@@ -1,0 +1,113 @@
+/* 
+结婚
+
+CherryMS LoveMXD
+
+任务代码：999 男生准备2
+               998 男生准备1
+               1000 女生准备1
+               1001 女生准备2
+
+原创脚本。非同意禁止转载
+*/
+var status = 0;
+var menu = "说吧。你想做什么#b\r\n\r\n#L0#我要进入圣枫殿堂！\r\n#L1#我要进入白色礼堂！";
+var main = "这里天气很不错哦。。和自己心爱的人来看看这里的风景吧。。#b\r\n#L0#我想做点什么。。。";
+var boymain = "你想做什么呢？#b\r\n#L2#协同爱人进入殿堂"
+var grilmain = "你想做什么呢？#b\r\n#L3#进入结婚休息场地"
+var guestmain = "你想做什么呢？#b\r\n#L4#我是访客，进入殿堂。"
+
+function start() {
+	status = -1;
+	action(1, 0, 0);
+}
+
+function action(mode, type, selection) {
+	if (mode == -1) {
+		cm.dispose();
+	} else {
+		if (status == 0 && mode == 0) {
+			cm.dispose();
+			return;
+		} else if (status == 2 && mode == 0) {
+			cm.sendNext("嗯。。如果有什么事的话可以来找我。我在这里等你。");
+		}
+		if (mode == 1)
+			status++;
+		else
+			status--;
+                                          if (status == 0) {
+if (cm.getPlayer().getMap().getId() == 680000210) {
+cm.setNPC_Mode(1);
+cm.openNpc(9201002);
+cm.setNPC_Mode(0);
+}else if (cm.MissionStatus(cm.getPlayer().getId(),1024,0,4)) {
+cm.sendSimple(guestmain);
+}else if (cm.MissionStatus(cm.getPlayer().getId(),1023,0,0)){
+                                          cm.sendSimple(grilmain);
+                                          }else if (cm.getPlayer().getMap().getId() == 680000000) {
+			cm.sendSimple(main);
+                                          }
+                                          } else if (status == 1) {
+			if (selection == 0) { // 移动到结婚殿堂
+				cm.sendNext("其实你也不用做什么。。。对自己心爱的人好一点就可以了。。我会在这里注视着你。。");
+			
+                  }else if (selection == 1 ){//协同爱人进入殿堂
+                            status = 8;
+                            cm.sendNext("嗯。。确认你们很幸福呀。。")
+}else if (selection == 3){
+cm.warp(680000200)
+cm.dispose();
+}else if (selection == 4){
+cm.warp(680000210)
+cm.dispose();
+}
+		} else if (status == 2) { // 关于结婚详情
+			cm.sendNextPrev("你能做到我想要的吗？？好吧。在结婚纪念日的时候给在自己心爱的人送一块美味的蛋糕，我想Ta会很高兴的。不是吗？");
+		} else if (status == 3) { //关于结婚详情
+			cm.sendNextPrev("嗯。。聊得差不多了。有关于结婚或者离婚的事宜都可以来找我。不过结婚离婚可要谨慎哦！");
+		} else if (status == 4) {
+			cm.sendSimple(menu);
+		} else if (status == 5) { //Menu
+			if (selection == 0){//进入圣枫殿堂！
+                                          if (cm.MissionStatus(cm.getPlayer().getId(),1016,0,0)) {//如果接了任务，而且是男生
+                                          cm.sendSimple(boymain);
+}else{
+cm.sendOk("我看过很多甜蜜的恋人，你是不是其中的一个？")
+cm.dispose();
+}
+                                          }else if (selection == 1){
+                                          cm.sendOk("白色礼堂是登记结婚用的，请到#p9201013#处登记。")
+cm.dispose();
+}else if (selection == 3){
+cm.warp(680000200)
+cm.dispose();
+}
+		} else if (status == 6){
+                                          cm.sendNextPrev("好吧。。我送你到结婚休息地点。访客全部到达后。你可以和#p9201014#谈话进入结婚殿堂！");
+                            } else if (status == 7){
+                                         if (cm.getPlayerOnline(cm.getPlayer().getMarriageId()) == false ){//如果女方没有在线。
+cm.startPopMessage("对不起，对方没有在线。")
+}else if (cm.getSameMap(cm.getPlayer().getMarriageId()) == false){
+cm.startPopMessage("对方没有不与您同个地图。\r\n请重试后再试。");
+}else if (cm.haveItem(5251000,1) == false){//检测有没有婚礼票
+cm.startPopMessage("没有婚礼票不能入场。")
+}else if (cm.MissionStatus(cm.getPlayer().getId(),1025,0,0)){//如果是女生
+cm.sendOk("对不起！请你的男朋友和我说话 。")
+cm.dispose();
+}else{
+cm.warp(680000200)
+cm.startPopMessage(cm.getPlayer().getMarriageId(),"您的未婚夫已经进入休息地\r\n请您尽快进入。")
+cm.startPopMessage("已经向对方发送了确认信息。")
+cm.MissionMake(cm.getPlayer().getMarriageId(),1023,0,0,0,0);//给女方的确认函数
+cm.MissionFinish(cm.getPlayer().getMarriageId(),1023);//给女方的确认函数
+
+
+}
+                           } else if (status == 8){
+                                          cm.warp(680000100);
+                           }else if (status == 9){
+                                          cm.sendOk("今天天气很好不是吗？");
+}
+	}
+}

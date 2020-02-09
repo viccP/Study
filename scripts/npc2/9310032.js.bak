@@ -1,0 +1,134 @@
+var status = 0;
+var display;
+
+function start() {
+	status = -1;
+	action(1, 0, 0);
+}
+
+function action(mode, type, selection) {
+	if (mode == -1) {
+		cm.dispose();
+	} else {
+		if (mode == 0) {
+			cm.dispose();
+			return;
+		}
+		if (mode == 1)
+			status++;
+		if (status == 0) {
+			cm.sendSimple("#h #你好，请选择你要开通的VIP等级！VIP等级特权登陆网站查看！1RMB=2000点。打怪所得的抵用卷是买不了VIP的！请到网站选择充值平台充值。\r\n冒险币：#r"+ cm.getChar().getMeso() +"元#k　点卷：#r"+ cm.getChar().getNX() +"点#k　银行存款#r"+ cm.getMeso() +"亿#k\r\n#L1##b１、开通★星VIP会员（需22W点卷，赠送5W点）#l\r\n#L2#２、开通★★星VIP会员（需42W点卷，自动赠送送8W点，110武器，稀有椅子1把）#l\r\n#L3#３、开通★★★星VIP会员（需62W点卷，自动赠送15W点，部分GM命令,稀有椅子2把，120武器）#l\r\n#L4#４、开通★★★★星VIP会员（需100W点卷，赠送20W点，部分GM命令，游戏职业：超级GM）#k#l");
+		} else if (status == 1) {
+		if (selection == 1) {
+			if(cm.getVip() == 4) {
+				cm.sendOk("你己经是★★★★星VIP会员，还想干嘛！");
+			} else if(cm.getVip() == 3) {
+				cm.sendOk("你己经是★★★星VIP会员，还想干嘛！");
+			} else if(cm.getVip() == 2) {
+				cm.sendOk("你己经是★★星VIP会员，还想干嘛！");
+			} else if(cm.getVip() == 1) {
+				cm.sendOk("你己经是★星VIP会员，还想干嘛！");
+			} else if (cm.getChar().getNX() < 220000) {
+				cm.sendOk("抱歉，你没有22W点卷开通★星VIP会员\r\n如果用点卡购买点卷请登录网站 http://www.lovemxd.com进行平台充值\r\n如果使用RMB购买点卷请联系管理员QQ：200058258");
+				} else {
+				cm.setVip(1);
+				cm.gainNX(-170000);
+				cm.serverNotice(6,"『会员公告』：恭喜"+ cm.getChar().getName() +"成功开通了★星VIP会员，并返回5W点大家一起为他祝贺吧！");
+				cm.sendOk("恭喜你己经成功开通★星VIP会员，赶快告诉你的朋友吧！");
+				}
+				cm.dispose();
+		} else if (selection == 2) {
+				if(cm.getVip() == 4) {
+				cm.sendOk("你己经是★★★★星VIP会员，还想干嘛！");
+			} else if(cm.getVip() == 3) {
+				cm.sendOk("你己经是★★★星VIP会员，还想干嘛！");
+			} else if(cm.getVip() == 2) {
+				cm.sendOk("你己经是★★星VIP会员，还想干嘛！");
+			} else if(cm.getVip() == 1) {
+				if (cm.getChar().getNX() < 220000) {
+				cm.sendOk("你目前是★星VIP会员，如果你想续费开通★★星VIP会员需要22W点卷\r\n请到官网冲值http://www.lovemxd.com选择平台充值");
+				} else {
+				cm.getChar().setVip(2);
+				cm.gainNX(-220000);
+				cm.serverNotice(6,"『会员公告』：恭喜"+ cm.getChar().getName() +"成功由★星VIP会员续费★★星VIP会员，大家一起为他祝贺吧！");
+				cm.sendOk("恭喜你己经成功续费★★星VIP会员，赶快告诉你的朋友吧！");
+			}} else if (cm.getChar().getNX() < 420000) {
+				cm.sendOk("抱歉，你没有42W点卷开通★★星VIP会员\r\n如果用点卡购买点卷请登录网站 http://www.lovemxd.com选择平台充值\r\n如果使用RMB购买点卷请联系管理员QQ：200058258");
+				} else {
+				cm.getChar().setVip(2);
+				cm.gainNX(-340000);
+				cm.gainItem(3010026,1);
+				cm.serverNotice(6,"『会员公告』：恭喜"+ cm.getChar().getName() +"成功开通了★★星VIP会员并赠送8W点卷和玩具，大家一起为他祝贺吧！");
+				cm.sendOk("恭喜你己经成功开通★★星VIP会员并赠送8W点卷，赶快告诉你的朋友吧！");
+				}
+				cm.dispose();
+		} else if (selection == 3) {
+				if(cm.getVip() == 4) {
+				cm.sendOk("你己经是★★★★星VIP会员，还想干嘛！");
+			} else if(cm.getVip() == 3) {
+				cm.sendOk("你己经是★★★星VIP会员，还想干嘛！");
+			} else if(cm.getVip() == 2) {
+				if (cm.getChar().getNX() < 220000) {
+				cm.sendOk("你目前是★★星VIP会员，如果你想续费开通★★★星VIP会员需要22W点卷\r\n如果用点卡购买点卷请登录网站 http://www.lovemxd.com选择平台充值\r\n如果使用RMB购买点卷请联系管理员QQ：200058258");
+				} else {
+				cm.getChar().setVip(3);
+				cm.gainNX(-220000);
+				cm.serverNotice(6,"『会员公告』：恭喜"+ cm.getChar().getName() +"成功由★★星VIP会员续费★★★星VIP会员，大家一起为他祝贺吧！");
+				cm.sendOk("恭喜你己经成功续费★★★星VIP会员，赶快告诉你的朋友吧！");
+			}} else if(cm.getVip() == 1) {
+				if (cm.getChar().getNX() < 420000) {
+				cm.sendOk("你目前是★星VIP会员，如果你想续费开通★★★星VIP会员需要42W点卷\r\n如果用点卡购买点卷请登录网站 http://www.lovemxd.com选择平台充值\r\n如果使用RMB购买点卷请联系管理员QQ：200058258");
+				} else {
+				cm.getChar().setVip(3);
+				cm.gainNX(-420000);
+				cm.serverNotice(6,"『会员公告』：恭喜"+ cm.getChar().getName() +"成功由★星VIP会员续费★★★星VIP会员，大家一起为他祝贺吧！");
+				cm.sendOk("恭喜你己经成功续费★★★星VIP会员，赶快告诉你的朋友吧！");
+			}} else if (cm.getChar().getNX() < 620000) {
+				cm.sendOk("抱歉，你没有62W点卷开通★★★星VIP会员\r\n如果用点卡购买点卷请登录网站 http:/www.lovemxd.com选择平台充值\r\n如果使用RMB购买点卷请联系管理员QQ：200058258");
+				} else {
+				cm.getChar().setVip(3);
+				cm.gainNX(-470000);
+				cm.gainItem(3010022,1);
+				cm.gainItem(3010028,1);
+				cm.serverNotice(6,"『会员公告』：恭喜"+ cm.getChar().getName() +"成功开通了★★★星VIP会员并赠送15W点卷以及玩具，大家一起为他祝贺吧！");
+				cm.sendOk("恭喜你己经成功开通★★★星VIP会员并赠送15W点卷，赶快告诉你的朋友吧！");
+				}
+				cm.dispose();
+		} else if (selection == 4) {
+				if(cm.getVip() == 4) {
+				cm.sendOk("你己经是★★★★星VIP会员，还想干嘛！");
+			} else if(cm.getVip() == 3) {
+				if (cm.getChar().getNX() < 420000) {
+				cm.sendOk("你目前是★★★星VIP会员，如果你想续费开通★★★★星VIP会员需要42W点卷\r\n如果用点卡购买点卷请登录网站 http://www.lovemxd.com 选择平台充值\r\n如果使用RMB购买点卷请联系管理员QQ：200058258");
+				} else {
+				cm.getChar().setVip(4);
+				cm.gainNX(-420000);
+				cm.serverNotice(6,"『会员公告』：恭喜"+ cm.getChar().getName() +"成功由★★★星VIP会员续费★★★★星VIP会员，大家一起为他祝贺吧！");
+				cm.sendOk("恭喜你己经成功续费★★★★星VIP会员，赶快告诉你的朋友吧！");
+			}} else if(cm.getVip() == 2) {
+				if (cm.getChar().getNX() < 620000) {
+				cm.sendOk("你目前是★★星VIP会员，如果你想续费开通★★★★星VIP会员需要62W点卷\r\n如果用点卡购买点卷请登录网站 http://www.lovemxd.com 选择平台充值\r\n如果使用RMB购买点卷请联系管理员QQ：200058258");
+				} else {
+				cm.getChar().setVip(4);
+				cm.gainNX(-620000);
+				cm.serverNotice(6,"『会员公告』：恭喜"+ cm.getChar().getName() +"成功由★★星VIP会员续费★★★★星VIP会员，大家一起为他祝贺吧！");
+				cm.sendOk("恭喜你己经成功续费★★★★星VIP会员，赶快告诉你的朋友吧！");
+			}} else if(cm.getVip() == 1) {
+				if (cm.getChar().getNX() < 820000) {
+				cm.sendOk("你目前是★星VIP会员，如果你想续费开通★★★★星VIP会员需要82W点卷\r\n如果用点卡购买点卷请登录网站 http://www.lovemxd.com 选择平台充值\r\n如果使用RMB购买点卷请联系管理员QQ：200058258");
+				} else {
+				cm.getChar().setVip(4);
+				cm.gainNX(-820000);
+				cm.serverNotice(6,"『会员公告』：恭喜"+ cm.getChar().getName() +"成功由★星VIP会员续费★★★★星VIP会员，大家一起为他祝贺吧！");
+				cm.sendOk("恭喜你己经成功续费★★★★星VIP会员，赶快告诉你的朋友吧！");
+			}} else if (cm.getChar().getNX() < 1000000) {
+				cm.sendOk("抱歉，你没有100W点卷开通★★★★星VIP会员\r\n如果用点卡购买点卷请登录网站 http://www.lovemxd.com 选择平台充值\r\n如果使用RMB购买点卷请联系管理员QQ：200058258");
+				} else {
+				cm.getChar().setVip(4);
+				cm.gainNX(-1000000);
+				cm.gainNX(200000);
+				cm.serverNotice(6,"『会员公告』：恭喜"+ cm.getChar().getName() +"成功开通了★★★★星VIP会员并赠送20W点卷，大家一起为他祝贺吧！");
+				cm.sendOk("恭喜你己经成功开通★★★★星VIP会员并赠送20W点卷，哇，直接居然是超级GM！赶快告诉你的朋友吧！");
+				}
+				cm.dispose();
+		}}}}

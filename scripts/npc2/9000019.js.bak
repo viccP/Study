@@ -1,0 +1,57 @@
+/* 
+CherryMS LoveMXD
+非同意内禁止转载
+CherryMS.cn
+脚本类型：新手帮助
+*/
+var status = 0;
+var main = "欢迎来到爱上冒险岛，请问你要做什么？#b\r\n#L0#我要怎么转职成冒险骑士团？\r\n#L1#爱上冒险岛的倍率设置\r\n#L2#各个组队任务哪里接？\r\n#L3#爱上冒险岛VIP怎么购买？\r\n#L4#我要怎么结婚。\r\n#L5#我要去新地图，怎么过去？"
+var exp = 200
+var drop = 200
+
+function start() {
+	status = -1;
+	action(1, 0, 0);
+}
+
+function action(mode, type, selection) {
+	if (mode == -1) {
+		cm.dispose();
+	} else {
+		if (status == 0 && mode == 0) {
+			cm.dispose();
+			return;
+		} else if (status == 2 && mode == 0) {
+			cm.sendNext("嗯，好的。如果你有什么事可以再来找我。");
+			cm.dispose();
+		}
+		if (mode == 1)
+			status++;
+		else
+			status--;
+                                          if (status == 0) {
+                                          cm.sendSimple(main)
+                                          } else if (status == 1) {//选项部分
+			if (selection == 0){//我要怎么转职成骑士团？
+            cm.sendNext("老职业满120级即可到圣地转职。")
+			cm.dispose();
+			}else if (selection == 1){//爱上冒险岛倍率设置
+      		cm.sendNext("目前爱上冒险岛倍率设置如下：\r\n经验倍率："+exp+" 倍 \r\n怪物暴率: "+drop+" 倍。");
+			cm.dispose();
+            }else if (selection == 2){//各个组队任务在哪里接？
+            cm.sendNext("各个组队任务位置如下：\r\n玩具组队任务: 玩具城塔 101 层 。\r\n废弃组队任务：废弃都市下水道处。\r\n家族组队任务:\r\n勇士部落遗迹部落。");
+			cm.dispose();
+ 			}else if (selection == 3){
+			cm.sendNext("开通VIP以及点卷购买喇叭,接骑宠任务请选择自由市场爱上服务生。");
+			cm.dispose();
+			}else if (selection == 4){
+ 			cm.sendNext("结婚的到各安全部落的 NANA 处进入。");
+				cm.dispose();
+			}else if (selection == 5){
+ 			cm.sendNext("去新地图的话到自由市场的传送大师处进入。");
+				cm.dispose();
+}
+		}
+
+	}
+}
