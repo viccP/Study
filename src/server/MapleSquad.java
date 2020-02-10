@@ -3,26 +3,20 @@
  */
 package server;
 
-import client.MapleCharacter;
-import client.MapleClient;
-import handling.MaplePacket;
-import handling.channel.ChannelServer;
-import handling.channel.PlayerStorage;
-import handling.world.World;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.ScheduledFuture;
-import server.MapleCarnivalChallenge;
-import server.Timer;
+
+import client.MapleCharacter;
+import client.MapleClient;
+import handling.channel.ChannelServer;
+import handling.world.World;
 import server.maps.MapleMap;
-import server.maps.MapleMapFactory;
 import tools.MaplePacketCreator;
 import tools.Pair;
 
@@ -142,14 +136,14 @@ public class MapleSquad {
     }
 
     public String getNextPlayer() {
-        StringBuilder sb = new StringBuilder("\n\u6392\u968a\u6210\u54e1 : ");
-        sb.append("#b").append(this.type.queue.get(this.ch).size()).append(" #k ").append("\u8207\u9060\u5f81\u968a\u540d\u55ae : \n\r ");
+        StringBuilder sb = new StringBuilder("\n排隊成員 : ");
+        sb.append("#b").append(this.type.queue.get(this.ch).size()).append(" #k ").append("與遠征隊名單 : \n\r ");
         int i = 0;
         for (Pair<String, Long> chr : this.type.queue.get(this.ch)) {
             sb.append(++i).append(" : ").append((String)chr.left);
             sb.append(" \n\r ");
         }
-        sb.append("\u4f60\u662f\u5426\u60f3\u8981 #e\u7576\u4e0b\u4e00\u500b#n \u5728\u9060\u5f81\u968a\u6392\u968a\u4e2d\u3000\u6216\u8005 #e\u79fb\u9664#n \u5728\u9060\u5f81\u968a? \u5982\u679c\u4f60\u60f3\u7684\u8a71...");
+        sb.append("你是否想要 #e當下一個#n 在遠征隊排隊中　或者 #e移除#n 在遠征隊? 如果你想的話...");
         return sb.toString();
     }
 
@@ -220,7 +214,7 @@ public class MapleSquad {
             if (!this.containsMember(member) && !this.getAllNextPlayer().contains(member.getName())) {
                 if (this.members.size() <= 30) {
                     this.members.put(member.getName(), job);
-                    this.getLeader().dropMessage(6, member.getName() + " (" + job + ") \u52a0\u5165\u4e86\u9060\u5f81\u968a!");
+                    this.getLeader().dropMessage(6, member.getName() + " (" + job + ") 加入了遠征隊!");
                     return 1;
                 }
                 return 2;
@@ -229,7 +223,7 @@ public class MapleSquad {
         }
         if (this.containsMember(member)) {
             this.members.remove(member.getName());
-            this.getLeader().dropMessage(6, member.getName() + " (" + job + ") \u96e2\u958b\u4e86\u9060\u5f81\u968a.");
+            this.getLeader().dropMessage(6, member.getName() + " (" + job + ") 離開了遠征隊.");
             return 1;
         }
         return -1;
@@ -244,7 +238,7 @@ public class MapleSquad {
         if (toadd != null && this.getChar(toadd) != null) {
             this.members.put(toadd, this.bannedMembers.get(toadd));
             this.bannedMembers.remove(toadd);
-            this.getChar(toadd).dropMessage(5, this.getLeaderName() + " \u5141\u8a31\u4f60\u91cd\u65b0\u56de\u4f86\u9060\u5f81\u968a");
+            this.getChar(toadd).dropMessage(5, this.getLeaderName() + " 允許你重新回來遠征隊");
         }
     }
 
@@ -274,7 +268,7 @@ public class MapleSquad {
         if (toban != null && this.getChar(toban) != null) {
             this.bannedMembers.put(toban, this.members.get(toban));
             this.members.remove(toban);
-            this.getChar(toban).dropMessage(5, this.getLeaderName() + " \u5f9e\u9060\u5f81\u968a\u4e2d\u522a\u9664\u60a8.");
+            this.getChar(toban).dropMessage(5, this.getLeaderName() + " 從遠征隊中刪除您.");
         }
     }
 
@@ -297,13 +291,13 @@ public class MapleSquad {
     public String getSquadMemberString(byte type) {
         switch (type) {
             case 0: {
-                StringBuilder sb = new StringBuilder("\u9060\u5f81\u968a\u540d\u55ae : ");
-                sb.append("#b").append(this.members.size()).append(" #k ").append("\u8207\u6210\u54e1\u540d\u55ae : \n\r ");
+                StringBuilder sb = new StringBuilder("遠征隊名單 : ");
+                sb.append("#b").append(this.members.size()).append(" #k ").append("與成員名單 : \n\r ");
                 int i = 0;
                 for (Map.Entry<String, String> chr : this.members.entrySet()) {
                     sb.append(++i).append(" : ").append(chr.getKey()).append(" (").append(chr.getValue()).append(") ");
                     if (i == 1) {
-                        sb.append("(\u9060\u5f81\u968a\u9818\u8896)");
+                        sb.append("(遠征隊領袖)");
                     }
                     sb.append(" \n\r ");
                 }
@@ -313,8 +307,8 @@ public class MapleSquad {
                 return sb.toString();
             }
             case 1: {
-                StringBuilder sb = new StringBuilder("\u9060\u5f81\u968a\u540d\u55ae : ");
-                sb.append("#b").append(this.members.size()).append(" #n ").append("\u8207\u6210\u54e1\u540d\u55ae : \n\r ");
+                StringBuilder sb = new StringBuilder("遠征隊名單 : ");
+                sb.append("#b").append(this.members.size()).append(" #n ").append("與成員名單 : \n\r ");
                 int i = 0;
                 int selection = 0;
                 for (Map.Entry<String, String> chr : this.members.entrySet()) {
@@ -322,7 +316,7 @@ public class MapleSquad {
                     ++selection;
                     sb.append(++i).append(" : ").append(chr.getKey()).append(" (").append(chr.getValue()).append(") ");
                     if (i == 1) {
-                        sb.append("(\u9060\u5f81\u968a\u9818\u8896)");
+                        sb.append("(遠征隊領袖)");
                     }
                     sb.append("#l").append(" \n\r ");
                 }
@@ -332,8 +326,8 @@ public class MapleSquad {
                 return sb.toString();
             }
             case 2: {
-                StringBuilder sb = new StringBuilder("\u9060\u5f81\u968a\u540d\u55ae : ");
-                sb.append("#b").append(this.members.size()).append(" #n ").append("\u8207\u6210\u54e1\u540d\u55ae : \n\r ");
+                StringBuilder sb = new StringBuilder("遠征隊名單 : ");
+                sb.append("#b").append(this.members.size()).append(" #n ").append("與成員名單 : \n\r ");
                 int i = 0;
                 int selection = 0;
                 for (Map.Entry<String, String> chr : this.bannedMembers.entrySet()) {
@@ -348,7 +342,7 @@ public class MapleSquad {
                 return sb.toString();
             }
             case 3: {
-                StringBuilder sb = new StringBuilder("\u8077\u696d : ");
+                StringBuilder sb = new StringBuilder("職業 : ");
                 Map<String, Integer> jobs = this.getJobs();
                 for (Map.Entry<String, Integer> chr : jobs.entrySet()) {
                     sb.append("\r\n").append(chr.getKey()).append(" : ").append(chr.getValue());
@@ -408,4 +402,3 @@ public class MapleSquad {
     }
 
 }
-

@@ -4,9 +4,7 @@
 package tools;
 
 import java.io.ByteArrayOutputStream;
-import java.nio.Buffer;
 import java.nio.ByteBuffer;
-import tools.StringUtil;
 
 public class HexTool {
     private static final char[] HEX = new char[]{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
@@ -50,7 +48,7 @@ public class HexTool {
             int chr = (short)bytes[x] & 0xFF;
             ret[x] = (byte)chr;
         }
-        String encode = "gbk";
+        String encode = "utf-8";
         try {
             String str = new String(ret, encode);
             return str;
@@ -70,27 +68,45 @@ public class HexTool {
         return ret.toString();
     }
 
-    public static byte[] getByteArrayFromHexString(String hex) {
+    /**
+     * Turns an hexadecimal string into a byte array.
+     *
+     * @param hex The string to convert.
+     * @return The byte array representation of <code>hex</code>
+     */
+    public static byte[] getByteArrayFromHexString(final String hex) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         int nexti = 0;
         int nextb = 0;
         boolean highoc = true;
-        block0: do {
+        outer:
+        for (;;) {
             int number = -1;
             while (number == -1) {
-                if (nexti == hex.length()) break block0;
+                if (nexti == hex.length()) {
+                    break outer;
+                }
                 char chr = hex.charAt(nexti);
-                number = chr >= '0' && chr <= '9' ? chr - 48 : (chr >= 'a' && chr <= 'f' ? chr - 97 + 10 : (chr >= 'A' && chr <= 'F' ? chr - 65 + 10 : -1));
-                ++nexti;
+                if (chr >= '0' && chr <= '9') {
+                    number = chr - '0';
+                } else if (chr >= 'a' && chr <= 'f') {
+                    number = chr - 'a' + 10;
+                } else if (chr >= 'A' && chr <= 'F') {
+                    number = chr - 'A' + 10;
+                } else {
+                    number = -1;
+                }
+                nexti++;
             }
             if (highoc) {
                 nextb = number << 4;
                 highoc = false;
-                continue;
+            } else {
+                nextb |= number;
+                highoc = true;
+                baos.write(nextb);
             }
-            highoc = true;
-            baos.write(nextb |= number);
-        } while (true);
+        }
         return baos.toByteArray();
     }
 

@@ -1,6 +1,2 @@
 function act() {
-    rm.mapMessage(5, "µL¦WÅ]Ã~¥l³ê¥X¨Ó¤F! ¤j®a¤p¤ß¤@ÂI!");
-    rm.changeMusic("Bgm14/HonTale");
-    rm.spawnMonster(9400266);
-
-}
+    rm.mapMessage(5, "ç¤š

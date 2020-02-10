@@ -14,11 +14,11 @@ function action(mode, type, selection) {
         status--;
     }
     if (status == 0) {
-        cm.sendSimple("ÄãºÃ£¬ÎÒÊÇÐ¡ÀÏ»¢ #bRice Cakes#k...#b\r\n#L1#²é¿´ËµÃ÷#l\r\n#L2#Àë¿ªµØÍ¼#l\r\n#L0#ÎÒ¸øÄã´øÀ´ÁËÄê¸â!#l");
+        cm.sendSimple("ä½ å¥½ï¼Œæˆ‘æ˜¯å°è€è™Ž #bRice Cakes#k...#b\r\n#L1#æŸ¥çœ‹è¯´æ˜Ž#l\r\n#L2#ç¦»å¼€åœ°å›¾#l\r\n#L0#æˆ‘ç»™ä½ å¸¦æ¥äº†å¹´ç³•!#l");
     } else if (status == 1) {
         if (selection == 0) {
             if (!cm.isLeader()) {
-                cm.sendOk("Çë¶Ó³¤ÓëÎÒÌ¸»°.");
+                cm.sendOk("è¯·é˜Ÿé•¿ä¸Žæˆ‘è°ˆè¯.");
             } else {
                 if (cm.haveItem(4001101,20)) {
                     cm.removeAll(4001101);
@@ -28,14 +28,14 @@ function action(mode, type, selection) {
                     //cm.achievement(100);
                     cm.endPartyQuest(1200);
                     cm.warpParty(910010300);
-cm.À®°È(3, "¹§Ï²[" + cm.getPlayer().getName() + "]³É¹¦´øÁì¶ÓÓÑÍ¨¹Ø¡¾×é¶ÓÈÎÎñ - ÔÂÃî¸±±¾¡¿»ñµÃ½±Àø£¡");
+cm.å–‡å­(3, "æ­å–œ[" + cm.getPlayer().getName() + "]æˆåŠŸå¸¦é¢†é˜Ÿå‹é€šå…³ã€ç»„é˜Ÿä»»åŠ¡ - æœˆå¦™å‰¯æœ¬ã€‘èŽ·å¾—å¥–åŠ±ï¼");
         cm.dispose();
                 } else {
-                    cm.sendNext("ÄãÃ»ÓÐ´øÀ´ #r20#k ¿éÔÂÃîµÄÄê¸â... ");
+                    cm.sendNext("ä½ æ²¡æœ‰å¸¦æ¥ #r20#k å—æœˆå¦™çš„å¹´ç³•... ");
                 }
             }
         } else if (selection == 1) {
-            cm.sendNext("Çëµã»÷µØ¿éÈÃËü¿ª»¨£¬6¿éÍÁµØÈ«²¿¿ª»¨Ê±ÂúÔÂ½«³öÏÖ¡£ÂúÔÂÏÂ»áÕÙ»½ÔÂÃîÐ¡ÏÉ×Ó£¬Ã¿¸ôÒ»¶ÎÊ±¼äÔÂÃîÐ¡ÏÉ×Ó»áµ·³öÄê¸â£¬ÊÕ¼¯ #r20 #k¿éÄê¸âºó½»¸ø¶Ó³¤È»ºó½»¸øNPC£¬¼´¿ÉÍ¨¹Ø¡£\r\n#r×¢£ºÔÚÔÂÃîÏÉ×Óµ·Äê¸âµÄÊ±ºò±£»¤Ëü£¬ÔÂÃîÏÉ×Ó±»¹ÖÎï¹¥»÷ºóËÀÍöÔòÈÎÎñÊ§°Ü.");
+            cm.sendNext("è¯·ç‚¹å‡»åœ°å—è®©å®ƒå¼€èŠ±ï¼Œ6å—åœŸåœ°å…¨éƒ¨å¼€èŠ±æ—¶æ»¡æœˆå°†å‡ºçŽ°ã€‚æ»¡æœˆä¸‹ä¼šå¬å”¤æœˆå¦™å°ä»™å­ï¼Œæ¯éš”ä¸€æ®µæ—¶é—´æœˆå¦™å°ä»™å­ä¼šæ£å‡ºå¹´ç³•ï¼Œæ”¶é›† #r20 #kå—å¹´ç³•åŽäº¤ç»™é˜Ÿé•¿ç„¶åŽäº¤ç»™NPCï¼Œå³å¯é€šå…³ã€‚\r\n#ræ³¨ï¼šåœ¨æœˆå¦™ä»™å­æ£å¹´ç³•çš„æ—¶å€™ä¿æŠ¤å®ƒï¼Œæœˆå¦™ä»™å­è¢«æ€ªç‰©æ”»å‡»åŽæ­»äº¡åˆ™ä»»åŠ¡å¤±è´¥.");
         } else if (selection == 2) {
         cm.removeAll(4001095);
         cm.removeAll(4001096);

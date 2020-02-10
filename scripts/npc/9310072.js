@@ -10,7 +10,7 @@ function action(mode, type, selection) {
         cm.dispose();
     } else {
         if (status == 2 && mode == 0) {
-            cm.sendOk("ÇëĞèÒªÇ©µ½ÔÙÀ´ÕÒÎÒ°É£¡");
+            cm.sendOk("è¯·éœ€è¦ç­¾åˆ°å†æ¥æ‰¾æˆ‘å§ï¼");
             status = 4;
             return;
         }
@@ -19,28 +19,28 @@ function action(mode, type, selection) {
         else
             status--;
         if (status == 0) {
-            cm.sendNext("#bÄãºÃ£¬µ±ÄãµÈ¼¶´ïµ½30¼¶ºó£¬ÎÒ¿ÉÒÔ´«ÊÚÄãÈº³è¡¢ÆïÊŞ»¹ÓĞ¶ÍÔì¼¼ÄÜ£¡");
+            cm.sendNext("#bä½ å¥½ï¼Œå½“ä½ ç­‰çº§è¾¾åˆ°30çº§åï¼Œæˆ‘å¯ä»¥ä¼ æˆä½ ç¾¤å® ã€éª‘å…½è¿˜æœ‰é”»é€ æŠ€èƒ½ï¼");
         } else if (status == 1) {            
-            cm.sendYesNo("#dÄãÈ·¶¨ÄãµÈ¼¶´ïµ½30¼¶ÁËÂğ£¿");
+            cm.sendYesNo("#dä½ ç¡®å®šä½ ç­‰çº§è¾¾åˆ°30çº§äº†å—ï¼Ÿ");
         } else if (status == 2) {
             if (cm.getLevel() < 30 ) {  
-                cm.sendOk("ÄãµÄµÈ¼¶µÍÓÚ30¼¶£¬ÎŞ·¨Ñ§Ï°£¡");	
+                cm.sendOk("ä½ çš„ç­‰çº§ä½äº30çº§ï¼Œæ— æ³•å­¦ä¹ ï¼");	
                 cm.dispose();
 			}else if(cm.hasSkill(1007) == true && cm.hasSkill(8) == true && cm.hasSkill(20001004) == true && cm.hasSkill(10001004) == true && cm.hasSkill(1004) == true && cm.hasSkill(10001019) == true && cm.hasSkill(20001019) == true){
-                cm.sendOk("ÄãÒÑ¾­Ñ§»áÁË£¬Çë²»ÒªÖØ¸´Ñ§£¬Ğ»Ğ»ºÏ×÷£¡");
+                cm.sendOk("ä½ å·²ç»å­¦ä¼šäº†ï¼Œè¯·ä¸è¦é‡å¤å­¦ï¼Œè°¢è°¢åˆä½œï¼");
                 cm.dispose();
             } else {
-		cm.teachSkill(8,1,1);//Èº³è
-		cm.teachSkill(1007,3,3);//¶ÍÔì
-		cm.teachSkill(20001007,3,3);//Õ½Éñ¶ÍÔì
-		cm.teachSkill(10001007,3,3);//ÆïÊ¿ÍÅ¶ÍÔì
-		cm.teachSkill(1004,1,1);//ÆïÊŞ
-			cm.teachSkill(20001004,1,1); //Õ½ÉñÆïÊŞ
-			cm.teachSkill(10001004,1,1); //ÆïÊ¿ÍÅÆïÊŞ
+		cm.teachSkill(8,1,1);//ç¾¤å® 
+		cm.teachSkill(1007,3,3);//é”»é€ 
+		cm.teachSkill(20001007,3,3);//æˆ˜ç¥é”»é€ 
+		cm.teachSkill(10001007,3,3);//éª‘å£«å›¢é”»é€ 
+		cm.teachSkill(1004,1,1);//éª‘å…½
+			cm.teachSkill(20001004,1,1); //æˆ˜ç¥éª‘å…½
+			cm.teachSkill(10001004,1,1); //éª‘å£«å›¢éª‘å…½
 			cm.teachSkill(1017,1,1); 
 			cm.teachSkill(10001019,1,1);
 			cm.teachSkill(20001019,1,1);
-cm.À®°È(3, "[" + cm.getPlayer().getName() + "]³É¹¦Ñ§»áÁËÈº³è¡¢ÆïÊŞ¡¢¶ÍÔì¼¼ÄÜ£¡");
+cm.å–‡å­(3, "[" + cm.getPlayer().getName() + "]æˆåŠŸå­¦ä¼šäº†ç¾¤å® ã€éª‘å…½ã€é”»é€ æŠ€èƒ½ï¼");
                 cm.dispose();  
 }          
         }	

@@ -10,7 +10,7 @@ function start() {
 function action(mode, type, selection) {
     status++;
     if(mode == 0) {
-	cm.sendOk("你想下船吗？离开飞船后会回到原来的地方！");
+	cm.sendOk("浣犳兂涓嬭埞鍚楋紵绂诲紑椋炶埞鍚庝細鍥炲埌鍘熸潵鐨勫湴鏂癸紒");
 	cm.dispose();
 	return;
     }

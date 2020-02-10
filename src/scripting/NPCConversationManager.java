@@ -147,7 +147,7 @@ extends AbstractPlayerInteraction {
             this.sendSimple(text);
             return;
         }
-        this.c.getSession().write((Object)MaplePacketCreator.getNPCTalk(this.npc, (byte)0, text, "00 01", (byte)0));
+        this.c.getSession().write(MaplePacketCreator.getNPCTalk(this.npc, (byte)0, text, "00 01", (byte)0));
         this.lastMsg = 0;
     }
 
@@ -159,7 +159,7 @@ extends AbstractPlayerInteraction {
             this.sendSimpleS(text, type);
             return;
         }
-        this.c.getSession().write((Object)MaplePacketCreator.getNPCTalk(this.npc, (byte)0, text, "00 01", type));
+        this.c.getSession().write(MaplePacketCreator.getNPCTalk(this.npc, (byte)0, text, "00 01", type));
         this.lastMsg = 0;
     }
 
@@ -315,8 +315,8 @@ extends AbstractPlayerInteraction {
             this.sendNext(text);
             return;
         }
-        this.c.getSession().write((Object)MaplePacketCreator.getNPCTalk(this.npc, (byte)4, text, "", (byte)0));
-        this.lastMsg = (byte)4;
+        this.c.getSession().write(MaplePacketCreator.getNPCTalk(npc, (byte)4, text, "", (byte)0));
+        this.lastMsg = 4;
     }
 
     public void sendSimpleS(String text, byte type) {
@@ -327,8 +327,8 @@ extends AbstractPlayerInteraction {
             this.sendNextS(text, type);
             return;
         }
-        this.c.getSession().write((Object)MaplePacketCreator.getNPCTalk(this.npc, (byte)4, text, "", type));
-        this.lastMsg = (byte)4;
+        this.c.getSession().write(MaplePacketCreator.getNPCTalk(this.npc, (byte)4, text, "", type));
+        this.lastMsg = 4;
     }
 
     public void sendStyle(String text, int caid, int[] styles) {

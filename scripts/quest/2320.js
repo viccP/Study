@@ -2,7 +2,7 @@
 			Resonance
 	NPC Name: 	Scarrs
 	Map(s): 	Mushroom Castle: Corner of Mushroom Forest(106020000)
-	Description: 	Quest -  布鲁斯的友情
+	Description: 	Quest -  甯冮瞾鏂殑鍙嬫儏
 */
 
 importPackage(Packages.client);

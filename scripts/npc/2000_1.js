@@ -1,17 +1,17 @@
-var À¶É«¼ıÍ· = "#fUI/UIWindow/Quest/icon2/7#";
-var ºìÉ«¼ıÍ· = "#fUI/UIWindow.img/PvP/Scroll/enabled/next2#";
+var è“è‰²ç®­å¤´ = "#fUI/UIWindow/Quest/icon2/7#";
+var çº¢è‰²ç®­å¤´ = "#fUI/UIWindow.img/PvP/Scroll/enabled/next2#";
 function start() {
 
     if (cm.getChar().getMapId() != 209000015) {
-        cm.sendSimple("#b¸÷´óÅÅÃû¿É²é¿´£¡\r\n\r\n\r\n#L0#"+ºìÉ«¼ıÍ·+"ÈËÆøÅÅĞĞ°ñ#l\t\t\t#L1#"+ºìÉ«¼ıÍ·+"µÈ¼¶ÅÅĞĞ°ñ#l  \r\n#r#L2#"+ºìÉ«¼ıÍ·+"¼Ò×åÅÅĞĞ°ñ#l  \t\t\t#L10#"+ºìÉ«¼ıÍ·+"½ğ±ÒÅÅĞĞ°ñ#l\r\n\r\n");
+        cm.sendSimple("#bå„å¤§æ’åå¯æŸ¥çœ‹ï¼\r\n\r\n\r\n#L0#"+çº¢è‰²ç®­å¤´+"äººæ°”æ’è¡Œæ¦œ#l\t\t\t#L1#"+çº¢è‰²ç®­å¤´+"ç­‰çº§æ’è¡Œæ¦œ#l  \r\n#r#L2#"+çº¢è‰²ç®­å¤´+"å®¶æ—æ’è¡Œæ¦œ#l  \t\t\t#L10#"+çº¢è‰²ç®­å¤´+"é‡‘å¸æ’è¡Œæ¦œ#l\r\n\r\n");
     } else {
-        cm.sendOk("²»ÒªÔÙÕâ¸öµØÍ¼Ê¹ÓÃÎÒ")
+        cm.sendOk("ä¸è¦å†è¿™ä¸ªåœ°å›¾ä½¿ç”¨æˆ‘")
     }
 }
 function action(mode, type, selection) {
     cm.dispose();
-    if (selection == 0) { //ÈËÆøÅÅĞĞ
-        cm.ÈËÆøÅÅĞĞ°ñ();
+    if (selection == 0) { //äººæ°”æ’è¡Œ
+        cm.äººæ°”æ’è¡Œæ¦œ();
         cm.dispose();
     } else if (selection == 1) {
         //Level
@@ -23,7 +23,7 @@ function action(mode, type, selection) {
         cm.dispose();
     } else if (selection == 10) {
         //MapGui
-        cm.½ğ±ÒÅÅĞĞ();
+        cm.é‡‘å¸æ’è¡Œ();
         cm.dispose();
 
     }

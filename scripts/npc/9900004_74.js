@@ -10,7 +10,7 @@ function action(mode, type, selection) {
     else {
         if (status >= 0 && mode == 0) {
 
-            cm.sendOk("¸ĞĞ»ÄãµÄ¹âÁÙ£¡");
+            cm.sendOk("æ„Ÿè°¢ä½ çš„å…‰ä¸´ï¼");
             cm.dispose();
             return;
         }
@@ -26,8 +26,8 @@ function action(mode, type, selection) {
             for (i = 0; i < 10; i++) {
                 text += "";
             }
-			//ÏÔÊ¾ÎïÆ·IDÍ¼Æ¬ÓÃµÄ´úÂëÊÇ  #vÕâÀïĞ´ÈëID#
-            text += "#L1##r#v1112405#ÁìÈ¡ÀÛ¼Æ³äÖµ500½äÖ¸£¡#l\r\n\r\n"//3
+			//æ˜¾ç¤ºç‰©å“IDå›¾ç‰‡ç”¨çš„ä»£ç æ˜¯  #vè¿™é‡Œå†™å…¥ID#
+            text += "#L1##r#v1112405#é¢†å–ç´¯è®¡å……å€¼500æˆ’æŒ‡ï¼#l\r\n\r\n"//3
             cm.sendSimple(text);
         } else if (selection == 1) {
 			//1
@@ -36,28 +36,28 @@ function action(mode, type, selection) {
 			//4
 			//5
 			/*if(!cm.beibao(1,3)){
-            cm.sendOk("×°±¸À¸¿ÕÓà²»×ã3¸ö¿Õ¸ñ£¡");
+            cm.sendOk("è£…å¤‡æ ç©ºä½™ä¸è¶³3ä¸ªç©ºæ ¼ï¼");
             cm.dispose();
 			}else if(!cm.beibao(2,2)){
-            cm.sendOk("ÏûºÄÀ¸¿ÕÓà²»×ã2¸ö¿Õ¸ñ£¡");
+            cm.sendOk("æ¶ˆè€—æ ç©ºä½™ä¸è¶³2ä¸ªç©ºæ ¼ï¼");
             cm.dispose();
 			}else if(!cm.beibao(3,1)){
-            cm.sendOk("ÉèÖÃÀ¸¿ÕÓà²»×ã1¸ö¿Õ¸ñ£¡");
+            cm.sendOk("è®¾ç½®æ ç©ºä½™ä¸è¶³1ä¸ªç©ºæ ¼ï¼");
             cm.dispose();
 			}else if(!cm.beibao(4,1)){
-            cm.sendOk("ÆäËûÀ¸¿ÕÓà²»×ã1¸ö¿Õ¸ñ£¡");
+            cm.sendOk("å…¶ä»–æ ç©ºä½™ä¸è¶³1ä¸ªç©ºæ ¼ï¼");
             cm.dispose();
 			}else if(!cm.beibao(5,1)){
-            cm.sendOk("ÏÖ½ğÀ¸¿ÕÓà²»×ã1¸ö¿Õ¸ñ£¡");
+            cm.sendOk("ç°é‡‘æ ç©ºä½™ä¸è¶³1ä¸ªç©ºæ ¼ï¼");
             cm.dispose();
 			}else */if(cm.haveItem(1112405,1)){
 				cm.gainItem(1112405, -1);
-				cm.gainItem(1112405,5,5,5,5,50,50,3,3,10,10,10,10,0,0);//Ã°ÏÕµºÊÕ²Ø¼Ò
-				cm.À®°È(2, "¹§Ï²[" + cm.getPlayer().getName() + "]³É¹¦ÁìÈ¡ÀÛ¼Æ³äÖµ500Ôª½äÖ¸Ò»Ã¶£¡£¡");
-            cm.sendOk("»»¹º³É¹¦£¡");
+				cm.gainItem(1112405,5,5,5,5,50,50,3,3,10,10,10,10,0,0);//å†’é™©å²›æ”¶è—å®¶
+				cm.å–‡å­(2, "æ­å–œ[" + cm.getPlayer().getName() + "]æˆåŠŸé¢†å–ç´¯è®¡å……å€¼500å…ƒæˆ’æŒ‡ä¸€æšï¼ï¼");
+            cm.sendOk("æ¢è´­æˆåŠŸï¼");
             cm.dispose();
 			}else{
-            cm.sendOk("µÀ¾ß²»×ãÎŞ·¨»»¹º£¡");
+            cm.sendOk("é“å…·ä¸è¶³æ— æ³•æ¢è´­ï¼");
             cm.dispose();
 			}
 		}

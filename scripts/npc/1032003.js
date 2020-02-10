@@ -19,7 +19,7 @@ function start() {
 
 function action(mode, type, selection) {
     if (mode == 0) {
-	cm.sendOk("ĞèÒªµÄ•rºòÔÙíÕÒÎÒ°É¡£");
+	cm.sendOk("éœ€è¦çš„æ™‚å€™å†ä¾†æ‰¾æˆ‘å§ã€‚");
 	cm.dispose();
 	return;
     }
@@ -31,17 +31,17 @@ function action(mode, type, selection) {
     }
     if (status == 0) {
 	if (cm.getPlayerStat("LVL") < 25) {
-	    cm.sendOk("ÄãµÄµÈ¼‰ºÃÏñ²»‰ò¸ß¡£");
+	    cm.sendOk("ä½ çš„ç­‰ç´šå¥½åƒä¸å¤ é«˜ã€‚");
 	    cm.dispose();
 	    check = 1;
 	}
 	else {
-	    cm.sendYesNo("àË~ÎÒÊÇÙ¶÷£¬ÎÒ¿É×ŒÄãßMÈë#m101000100# ÙMÓÃÊÇ #b5000#k —÷Å ÄãÊÇ·ñÏëßMÈ¥£¿£¿");
+	    cm.sendYesNo("å—¨~æˆ‘æ˜¯è³½æ©ï¼Œæˆ‘å¯è®“ä½ é€²å…¥#m101000100# è²»ç”¨æ˜¯ #b5000#k æ¥“å¹£ ä½ æ˜¯å¦æƒ³é€²å»ï¼Ÿï¼Ÿ");
 	}
     } else if (status == 1) {
 	if (check != 1) {
 	    if (cm.getMeso() < 5000) {
-		cm.sendOk("±§Ç¸£¬ÄãºÃÏñ›]ÓĞ×ã‰ò—÷Å£¬ÎÒ²»ÄÜ×ŒÄãßMÈ¥£¡£¡")
+		cm.sendOk("æŠ±æ­‰ï¼Œä½ å¥½åƒæ²’æœ‰è¶³å¤ æ¥“å¹£ï¼Œæˆ‘ä¸èƒ½è®“ä½ é€²å»ï¼ï¼")
 		cm.dispose();
 	    }
 	    else {

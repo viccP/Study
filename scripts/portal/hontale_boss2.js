@@ -3,7 +3,7 @@ function enter(pi) {
     if (em != null) {
         var prop = em.getProperty("preheadCheck");
         if (prop != null && prop.equals("2")) {
-            pi.mapMessage(6, "欢迎来到试练洞穴2，这里是暗黑龙王右边头颅的试练！")
+            pi.mapMessage(6, "娆㈣繋鏉ュ埌璇曠粌娲炵┐2锛岃繖閲屾槸鏆楅粦榫欑帇鍙宠竟澶撮鐨勮瘯缁冿紒")
             em.setProperty("preheadCheck", "3");
         }
     }

@@ -21,19 +21,19 @@ function action(mode, type, selection) {
 	} else if (cm.getQuestStatus(100006) >= 1) {
 	    cm.completeQuest(100006);
 	    if (cm.getQuestStatus(100006) == 2) {
-		cm.sendNext("ÄãÀ´À²?");
+		cm.sendNext("ä½ æ¥å•¦?");
 	    }
 	} else {
-	    cm.sendOk("ÎÒÄÜ¸øÄãÒ»´Î»ú»áÅ¶£¡£¡");
+	    cm.sendOk("æˆ‘èƒ½ç»™ä½ ä¸€æ¬¡æœºä¼šå“¦ï¼ï¼");
 	    cm.safeDispose();
 	}
     } else if (status == 1) {
-	cm.sendNextPrev("ÄãÏëÒª¶ş×ªÂğ£¿£¿.")
+	cm.sendNextPrev("ä½ æƒ³è¦äºŒè½¬å—ï¼Ÿï¼Ÿ.")
     } else if (status == 2) {
-	cm.askAcceptDecline("ÎÒ»á¸øÄãÒ»´Î»ú»á£¬Äã×¼±¸ºÃÁËÂğ£¿£¿");
+	cm.askAcceptDecline("æˆ‘ä¼šç»™ä½ ä¸€æ¬¡æœºä¼šï¼Œä½ å‡†å¤‡å¥½äº†å—ï¼Ÿï¼Ÿ");
     } else if (status == 3) {
 	cm.startQuest(100007);
-	cm.sendOk("Äã½«ÒªÊÕ¼¯ #b30 #t4031013##k.×£ÄãºÃÔË£¡£¡£¡£¡")
+	cm.sendOk("ä½ å°†è¦æ”¶é›† #b30 #t4031013##k.ç¥ä½ å¥½è¿ï¼ï¼ï¼ï¼")
     } else if (status == 4) {
 	//	    cm.gainItem(4031009, -1);
 		cm.warp(108000200,0);

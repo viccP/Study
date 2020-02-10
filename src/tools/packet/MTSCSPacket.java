@@ -43,7 +43,7 @@ public class MTSCSPacket {
     public static MaplePacket warpCS(MapleClient c) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
         MapleCharacter chr = c.getPlayer();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("warpCS--------------------");
         }
         mplew.writeShort(SendPacketOpcode.CS_OPEN.getValue());
@@ -133,7 +133,7 @@ public class MTSCSPacket {
 
     public static MaplePacket sendBlockedMessage(int type) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("sendBlockedMessage--------------------");
         }
         mplew.writeShort(SendPacketOpcode.BLOCK_MSG.getValue());
@@ -147,7 +147,7 @@ public class MTSCSPacket {
 
     public static MaplePacket playCashSong(int itemid, String name) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("playCashSong--------------------");
         }
         mplew.writeShort(SendPacketOpcode.CASH_SONG.getValue());
@@ -161,7 +161,7 @@ public class MTSCSPacket {
     }
 
     public static MaplePacket show\u5854\u7f57\u724c(String name, String otherName, int love, int cardId, int commentId) {
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("show\u5854\u7f57\u724c--------------------");
         }
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
@@ -180,7 +180,7 @@ public class MTSCSPacket {
 
     public static MaplePacket useCharm(byte charmsleft, byte daysleft) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("useCharm--------------------");
         }
         mplew.writeShort(SendPacketOpcode.SHOW_ITEM_GAIN_INCHAT.getValue());
@@ -197,7 +197,7 @@ public class MTSCSPacket {
 
     public static MaplePacket useWheel(byte charmsleft) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("useWheel--------------------");
         }
         mplew.writeShort(SendPacketOpcode.SHOW_ITEM_GAIN_INCHAT.getValue());
@@ -212,7 +212,7 @@ public class MTSCSPacket {
 
     public static MaplePacket itemExpired(int itemid) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("itemExpired--------------------");
         }
         mplew.writeShort(SendPacketOpcode.SHOW_STATUS_INFO.getValue());
@@ -227,7 +227,7 @@ public class MTSCSPacket {
 
     public static MaplePacket ViciousHammer(boolean start, int hammered) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("ViciousHammer--------------------");
         }
         mplew.writeShort(SendPacketOpcode.VICIOUS_HAMMER.getValue());
@@ -248,7 +248,7 @@ public class MTSCSPacket {
 
     public static MaplePacket changePetFlag(int uniqueId, boolean added, int flagAdded) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("changePetFlag--------------------");
         }
         mplew.writeShort(SendPacketOpcode.PET_FLAG_CHANGE.getValue());
@@ -264,7 +264,7 @@ public class MTSCSPacket {
 
     public static MaplePacket changePetName(MapleCharacter chr, String newname, int slot) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("changePetName--------------------");
         }
         mplew.writeShort(SendPacketOpcode.PET_NAMECHANGE.getValue());
@@ -281,7 +281,7 @@ public class MTSCSPacket {
 
     public static MaplePacket showNotes(ResultSet notes, int count) throws SQLException {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("showNotes--------------------");
         }
         mplew.writeShort(SendPacketOpcode.SHOW_NOTES.getValue());
@@ -304,7 +304,7 @@ public class MTSCSPacket {
 
     public static MaplePacket useChalkboard(int charid, String msg) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("useChalkboard--------------------");
         }
         mplew.writeShort(SendPacketOpcode.CHALKBOARD.getValue());
@@ -325,7 +325,7 @@ public class MTSCSPacket {
     public static MaplePacket getTrockRefresh(MapleCharacter chr, boolean vip, boolean delete) {
         int[] map;
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getTrockRefresh--------------------");
         }
         mplew.writeShort(SendPacketOpcode.TROCK_LOCATIONS.getValue());
@@ -351,7 +351,7 @@ public class MTSCSPacket {
 
     public static MaplePacket sendWishList(MapleCharacter chr, boolean update) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("sendWishList--------------------");
         }
         mplew.writeShort(SendPacketOpcode.CS_OPERATION.getValue());
@@ -385,7 +385,7 @@ public class MTSCSPacket {
 
     public static MaplePacket showNXMapleTokens(MapleCharacter chr) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("showNXMapleTokens--------------------");
         }
         mplew.writeShort(SendPacketOpcode.CS_UPDATE.getValue());
@@ -400,7 +400,7 @@ public class MTSCSPacket {
 
     public static MaplePacket showBoughtCSPackage(Map<Integer, IItem> ccc, int accid, int sn1) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("showBoughtCSPackage--------------------");
         }
         mplew.writeShort(SendPacketOpcode.CS_OPERATION.getValue());
@@ -419,7 +419,7 @@ public class MTSCSPacket {
 
     public static MaplePacket showBoughtCSItem(int itemid, int sn, int uniqueid, int accid, int quantity, String giftFrom, long expire) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("showBoughtCSItemA--------------------");
         }
         mplew.writeShort(SendPacketOpcode.CS_OPERATION.getValue());
@@ -434,7 +434,7 @@ public class MTSCSPacket {
 
     public static MaplePacket showBoughtCSItem(IItem item, int sn, int accid) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("showBoughtCSItemB--------------------");
         }
         mplew.writeShort(SendPacketOpcode.CS_OPERATION.getValue());
@@ -449,7 +449,7 @@ public class MTSCSPacket {
 
     public static MaplePacket showXmasSurprise(int idFirst, IItem item, int accid) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("showXmasSurprise--------------------");
         }
         mplew.writeShort(SendPacketOpcode.XMAS_SURPRISE.getValue());
@@ -468,28 +468,28 @@ public class MTSCSPacket {
     }
 
     public static final void addCashItemInfo(MaplePacketLittleEndianWriter mplew, IItem item, int accId, int sn) {
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("addCashItemInfoA--------------------");
         }
         MTSCSPacket.addCashItemInfo(mplew, item, accId, sn, true);
     }
 
     public static final void addCashItemInfo(MaplePacketLittleEndianWriter mplew, IItem item, int accId, int sn, boolean isFirst) {
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("addCashItemInfoB--------------------");
         }
         MTSCSPacket.addCashItemInfo(mplew, item.getUniqueId(), accId, item.getItemId(), sn, item.getQuantity(), item.getGiftFrom(), item.getExpiration(), isFirst);
     }
 
     public static final void addCashItemInfo(MaplePacketLittleEndianWriter mplew, int uniqueid, int accId, int itemid, int sn, int quantity, String sender, long expire) {
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("addCashItemInfoC--------------------");
         }
         MTSCSPacket.addCashItemInfo(mplew, uniqueid, accId, itemid, sn, quantity, sender, expire, true);
     }
 
     public static final void addCashItemInfo(MaplePacketLittleEndianWriter mplew, int uniqueid, int accId, int itemid, int sn, int quantity, String sender, long expire, boolean isFirst) {
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("addCashItemInfoD--------------------");
         }
         mplew.writeLong(uniqueid > 0 ? (long)uniqueid : 0L);
@@ -504,7 +504,7 @@ public class MTSCSPacket {
     }
 
     public static void addModCashItemInfo(MaplePacketLittleEndianWriter mplew, CashItemInfo.CashModInfo item) {
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("addModCashItemInfo--------------------");
         }
         int flags = item.flags;
@@ -573,7 +573,7 @@ public class MTSCSPacket {
 
     public static MaplePacket showBoughtCSQuestItem(int price, short quantity, byte position, int itemid) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("showBoughtCSQuestItem--------------------");
         }
         mplew.writeShort(SendPacketOpcode.CS_OPERATION.getValue());
@@ -591,7 +591,7 @@ public class MTSCSPacket {
 
     public static MaplePacket sendCSFail(int err) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("sendCSFail--------------------");
         }
         mplew.writeShort(SendPacketOpcode.CS_OPERATION.getValue());
@@ -606,7 +606,7 @@ public class MTSCSPacket {
 
     public static MaplePacket showCouponRedeemedItem(int itemid) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("showCouponRedeemedItemA--------------------");
         }
         mplew.writeShort(SendPacketOpcode.CS_OPERATION.getValue());
@@ -626,7 +626,7 @@ public class MTSCSPacket {
 
     public static MaplePacket showCouponRedeemedItem(Map<Integer, IItem> items, int mesos, int maplePoints, MapleClient c) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("showCouponRedeemedItemB--------------------");
         }
         mplew.writeShort(SendPacketOpcode.CS_OPERATION.getValue());
@@ -646,7 +646,7 @@ public class MTSCSPacket {
 
     public static MaplePacket enableCSorMTS() {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("enableCSorMTS--------------------");
         }
         mplew.write(HexTool.getByteArrayFromHexString("15 00 01 00 00 00 00"));
@@ -659,7 +659,7 @@ public class MTSCSPacket {
 
     public static MaplePacket enableCSUse() {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("enableCSUse--------------------");
         }
         mplew.write(HexTool.getByteArrayFromHexString("15 00 01 00 00 00 00"));
@@ -672,7 +672,7 @@ public class MTSCSPacket {
 
     public static MaplePacket getCSInventory(MapleClient c) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getCSInventory--------------------");
         }
         mplew.writeShort(SendPacketOpcode.CS_OPERATION.getValue());
@@ -704,7 +704,7 @@ public class MTSCSPacket {
 
     public static MaplePacket getCSGifts(MapleClient c) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getCSGifts--------------------");
         }
         mplew.writeShort(SendPacketOpcode.CS_OPERATION.getValue());
@@ -726,7 +726,7 @@ public class MTSCSPacket {
 
     public static MaplePacket cashItemExpired(int uniqueid) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("cashItemExpired--------------------");
         }
         mplew.writeShort(SendPacketOpcode.CS_OPERATION.getValue());
@@ -741,7 +741,7 @@ public class MTSCSPacket {
 
     public static MaplePacket sendGift(int itemid, int quantity, String receiver) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("sendGift--------------------");
         }
         mplew.writeShort(SendPacketOpcode.CS_OPERATION.getValue());
@@ -758,7 +758,7 @@ public class MTSCSPacket {
 
     public static MaplePacket increasedInvSlots(int inv, int slots) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("increasedInvSlots--------------------");
         }
         mplew.writeShort(SendPacketOpcode.CS_OPERATION.getValue());
@@ -774,7 +774,7 @@ public class MTSCSPacket {
 
     public static MaplePacket increasedStorageSlots(int slots) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("increasedStorageSlots--------------------");
         }
         mplew.writeShort(SendPacketOpcode.CS_OPERATION.getValue());
@@ -800,7 +800,7 @@ public class MTSCSPacket {
 
     public static MaplePacket confirmToCSInventory(IItem item, int accId, int sn) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("confirmToCSInventory--------------------");
         }
         mplew.writeShort(SendPacketOpcode.CS_OPERATION.getValue());
@@ -822,7 +822,7 @@ public class MTSCSPacket {
 
     public static MaplePacket confirmFromCSInventory(IItem item, short pos) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("confirmFromCSInventory--------------------");
         }
         mplew.writeShort(SendPacketOpcode.CS_OPERATION.getValue());
@@ -838,7 +838,7 @@ public class MTSCSPacket {
 
     public static MaplePacket sendMesobagFailed() {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("sendMesobagFailed--------------------");
         }
         mplew.writeShort(SendPacketOpcode.MESOBAG_FAILURE.getValue());
@@ -851,7 +851,7 @@ public class MTSCSPacket {
 
     public static MaplePacket sendMesobagSuccess(int mesos) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("sendMesobagSuccess--------------------");
         }
         mplew.writeShort(SendPacketOpcode.MESOBAG_SUCCESS.getValue());
@@ -865,7 +865,7 @@ public class MTSCSPacket {
 
     public static final MaplePacket startMTS(MapleCharacter chr, MapleClient c) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("startMTS--------------------");
         }
         mplew.writeShort(SendPacketOpcode.MTS_OPEN.getValue());
@@ -886,7 +886,7 @@ public class MTSCSPacket {
 
     public static final MaplePacket sendMTS(List<MTSStorage.MTSItemInfo> items, int tab, int type, int page, int pages) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("sendMTS--------------------");
         }
         mplew.writeShort(SendPacketOpcode.MTS_OPERATION.getValue());
@@ -911,7 +911,7 @@ public class MTSCSPacket {
 
     public static final MaplePacket showMTSCash(MapleCharacter p) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("showMTSCash--------------------");
         }
         mplew.writeShort(SendPacketOpcode.GET_MTS_TOKENS.getValue());
@@ -925,7 +925,7 @@ public class MTSCSPacket {
 
     public static final MaplePacket getMTSWantedListingOver(int nx, int items) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getMTSWantedListingOver--------------------");
         }
         mplew.writeShort(SendPacketOpcode.MTS_OPERATION.getValue());
@@ -941,7 +941,7 @@ public class MTSCSPacket {
 
     public static final MaplePacket getMTSConfirmSell() {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getMTSConfirmSell--------------------");
         }
         mplew.writeShort(SendPacketOpcode.MTS_OPERATION.getValue());
@@ -955,7 +955,7 @@ public class MTSCSPacket {
 
     public static final MaplePacket getMTSFailSell() {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getMTSFailSell--------------------");
         }
         mplew.writeShort(SendPacketOpcode.MTS_OPERATION.getValue());
@@ -970,7 +970,7 @@ public class MTSCSPacket {
 
     public static final MaplePacket getMTSConfirmBuy() {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getMTSConfirmBuy--------------------");
         }
         mplew.writeShort(SendPacketOpcode.MTS_OPERATION.getValue());
@@ -984,7 +984,7 @@ public class MTSCSPacket {
 
     public static final MaplePacket getMTSFailBuy() {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getMTSFailBuy--------------------");
         }
         mplew.writeShort(SendPacketOpcode.MTS_OPERATION.getValue());
@@ -999,7 +999,7 @@ public class MTSCSPacket {
 
     public static final MaplePacket getMTSConfirmCancel() {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getMTSConfirmCancel--------------------");
         }
         mplew.writeShort(SendPacketOpcode.MTS_OPERATION.getValue());
@@ -1013,7 +1013,7 @@ public class MTSCSPacket {
 
     public static final MaplePacket getMTSFailCancel() {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getMTSFailCancel--------------------");
         }
         mplew.writeShort(SendPacketOpcode.MTS_OPERATION.getValue());
@@ -1028,7 +1028,7 @@ public class MTSCSPacket {
 
     public static final MaplePacket getMTSConfirmTransfer(int quantity, int pos) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getMTSConfirmTransfer--------------------");
         }
         mplew.writeShort(SendPacketOpcode.MTS_OPERATION.getValue());
@@ -1043,7 +1043,7 @@ public class MTSCSPacket {
     }
 
     private static final void addMTSItemInfo(MaplePacketLittleEndianWriter mplew, MTSStorage.MTSItemInfo item) {
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("addMTSItemInfo--------------------");
         }
         PacketHelper.addItemInfo(mplew, item.getItem(), true, true);
@@ -1060,7 +1060,7 @@ public class MTSCSPacket {
 
     public static final MaplePacket getNotYetSoldInv(List<MTSStorage.MTSItemInfo> items) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getNotYetSoldInv--------------------");
         }
         mplew.writeShort(SendPacketOpcode.MTS_OPERATION.getValue());
@@ -1078,7 +1078,7 @@ public class MTSCSPacket {
 
     public static final MaplePacket getTransferInventory(List<IItem> items, boolean changed) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getTransferInventory--------------------");
         }
         mplew.writeShort(SendPacketOpcode.MTS_OPERATION.getValue());
@@ -1104,7 +1104,7 @@ public class MTSCSPacket {
 
     public static final MaplePacket addToCartMessage(boolean fail, boolean remove) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("addToCartMessage--------------------");
         }
         mplew.writeShort(SendPacketOpcode.MTS_OPERATION.getValue());

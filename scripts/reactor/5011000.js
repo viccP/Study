@@ -1,9 +1,3 @@
 function act() {
  	rm.dropItems(); 
-	rm.mapMessage(5, "¤»¤â¨¸¯«¤w¸g©Û´« ¥[ªo§a!!");
-	rm.changeMusic("Bgm09/TimeAttack");
-	rm.spawnMonster(9420014, -202, 479);
-	rm.closeDoor(501030104);
-	rm.closePortal(501030104,"sp");
-	rm.createMapMonitor(501030104,"sp");
-}
+	rm.mapMessage(5, "ã›ã‚‚Çœ

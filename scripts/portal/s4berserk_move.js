@@ -6,6 +6,6 @@ function enter(pi) {
         pi.warp(910500200, "pt00");
         return true;
     }
-    pi.playerMessage("�Ѿ��رյĴ��Ϳڡ�");
+    pi.playerMessage("已经关闭的传送口。");
     return true;
 }

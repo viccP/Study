@@ -4,7 +4,7 @@
   */
 
 function act() {
-    rm.mapMessage(5, "ÖÜÎ§Í»È»Ò»µÀÉÁ¹â£¬ºÃÏñÓĞÈË³öÏÖÁË¡£");
+    rm.mapMessage(5, "å‘¨å›´çªç„¶ä¸€é“é—ªå…‰ï¼Œå¥½åƒæœ‰äººå‡ºç°äº†ã€‚");
     rm.spawnNpc(2013001);
     var em = rm.getEventManager("OrbisPQ");
     if (em != null) {

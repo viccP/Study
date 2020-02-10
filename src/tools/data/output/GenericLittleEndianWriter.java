@@ -5,8 +5,6 @@ package tools.data.output;
 
 import java.awt.Point;
 import java.nio.charset.Charset;
-import tools.data.output.ByteOutputStream;
-import tools.data.output.LittleEndianWriter;
 
 public class GenericLittleEndianWriter
 implements LittleEndianWriter {

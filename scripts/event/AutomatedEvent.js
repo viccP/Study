@@ -8,8 +8,8 @@ function init() {
     	cal.set(java.util.Calendar.SECOND, 0);
     	nextTime = cal.getTimeInMillis();
         while (nextTime <= java.lang.System.currentTimeMillis()) {
-	   // nextTime += 1000 * 6 * 24; // 4С�r
-	    nextTime += 99999999999; // 4С�r
+	   // nextTime += 1000 * 6 * 24; // 4小時
+	    nextTime += 99999999999; // 4小時
         }
     	scheduleNew();
 }
@@ -27,7 +27,7 @@ function cancelSchedule() {
 
 function setup() {
     em.scheduleRandomEvent();
-    setupTask = em.schedule("scheduleNew", 120000); // 2��
-    //nextTime += 1000 * 6 * 24; // 4С�r
-	    nextTime += 99999999999; // 4С�r
+    setupTask = em.schedule("scheduleNew", 120000); // 2分
+    //nextTime += 1000 * 6 * 24; // 4小時
+	    nextTime += 99999999999; // 4小時
 }

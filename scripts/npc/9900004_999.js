@@ -20,14 +20,14 @@ function action(mode, type, selection) {
 		else
 			status--;
 		if (status == 0) {
-			cm.sendYesNo("È·¶¨¼¤»î¼¼ÄÜ?");
+			cm.sendYesNo("ç¡®å®šæ¿€æ´»æŠ€èƒ½?");
 		} else if (status == 1) {
 			if(cm.getPlayer().getJob() == 132){
 				cm.teachSkill(1320009,25,25);
 				cm.teachSkill(1320008,25,25);
-			cm.sendOk("¼¤»î³É¹¦£¡");
+			cm.sendOk("æ¿€æ´»æˆåŠŸï¼");
 			}else{
-				cm.sendOk("Äã²»Âú×ã¼¤»îÌõ¼ş±ØĞë4×ª»òÕßÄãÖ°Òµ²»ĞèÒª¼¤»î£¡");
+				cm.sendOk("ä½ ä¸æ»¡è¶³æ¿€æ´»æ¡ä»¶å¿…é¡»4è½¬æˆ–è€…ä½ èŒä¸šä¸éœ€è¦æ¿€æ´»ï¼");
 			}
 			cm.dispose();
 			}

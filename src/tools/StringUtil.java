@@ -3,8 +3,6 @@
  */
 package tools;
 
-import java.nio.charset.Charset;
-
 public class StringUtil {
     public static final String getLeftPaddedStr(String in, char padchar, int length) {
         StringBuilder builder = new StringBuilder(length);
@@ -13,11 +11,6 @@ public class StringUtil {
         }
         builder.append(in);
         return builder.toString();
-    }
-
-    public static final int getlength(String str) {
-        byte[] bt = str.getBytes(Charset.forName("GBK"));
-        return bt.length;
     }
 
     public static final String getRightPaddedStr(String in, char padchar, int length) {
@@ -80,7 +73,7 @@ public class StringUtil {
             sb.append(" day" + (elapsedDays > 1 ? "s" : "") + (mins ? ", " : "."));
             if (mins) {
                 boolean secs;
-                boolean bl = secs = elapsedMins > 0;
+                secs = elapsedMins > 0;
                 if (!secs) {
                     sb.append("and ");
                 }
@@ -88,7 +81,7 @@ public class StringUtil {
                 sb.append(" hour" + (elapsedHours > 1 ? "s" : "") + (secs ? ", " : "."));
                 if (secs) {
                     boolean millis;
-                    boolean bl2 = millis = elapsedSecs > 0;
+                    millis = elapsedSecs > 0;
                     if (!millis) {
                         sb.append("and ");
                     }
@@ -107,7 +100,7 @@ public class StringUtil {
             sb.append(" hour" + (elapsedHours > 1 ? "s" : "") + (mins ? ", " : "."));
             if (mins) {
                 boolean secs;
-                boolean bl = secs = elapsedSecs > 0;
+                secs = elapsedSecs > 0;
                 if (!secs) {
                     sb.append("and ");
                 }

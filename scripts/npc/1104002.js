@@ -4,7 +4,7 @@
  */
 
 function start() {
-    cm.sendNext("呵呵...難道我剛剛做的被發現了嗎？！");
+    cm.sendNext("鍛靛懙...闆ｉ亾鎴戝墰鍓涘仛鐨勮鐧肩従浜嗗棊锛燂紒");
 }
 
 function action(mode, type, selection) {

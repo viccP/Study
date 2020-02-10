@@ -2,7 +2,7 @@
 			Resonance
 	NPC Name: 	Minister of Magic
 	Map(s): 	Mushroom Castle: Corner of Mushroom Forest(106020000)
-	Description: 	Quest -  Ô½¹ý³ÇÇ½(1)
+	Description: 	Quest -  è¶Šè¿‡åŸŽå¢™(1)
 */
 
 importPackage(Packages.client);

@@ -6,5 +6,5 @@
 function act() {
     rm.changeMusic("Bgm09/TimeAttack");
     rm.spawnMonster(9420520);
-    rm.mapMessage(5, "¿ËÀ×Èû¶û³öÏÖÁË¡£");
+    rm.mapMessage(5, "å…‹é›·å¡å°”å‡ºç°äº†ã€‚");
 }

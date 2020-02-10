@@ -42,24 +42,4 @@
             pi.warp(220080001, "st00");
             return true;
         } else {
-            pi.playerMessage(5, "对抗闹钟BOSS的挑战已经开始了，你不能进入到里面。");
-            return false;
-        }
- }
- }
-/*function enter(pi) {
-    var papuMap = pi.getClient().getChannelServer().getMapFactory().getMap(220080001);
-    if (papuMap.getCharacters().size() == 0) {
-        pi.getPlayer().dropMessage("The room is empty. A perfect opportunity to challenge the boss.");
-        papuMap.resetReactors();
-    } else { // someone is inside
-        for (var i = 0; i < 3; i++) {
-            if (papuMap.getMonsterById(8500000 + i) != null) {
-                pi.getPlayer().dropMessage("Someone is fighting Papulatus.");
-                return false;
-            }
-        }
-    }
-    pi.warp(220080001, "st00");
-    return true;
-}*/
+            pi.playerMessage(5, "瀵规姉闂归挓BOSS鐨勬寫鎴樺凡缁忓紑濮嬩簡锛屼綘涓嶈兘杩涘叆鍒伴噷闈

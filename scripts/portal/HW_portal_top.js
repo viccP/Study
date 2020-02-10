@@ -1,3 +1,3 @@
 function enter(pi) {
-    pi.playerMessage("Õâ¸ö´«ËÍÃÅÔİÊ±ÎŞ·¨Ê¹ÓÃ¡£");
+    pi.playerMessage("è¿™ä¸ªä¼ é€é—¨æš‚æ—¶æ— æ³•ä½¿ç”¨ã€‚");
 }

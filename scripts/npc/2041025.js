@@ -15,13 +15,13 @@ function action(mode, type, selection) {
         status--;
     }
     if (status == 0) {
-        cm.sendYesNo("你的要离开这里吗？");
+        cm.sendYesNo("浣犵殑瑕佺寮�杩欓噷鍚楋紵");
     } else if (status == 1) {
         cm.warp(220080000);
         if (cm.getPlayerCount(220080001) == 0) {
             cm.getMap(220080000).resetReactors();
         }
-		cm.getPlayer().setbosslog(0);//BOSS重返
+		cm.getPlayer().setbosslog(0);//BOSS閲嶈繑
         cm.dispose();
     } else {
         cm.dispose();

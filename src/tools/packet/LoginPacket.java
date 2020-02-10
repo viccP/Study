@@ -22,7 +22,7 @@ import tools.packet.PacketHelper;
 public class LoginPacket {
     public static final MaplePacket getHello(short mapleVersion, byte[] sendIv, byte[] recvIv) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter(16);
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getHello--------------------");
         }
         mplew.writeShort(13);
@@ -42,7 +42,7 @@ public class LoginPacket {
 
     public static final MaplePacket getPing() {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter(16);
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getPing--------------------");
         }
         mplew.writeShort(SendPacketOpcode.PING.getValue());
@@ -55,7 +55,7 @@ public class LoginPacket {
 
     public static final MaplePacket StrangeDATA() {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter(16);
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("StrangeDATA--------------------");
         }
         mplew.writeShort(18);
@@ -69,7 +69,7 @@ public class LoginPacket {
 
     public static MaplePacket genderNeeded(MapleClient c) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter(3);
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("genderNeeded--------------------");
         }
         mplew.writeShort(SendPacketOpcode.CHOOSE_GENDER.getValue());
@@ -83,7 +83,7 @@ public class LoginPacket {
 
     public static final MaplePacket getLoginFailed(int reason) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter(16);
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getLoginFailed--------------------");
         }
         mplew.writeShort(SendPacketOpcode.LOGIN_STATUS.getValue());
@@ -98,7 +98,7 @@ public class LoginPacket {
 
     public static final MaplePacket getPermBan(byte reason) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter(16);
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getPermBan--------------------");
         }
         mplew.writeShort(SendPacketOpcode.LOGIN_STATUS.getValue());
@@ -115,7 +115,7 @@ public class LoginPacket {
 
     public static final MaplePacket getTempBan(long timestampTill, byte reason) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter(17);
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getTempBan--------------------");
         }
         mplew.writeShort(SendPacketOpcode.LOGIN_STATUS.getValue());
@@ -132,7 +132,7 @@ public class LoginPacket {
 
     public static final MaplePacket getGenderChanged(MapleClient client) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getGenderChanged--------------------");
         }
         mplew.writeShort(SendPacketOpcode.GENDER_SET.getValue());
@@ -148,7 +148,7 @@ public class LoginPacket {
 
     public static final MaplePacket getGenderNeeded(MapleClient client) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getGenderNeeded--------------------");
         }
         mplew.writeShort(SendPacketOpcode.CHOOSE_GENDER.getValue());
@@ -162,7 +162,7 @@ public class LoginPacket {
 
     public static final MaplePacket getAuthSuccessRequest(MapleClient client) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getAuthSuccessRequest--------------------");
         }
         mplew.writeShort(SendPacketOpcode.LOGIN_STATUS.getValue());
@@ -186,7 +186,7 @@ public class LoginPacket {
 
     public static final MaplePacket deleteCharResponse(int cid, int state) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("deleteCharResponse--------------------");
         }
         mplew.writeShort(SendPacketOpcode.DELETE_CHAR_RESPONSE.getValue());
@@ -201,7 +201,7 @@ public class LoginPacket {
 
     public static final MaplePacket secondPwError(byte mode) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter(3);
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("secondPwError--------------------");
         }
         mplew.writeShort(SendPacketOpcode.SECONDPW_ERROR.getValue());
@@ -215,7 +215,7 @@ public class LoginPacket {
 
     public static final MaplePacket getServerList(int serverId, String serverName, Map<Integer, Integer> channelLoad) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getServerList--------------------");
         }
         mplew.writeShort(SendPacketOpcode.SERVERLIST.getValue());
@@ -256,7 +256,7 @@ public class LoginPacket {
 
     public static final MaplePacket getEndOfServerList() {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getEndOfServerList--------------------");
         }
         mplew.writeShort(SendPacketOpcode.SERVERLIST.getValue());
@@ -270,7 +270,7 @@ public class LoginPacket {
 
     public static final MaplePacket getServerStatus(int status) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getServerStatus--------------------");
         }
         mplew.writeShort(SendPacketOpcode.SERVERSTATUS.getValue());
@@ -284,7 +284,7 @@ public class LoginPacket {
 
     public static final MaplePacket getCharList(boolean secondpw, List<MapleCharacter> chars, int charslots) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getCharList--------------------");
         }
         mplew.writeShort(SendPacketOpcode.CHARLIST.getValue());
@@ -305,7 +305,7 @@ public class LoginPacket {
 
     public static final MaplePacket addNewCharEntry(MapleCharacter chr, boolean worked) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("addNewCharEntry--------------------");
         }
         mplew.writeShort(SendPacketOpcode.ADD_NEW_CHAR_ENTRY.getValue());
@@ -320,7 +320,7 @@ public class LoginPacket {
 
     public static final MaplePacket charNameResponse(String charname, boolean nameUsed) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("charNameResponse--------------------");
         }
         mplew.writeShort(SendPacketOpcode.CHAR_NAME_RESPONSE.getValue());
@@ -334,7 +334,7 @@ public class LoginPacket {
     }
 
     private static final void addCharEntry(MaplePacketLittleEndianWriter mplew, MapleCharacter chr, boolean ranking, boolean viewAll) {
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("addCharEntry--------------------");
         }
         PacketHelper.addCharStats(mplew, chr);

@@ -1,5 +1,5 @@
 /*
- ±ã½İ¹¦ÄÜ
+ ä¾¿æ·åŠŸèƒ½
  */
 
 var status;
@@ -27,8 +27,8 @@ function action(mode, type, selection) {
         }
 
         if (status == 0) {
-            text = "#e- ±ã½İ¹¦ÄÜ -#n\r\n\r\n#b";
-            text += "#L0##e#d»ØÊÕ°ü¹üÄÚÖ¸¶¨µÀ¾ß#l\r\n";
+            text = "#e- ä¾¿æ·åŠŸèƒ½ -#n\r\n\r\n#b";
+            text += "#L0##e#då›æ”¶åŒ…è£¹å†…æŒ‡å®šé“å…·#l\r\n";
             text += "\r\n\r\n\r\n\r\n";
             cm.sendSimple(text);
         } else {
@@ -48,17 +48,17 @@ function action(mode, type, selection) {
 
 function deleteItemBySlot(selection) {
     if (status == 1) {
-        text = "#e- ÇëÑ¡ÔñÒª»ØÊÕµÄµÀ¾ßÀàĞÍ -#n\r\n#d#e";
-        text += "\t#L1#×°±¸À¸#l\r\n";
-        text += "\t#L2#ÏûºÄÀ¸#l\r\n";
-        text += "\t#L4#ÆäËüÀ¸#l\r\n";
-        text += "\t#L3#ÉèÖÃÀ¸#l\r\n";
-        text += "\t#L5#ÌØÊâÀ¸#l\r\n";
+        text = "#e- è¯·é€‰æ‹©è¦å›æ”¶çš„é“å…·ç±»å‹ -#n\r\n#d#e";
+        text += "\t#L1#è£…å¤‡æ #l\r\n";
+        text += "\t#L2#æ¶ˆè€—æ #l\r\n";
+        text += "\t#L4#å…¶å®ƒæ #l\r\n";
+        text += "\t#L3#è®¾ç½®æ #l\r\n";
+        text += "\t#L5#ç‰¹æ®Šæ #l\r\n";
         cm.sendSimple(text);
     } else if (status == 2) {
         inventoryType = selection;
         itemList = cm.getInventory(inventoryType).list().iterator();
-        text = "#e- ÇëÑ¡ÔñÒª»ØÊÕµÄµÀ¾ß -#n\r\n\r\n#b";
+        text = "#e- è¯·é€‰æ‹©è¦å›æ”¶çš„é“å…· -#n\r\n\r\n#b";
         var indexof = 1;
         while (itemList.hasNext()) {
             var item = itemList.next();
@@ -73,11 +73,11 @@ function deleteItemBySlot(selection) {
         var item = cm.getInventory(inventoryType).getItem(selection);
         deleteSlot = selection;
         deleteQuantity = item.getQuantity();
-        text = "#eÈ·¶¨Òª»ØÊÕ#r#v" + item.getItemId() + "##z" + item.getItemId() + "# " + deleteQuantity + "¸ö #kÂğ£¿";
+        text = "#eç¡®å®šè¦å›æ”¶#r#v" + item.getItemId() + "##z" + item.getItemId() + "# " + deleteQuantity + "ä¸ª #kå—ï¼Ÿ";
         cm.sendNextPrev(text);
     } else if (status == 4) {
         cm.removeSlot(inventoryType, deleteSlot, deleteQuantity);
-        cm.sendOk("»ØÊÕ³É¹¦£¬×£ÄãÓÎÏ·Óä¿ì~");
+        cm.sendOk("å›æ”¶æˆåŠŸï¼Œç¥ä½ æ¸¸æˆæ„‰å¿«~");
         status = 0;
 		cm.dispose();
     }

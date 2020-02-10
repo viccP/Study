@@ -155,23 +155,23 @@ public class PacketHelper {
         mplew.writeInt(chr.getBeans());
         mplew.writeInt(0);
         mplew.write(chr.getInventory(MapleInventoryType.EQUIP).getSlotLimit());
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("-------\u80cc\u5305\u88c5\u5907\u683c\u5b50\u6570\u636e\u8f93\u51fa\uff1a" + chr.getInventory(MapleInventoryType.EQUIP).getSlotLimit());
         }
         mplew.write(chr.getInventory(MapleInventoryType.USE).getSlotLimit());
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("-------\u80cc\u5305\u6d88\u8017\u683c\u5b50\u6570\u636e\u8f93\u51fa\uff1a" + chr.getInventory(MapleInventoryType.USE).getSlotLimit());
         }
         mplew.write(chr.getInventory(MapleInventoryType.SETUP).getSlotLimit());
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("-------\u80cc\u5305\u7279\u6b8a\u683c\u5b50\u6570\u636e\u8f93\u51fa\uff1a" + chr.getInventory(MapleInventoryType.SETUP).getSlotLimit());
         }
         mplew.write(chr.getInventory(MapleInventoryType.ETC).getSlotLimit());
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("-------\u80cc\u5305\u5176\u4ed6\u683c\u5b50\u6570\u636e\u8f93\u51fa\uff1a" + chr.getInventory(MapleInventoryType.ETC).getSlotLimit());
         }
         mplew.write(chr.getInventory(MapleInventoryType.CASH).getSlotLimit());
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("-------\u80cc\u5305\u73b0\u91d1\u683c\u5b50\u6570\u636e\u8f93\u51fa\uff1a" + chr.getInventory(MapleInventoryType.CASH).getSlotLimit());
         }
         mplew.writeLong(PacketHelper.getTime(System.currentTimeMillis()));

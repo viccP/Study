@@ -5,10 +5,10 @@ function action(mode, type, selection) {
     //cm.addTrait("charisma", 10);
     cm.getPlayer().endPartyQuest(1202); //might be a bad implentation.. incase they dc or something
    // cm.gainNX(100);
-cm.gainItem(4001322,+2);//°×Ñ©ÈË·¨ÀÏµÄÀ¶±¦Ê¯
-cm.gainMeso(+30000);//¶ÁÈ¡±äÁ¿
+cm.gainItem(4001322,+2);//ç™½é›ªäººæ³•è€çš„è“å®çŸ³
+cm.gainMeso(+30000);//è¯»å–å˜é‡
 cm.gainExp(+60000);
     cm.warp(922010000);
-cm.À®°È(3, "[" + cm.getPlayer().getName() + "]³É¹¦Í¨¹Ø¡¾×é¶ÓÈÎÎñ - Íæ¾ß³Ç×é¶Ó¡¿»ñµÃ½±Àø£¡");
+cm.å–‡å­(3, "[" + cm.getPlayer().getName() + "]æˆåŠŸé€šå…³ã€ç»„é˜Ÿä»»åŠ¡ - ç©å…·åŸç»„é˜Ÿã€‘è·å¾—å¥–åŠ±ï¼");
     cm.dispose();
 }

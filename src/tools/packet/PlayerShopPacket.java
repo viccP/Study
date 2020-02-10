@@ -26,7 +26,7 @@ import tools.packet.PacketHelper;
 public class PlayerShopPacket {
     public static final MaplePacket addCharBox(MapleCharacter c, int type) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("addCharBox--------------------");
         }
         mplew.writeShort(SendPacketOpcode.UPDATE_CHAR_BOX.getValue());
@@ -41,7 +41,7 @@ public class PlayerShopPacket {
 
     public static final MaplePacket removeCharBox(MapleCharacter c) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("removeCharBox--------------------");
         }
         mplew.writeShort(SendPacketOpcode.UPDATE_CHAR_BOX.getValue());
@@ -56,7 +56,7 @@ public class PlayerShopPacket {
 
     public static final MaplePacket sendTitleBox() {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("sendTitleBox--------------------");
         }
         mplew.writeShort(SendPacketOpcode.SEND_TITLE_BOX.getValue());
@@ -70,7 +70,7 @@ public class PlayerShopPacket {
 
     public static final MaplePacket sendPlayerShopBox(MapleCharacter c) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("sendPlayerShopBox--------------------");
         }
         mplew.writeShort(SendPacketOpcode.UPDATE_CHAR_BOX.getValue());
@@ -85,7 +85,7 @@ public class PlayerShopPacket {
 
     public static final MaplePacket getHiredMerch(MapleCharacter chr, HiredMerchant merch, boolean firstTime) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getHiredMerch--------------------");
         }
         mplew.writeShort(SendPacketOpcode.PLAYER_INTERACTION.getValue());
@@ -134,7 +134,7 @@ public class PlayerShopPacket {
 
     public static final MaplePacket getPlayerStore(MapleCharacter chr, boolean firstTime) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getPlayerStore--------------------");
         }
         mplew.writeShort(SendPacketOpcode.PLAYER_INTERACTION.getValue());
@@ -185,7 +185,7 @@ public class PlayerShopPacket {
 
     public static final MaplePacket shopChat(String message, int slot) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("shopChat--------------------");
         }
         mplew.writeShort(SendPacketOpcode.PLAYER_INTERACTION.getValue());
@@ -202,7 +202,7 @@ public class PlayerShopPacket {
 
     public static final MaplePacket shopErrorMessage(int error, int type) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("shopErrorMessage--------------------");
         }
         mplew.writeShort(SendPacketOpcode.PLAYER_INTERACTION.getValue());
@@ -218,7 +218,7 @@ public class PlayerShopPacket {
 
     public static final MaplePacket spawnHiredMerchant(HiredMerchant hm) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("spawnHiredMerchant--------------------");
         }
         mplew.writeShort(SendPacketOpcode.SPAWN_HIRED_MERCHANT.getValue());
@@ -237,7 +237,7 @@ public class PlayerShopPacket {
 
     public static final MaplePacket destroyHiredMerchant(int id) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("destroyHiredMerchant--------------------");
         }
         mplew.writeShort(SendPacketOpcode.DESTROY_HIRED_MERCHANT.getValue());
@@ -251,7 +251,7 @@ public class PlayerShopPacket {
 
     public static final MaplePacket shopItemUpdate(IMaplePlayerShop shop) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("shopItemUpdate--------------------");
         }
         mplew.writeShort(SendPacketOpcode.PLAYER_INTERACTION.getValue());
@@ -275,7 +275,7 @@ public class PlayerShopPacket {
 
     public static final MaplePacket shopVisitorAdd(MapleCharacter chr, int slot) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("shopVisitorAdd--------------------");
         }
         mplew.writeShort(SendPacketOpcode.PLAYER_INTERACTION.getValue());
@@ -292,7 +292,7 @@ public class PlayerShopPacket {
 
     public static final MaplePacket shopVisitorLeave(byte slot) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("shopVisitorLeave--------------------");
         }
         mplew.writeShort(SendPacketOpcode.PLAYER_INTERACTION.getValue());
@@ -311,7 +311,7 @@ public class PlayerShopPacket {
 
     public static final MaplePacket Merchant_Buy_Error(byte message) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("Merchant_Buy_Error--------------------");
         }
         mplew.writeShort(SendPacketOpcode.PLAYER_INTERACTION.getValue());
@@ -326,7 +326,7 @@ public class PlayerShopPacket {
 
     public static final MaplePacket updateHiredMerchant(HiredMerchant shop) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("updateHiredMerchant--------------------");
         }
         mplew.writeShort(SendPacketOpcode.UPDATE_HIRED_MERCHANT.getValue());
@@ -341,7 +341,7 @@ public class PlayerShopPacket {
 
     public static final MaplePacket merchItem_Message(byte op) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("merchItem_Message--------------------");
         }
         mplew.writeShort(SendPacketOpcode.MERCH_ITEM_MSG.getValue());
@@ -355,7 +355,7 @@ public class PlayerShopPacket {
 
     public static final MaplePacket merchItemStore(byte op) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("merchItemStore--------------------");
         }
         mplew.writeShort(SendPacketOpcode.MERCH_ITEM_STORE.getValue());
@@ -378,7 +378,7 @@ public class PlayerShopPacket {
 
     public static final MaplePacket merchItemStore_ItemData(MerchItemPackage pack) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("merchItemStore_ItemData--------------------");
         }
         mplew.writeShort(SendPacketOpcode.MERCH_ITEM_STORE.getValue());
@@ -402,7 +402,7 @@ public class PlayerShopPacket {
 
     public static MaplePacket getMiniGame(MapleClient c, MapleMiniGame minigame) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getMiniGame--------------------");
         }
         mplew.writeShort(SendPacketOpcode.PLAYER_INTERACTION.getValue());
@@ -436,7 +436,7 @@ public class PlayerShopPacket {
 
     public static MaplePacket getMiniGameReady(boolean ready) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getMiniGameReady--------------------");
         }
         mplew.writeShort(SendPacketOpcode.PLAYER_INTERACTION.getValue());
@@ -450,7 +450,7 @@ public class PlayerShopPacket {
 
     public static MaplePacket getMiniGameExitAfter(boolean ready) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getMiniGameExitAfter--------------------");
         }
         mplew.writeShort(SendPacketOpcode.PLAYER_INTERACTION.getValue());
@@ -464,7 +464,7 @@ public class PlayerShopPacket {
 
     public static MaplePacket getMiniGameStart(int loser) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getMiniGameStart--------------------");
         }
         mplew.writeShort(SendPacketOpcode.PLAYER_INTERACTION.getValue());
@@ -479,7 +479,7 @@ public class PlayerShopPacket {
 
     public static MaplePacket getMiniGameSkip(int slot) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getMiniGameSkip--------------------");
         }
         mplew.writeShort(SendPacketOpcode.PLAYER_INTERACTION.getValue());
@@ -494,7 +494,7 @@ public class PlayerShopPacket {
 
     public static MaplePacket getMiniGameSkip1(int slot) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getMiniGameSkip1--------------------");
         }
         mplew.writeShort(SendPacketOpcode.PLAYER_INTERACTION.getValue());
@@ -509,7 +509,7 @@ public class PlayerShopPacket {
 
     public static MaplePacket getMiniGameRequestTie() {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getMiniGameRequestTie--------------------");
         }
         mplew.writeShort(SendPacketOpcode.PLAYER_INTERACTION.getValue());
@@ -523,7 +523,7 @@ public class PlayerShopPacket {
 
     public static MaplePacket getMiniGameRequestREDO() {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getMiniGameRequestREDO--------------------");
         }
         mplew.writeShort(SendPacketOpcode.PLAYER_INTERACTION.getValue());
@@ -537,7 +537,7 @@ public class PlayerShopPacket {
 
     public static MaplePacket getMiniGameDenyTie() {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getMiniGameDenyTie--------------------");
         }
         mplew.writeShort(SendPacketOpcode.PLAYER_INTERACTION.getValue());
@@ -551,7 +551,7 @@ public class PlayerShopPacket {
 
     public static MaplePacket getMiniGameDenyREDO() {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getMiniGameDenyREDO--------------------");
         }
         mplew.writeShort(SendPacketOpcode.PLAYER_INTERACTION.getValue());
@@ -565,7 +565,7 @@ public class PlayerShopPacket {
 
     public static MaplePacket getMiniGameFull() {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getMiniGameFull--------------------");
         }
         mplew.writeShort(SendPacketOpcode.PLAYER_INTERACTION.getValue());
@@ -580,7 +580,7 @@ public class PlayerShopPacket {
 
     public static MaplePacket getMiniGameMoveOmok(int move1, int move2, int move3) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getMiniGameMoveOmok--------------------");
         }
         mplew.writeShort(SendPacketOpcode.PLAYER_INTERACTION.getValue());
@@ -597,7 +597,7 @@ public class PlayerShopPacket {
 
     public static MaplePacket getMiniGameNewVisitor(MapleCharacter c, int slot, MapleMiniGame game) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getMiniGameNewVisitor--------------------");
         }
         mplew.writeShort(SendPacketOpcode.PLAYER_INTERACTION.getValue());
@@ -623,7 +623,7 @@ public class PlayerShopPacket {
 
     public static MaplePacket getMiniGameClose(byte number) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getMiniGameClose--------------------");
         }
         mplew.writeShort(SendPacketOpcode.PLAYER_INTERACTION.getValue());
@@ -639,7 +639,7 @@ public class PlayerShopPacket {
 
     public static MaplePacket getMatchCardStart(MapleMiniGame game, int loser) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getMatchCardStart--------------------");
         }
         mplew.writeShort(SendPacketOpcode.PLAYER_INTERACTION.getValue());
@@ -659,7 +659,7 @@ public class PlayerShopPacket {
 
     public static MaplePacket getMatchCardSelect(int turn, int slot, int firstslot, int type) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getMatchCardSelect--------------------");
         }
         mplew.writeShort(SendPacketOpcode.PLAYER_INTERACTION.getValue());
@@ -679,7 +679,7 @@ public class PlayerShopPacket {
 
     public static MaplePacket getMiniGameResult(MapleMiniGame game, int type, int x) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getMiniGameResult--------------------");
         }
         mplew.writeShort(SendPacketOpcode.PLAYER_INTERACTION.getValue());
@@ -709,7 +709,7 @@ public class PlayerShopPacket {
 
     public static final MaplePacket MerchantVisitorView(List<String> visitor) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("MerchantVisitorView--------------------");
         }
         mplew.writeShort(SendPacketOpcode.PLAYER_INTERACTION.getValue());
@@ -728,7 +728,7 @@ public class PlayerShopPacket {
 
     public static final MaplePacket MerchantBlackListView(List<String> blackList) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("MerchantBlackListView--------------------");
         }
         mplew.writeShort(SendPacketOpcode.PLAYER_INTERACTION.getValue());
@@ -747,7 +747,7 @@ public class PlayerShopPacket {
 
     public static final MaplePacket sendHiredMerchantMessage(byte type) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("sendHiredMerchantMessage--------------------");
         }
         mplew.writeShort(SendPacketOpcode.MERCH_ITEM_MSG.getValue());
@@ -761,7 +761,7 @@ public class PlayerShopPacket {
 
     public static final MaplePacket shopMessage(int type) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("shopMessage--------------------");
         }
         mplew.writeShort(SendPacketOpcode.PLAYER_INTERACTION.getValue());

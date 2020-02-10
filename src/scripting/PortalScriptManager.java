@@ -40,7 +40,7 @@ public class PortalScriptManager {
         }
         File scriptFile = new File("scripts/portal/" + scriptName + ".js");
         if (c.getPlayer().isGM()) {
-            c.getPlayer().dropMessage("[\u7cfb\u7edf\u63d0\u793a]\u60a8\u5df2\u7ecf\u5efa\u7acb\u4e0ePortalScript:[" + scriptName + ".js]\u7684\u5bf9\u8bdd\u3002");
+            c.getPlayer().dropMessage("[系统提示]您已经建立与PortalScript:[" + scriptName + ".js]的对话。");
         }
         if (!scriptFile.exists()) {
             this.scripts.put(scriptName, null);
@@ -77,7 +77,7 @@ public class PortalScriptManager {
         if (script != null) {
             try {
                 if (c.getPlayer().isGM()) {
-                    c.getPlayer().dropMessage("[\u7cfb\u7edf\u63d0\u793a]\u60a8\u5df2\u7ecf\u5efa\u7acb\u4e0ePortalScriptA:[" + portal.getScriptName() + ".js]\u7684\u5bf9\u8bdd\u3002");
+                    c.getPlayer().dropMessage("[系统提示]您已经建立与PortalScriptA:[" + portal.getScriptName() + ".js]的对话。");
                 }
                 script.enter(new PortalPlayerInteraction(c, portal));
             }
@@ -94,4 +94,3 @@ public class PortalScriptManager {
         this.scripts.clear();
     }
 }
-

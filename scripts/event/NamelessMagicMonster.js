@@ -79,23 +79,4 @@ function allMonstersDead(eim) {
     var prop = eim.getProperty("summoned");
 
     if (prop.equals("0")) {
-        eim.broadcastPlayerMsg(5, "幹掉他吧！");
-
-        eim.setProperty("summoned", "1");
-        var map = eim.getMapInstance(0);
-        var mob = em.getMonster(9400266);
-        eim.registerMonster(mob);
-        map.spawnMonsterOnGroundBelow(mob, new java.awt.Point(334, 45));
-    } else {
-        var map = eim.getMapInstance(0);
-        map.spawnNpc(9120026, new java.awt.Point(-472, -32));
-    }
-}
-
-function leftParty(eim, player) {}
-
-function disbandParty(eim) {}
-
-function playerDead(eim, player) {}
-
-function cancelSchedule() {}
+        eim.broadcastPlayerMsg(5, "骞规帀浠栧惂锛

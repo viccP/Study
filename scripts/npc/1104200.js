@@ -6,7 +6,7 @@ function action(mode, type, selection) {
 		map.spawnNpc(1104002, new java.awt.Point(-430, 88));
 		cm.warp(913030000, 0);
 	} else {
-	    cm.playerMessage("ºÚÅ®Î×ÕıÔÚÅcÆäËûÈË‘ğôYÖĞ¡£");
+	    cm.playerMessage("é»‘å¥³å·«æ­£åœ¨èˆ‡å…¶ä»–äººæˆ°é¬¥ä¸­ã€‚");
 	}
 	cm.dispose();
 }

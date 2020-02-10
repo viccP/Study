@@ -134,7 +134,6 @@ public class InterServerHandler {
         c.getSession().write((Object)MaplePacketCreator.temporaryStats_Reset());
         player.getMap().addPlayer(player);
         try {
-            CharacterIdChannelPair[] onlineBuddies;
             player.silentGiveBuffs(PlayerBuffStorage.getBuffsFromStorage(player.getId()));
             player.giveCoolDowns(PlayerBuffStorage.getCooldownsFromStorage(player.getId()));
             player.giveSilentDebuff(PlayerBuffStorage.getDiseaseFromStorage(player.getId()));
@@ -143,12 +142,13 @@ public class InterServerHandler {
             if (player.getParty() != null) {
                 World.Party.updateParty(player.getParty().getId(), PartyOperation.LOG_ONOFF, new MaplePartyCharacter(player));
             }
-            for (CharacterIdChannelPair onlineBuddy : onlineBuddies = World.Find.multiBuddyFind(player.getId(), buddyIds)) {
+            CharacterIdChannelPair[] onlineBuddies=World.Find.multiBuddyFind(player.getId(), buddyIds);
+            for (CharacterIdChannelPair onlineBuddy : onlineBuddies) {
                 BuddylistEntry ble = player.getBuddylist().get(onlineBuddy.getCharacterId());
                 ble.setChannel(onlineBuddy.getChannel());
                 player.getBuddylist().put(ble);
             }
-            c.getSession().write((Object)MaplePacketCreator.updateBuddylist(player.getBuddylist().getBuddies()));
+            c.getSession().write(MaplePacketCreator.updateBuddylist(player.getBuddylist().getBuddies()));
             MapleMessenger messenger = player.getMessenger();
             if (messenger != null) {
                 World.Messenger.silentJoinMessenger(messenger.getId(), new MapleMessengerCharacter(c.getPlayer()));

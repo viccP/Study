@@ -3,7 +3,7 @@ var status = -1;
 function action(mode, type, selection) {
     if (cm.isQuestActive(3114)) {
 	cm.forceCompleteQuest(3114);
-	cm.playerMessage(5, "Òô˜·ÒÑ½›²¥·Å‡Ó. +20 ÃûÂ•");
+	cm.playerMessage(5, "éŸ³æ¨‚å·²ç¶“æ’­æ”¾å›‰. +20 åè²");
 	if ((cm.getPlayer().getFame() + 20) <= 30000) {
 	    cm.getPlayer().addFame(20);
 	    cm.getPlayer().updateFame();

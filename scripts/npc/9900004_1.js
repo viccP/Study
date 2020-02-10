@@ -1,277 +1,141 @@
-/*
- *
- *  ´Ë½Å±¾ÓÉÀÖÕÂÍøÂçÖÆ×÷Íê³É
- * ¹ºÂòÉÌÒµ½Å±¾Çë¼ÓÈº:1049548
- *
+//åœ°å›¾å¯¹è±¡
+var mapObj=[
+	[
+		{mapId:910000000,meso:0,mapName:"è‡ªç”±å¸‚åœº"},
+		{mapId:701000210,meso:0,mapName:"å¤§æ“‚å°"},
+		{mapId:200000000,meso:0,mapName:"å¤©ç©ºä¹‹åŸ"},
+		{mapId:270000100,meso:0,mapName:"ç¥æ®¿å…¥å£"},
+		{mapId:211000000,meso:0,mapName:"å†°å³°é›ªåŸŸ"},
+		{mapId:220000000,meso:0,mapName:"ç©å…·åŸ"},
+		{mapId:221000000,meso:0,mapName:"åœ°çƒé˜²å¾¡æœ¬éƒ¨"},
+		{mapId:222000000,meso:0,mapName:"ç«¥è¯æ‘"},
+		{mapId:230000000,meso:0,mapName:"æ°´ä¸‹ä¸–ç•Œ"},
+		{mapId:240000000,meso:0,mapName:"ç¥æœ¨æ‘"},
+		{mapId:250000000,meso:0,mapName:"æ­¦é™µ"},
+		{mapId:251000000,meso:0,mapName:"ç™¾è‰å ‚"},
+		{mapId:260000000,meso:0,mapName:"é˜¿é‡Œå®‰ç‰¹"},
+		{mapId:261000000,meso:0,mapName:"ç›åŠ æäºš"},
+		{mapId:100000000,meso:0,mapName:"å°„æ‰‹æ‘"},
+		{mapId:101000000,meso:0,mapName:"é­”æ³•å¯†æ—"},
+		{mapId:102000000,meso:0,mapName:"å‹‡å£«éƒ¨è½"},
+		{mapId:103000000,meso:0,mapName:"åºŸå¼ƒéƒ½å¸‚"},
+		{mapId:105040300,meso:0,mapName:"æ—ä¸­ä¹‹åŸ"},
+		{mapId:110000000,meso:0,mapName:"é»„é‡‘æµ·æ»©"},
+		{mapId:120000101,meso:0,mapName:"èˆªæµ·å®¤ã€€"},
+		{mapId:130000000,meso:0,mapName:"åœ£åœ°"},
+		{mapId:140000000,meso:0,mapName:"é‡Œæ©"},
+		{mapId:701000100,meso:0,mapName:"ä¸œæ–¹ç¥å·"}
+	],
+	[
+		{mapId:104000400,meso:0,mapName:"çº¢èœ—ç‰›ç‹"},
+		{mapId:101030404,meso:0,mapName:"æ ‘å¦–ç‹"},
+		{mapId:701010323,meso:0,mapName:"èœˆèš£ç‹"},
+		{mapId:100000005,meso:0,mapName:"è˜‘è‡ç‹"},
+		{mapId:105070002,meso:0,mapName:"åƒµå°¸è˜‘è‡ç‹"},
+		{mapId:107000300,meso:0,mapName:"å¤šå°”"},
+		{mapId:100040105,meso:0,mapName:"æµ®å£«å¾·"},
+		{mapId:260010201,meso:0,mapName:"å¤§å®‡"},
+		{mapId:230020100,meso:0,mapName:"æ­‡å°”å¤«"},
+		{mapId:110040000,meso:0,mapName:"å·¨å‹å¯„å±…èŸ¹"},
+		{mapId:105090900,meso:0,mapName:"è™è æ€ª"},
+		{mapId:220050100,meso:0,mapName:"æè«"},
+		{mapId:222010401,meso:0,mapName:"é¬¼æ€ª"},
+		{mapId:200010300,meso:0,mapName:"è‰¾åŠ›æ°"},
+		{mapId:211040000,meso:0,mapName:"é©¼ç‹¼é›ªäºº"},
+		{mapId:250010303,meso:0,mapName:"è‚¯å¾·ç†Š"},
+		{mapId:250010304,meso:0,mapName:"åˆ€ç–¤æ£•ç†Š"},
+		{mapId:800010100,meso:0,mapName:"è“è˜‘è‡ç‹"},
+		{mapId:240020401,meso:0,mapName:"å–·ç«é¾™"},
+		{mapId:240020101,meso:0,mapName:"å¤©é¹°"},
+		{mapId:270030500,meso:0,mapName:"é›·å¡"},
+		{mapId:270010500,meso:0,mapName:"å¤šå¤š"},
+		{mapId:270020500,meso:0,mapName:"ç„å†°ç‹¬è§’å…½"},
+		{mapId:250010504,meso:0,mapName:"å¦–æ€ªç¦…å¸ˆ"},
+		{mapId:230040420,meso:0,mapName:"é±¼ç‹"},
+		{mapId:702060000,meso:0,mapName:"å¦–åƒ§"}
+	],
+	[
+		{mapId:220080001,meso:0,mapName:"é—¹é’Ÿ"},
+		{mapId:280030000,meso:0,mapName:"æ‰æ˜†"},
+		{mapId:240060200,meso:0,mapName:"é»‘æš—é¾™ç‹"},
+		{mapId:270050100,meso:0,mapName:"å“å®¢ç¼¤"}
+
+	]
+];
+
+//ç¬¬ä¸€æ¬¡é€‰æ‹©
+var selFir=0;
+//ç¬¬äºŒæ¬¡é€‰æ‹©
+var selSec=0;
+
+/**
+ * è„šæœ¬åˆå§‹åŒ–å‡½æ•°
+ * @returns
  */
+function start() {
+	status = -1;
+	action(1, 0, 0);
+}
 
-
-importPackage(net.sf.cherry.client);
-
-var aaa = "#fUI/UIWindow.img/Quest/icon9/0#";
-var zzz = "#fUI/UIWindow.img/Quest/icon8/0#";
-var sss = "#fUI/UIWindow.img/QuestIcon/3/0#";
-
-//------------------------------------------------------------------------
-
-var chosenMap = -1;
-var monsters = 0;
-var towns = 0;
-var bosses = 0;
-var fuben = 0;
-
-//------------------------------------------------------------------------
-
-var bossmaps = Array(
-		Array(105040316,10,"³ÁË¯É­ÁÖÌøÌø"),	
-		//Array(109010000,10,"Ã°ÏÕµº»î¶¯-Ñ°ÕÒ±¦Îï"), 
-		Array(109040001,10,"Ã°ÏÕµº»î¶¯ÌøÌø"), 
-		Array(103000900,10,"µØÌúÈıºÅÏßÌøÌø"),      
-		Array(280020000,10,"»ğÉ½ÌøÌø"), 
-		Array(101000100,10,"ÈÌ¿àÌøÌø") 											
-		);
-
-//------------------------------------------------------------------------
-
-var monstermaps = Array(
-		Array(702000000,0,"ÉÙÁÖËÂ"), 
-		Array(701000000,0,"ÉÏº£ÍâÌ²"), 
-		Array(550000000,0,"ÂíÀ´Î÷ÑÇ"), 
-		Array(551000000,0,"¸Ê°ñ´å")
-		); 
-
-//------------------------------------------------------------------------
-
-var townmaps = Array(
-
-		Array(701000210,0,"´óÀŞÌ¨"), 
-		Array(910000000,0,"×ÔÓÉÊĞ³¡")
-		);
-
-//------------------------------------------------------------------------
-
-var fubenmaps = Array(
-		Array(800020400,0,"¼Ò×åPKµØÍ¼"),
-		Array(193000000,0,"Íø°ÉµØÍ¼")						
-		);
-
-//------------------------------------------------------------------------
-
-	function start() {
-		status = -1;
-		action(1, 0, 0);
-		}
-	function action(mode, type, selection) {
+/**
+ * åŠ¨ä½œå‡½æ•°
+ * @param mode
+ * @param type
+ * @param selection
+ * @returns
+ */
+function action(mode, type, selection) {
 	if (mode == -1) {
-		cm.sendOk("#bºÃµÄ,ÏÂ´ÎÔÙ¼û.");
+		cm.sendOk("#bå¥½çš„,ä¸‹æ¬¡å†è§.");
 		cm.dispose();
+	} else {
+		//ç»“æŸå¯¹è¯
+		if (status >= 0 && mode == 0) {
+			cm.sendOk("#bå¥½çš„,ä¸‹æ¬¡å†è§.");
+			cm.dispose();
+			return;
+		}
+		//è®°å½•æ¬¡æ•°
+		if (mode == 1) {
+			status++;
 		} else {
-	if (status >= 0 && mode == 0) {
-		cm.sendOk("#bºÃµÄ,ÏÂ´ÎÔÙ¼û.");
-		cm.dispose();
-		return;
+			status--;
 		}
-	if (mode == 1) {
-		status++;
-		} else {
-		status--;
+	
+		//ç¬¬ä¸€æ­¥
+		if (status == 0) {
+	   	    var add = "#e#rè±†è±†#kå†’é™©å²›.å¿«æ·ä¼ é€æœåŠ¡.#k\r\n\r\n";
+			add += "#L0##e#dåŸé•‡ä¼ é€#l ";
+			add += "#L1#é‡å¤–BOSS#l ";
+			add += "#L2##rå‰¯æœ¬BOSS#l ";
+			cm.sendSimple (add);    
+		} 
+		//ç¬¬äºŒæ­¥
+		else if (status == 1) {
+			var selStr = "#ræ£‰èŠ±ç³–å†’é™©å²›#k\r\n#dã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€é€‰æ‹©ä½ çš„ç›®çš„åœ°å§.#k#b";
+			//åˆå§‹åŒ–åœ°å›¾åˆ—è¡¨
+			for(var index in mapObj[selection]){
+				var item=mapObj[selection][index];
+				selStr += "\r\n#L" + index + "#" + item.mapName + "";
+			}
+			cm.sendSimple(selStr);
+			selFir=selection;
+		} 
+		//ç¬¬ä¸‰æ­¥
+		else if (status == 2) {
+			cm.sendYesNo("ä½ ç¡®å®šè¦å» " + mapObj[selFir][selection].mapName + "?");
+			selSec = selection;
+		} 
+		else if (status == 3) {
+			var item=mapObj[selFir][selSec];
+			if(cm.getMeso()>=item.meso){
+				cm.warp(item.mapId, 0);
+				cm.gainMeso(-item.meso);
+			}else{
+				cm.sendOk("ä½ æ²¡æœ‰è¶³å¤Ÿçš„é‡‘å¸å“¦!");
+			}
+			cm.dispose();
 		}
-
-//------------------------------------------------------------------------
-
-	if (status == 0) {
-
-   	    var add = "#e#r¶¹¶¹#kÃ°ÏÕµº.¿ì½İ´«ËÍ·şÎñ.#k\r\n\r\n";
-
-//		add += "#r¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡ĞÂÎïÆ·Õ¹ÀÀ#k\r\n";
-
-//		add += "#b×ùÒÎ#k\r\n";
-
-//		add += "#v3010154# #v3010179# #v3010169# #v3010171# #v3010174# #v3010182# #v3010183# #v3010053##b\r\n\r\n";
-
-//		add += "#b×øÆï#k\r\n";
-
-//		add += "#v1902060# #v1912053# #v1902062# #v1912055# #v1902063# #v1912056# #v1902040# #v1912057#\r\n\r\n";
-
-		add += "#L0##e#d¿ì½İ´«ËÍ#l ";
-
-		add += "#L1#º£ÍâÂÃÓÎ#l ";
-		
-//		add += "#L2#ÌøÌøµØÍ¼´«ËÍ#l ";
-
-	//	add += "#L3##rBOSS×´Ì¬#l ";
- 
-		add += "#L4##rÏµÍ³»î¶¯´«ËÍ#l ";
-		cm.sendSimple (add);    
-
-//------------------------------------------------------------------------
-				
-	} else if (status == 1) {
-
-	if (selection == 0){
-		var selStr = "#rÃŞ»¨ÌÇÃ°ÏÕµº#k\r\n#d¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡Ñ¡ÔñÄãµÄÄ¿µÄµØ°É.#k#b";
-		for (var i = 0; i < townmaps.length; i++) {
-		selStr += "\r\n#L" + i + "#" + townmaps[i][2] + "";
-		}
-		cm.sendSimple(selStr);
-		towns = 1;
-		}
-
-	if (selection == 1) {
-		var selStr = "#rÃŞ»¨ÌÇÃ°ÏÕµº#k\r\n#d¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡Ñ¡ÔñÄãµÄÄ¿µÄµØ°É.#k#b";
-		for (var i = 0; i < monstermaps.length; i++) {
-		selStr += "\r\n#L" + i + "#" + monstermaps[i][2] + "";
-		}
-		cm.sendSimple(selStr);
-		monsters = 1;
-		}
-
-	if (selection == 2) {
-		var selStr = "#rÃŞ»¨ÌÇÃ°ÏÕµº#k\r\n#d¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡Ñ¡ÔñÄãµÄÄ¿µÄµØ°É.#k#b";
-		for (var i = 0; i < bossmaps.length; i++) {
-		selStr += "\r\n#L" + i + "#" + bossmaps[i][2] + "";
-		}
-		cm.sendSimple(selStr);
-		bosses = 1;
-		}
-
-	if (selection == 3) {
-		var map = net.sf.cherry.net.channel.ChannelServer.getInstance(1).getMapFactory().getMap(280030000);
-		var zha1 = map.getCharacters().toArray().length;
-		var map = net.sf.cherry.net.channel.ChannelServer.getInstance(2).getMapFactory().getMap(280030000);
-		var zha2 = map.getCharacters().toArray().length;
-		var map = net.sf.cherry.net.channel.ChannelServer.getInstance(3).getMapFactory().getMap(280030000);
-		var zha3 = map.getCharacters().toArray().length;
-		var map = net.sf.cherry.net.channel.ChannelServer.getInstance(4).getMapFactory().getMap(280030000);
-		var zha4 = map.getCharacters().toArray().length;
-
-		var map = net.sf.cherry.net.channel.ChannelServer.getInstance(1).getMapFactory().getMap(240060200);
-		var hei1 = map.getCharacters().toArray().length;
-		var map = net.sf.cherry.net.channel.ChannelServer.getInstance(2).getMapFactory().getMap(240060200);
-		var hei2 = map.getCharacters().toArray().length;
-		var map = net.sf.cherry.net.channel.ChannelServer.getInstance(3).getMapFactory().getMap(240060200);
-		var hei3 = map.getCharacters().toArray().length;
-		var map = net.sf.cherry.net.channel.ChannelServer.getInstance(4).getMapFactory().getMap(240060200);
-		var hei4 = map.getCharacters().toArray().length
-
-		var map = net.sf.cherry.net.channel.ChannelServer.getInstance(1).getMapFactory().getMap(270050100);
-		var pb1 = map.getCharacters().toArray().length;
-		var map = net.sf.cherry.net.channel.ChannelServer.getInstance(2).getMapFactory().getMap(270050100);
-		var pb2 = map.getCharacters().toArray().length;
-		var map = net.sf.cherry.net.channel.ChannelServer.getInstance(3).getMapFactory().getMap(270050100);
-		var pb3 = map.getCharacters().toArray().length;
-		var map = net.sf.cherry.net.channel.ChannelServer.getInstance(4).getMapFactory().getMap(270050100);
-		var pb4 = map.getCharacters().toArray().length
-
-		var map = net.sf.cherry.net.channel.ChannelServer.getInstance(1).getMapFactory().getMap(220080001);
-		var nao1 = map.getCharacters().toArray().length;
-		var map = net.sf.cherry.net.channel.ChannelServer.getInstance(2).getMapFactory().getMap(220080001);
-		var nao2 = map.getCharacters().toArray().length;
-		var map = net.sf.cherry.net.channel.ChannelServer.getInstance(3).getMapFactory().getMap(220080001);
-		var nao3 = map.getCharacters().toArray().length;
-		var map = net.sf.cherry.net.channel.ChannelServer.getInstance(4).getMapFactory().getMap(220080001);
-		var nao4 = map.getCharacters().toArray().length
-
-   	    var add = "ÒÔÏÂËùÊ¾Îª¸÷ÏßµÄBOSSÕ½¿ö#b\r\n";
-
-		add += ""+aaa+"[#rÆµµÀÒ»#b]\r\n";
-
-		add += ""+zzz+"[#dÄÖÖÓ#b]£º#r"+nao1+"#bÈË  [#dÔúÀ¥#b]£º#r"+zha1+"#bÈË  [#dºÚÁú#b]£º#r"+hei1+"#bÈË\r\n\r\n";
-
-		add += ""+aaa+"[#rÆµµÀ¶ş#b]\r\n";
-
-		add += ""+zzz+"[#dÄÖÖÓ#b]£º#r"+nao2+"#bÈË  [#dÔúÀ¥#b]£º#r"+zha2+"#bÈË  [#dºÚÁú#b]£º#r"+hei2+"#bÈË\r\n\r\n";
-
-		add += ""+aaa+"[#rÆµµÀÈı#b]\r\n";
-
-		add += ""+zzz+"[#dÄÖÖÓ#b]£º#r"+nao3+"#bÈË  [#dÔúÀ¥#b]£º#r"+zha3+"#bÈË  [#dºÚÁú#b]£º#r"+hei3+"#bÈË\r\n\r\n";
-
-		add += ""+aaa+"[#rÆµµÀËÄ#b]\r\n";
-
-		add += ""+zzz+"[#dÄÖÖÓ#b]£º#r"+nao4+"#bÈË  [#dÔúÀ¥#b]£º#r"+zha4+"#bÈË  [#dºÚÁú#b]£º#r"+hei4+"#bÈË\r\n\r\n";
- 
-		cm.sendOk (add); 
-
-		cm.dispose();
-
-                   }
-				   
-	if (selection == 4) {
-            cm.openNpc(9310100, 0);
-		}
-
-
-//------------------------------------------------------------------------
-
-	} else if (status == 2) {
-
-	if (towns == 1) {
-		cm.sendYesNo("ÄãÈ·¶¨ÒªÈ¥ " + townmaps[selection][2] + "?");
-		chosenMap = selection;
-		towns = 2;
-
-	} else if (monsters == 1) {
-		cm.sendYesNo("ÄãÈ·¶¨ÒªÈ¥ " + monstermaps[selection][2] + "?");
-		chosenMap = selection;
-		monsters = 2;
-
-	} else if (bosses == 1) {
-		cm.sendYesNo("ÄãÈ·¶¨ÒªÈ¥ " + bossmaps[selection][2] + "?");
-		chosenMap = selection;
-		bosses = 2;
-
-	} else if (fuben == 1) {
-		cm.sendYesNo("ÄãÈ·¶¨ÒªÈ¥ " + fubenmaps[selection][2] + "?");
-		chosenMap = selection;
-		fuben = 2;
-
-		}
-
-//----------------------------------------------------------------------
-
-	} else if (status == 3) {
-
-	if (towns == 2) {
-		if(cm.getMeso()>=townmaps[chosenMap][1]){
-		cm.warp(townmaps[chosenMap][0], 0);
-		cm.gainMeso(-townmaps[chosenMap][1]);
-		}else{
-		cm.sendOk("ÄãÃ»ÓĞ×ã¹»µÄ½ğ±ÒÅ¶!");
-		}
-		cm.dispose();
-
-	} else if (monsters == 2) {
-		if(cm.getMeso()>=monstermaps[chosenMap][1]){
-		cm.warp(monstermaps[chosenMap][0], 0);
-		cm.gainMeso(-monstermaps[chosenMap][1]);
-		}else{
-		cm.sendOk("ÄãÃ»ÓĞ×ã¹»µÄ½ğ±ÒÅ¶!");
-		}
-		cm.dispose();
-
-	} else if (bosses == 2) {
-		if(cm.getMeso()>=bossmaps[chosenMap][1]){
-		cm.warp(bossmaps[chosenMap][0], 0);
-		cm.gainMeso(-bossmaps[chosenMap][1]);
-		}else{
-		cm.sendOk("ÄãÃ»ÓĞ×ã¹»µÄ½ğ±ÒÅ¶!");
-		}
-		cm.dispose();
-
-	} else if (fuben == 2) {
-		if(cm.getMeso()>=fubenmaps[chosenMap][1]){
-		cm.warp(fubenmaps[chosenMap][0], 0);
-		cm.gainMeso(-fubenmaps[chosenMap][1]);
-		}else{
-		cm.sendOk("ÄãÃ»ÓĞ×ã¹»µÄ½ğ±ÒÅ¶!");
-		}
-		cm.dispose();
-
-                }
-
-//------------------------------------------------------------------------
-
-		}
-		}
-		}
+	}
+}
 

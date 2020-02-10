@@ -2,7 +2,7 @@ var letters0 = Array("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L",
 var answers0 = Array("APPLE", "BEAR", "CHEESE", "DOUGHNUT", "EARTH", "FLY", "GOLD", "HALLOWEEN", "ICE", "JEWELRY", "KING", "LOVE", "MOUNTAIN", "NOTE", "ORANGE", "POLICE", "QUIZ", "ROSE", "SNAKE", "TABLE", "UFO", "VIP", "WOOD", "XMAS", "YOUNG", "ZZZ");
 var letters1 = Array(2010000, 2010001, 2010002, 2010003, 2010004, 2010005, 2010009, 2020000, 2020001, 2020002, 2020003, 2020004, 2020005, 2020007, 2020008, 2020009, 2020010, 2020012, 2020013, 2020014, 2020015, 2020016);
 var answers1 = Array("APPLE", "MEAT", "EGG", "ORANGE", "LEMON", "HONEY", "GREENAPPLE", "SALAD", "FRIEDCHICKEN", "CAKE", "PIZZA", "HAMBURGER", "HOTDOG", "DRIEDSQUID", "FATSAUSAGE", "ORANGEJUICE", "GRAPEJUICE", "MELTINGCHEESE", "REINDEERMILK", "SUNRISEDEW", "SUNSETDEW", "CHEESECAKE");
-var letters2 = Array("Lirin×îÏ²šgÊ²üN„ÓÎï??", "½ğ×ÖËş·¨ÀÏÍõÊÇÊ²üNîÉ«??", "Õˆ½oÎÒµÄß@Ğ©×ÖÄ¸ [REINDEER]", "Which Valentine Rose is level 48?", "How much EXP does it take for level 1-2?", "Who exchanges Vote Points in FM?", "Who is the owner of this server (HINT: A _ _ _ _ _ _) ?", "What level does a Beginner become a Magician?", "What town does an Evan start in?", "What town is the home to the Black Wings?", "What are the Wild Hunters, Battle Mages, and Mechanics?", "What type of dragon is Mir?", "Who is Mir's ancestor?", "What weapon does the Aran use?", "Who is the job instructor for Mechanic?", "Ã°ëU¼ÒÈıŞDĞèÒªÓÃµ½ÄÄÒ»·NÊ¯î^??", "ÄÄÒ»‚€NPC¿ÉÒÔ½oÄãµÚÒ»Ö»ÉñÆæŒšØ??", "¿ñ±©«CÈËµÄ±ªÓ¢ÎÄ??", "»Ê¼ÒòTÊ¿ˆF×µÈ¿ÉÒÔËÄŞD??", "Ñb‚äœ\ÄÜºÎÕßÅÅÃû×î´ó ÌØÊâ,º±ÒŠ??", "Æ¤¿¨Çğî^ÉÏµÄµñÏñÃû×ÖÊÇ??", "°µºÚıˆÍõ¿¿½üÄÄ‚€µØˆD??", "ÔÚ—÷Ö®¹ÈÊÀ½çÖĞšˆ±©Ñ×Ä§×µÈ²ÅÄÜÌô‘ğ??");
+var letters2 = Array("Lirinæœ€å–œæ­¡ä»€éº¼å‹•ç‰©??", "é‡‘å­—å¡”æ³•è€ç‹æ˜¯ä»€éº¼é¡è‰²??", "è«‹çµ¦æˆ‘çš„é€™äº›å­—æ¯ [REINDEER]", "Which Valentine Rose is level 48?", "How much EXP does it take for level 1-2?", "Who exchanges Vote Points in FM?", "Who is the owner of this server (HINT: A _ _ _ _ _ _) ?", "What level does a Beginner become a Magician?", "What town does an Evan start in?", "What town is the home to the Black Wings?", "What are the Wild Hunters, Battle Mages, and Mechanics?", "What type of dragon is Mir?", "Who is Mir's ancestor?", "What weapon does the Aran use?", "Who is the job instructor for Mechanic?", "å†’éšªå®¶ä¸‰è½‰éœ€è¦ç”¨åˆ°å“ªä¸€ç¨®çŸ³é ­??", "å“ªä¸€å€‹NPCå¯ä»¥çµ¦ä½ ç¬¬ä¸€åªç¥å¥‡å¯¶è²??", "ç‹‚æš´çµäººçš„è±¹è‹±æ–‡??", "çš‡å®¶é¨å£«åœ˜å¹¾ç­‰å¯ä»¥å››è½‰??", "è£å‚™æ·ºèƒ½ä½•è€…æ’åæœ€å¤§ ç‰¹æ®Š,ç½•è¦‹??", "çš®å¡ä¸˜é ­ä¸Šçš„é›•åƒåå­—æ˜¯??", "æš—é»‘é¾ç‹é è¿‘å“ªå€‹åœ°åœ–??", "åœ¨æ¥“ä¹‹è°·ä¸–ç•Œä¸­æ®˜æš´ç‚é­”å¹¾ç­‰æ‰èƒ½æŒ‘æˆ°??");
 var answers2 = Array("WOLF", "YELLOW", "REINDEER", "BLUE", "FIFTEEN", "PHOENIX", "AWESOME", "EIGHT", "HENESYS", "EDELSTEIN", "RESISTANCE", "ONYX", "AFRIEN", "POLEARM", "CHECKY", "DARKCRYSTAL", "GAGA", "JAGUAR", "CYGNUS", "UNIQUE", "ARIEL", "LEAFRE", "FIFTY");
 
 function init() {
@@ -42,9 +42,9 @@ function playerEntry(eim, player) {
     var map = eim.getMapInstance(0);
     player.changeMap(map, map.getPortal(0));
 	if (eim.getProperty("mode").equals("0")) {
-		player.sendEnglishQuiz("ÔÚÓ¢ÎÄ´åµÄ [" + eim.getProperty("question") + "] ¹ÖÎï´ú±íÊ²üN??");
+		player.sendEnglishQuiz("åœ¨è‹±æ–‡æ‘çš„ [" + eim.getProperty("question") + "] æ€ªç‰©ä»£è¡¨ä»€éº¼??");
 	} else if (eim.getProperty("mode").equals("1")) {
-		player.sendEnglishQuiz("Õˆ½oÎÒß@Ğ©×ÖÄ¸ #i" + parseInt(eim.getProperty("question")) + "#.");
+		player.sendEnglishQuiz("è«‹çµ¦æˆ‘é€™äº›å­—æ¯ #i" + parseInt(eim.getProperty("question")) + "#.");
 	} else if (eim.getProperty("mode").equals("2")) {
 		player.sendEnglishQuiz(eim.getProperty("question"));
 	}

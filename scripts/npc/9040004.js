@@ -10,7 +10,7 @@ function action(mode, type, selection) {
         status--;
     }
     if (status == 0) {
-        cm.sendSimple("ÄúºÃ #r#h ##k ÇëÑ¡ÔñÄúÒª²é¿´ÅÅÃûµÄÀàĞÍ:\r\n#b#L0#¼Ò×åÅÅÃû#l");
+        cm.sendSimple("æ‚¨å¥½ #r#h ##k è¯·é€‰æ‹©æ‚¨è¦æŸ¥çœ‹æ’åçš„ç±»å‹:\r\n#b#L0#å®¶æ—æ’å#l");
     } else if (status == 1) {
         if (selection == 0) {
             cm.displayGuildRanks();

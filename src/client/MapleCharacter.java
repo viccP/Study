@@ -795,9 +795,8 @@ implements Serializable {
                 ps.setInt(1, charid);
                 rs = ps.executeQuery();
                 while (rs.next()) {
-                    SkillMacro macro;
                     int position = rs.getInt("position");
-                    ret.skillMacros[position] = macro = new SkillMacro(rs.getInt("skill1"), rs.getInt("skill2"), rs.getInt("skill3"), rs.getString("name"), rs.getInt("shout"), position);
+                    ret.skillMacros[position] = new SkillMacro(rs.getInt("skill1"), rs.getInt("skill2"), rs.getInt("skill3"), rs.getString("name"), rs.getInt("shout"), position);
                 }
                 rs.close();
                 ps.close();
@@ -1245,12 +1244,12 @@ implements Serializable {
             this.deleteWhereCharacterId(con, "DELETE FROM skills WHERE characterid = ?");
             ps = con.prepareStatement("INSERT INTO skills (characterid, skillid, skilllevel, masterlevel, expiration) VALUES (?, ?, ?, ?, ?)");
             ps.setInt(1, this.id);
-            for (Map.Entry skill : this.skills.entrySet()) {
-                if (!GameConstants.isApplicableSkill(((ISkill)skill.getKey()).getId())) continue;
-                ps.setInt(2, ((ISkill)skill.getKey()).getId());
-                ps.setByte(3, ((SkillEntry)skill.getValue()).skillevel);
-                ps.setByte(4, ((SkillEntry)skill.getValue()).masterlevel);
-                ps.setLong(5, ((SkillEntry)skill.getValue()).expiration);
+            for (Map.Entry<ISkill, SkillEntry> skill : this.skills.entrySet()) {
+                if (!GameConstants.isApplicableSkill(skill.getKey().getId())) continue;
+                ps.setInt(2, skill.getKey().getId());
+                ps.setByte(3, skill.getValue().skillevel);
+                ps.setByte(4, skill.getValue().masterlevel);
+                ps.setLong(5, skill.getValue().expiration);
                 ps.execute();
             }
             ps.close();
@@ -1289,11 +1288,12 @@ implements Serializable {
             }
             ps.close();
             this.deleteWhereCharacterId(con, "DELETE FROM buddies WHERE characterid = ?");
-            ps = con.prepareStatement("INSERT INTO buddies (characterid, `buddyid`, `pending`) VALUES (?, ?, ?)");
+            ps = con.prepareStatement("INSERT INTO buddies (characterid, `buddyid`, `pending`,`groupname`) VALUES (?, ?, ?,?)");
             ps.setInt(1, this.id);
             for (BuddylistEntry entry : this.buddylist.getBuddies()) {
                 ps.setInt(2, entry.getCharacterId());
                 ps.setInt(3, entry.isVisible() ? 0 : 1);
+                ps.setString(4, entry.getGroup());
                 ps.execute();
             }
             ps.close();
@@ -1701,9 +1701,9 @@ implements Serializable {
 
     public List<MapleBuffStat> getBuffStats(MapleStatEffect effect, long startTime) {
         ArrayList<MapleBuffStat> bstats = new ArrayList<MapleBuffStat>();
-        EnumMap<MapleBuffStat, MapleBuffStatValueHolder> allBuffs = new EnumMap<MapleBuffStat, MapleBuffStatValueHolder>(this.effects);
-        for (Map.Entry stateffect : allBuffs.entrySet()) {
-            MapleBuffStatValueHolder mbsvh = (MapleBuffStatValueHolder)stateffect.getValue();
+        Map<MapleBuffStat, MapleBuffStatValueHolder> allBuffs = new EnumMap<MapleBuffStat, MapleBuffStatValueHolder>(this.effects);
+        for (Map.Entry<MapleBuffStat, MapleBuffStatValueHolder> stateffect : allBuffs.entrySet()) {
+            MapleBuffStatValueHolder mbsvh = stateffect.getValue();
             if (!mbsvh.effect.sameSource(effect) || startTime != -1L && startTime != mbsvh.startTime) continue;
             bstats.add((MapleBuffStat)stateffect.getKey());
         }
@@ -1843,7 +1843,7 @@ implements Serializable {
 
     private void cancelPlayerBuffs(List<MapleBuffStat> buffstats) {
         boolean write;
-        boolean bl = write = this.client.getChannelServer().getPlayerStorage().getCharacterById(this.getId()) != null;
+        write = this.client.getChannelServer().getPlayerStorage().getCharacterById(this.getId()) != null;
         if (buffstats.contains(MapleBuffStat.HOMING_BEACON)) {
             if (write) {
                 this.client.getSession().write((Object)MaplePacketCreator.cancelHoming());
@@ -2394,7 +2394,7 @@ implements Serializable {
         if (this.eventInstance != null) {
             this.eventInstance.changedMap(this, to.getId());
         }
-        boolean bl = pyramid = this.pyramidSubway != null;
+        pyramid = this.pyramidSubway != null;
         if (this.map.getId() == nowmapid) {
             this.client.getSession().write((Object)warpPacket);
             this.map.removePlayer(this);
@@ -3051,10 +3051,10 @@ implements Serializable {
                 toberemove.add(new Pair<MapleInventoryType, IItem>(inv, item));
             }
         }
-        for (Pair itemz : toberemove) {
-            IItem item = (IItem)itemz.getRight();
+        for (Pair<MapleInventoryType,IItem> itemz : toberemove) {
+            IItem item = itemz.getRight();
             ret.add(item.getItemId());
-            this.getInventory((MapleInventoryType)((Object)itemz.getLeft())).removeItem(item.getPosition(), item.getQuantity(), false);
+            this.getInventory(itemz.getLeft()).removeItem(item.getPosition(), item.getQuantity(), false);
         }
         for (IItem itemz : tobeunlock) {
             itemz.setExpiration(-1L);
@@ -5325,11 +5325,10 @@ implements Serializable {
     }
 
     public String getOneInfo(int questid, String key) {
-        String[] split;
         if (!this.questinfo.containsKey(questid) || key == null) {
             return null;
         }
-        for (String x : split = this.questinfo.get(questid).split(";")) {
+        for (String x : this.questinfo.get(questid).split(";")) {
             String[] split2 = x.split("=");
             if (split2.length != 2 || !split2[0].equals(key)) continue;
             return split2[1];
@@ -5364,7 +5363,7 @@ implements Serializable {
             if (oldRank == null || oldRank.equals("S")) {
                 return;
             }
-            String[] split = this.questinfo.get(questid).split(";");
+            this.questinfo.get(questid).split(";");
             String newRank = null;
             if (oldRank.equals("A")) {
                 newRank = "S";
@@ -5382,7 +5381,7 @@ implements Serializable {
             List<Pair<String, Pair<String, Integer>>> questInfo = MapleQuest.getInstance(questid).getInfoByRank(newRank);
             for (Pair<String, Pair<String, Integer>> q : questInfo) {
                 boolean found = false;
-                String val = this.getOneInfo(questid, (String)((Pair)q.right).left);
+                String val = this.getOneInfo(questid,q.right.left);
                 if (val == null) {
                     return;
                 }
@@ -5394,11 +5393,11 @@ implements Serializable {
                     return;
                 }
                 if (((String)q.left).equals("less")) {
-                    found = vall < (Integer)((Pair)q.right).right;
-                } else if (((String)q.left).equals("more")) {
-                    found = vall > (Integer)((Pair)q.right).right;
+                    found = vall < q.right.right;
+                } else if (q.left.equals("more")) {
+                    found = vall >q.right.right;
                 } else if (((String)q.left).equals("equal")) {
-                    boolean bl = found = vall == (Integer)((Pair)q.right).right;
+                    found = vall == q.right.right;
                 }
                 if (found) continue;
                 return;
@@ -5427,7 +5426,7 @@ implements Serializable {
                 int mins = (int)(changeTime / 1000L / 60L);
                 int secs = (int)(changeTime / 1000L % 60L);
                 int mins2 = Integer.parseInt(this.getOneInfo(questid, "min"));
-                int secs2 = Integer.parseInt(this.getOneInfo(questid, "sec"));
+                Integer.parseInt(this.getOneInfo(questid, "sec"));
                 if (mins2 <= 0 || mins < mins2) {
                     this.updateOneInfo(questid, "min", String.valueOf(mins));
                     this.updateOneInfo(questid, "sec", String.valueOf(secs));
@@ -5506,7 +5505,7 @@ implements Serializable {
 
     public void resetStatsByJob(boolean beginnerJob) {
         int baseJob;
-        int n = baseJob = beginnerJob ? this.job % 1000 : this.job % 1000 / 100 * 100;
+        baseJob = beginnerJob ? this.job % 1000 : this.job % 1000 / 100 * 100;
         if (baseJob == 100) {
             this.resetStats(25, 4, 4, 4);
         } else if (baseJob == 200) {
@@ -7057,7 +7056,6 @@ implements Serializable {
 
     public String \u9886\u53d6\u65e5\u5fd7() {
         String result = "";
-        boolean i = false;
         try {
             Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT * FROM qmdblog");

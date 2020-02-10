@@ -1,4 +1,4 @@
-﻿function enter(pi) {
+锘縡unction enter(pi) {
 	var returnMap = pi.getSavedLocation("DONGDONGCHIANG");
 	if (returnMap < 0) {
 		returnMap = 100000000;

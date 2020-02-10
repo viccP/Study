@@ -8,9 +8,9 @@ function action(mode, type, selection) {
     }
     if (status == 0) {
         if (cm.getPlayer().getLevel() < 255) {
-            cm.sendYesNo("ÄãÏëÒª½øÈ¥Íê³ÉÖ°ÒµÍ·ÈÎÎñÂð?");
+            cm.sendYesNo("ä½ æƒ³è¦è¿›åŽ»å®ŒæˆèŒä¸šå¤´ä»»åŠ¡å—?");
         } else {
-            cm.sendOk("ÄãÏëÒª½øÈ¥Íê³ÉÖ°ÒµÍ·ÈÎÎñÂð");
+            cm.sendOk("ä½ æƒ³è¦è¿›åŽ»å®ŒæˆèŒä¸šå¤´ä»»åŠ¡å—");
             cm.dispose();
         }
     } else {

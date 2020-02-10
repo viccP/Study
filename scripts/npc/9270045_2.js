@@ -13,7 +13,7 @@ function action(mode, type, selection) {
   else 
    status--; 
   if (status == 0) { 
-   cm.sendYesNo("È·¶¨ÒªÀë¿ªÂğ?"); 
+   cm.sendYesNo("ç¡®å®šè¦ç¦»å¼€å—?"); 
   } 
   else if(status == 1) { 
    cm.warp(541020700); 

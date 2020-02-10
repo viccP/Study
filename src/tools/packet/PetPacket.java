@@ -23,7 +23,7 @@ public class PetPacket {
 
     public static final MaplePacket updatePet(MaplePet pet, IItem item, boolean active) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("updatePet--------------------");
         }
         mplew.writeShort(SendPacketOpcode.MODIFY_INVENTORY_ITEM.getValue());
@@ -49,7 +49,7 @@ public class PetPacket {
 
     public static final MaplePacket removePet(MapleCharacter chr, int slot) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("removePet--------------------");
         }
         mplew.writeShort(SendPacketOpcode.SPAWN_PET.getValue());
@@ -64,7 +64,7 @@ public class PetPacket {
 
     public static final MaplePacket showPet(MapleCharacter chr, MaplePet pet, boolean remove, boolean hunger) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("showPet--------------------");
         }
         mplew.writeShort(SendPacketOpcode.SPAWN_PET.getValue());
@@ -107,7 +107,7 @@ public class PetPacket {
 
     public static final MaplePacket removePet(int cid, int index) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("removePet--------------------");
         }
         mplew.writeShort(SendPacketOpcode.SPAWN_PET.getValue());
@@ -123,7 +123,7 @@ public class PetPacket {
 
     public static final MaplePacket movePet(int cid, int pid, byte slot, List<LifeMovementFragment> moves) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("movePet--------------------");
         }
         mplew.writeShort(SendPacketOpcode.MOVE_PET.getValue());
@@ -140,7 +140,7 @@ public class PetPacket {
 
     public static final MaplePacket petChat(int cid, int un, String text, byte slot) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("petChat--------------------");
         }
         mplew.writeShort(SendPacketOpcode.PET_CHAT.getValue());
@@ -158,7 +158,7 @@ public class PetPacket {
 
     public static final MaplePacket commandResponse(int cid, byte command, byte slot, boolean success, boolean food) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("commandResponse--------------------");
         }
         mplew.writeShort(SendPacketOpcode.PET_COMMAND.getValue());
@@ -180,7 +180,7 @@ public class PetPacket {
 
     public static final MaplePacket showOwnPetLevelUp(byte index) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("showOwnPetLevelUp--------------------");
         }
         mplew.writeShort(SendPacketOpcode.SHOW_ITEM_GAIN_INCHAT.getValue());
@@ -196,7 +196,7 @@ public class PetPacket {
 
     public static final MaplePacket showPetLevelUp(MapleCharacter chr, byte index) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("showPetLevelUp--------------------");
         }
         mplew.writeShort(SendPacketOpcode.SHOW_FOREIGN_EFFECT.getValue());
@@ -212,7 +212,7 @@ public class PetPacket {
     }
 
     public static final MaplePacket emptyStatUpdate() {
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("emptyStatUpdate--------------------");
         }
         return MaplePacketCreator.enableActions();
@@ -220,7 +220,7 @@ public class PetPacket {
 
     public static final MaplePacket petStatUpdate_Empty() {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("petStatUpdate_Empty--------------------");
         }
         mplew.writeShort(SendPacketOpcode.UPDATE_STATS.getValue());
@@ -236,7 +236,7 @@ public class PetPacket {
 
     public static final MaplePacket petStatUpdate(MapleCharacter chr) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("petStatUpdate--------------------");
         }
         mplew.writeShort(SendPacketOpcode.UPDATE_STATS.getValue());

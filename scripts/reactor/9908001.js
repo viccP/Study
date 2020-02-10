@@ -8,6 +8,6 @@ function act() {
     if (eim != null) {
         var keys = eim.getProperty("goldkey");
         keys++eim.setProperty("goldkey", keys);
-        rm.playerMessage("»ñÈ¡ " + keys + "¡£");
+        rm.playerMessage("è·å– " + keys + "ã€‚");
     }
 }

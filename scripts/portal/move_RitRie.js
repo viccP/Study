@@ -1,2 +1,2 @@
-﻿function enter(pi) {
+锘縡unction enter(pi) {
 }

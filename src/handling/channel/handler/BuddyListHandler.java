@@ -60,13 +60,13 @@ public class BuddyListHandler {
                 return;
             }
             if (ble != null && (ble.getGroup().equals(groupName) || !ble.isVisible())) {
-                c.getSession().write((Object)MaplePacketCreator.buddylistMessage((byte)11));
+                c.getSession().write(MaplePacketCreator.buddylistMessage((byte)11));
             } else if (ble != null && ble.isVisible()) {
                 ble.setGroup(groupName);
-                c.getSession().write((Object)MaplePacketCreator.updateBuddylist(buddylist.getBuddies()));
-                c.getSession().write((Object)MaplePacketCreator.buddylistMessage((byte)13));
+                c.getSession().write(MaplePacketCreator.updateBuddylist(buddylist.getBuddies()));
+                c.getSession().write(MaplePacketCreator.buddylistMessage((byte)13));
             } else if (buddylist.isFull()) {
-                c.getSession().write((Object)MaplePacketCreator.buddylistMessage((byte)11));
+                c.getSession().write(MaplePacketCreator.buddylistMessage((byte)11));
             } else {
                 try {
                     CharacterIdNameBuddyCapacity charWithId = null;
@@ -128,10 +128,10 @@ public class BuddyListHandler {
                                 ps.close();
                             }
                             buddylist.put(new BuddylistEntry(charWithId.getName(), otherCid, groupName, displayChannel, true, charWithId.getLevel(), charWithId.getJob()));
-                            c.getSession().write((Object)MaplePacketCreator.updateBuddylist(buddylist.getBuddies()));
+                            c.getSession().write(MaplePacketCreator.updateBuddylist(buddylist.getBuddies()));
                         }
                     } else {
-                        c.getSession().write((Object)MaplePacketCreator.buddylistMessage((byte)15));
+                        c.getSession().write(MaplePacketCreator.buddylistMessage((byte)15));
                     }
                 }
                 catch (SQLException e) {

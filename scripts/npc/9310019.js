@@ -10,7 +10,7 @@ function action(mode, type, selection) {
     else {
         if (status >= 0 && mode == 0) {
 
-            cm.sendOk("¸ĞĞ»ÄãµÄ¹âÁÙ£¡");
+            cm.sendOk("æ„Ÿè°¢ä½ çš„å…‰ä¸´ï¼");
             cm.dispose();
             return;
         }
@@ -26,47 +26,47 @@ function action(mode, type, selection) {
             for (i = 0; i < 10; i++) {
                 text += "";
             }
-			text += "\t\t\t  #e»¶Ó­À´µ½#b¶¹¶¹Ã°ÏÕµº #k!#n\r\n"
-            text += "#L1##e#dLv10-200.ÔÂÃî×é¶Ó¸±±¾#l#L2##dLv21-200.·ÏÆú×é¶Ó¸±±¾#l\r\n\r\n"//3
-            text += "#L3##dLv35-200.Íæ¾ß×é¶Ó¸±±¾#l#L4##dLv51-200.Ìì¿Õ×é¶Ó¸±±¾#l\r\n\r\n"//3
-            text += "#L5##dLv100-200.¶¾Îï×é¶Ó¸±±¾#l#L6##dLv55-200.º£µÁ×é¶Ó¸±±¾#l\r\n\r\n"//3
-            text += "#L7##dLv100ÒÔÉÏ.ÂŞÃÜÅ·ÓëÖìÀöÒ¶×é¶Ó¸±±¾#l\r\n\r\n"//3
-            text += "#L9##dLv10¼¶ÒÔÉÏ.Ó¢ÓïÑ§Ôº¸±±¾#l\r\n\r\n"//3
-            text += "#L10##dLv30-200.¹ÖÎï¼ÎÄê»ª(×é¶Ó¶Ô¿¹¸±±¾.×îµÍ2V2)#l\r\n\r\n"//3
-            text += "#L8##dÒÅÖ·¹«»á¶Ô¿¹Õ½(¼Ò×å¸±±¾)#l\r\n\r\n"//3
-            //text += "#L11##dLv120.Ç§ÄêÊ÷¾«ÍõÒÅ¼£¢ò#l\r\n\r\n"//3
-            //text += "#L12##dLv130.ÈËÅ¼Ê¦BOSSÌôÕ½#l\r\n\r\n"//3
+			text += "\t\t\t  #eæ¬¢è¿æ¥åˆ°#bè±†è±†å†’é™©å²› #k!#n\r\n"
+            text += "#L1##e#dLv10-200.æœˆå¦™ç»„é˜Ÿå‰¯æœ¬#l#L2##dLv21-200.åºŸå¼ƒç»„é˜Ÿå‰¯æœ¬#l\r\n\r\n"//3
+            text += "#L3##dLv35-200.ç©å…·ç»„é˜Ÿå‰¯æœ¬#l#L4##dLv51-200.å¤©ç©ºç»„é˜Ÿå‰¯æœ¬#l\r\n\r\n"//3
+            text += "#L5##dLv100-200.æ¯’ç‰©ç»„é˜Ÿå‰¯æœ¬#l#L6##dLv55-200.æµ·ç›—ç»„é˜Ÿå‰¯æœ¬#l\r\n\r\n"//3
+            text += "#L7##dLv100ä»¥ä¸Š.ç½—å¯†æ¬§ä¸æœ±ä¸½å¶ç»„é˜Ÿå‰¯æœ¬#l\r\n\r\n"//3
+            text += "#L9##dLv10çº§ä»¥ä¸Š.è‹±è¯­å­¦é™¢å‰¯æœ¬#l\r\n\r\n"//3
+            text += "#L10##dLv30-200.æ€ªç‰©å˜‰å¹´å(ç»„é˜Ÿå¯¹æŠ—å‰¯æœ¬.æœ€ä½2V2)#l\r\n\r\n"//3
+            text += "#L8##dé—å€å…¬ä¼šå¯¹æŠ—æˆ˜(å®¶æ—å‰¯æœ¬)#l\r\n\r\n"//3
+            //text += "#L11##dLv120.åƒå¹´æ ‘ç²¾ç‹é—è¿¹â…¡#l\r\n\r\n"//3
+            //text += "#L12##dLv130.äººå¶å¸ˆBOSSæŒ‘æˆ˜#l\r\n\r\n"//3
             cm.sendSimple(text);
-        } else if (selection == 1) { //ÔÂÃî×é¶Ó¸±±¾
+        } else if (selection == 1) { //æœˆå¦™ç»„é˜Ÿå‰¯æœ¬
             cm.openNpc(1012112, 0);
-        } else if (selection == 2) {  //·ÏÆú×é¶Ó¸±±¾
+        } else if (selection == 2) {  //åºŸå¼ƒç»„é˜Ÿå‰¯æœ¬
             cm.openNpc(9020000, 0);
-        } else if (selection == 3) { //Íæ¾ß×é¶Ó¸±±¾
+        } else if (selection == 3) { //ç©å…·ç»„é˜Ÿå‰¯æœ¬
             cm.openNpc(2040034, 0);
-        } else if (selection == 4) {//Ìì¿Õ×é¶Ó¸±±¾
+        } else if (selection == 4) {//å¤©ç©ºç»„é˜Ÿå‰¯æœ¬
             cm.openNpc(2013000, 0);
-        } else if (selection == 5) {//¶¾Îï×é¶Ó¸±±¾
+        } else if (selection == 5) {//æ¯’ç‰©ç»„é˜Ÿå‰¯æœ¬
             cm.openNpc(2133000, 0);
-        } else if (selection == 6) {//º£µÁ×é¶Ó¸±±¾
+        } else if (selection == 6) {//æµ·ç›—ç»„é˜Ÿå‰¯æœ¬
             cm.openNpc(2094000, 0);
-        } else if (selection == 7) {//ÂŞÃÜÅ·ÓëÖìÀöÒ¶×é¶Ó¸±±¾
+        } else if (selection == 7) {//ç½—å¯†æ¬§ä¸æœ±ä¸½å¶ç»„é˜Ÿå‰¯æœ¬
             cm.openNpc(2112004, 0);
-        } else if (selection == 8) {//ÒÅÖ·¹«»á¶Ô¿¹Õ½
+        } else if (selection == 8) {//é—å€å…¬ä¼šå¯¹æŠ—æˆ˜
 			cm.warp(101030104);
             cm.dispose();
-        } else if (selection == 9) {//Ó¢ÓïÑ§Ôº¸±±¾
+        } else if (selection == 9) {//è‹±è¯­å­¦é™¢å‰¯æœ¬
             cm.warp(702090400);
             cm.dispose();
             //cm.openNpc(9310057, 0);
-        } else if (selection == 11) {//Ç§ÄêÊ÷¾«ÍõÒÅ¼£
+        } else if (selection == 11) {//åƒå¹´æ ‘ç²¾ç‹é—è¿¹
             cm.warp(541020700);
             cm.dispose();
             //cm.openNpc(9310057, 0);
-        } else if (selection == 12) {//ÈËÅ¼Ê¦BOSSÌôÕ½
+        } else if (selection == 12) {//äººå¶å¸ˆBOSSæŒ‘æˆ˜
             cm.warp(910510001);
             cm.dispose();
             //cm.openNpc(9310057, 0);
-        } else if (selection == 10) {//.¹ÖÎï¼ÎÄê»ª
+        } else if (selection == 10) {//.æ€ªç‰©å˜‰å¹´å
             cm.warp(980000000);
             cm.dispose();
             //cm.openNpc(9310057, 0);

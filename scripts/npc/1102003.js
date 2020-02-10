@@ -24,6 +24,6 @@
 */
 
 function start() {
-	cm.sendOk("»¶Ó­À´µ½Ê¥µØ£¡");
+	cm.sendOk("æ¬¢è¿æ¥åˆ°åœ£åœ°ï¼");
 	cm.dispose();
 }

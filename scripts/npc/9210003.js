@@ -12,15 +12,15 @@ function action(mode, type, selection) {
     if (mode == 1)
 	status++;
     else {
-	cm.sendOk("ĞèÒªµÄ•rºòÔÙíÕÒÎÒ¡£");
+	cm.sendOk("éœ€è¦çš„æ™‚å€™å†ä¾†æ‰¾æˆ‘ã€‚");
 	cm.dispose();
 	return;
     }
     if (status == 0) {
-	cm.sendYesNo("ÄãÏëßMÈëÔèÌÃ£¿ "+300+" —÷Å");
+	cm.sendYesNo("ä½ æƒ³é€²å…¥æ¾¡å ‚ï¼Ÿ "+300+" æ¥“å¹£");
     } else if (status == 1) {
 	if (cm.getMeso() < 300) {
-	    cm.sendOk("Õˆ´_ÕJÊÇ²»ÊÇÓĞ "+300+" —÷Å¡£");
+	    cm.sendOk("è«‹ç¢ºèªæ˜¯ä¸æ˜¯æœ‰ "+300+" æ¥“å¹£ã€‚");
 	} else {
 	    cm.gainMeso(-300);
 	    if (cm.getPlayerStat("GENDER") == 0) {

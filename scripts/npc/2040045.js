@@ -4,7 +4,7 @@
 
 function start() {
 	cm.warp(922011100);
-    cm.sendNext("你已经离开奖励地图");
+    cm.sendNext("浣犲凡缁忕寮�濂栧姳鍦板浘");
 	cm.dispose();
 }
 

@@ -805,7 +805,7 @@ implements Serializable {
             mplew.writeInt(mgc.getId());
         }
         for (MapleGuildCharacter mgc : this.members) {
-            mplew.writeAsciiString(StringUtil.getRightPaddedStr(mgc.getName(), '\u0000', 13));
+            mplew.writeAsciiString(StringUtil.getRightPaddedStr(mgc.getName(), '\000', 16));
             mplew.writeInt(mgc.getJobId());
             mplew.writeInt(mgc.getLevel());
             mplew.writeInt(mgc.getGuildRank());

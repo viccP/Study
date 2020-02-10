@@ -58,16 +58,4 @@ function action(mode, type, selection) {
             item = cm.gainGachaponItem(itemId, quantity, "Francis BOSS", notice);
             if (item != -1) {
                 cm.gainItem(4001232, -1);
-                cm.sendOk("你获得了 #b#t" + item + "##k " + quantity + "个。");
-            } else {
-                cm.sendOk("你确实有#b#t4170013##k吗？如果是，请你确认在背包的装备，消耗，其他窗口中是否有一格以上的空间。");
-            }
-            cm.safeDispose();
-        } else {
-            cm.sendOk("今天的运气可真差，什么都没有拿到。但是作为鼓励，送给你5颗#v4001322#作为奖励.");
-            cm.gainItem(4001232, -1);
-            cm.gainItem(4001322, 5);
-            cm.safeDispose();
-        }
-    }
-}
+                cm.sendOk("浣犺幏寰椾簡 #b#t" + item + "##k " + quantity + "涓

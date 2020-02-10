@@ -1,10 +1,4 @@
-﻿var status = -1;
+锘縱ar status = -1;
 
 function start(mode, type, selection) {
-	qm.sendNext("謝謝你。");
-	qm.forceCompleteQuest();
-	qm.dispose();
-}
-function end(mode, type, selection) {
-	qm.dispose();
-}
+	qm.sendNext("璎濊瑵浣犮€

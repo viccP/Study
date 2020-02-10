@@ -21,8 +21,8 @@ function action(mode, type, selection) {
             cm.dispose();
             return;
         }
-        cm.gainItem(4001158, 1);//Å®ÉñµÄÓğÃ«
-        cm.gainItem(4001322, 2);//À¶±¦Ê¯
+        cm.gainItem(4001158, 1);//å¥³ç¥çš„ç¾½æ¯›
+        cm.gainItem(4001322, 2);//è“å®çŸ³
         cm.getPlayer().endPartyQuest(1203); //might be a bad implentation.. incase they dc or something
         //cm.gainNX(100);
         cm.warp(200080101);

@@ -8,17 +8,4 @@ function action(mode, type, selection) {
 		if(cm.haveItem(4031018,1)){
 			cm.warpParty(674030300);
 		}else{
-		    cm.sendOk("请给我藏宝图！");
-		}
-            //cm.warp(674030100, 0);
-        } else {
-            var map = cm.getSavedLocation("CHRISTMAS");
-            if (map > -1 && map != cm.getMapId()) {
-                cm.warp(map, 0);
-            } else {
-                cm.warp(100000000, 0);
-            }
-        }
-    }
-    cm.dispose();
-}
+		    cm.sendOk("璇风粰鎴戣棌瀹濆浘锛

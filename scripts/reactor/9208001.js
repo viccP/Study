@@ -18,7 +18,7 @@ function act() {
                 eim.setProperty("stage1combo", prevCombo);
                 if (prevCombo.length == (6 * (stage + 3))) { //end of displaying
                     eim.setProperty("stage1status", "active");
-                    rm.mapMessage("ËùÓĞÊ¯ÏñÒÑ¾­ÒÆ¶¯Íê±Ï¡£");
+                    rm.mapMessage("æ‰€æœ‰çŸ³åƒå·²ç»ç§»åŠ¨å®Œæ¯•ã€‚");
                     eim.setProperty("stage1guess", "");
                 }
             } else { //active

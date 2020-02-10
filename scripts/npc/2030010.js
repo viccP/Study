@@ -3,7 +3,7 @@
  */
 
 function start() {
-    cm.sendYesNo("����������뿪���㽫���ò����¿�ʼ����ȷ��Ҫ�뿪���ﵽ����ȥ��");
+    cm.sendYesNo("如果你现在离开，你将不得不重新开始。你确定要离开这里到外面去吗？");
 }
 
 function action(mode, type, selection) {
@@ -13,7 +13,7 @@ function action(mode, type, selection) {
         } else {
             cm.warp(211042301);
         }
-		cm.getPlayer().setbosslog(0);//BOSS�ط�
+		cm.getPlayer().setbosslog(0);//BOSS重返
     }
     cm.dispose();
 }

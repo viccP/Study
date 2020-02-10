@@ -8,11 +8,11 @@ function enter(pi) {
 		pi.givePartyExp(10000);
 		pi.warpParty(926100001);
 	}else{
-        pi.playerMessage(5, "¶Ó³¤½øÈë£¡");
+        pi.playerMessage(5, "é˜Ÿé•¿è¿›å…¥ï¼");
 	}
       //  pi.warp(926100001, 0);
 		//pi.warpParty(926100001);
     } else {
-        pi.playerMessage(5, "´«ËÍÃÅÉĞÎ´´ò¿ª¡£");
+        pi.playerMessage(5, "ä¼ é€é—¨å°šæœªæ‰“å¼€ã€‚");
     }
 }

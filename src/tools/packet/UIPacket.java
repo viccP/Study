@@ -13,7 +13,7 @@ import tools.data.output.MaplePacketLittleEndianWriter;
 public class UIPacket {
     public static final MaplePacket EarnTitleMsg(String msg) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("EarnTitleMsg--------------------");
         }
         mplew.writeShort(SendPacketOpcode.EARN_TITLE_MSG.getValue());
@@ -27,7 +27,7 @@ public class UIPacket {
 
     public static MaplePacket getSPMsg(byte sp, short job) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getSPMsg--------------------");
         }
         mplew.writeShort(SendPacketOpcode.SHOW_STATUS_INFO.getValue());
@@ -43,7 +43,7 @@ public class UIPacket {
 
     public static MaplePacket getGPMsg(int itemid) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getGPMsg--------------------");
         }
         mplew.writeShort(SendPacketOpcode.SHOW_STATUS_INFO.getValue());
@@ -58,7 +58,7 @@ public class UIPacket {
 
     public static MaplePacket getTopMsg(String msg) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getTopMsg--------------------");
         }
         mplew.writeShort(SendPacketOpcode.TOP_MSG.getValue());
@@ -72,7 +72,7 @@ public class UIPacket {
 
     public static MaplePacket getStatusMsg(int itemid) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("getStatusMsg--------------------");
         }
         mplew.writeShort(SendPacketOpcode.SHOW_STATUS_INFO.getValue());
@@ -86,21 +86,21 @@ public class UIPacket {
     }
 
     public static final MaplePacket MapEff(String path) {
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("MapEff--------------------");
         }
         return MaplePacketCreator.environmentChange(path, 3);
     }
 
     public static final MaplePacket MapNameDisplay(int mapid) {
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("MapNameDisplay--------------------");
         }
         return MaplePacketCreator.environmentChange("maplemap/enter/" + mapid, 3);
     }
 
     public static final MaplePacket Aran_Start() {
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("Aran_Start--------------------");
         }
         return MaplePacketCreator.environmentChange("Aran/balloon", 4);
@@ -108,7 +108,7 @@ public class UIPacket {
 
     public static final MaplePacket AranTutInstructionalBalloon(String data) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("AranTutInstructionalBalloon--------------------");
         }
         mplew.writeShort(SendPacketOpcode.SHOW_ITEM_GAIN_INCHAT.getValue());
@@ -124,7 +124,7 @@ public class UIPacket {
 
     public static final MaplePacket ShowWZEffect(String data, int info) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("ShowWZEffect--------------------");
         }
         mplew.writeShort(SendPacketOpcode.SHOW_ITEM_GAIN_INCHAT.getValue());
@@ -146,7 +146,7 @@ public class UIPacket {
 
     public static MaplePacket summonHelper(boolean summon) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("summonHelper--------------------");
         }
         mplew.writeShort(SendPacketOpcode.SUMMON_HINT.getValue());
@@ -160,7 +160,7 @@ public class UIPacket {
 
     public static MaplePacket summonMessage(int type) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("summonMessageA--------------------");
         }
         mplew.writeShort(SendPacketOpcode.SUMMON_HINT_MSG.getValue());
@@ -176,7 +176,7 @@ public class UIPacket {
 
     public static MaplePacket summonMessage(String message) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("summonMessageB--------------------");
         }
         mplew.writeShort(SendPacketOpcode.SUMMON_HINT_MSG.getValue());
@@ -194,7 +194,7 @@ public class UIPacket {
 
     public static MaplePacket IntroLock(boolean enable) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("IntroLock--------------------");
         }
         mplew.writeShort(SendPacketOpcode.CYGNUS_INTRO_LOCK.getValue());
@@ -208,7 +208,7 @@ public class UIPacket {
 
     public static MaplePacket IntroDisableUI(boolean enable) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("IntroDisableUI--------------------");
         }
         mplew.writeShort(SendPacketOpcode.CYGNUS_INTRO_DISABLE_UI.getValue());
@@ -222,7 +222,7 @@ public class UIPacket {
 
     public static MaplePacket fishingUpdate(byte type, int id) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("fishingUpdate--------------------");
         }
         mplew.writeShort(SendPacketOpcode.FISHING_BOARD_UPDATE.getValue());
@@ -237,7 +237,7 @@ public class UIPacket {
 
     public static MaplePacket fishingCaught(int chrid) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.\u8c03\u8bd5\u8f93\u51fa\u5c01\u5305) {
+        if (ServerConstants.DEBUG_PACKET) {
             System.out.println("fishingCaught--------------------");
         }
         mplew.writeShort(SendPacketOpcode.FISHING_CAUGHT.getValue());

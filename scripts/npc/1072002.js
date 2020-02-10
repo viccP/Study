@@ -32,12 +32,12 @@ function action(mode, type, selection) {
 	    cm.dispose();
 	}
     } else if (status == 1) {
-	cm.sendNextPrev("ÄãÏëÒª¶ş×ªÂğ£¿£¿")
+	cm.sendNextPrev("ä½ æƒ³è¦äºŒè½¬å—ï¼Ÿï¼Ÿ")
     } else if (status == 2) {
-	cm.askAcceptDecline("ÎÒ»á¸øÄãÒ»´Î¾Í»á£¬²»ÖªµÀÄã×¼±¸ºÃÁËÂğ.");
+	cm.askAcceptDecline("æˆ‘ä¼šç»™ä½ ä¸€æ¬¡å°±ä¼šï¼Œä¸çŸ¥é“ä½ å‡†å¤‡å¥½äº†å—.");
     } else if (status == 3) {
 	cm.startQuest(100001);
-	cm.sendOk("ÇëÄãÊÕ¼¯#b30 #t4031013##k.×£ÄãºÃÔË£¡.")
+	cm.sendOk("è¯·ä½ æ”¶é›†#b30 #t4031013##k.ç¥ä½ å¥½è¿ï¼.")
     } else if (status == 4) {
 	// cm.gainItem(4031010, -1);
 		cm.warp(108000100,0);

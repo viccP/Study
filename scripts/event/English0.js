@@ -27,10 +27,10 @@ function setup() {
 function playerEntry(eim, player) {
     var map = eim.getMapInstance(0);
     player.changeMap(map, map.getPortal(0));
-	player.dropMessage(5, "×ÖÄ¸±í [" + eim.getProperty("question") + "] ¿´ÆğÀ´ÏñÂğ£¿");
-	player.dropMessage(5, "×ÖÄ¸±í [" + eim.getProperty("question") + "] ¿´ÆğÀ´ÏñÂğ£¿");
-	player.dropMessage(5, "×ÖÄ¸±í [" + eim.getProperty("question") + "] ¿´ÆğÀ´ÏñÂğ£¿");
-    player.sendEnglishQuiz("×ÖÄ¸±í [" + eim.getProperty("question") + "] ¿´ÆğÀ´ÏñÂğ£¿");
+	player.dropMessage(5, "å­—æ¯è¡¨ [" + eim.getProperty("question") + "] çœ‹èµ·æ¥åƒå—ï¼Ÿ");
+	player.dropMessage(5, "å­—æ¯è¡¨ [" + eim.getProperty("question") + "] çœ‹èµ·æ¥åƒå—ï¼Ÿ");
+	player.dropMessage(5, "å­—æ¯è¡¨ [" + eim.getProperty("question") + "] çœ‹èµ·æ¥åƒå—ï¼Ÿ");
+    player.sendEnglishQuiz("å­—æ¯è¡¨ [" + eim.getProperty("question") + "] çœ‹èµ·æ¥åƒå—ï¼Ÿ");
 }
 
 function playerDead(eim, player) {}
