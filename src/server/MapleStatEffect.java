@@ -7,26 +7,6 @@
  */
 package server;
 
-import client.ISkill;
-import client.MapleBuffStat;
-import client.MapleCharacter;
-import client.MapleClient;
-import client.MapleCoolDownValueHolder;
-import client.MapleDisease;
-import client.MapleStat;
-import client.MonsterBook;
-import client.PlayerStats;
-import client.SkillFactory;
-import client.anticheat.CheatTracker;
-import client.inventory.IItem;
-import client.inventory.MapleInventory;
-import client.inventory.MapleInventoryType;
-import client.status.MonsterStatus;
-import client.status.MonsterStatusEffect;
-import constants.GameConstants;
-import handling.MaplePacket;
-import handling.channel.ChannelServer;
-import handling.world.MapleParty;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.io.Serializable;
@@ -37,25 +17,28 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.ScheduledFuture;
-import org.apache.mina.common.IoSession;
-import org.apache.mina.common.WriteFuture;
+
+import client.ISkill;
+import client.MapleBuffStat;
+import client.MapleCharacter;
+import client.MapleCoolDownValueHolder;
+import client.MapleDisease;
+import client.MapleStat;
+import client.PlayerStats;
+import client.SkillFactory;
+import client.inventory.IItem;
+import client.inventory.MapleInventory;
+import client.inventory.MapleInventoryType;
+import client.status.MonsterStatus;
+import client.status.MonsterStatusEffect;
+import constants.GameConstants;
+import handling.channel.ChannelServer;
 import provider.MapleData;
 import provider.MapleDataTool;
-import server.MapleCarnivalFactory;
-import server.MapleCarnivalParty;
-import server.MapleInventoryManipulator;
-import server.MapleItemInformationProvider;
-import server.MaplePortal;
-import server.Randomizer;
-import server.Timer;
 import server.life.MapleMonster;
-import server.life.MapleMonsterStats;
-import server.life.MobSkill;
 import server.maps.MapleDoor;
 import server.maps.MapleMap;
-import server.maps.MapleMapFactory;
 import server.maps.MapleMapObject;
 import server.maps.MapleMapObjectType;
 import server.maps.MapleMist;
@@ -185,7 +168,7 @@ implements Serializable {
         if (!ret.skill && ret.duration > -1) {
             ret.overTime = true;
         } else {
-            ret.duration *= 1000;
+            ret.duration *= 1000000;
             ret.overTime = overTime || ret.isMorph() || ret.isPirateMorph() || ret.isFinalAttack();
         }
         ArrayList<Pair<MapleBuffStat, Integer>> statups = new ArrayList<Pair<MapleBuffStat, Integer>>();
