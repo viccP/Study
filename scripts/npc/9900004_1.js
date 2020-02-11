@@ -43,7 +43,6 @@ var mapObj=[
 		{mapId:200010300,meso:0,mapName:"艾力杰"},
 		{mapId:211040000,meso:0,mapName:"驼狼雪人"},
 		{mapId:250010303,meso:0,mapName:"肯德熊"},
-		{mapId:250010304,meso:0,mapName:"刀疤棕熊"},
 		{mapId:800010100,meso:0,mapName:"蓝蘑菇王"},
 		{mapId:240020401,meso:0,mapName:"喷火龙"},
 		{mapId:240020101,meso:0,mapName:"天鹰"},
@@ -51,14 +50,16 @@ var mapObj=[
 		{mapId:270010500,meso:0,mapName:"多多"},
 		{mapId:270020500,meso:0,mapName:"玄冰独角兽"},
 		{mapId:250010504,meso:0,mapName:"妖怪禅师"},
-		{mapId:230040420,meso:0,mapName:"鱼王"},
-		{mapId:702060000,meso:0,mapName:"妖僧"}
+		{mapId:240040400,meso:0,mapName:"大海兽"},
+		{mapId:230040420,meso:0,mapName:"鱼王"}
 	],
 	[
 		{mapId:220080001,meso:0,mapName:"闹钟"},
+		{mapId:702060000,meso:0,mapName:"妖僧"},
 		{mapId:280030000,meso:0,mapName:"扎昆"},
+		{mapId:551030200,meso:0,mapName:"暴力狮熊"},
 		{mapId:240060200,meso:0,mapName:"黑暗龙王"},
-		{mapId:270050100,meso:0,mapName:"品客缤"}
+		{mapId:270050000,meso:0,mapName:"品客缤"}
 
 	]
 ];

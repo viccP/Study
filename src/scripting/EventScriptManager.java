@@ -3,17 +3,14 @@
  */
 package scripting;
 
-import client.MapleClient;
-import handling.channel.ChannelServer;
-import java.io.PrintStream;
-import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
+
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
-import scripting.AbstractScriptManager;
-import scripting.EventManager;
+
+import handling.channel.ChannelServer;
 import tools.FileoutputUtil;
 
 public class EventScriptManager
@@ -27,9 +24,10 @@ extends AbstractScriptManager {
 
     public EventScriptManager(ChannelServer cserv, String[] scripts) {
         for (String script : scripts) {
-            Invocable iv;
-            if (script.equals("") || (iv = this.getInvocable("event/" + script + ".js", null)) == null) continue;
-            this.events.put(script, new EventEntry(script, iv, new EventManager(cserv, iv, script)));
+            if (!script.equals("")) {
+                Invocable iv = getInvocable("event/" + script + ".js", null);
+                this.events.put(script, new EventEntry(script, iv, new EventManager(cserv, iv, script)));
+            }
         }
     }
 

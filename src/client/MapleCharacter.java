@@ -5220,7 +5220,7 @@ implements Serializable {
         this.client.updateLoginState(6, this.client.getSessionIPAddress());
         String s = this.client.getSessionIPAddress();
         LoginServer.addIPAuth(s.substring(s.indexOf(47) + 1, s.length()));
-        this.client.getSession().write((Object)MaplePacketCreator.getChannelChange(Integer.parseInt(toch.getIP().split(":")[1])));
+        this.client.getSession().write(MaplePacketCreator.getChannelChange(Integer.parseInt(toch.getIP().split(":")[1])));
         this.saveToDB(false, false);
         this.getMap().removePlayer(this);
         this.client.setPlayer(null);

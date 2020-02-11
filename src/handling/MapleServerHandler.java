@@ -232,6 +232,7 @@ extends IoHandlerAdapter {
     }
 
     public static void handlePacket(RecvPacketOpcode header, SeekableLittleEndianAccessor slea, MapleClient c, boolean cs) throws Exception {
+    	System.out.println(header.name());
         switch (header) {
             case PONG: {
                 c.pongReceived();

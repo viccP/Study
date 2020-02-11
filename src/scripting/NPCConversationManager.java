@@ -490,6 +490,14 @@ extends AbstractPlayerInteraction {
         MapleShopFactory.getInstance().getShop(id).sendShop(this.c);
     }
 
+    /**
+     * 加载商店
+     * @param id
+     */
+    public void loadShop(int id) {
+        MapleShopFactory.getInstance().loadShop(id, true);
+    }
+    
     public int gainGachaponItem(int id, int quantity) {
         return this.gainGachaponItem(id, quantity, this.c.getPlayer().getMap().getStreetName() + " - " + this.c.getPlayer().getMap().getMapName());
     }

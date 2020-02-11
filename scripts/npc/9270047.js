@@ -2,7 +2,7 @@ var status = -1;
 
 function start() {
     if (cm.getPlayer().getMapId() == 551030200) {
-        cm.sendYesNo("Would you like to get out?");
+        cm.sendYesNo("你想要出去么?");
         status = 1;
         return;
     }

@@ -35,7 +35,7 @@ public class MapleShopFactory {
         return this.loadShop(npcId, false);
     }
 
-    private MapleShop loadShop(int id, boolean isShopId) {
+    public MapleShop loadShop(int id, boolean isShopId) {
         MapleShop ret = MapleShop.createFromDB(id, isShopId);
         if (ret != null) {
             this.shops.put(ret.getId(), ret);

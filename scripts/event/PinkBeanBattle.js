@@ -4,11 +4,10 @@ function init() {
 }
 
 function setup(eim, leaderid) {
+	em.setProperty("state", "1");
 	em.setProperty("leader", "true");
-    var eim = em.newInstance("Pinkbean");
+    var eim = em.newInstance("Pinkbean"+leaderid);
 	eim.setInstanceMap(270050100).resetFully();
-    em.setProperty("state", "0");
-
     eim.startEventTimer(14400000); // 1 hr
     return eim;
 }
@@ -68,6 +67,18 @@ function clearPQ(eim) {
 }
 
 function allMonstersDead(eim) {
+	var emState=em.getProperty("state");
+    if (emState.equals("1")) {
+        em.setProperty("state", "2");
+    } else if (emState.equals("2")) {
+        em.setProperty("state", "3");
+    } else if (emState.equals("3")) {
+        em.setProperty("state", "4");
+    } else if (emState.equals("4")) {
+        em.setProperty("state", "5");
+    } else if (emState.equals("5")) {
+        em.setProperty("state", "6");
+    }
 }
 
 function leftParty (eim, player) {}

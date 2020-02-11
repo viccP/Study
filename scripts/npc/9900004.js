@@ -25,14 +25,18 @@ function action(mode, type, selection) {
 		    text += " \t\t\t  #e#d欢迎来到#r豆豆冒险岛#k#n              \r\n           #v3994071##v3994066##v3994078##v3994071##v3994082##v3994062#\r\n"
             text += "\t\t\t#e#d当前在线时间："+cm.getGamePoints()+"分钟！#k#n\r\n"
             text += "\t\t\t#e#d当前点卷余额:#r" + cm.getPlayer().getCSPoints(1) + "#n\r\n";
-            text += "#L1##b" + redArrow + "快捷传送#l#l#L2##b"  + "#L3##b" + redArrow + "快捷商店#l\r\n\r\n"
+            text += "#L1##b" + redArrow + "快捷传送#l#l#L2##b"  + redArrow + "快捷商店#l#l#L3##b"+redArrow+"动态商店#l\r\n\r\n"
 		    cm.sendSimple(text);
         } else{
         	//快捷传送
         	if (selection == 1) {
         		 cm.openNpc(9900004, 1);
-            }else if (selection == 3) { //快捷商店
+            }else if (selection == 2) { //快捷商店
                 cm.openShop(30);
+    			cm.dispose();
+            } else if (selection == 3) { //快捷商店
+                cm.loadShop(50);
+                cm.openShop(50);
     			cm.dispose();
             } 
         }
