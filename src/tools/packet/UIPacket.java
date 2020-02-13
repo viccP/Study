@@ -6,16 +6,13 @@ package tools.packet;
 import constants.ServerConstants;
 import handling.MaplePacket;
 import handling.SendPacketOpcode;
-import java.io.PrintStream;
 import tools.MaplePacketCreator;
 import tools.data.output.MaplePacketLittleEndianWriter;
 
 public class UIPacket {
     public static final MaplePacket EarnTitleMsg(String msg) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.DEBUG_PACKET) {
-            System.out.println("EarnTitleMsg--------------------");
-        }
+       
         mplew.writeShort(SendPacketOpcode.EARN_TITLE_MSG.getValue());
         mplew.writeMapleAsciiString(msg);
         if (ServerConstants.PACKET_ERROR_OFF) {
@@ -27,9 +24,7 @@ public class UIPacket {
 
     public static MaplePacket getSPMsg(byte sp, short job) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.DEBUG_PACKET) {
-            System.out.println("getSPMsg--------------------");
-        }
+       
         mplew.writeShort(SendPacketOpcode.SHOW_STATUS_INFO.getValue());
         mplew.write(3);
         mplew.writeShort(job);
@@ -43,9 +38,7 @@ public class UIPacket {
 
     public static MaplePacket getGPMsg(int itemid) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.DEBUG_PACKET) {
-            System.out.println("getGPMsg--------------------");
-        }
+       
         mplew.writeShort(SendPacketOpcode.SHOW_STATUS_INFO.getValue());
         mplew.write(6);
         mplew.writeInt(itemid);
@@ -58,9 +51,7 @@ public class UIPacket {
 
     public static MaplePacket getTopMsg(String msg) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.DEBUG_PACKET) {
-            System.out.println("getTopMsg--------------------");
-        }
+       
         mplew.writeShort(SendPacketOpcode.TOP_MSG.getValue());
         mplew.writeMapleAsciiString(msg);
         if (ServerConstants.PACKET_ERROR_OFF) {
@@ -72,9 +63,7 @@ public class UIPacket {
 
     public static MaplePacket getStatusMsg(int itemid) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.DEBUG_PACKET) {
-            System.out.println("getStatusMsg--------------------");
-        }
+       
         mplew.writeShort(SendPacketOpcode.SHOW_STATUS_INFO.getValue());
         mplew.write(7);
         mplew.writeInt(itemid);
@@ -86,31 +75,23 @@ public class UIPacket {
     }
 
     public static final MaplePacket MapEff(String path) {
-        if (ServerConstants.DEBUG_PACKET) {
-            System.out.println("MapEff--------------------");
-        }
+       
         return MaplePacketCreator.environmentChange(path, 3);
     }
 
     public static final MaplePacket MapNameDisplay(int mapid) {
-        if (ServerConstants.DEBUG_PACKET) {
-            System.out.println("MapNameDisplay--------------------");
-        }
+       
         return MaplePacketCreator.environmentChange("maplemap/enter/" + mapid, 3);
     }
 
     public static final MaplePacket Aran_Start() {
-        if (ServerConstants.DEBUG_PACKET) {
-            System.out.println("Aran_Start--------------------");
-        }
+       
         return MaplePacketCreator.environmentChange("Aran/balloon", 4);
     }
 
     public static final MaplePacket AranTutInstructionalBalloon(String data) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.DEBUG_PACKET) {
-            System.out.println("AranTutInstructionalBalloon--------------------");
-        }
+       
         mplew.writeShort(SendPacketOpcode.SHOW_ITEM_GAIN_INCHAT.getValue());
         mplew.write(21);
         mplew.writeMapleAsciiString(data);
@@ -124,9 +105,7 @@ public class UIPacket {
 
     public static final MaplePacket ShowWZEffect(String data, int info) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.DEBUG_PACKET) {
-            System.out.println("ShowWZEffect--------------------");
-        }
+       
         mplew.writeShort(SendPacketOpcode.SHOW_ITEM_GAIN_INCHAT.getValue());
         if (info == -1) {
             mplew.write(18);
@@ -146,9 +125,7 @@ public class UIPacket {
 
     public static MaplePacket summonHelper(boolean summon) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.DEBUG_PACKET) {
-            System.out.println("summonHelper--------------------");
-        }
+       
         mplew.writeShort(SendPacketOpcode.SUMMON_HINT.getValue());
         mplew.write(summon ? 1 : 0);
         if (ServerConstants.PACKET_ERROR_OFF) {
@@ -160,9 +137,7 @@ public class UIPacket {
 
     public static MaplePacket summonMessage(int type) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.DEBUG_PACKET) {
-            System.out.println("summonMessageA--------------------");
-        }
+       
         mplew.writeShort(SendPacketOpcode.SUMMON_HINT_MSG.getValue());
         mplew.write(1);
         mplew.writeInt(type);
@@ -176,9 +151,7 @@ public class UIPacket {
 
     public static MaplePacket summonMessage(String message) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.DEBUG_PACKET) {
-            System.out.println("summonMessageB--------------------");
-        }
+       
         mplew.writeShort(SendPacketOpcode.SUMMON_HINT_MSG.getValue());
         mplew.write(0);
         mplew.writeMapleAsciiString(message);
@@ -194,9 +167,7 @@ public class UIPacket {
 
     public static MaplePacket IntroLock(boolean enable) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.DEBUG_PACKET) {
-            System.out.println("IntroLock--------------------");
-        }
+       
         mplew.writeShort(SendPacketOpcode.CYGNUS_INTRO_LOCK.getValue());
         mplew.write(enable ? 1 : 0);
         if (ServerConstants.PACKET_ERROR_OFF) {
@@ -208,9 +179,7 @@ public class UIPacket {
 
     public static MaplePacket IntroDisableUI(boolean enable) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.DEBUG_PACKET) {
-            System.out.println("IntroDisableUI--------------------");
-        }
+       
         mplew.writeShort(SendPacketOpcode.CYGNUS_INTRO_DISABLE_UI.getValue());
         mplew.write(enable ? 1 : 0);
         if (ServerConstants.PACKET_ERROR_OFF) {
@@ -222,9 +191,7 @@ public class UIPacket {
 
     public static MaplePacket fishingUpdate(byte type, int id) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.DEBUG_PACKET) {
-            System.out.println("fishingUpdate--------------------");
-        }
+       
         mplew.writeShort(SendPacketOpcode.FISHING_BOARD_UPDATE.getValue());
         mplew.write(type);
         mplew.writeInt(id);
@@ -237,9 +204,7 @@ public class UIPacket {
 
     public static MaplePacket fishingCaught(int chrid) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        if (ServerConstants.DEBUG_PACKET) {
-            System.out.println("fishingCaught--------------------");
-        }
+       
         mplew.writeShort(SendPacketOpcode.FISHING_CAUGHT.getValue());
         mplew.writeInt(chrid);
         if (ServerConstants.PACKET_ERROR_OFF) {

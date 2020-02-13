@@ -42,7 +42,7 @@ extends AbstractScriptManager {
     public final void init() {
         for (EventEntry entry : this.events.values()) {
             try {
-                ((ScriptEngine)((Object)entry.iv)).put("em", entry.em);
+                ((ScriptEngine)(entry.iv)).put("em", entry.em);
                 entry.iv.invokeFunction("init", new Object[]{null});
             }
             catch (Exception ex) {

@@ -8,45 +8,29 @@
  */
 package handling.channel.handler;
 
-import client.BuddyList;
+import java.util.List;
+
 import client.BuddylistEntry;
 import client.CharacterNameAndId;
 import client.MapleBuffStat;
 import client.MapleCharacter;
 import client.MapleClient;
-import client.MapleCoolDownValueHolder;
-import client.MapleDiseaseValueHolder;
-import client.MapleKeyLayout;
 import client.MapleQuestStatus;
 import client.SkillFactory;
 import handling.MaplePacket;
 import handling.cashshop.CashShopServer;
 import handling.channel.ChannelServer;
-import handling.channel.PlayerStorage;
 import handling.world.CharacterIdChannelPair;
 import handling.world.CharacterTransfer;
 import handling.world.MapleMessenger;
 import handling.world.MapleMessengerCharacter;
-import handling.world.MapleParty;
 import handling.world.MaplePartyCharacter;
 import handling.world.PartyOperation;
 import handling.world.PlayerBuffStorage;
-import handling.world.PlayerBuffValueHolder;
 import handling.world.World;
-import handling.world.family.MapleFamilyCharacter;
 import handling.world.guild.MapleGuild;
-import handling.world.guild.MapleGuildCharacter;
-import java.util.Collection;
-import java.util.List;
-import org.apache.mina.common.CloseFuture;
-import org.apache.mina.common.IoSession;
-import org.apache.mina.common.WriteFuture;
-import scripting.EventInstanceManager;
 import scripting.NPCScriptManager;
-import server.MapleStatEffect;
-import server.MapleTrade;
 import server.maps.FieldLimitType;
-import server.maps.MapleMap;
 import tools.FileoutputUtil;
 import tools.MaplePacketCreator;
 import tools.data.input.SeekableLittleEndianAccessor;
@@ -68,8 +52,8 @@ public class InterServerHandler {
         PlayerBuffStorage.addDiseaseToStorage(chr.getId(), chr.getAllDiseases());
         World.ChannelChange_Data(new CharacterTransfer(chr), chr.getId(), mts ? -20 : -10);
         ch.removePlayer(chr);
-        c.updateLoginState(6, c.getSessionIPAddress());
-        c.getSession().write((Object)MaplePacketCreator.getChannelChange(Integer.parseInt(CashShopServer.getIP().split(":")[1])));
+        c.updateLoginState(MapleClient.CHANGE_CHANNEL, c.getSessionIPAddress());
+        c.getSession().write(MaplePacketCreator.getChannelChange(CashShopServer.getPort()));
         chr.saveToDB(false, false);
         chr.getMap().removePlayer(chr);
         c.setPlayer(null);
@@ -77,8 +61,8 @@ public class InterServerHandler {
     }
 
     public static final void EnterMTS(MapleClient c, MapleCharacter chr, boolean mts) {
-        if (c.getPlayer().getTrade() != null) {
-            c.getPlayer().dropMessage(1, "\u4ea4\u6613\u4e2d\u65e0\u6cd5\u8fdb\u884c\u5176\u4ed6\u64cd\u4f5c\uff01");
+    	if (c.getPlayer().getTrade() != null) {
+            c.getPlayer().dropMessage(1, "交易中无法进行其他操作！");
             c.getSession().write((Object)MaplePacketCreator.enableActions());
             return;
         }
@@ -98,7 +82,7 @@ public class InterServerHandler {
             World.ChannelChange_Data(new CharacterTransfer(chr), chr.getId(), mts ? -20 : -10);
             ch.removePlayer(chr);
             c.updateLoginState(6, c.getSessionIPAddress());
-            c.getSession().write((Object)MaplePacketCreator.getChannelChange(Integer.parseInt(CashShopServer.getIP().split(":")[1])));
+            c.getSession().write(MaplePacketCreator.getChannelChange(CashShopServer.getPort()));
             chr.saveToDB(false, false);
             chr.getMap().removePlayer(chr);
             c.setPlayer(null);

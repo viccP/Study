@@ -168,7 +168,7 @@ implements Serializable {
         if (!ret.skill && ret.duration > -1) {
             ret.overTime = true;
         } else {
-            ret.duration *= 1000000;
+            ret.duration *= 1000;
             ret.overTime = overTime || ret.isMorph() || ret.isPirateMorph() || ret.isFinalAttack();
         }
         ArrayList<Pair<MapleBuffStat, Integer>> statups = new ArrayList<Pair<MapleBuffStat, Integer>>();

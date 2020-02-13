@@ -3,15 +3,12 @@
  */
 package tools.data.output;
 
+import java.io.ByteArrayOutputStream;
+
 import handling.ByteArrayMaplePacket;
 import handling.MaplePacket;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import server.ServerProperties;
 import tools.HexTool;
-import tools.data.output.BAOSByteOutputStream;
-import tools.data.output.ByteOutputStream;
-import tools.data.output.GenericLittleEndianWriter;
 
 public class MaplePacketLittleEndianWriter
 extends GenericLittleEndianWriter {

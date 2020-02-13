@@ -523,7 +523,7 @@ extends AbstractLoadedMapleLife {
         }
         if (controllers != null) {
             controllers.stopControllingMonster(this);
-            controllers.getClient().getSession().write((Object)MobPacket.stopControllingMonster(this.getObjectId()));
+            controllers.getClient().getSession().write(MobPacket.stopControllingMonster(this.getObjectId()));
         }
         newController.controlMonster(this, immediateAggro);
         this.setController(newController);
@@ -601,25 +601,25 @@ extends AbstractLoadedMapleLife {
         sb.append(this.stats.getName());
         sb.append("(");
         sb.append(this.getId());
-        sb.append(") (\u7b49\u7d1a ");
+        sb.append(") (等級 ");
         sb.append(this.stats.getLevel());
-        sb.append(") \u5728 (X");
+        sb.append(") 在 (X");
         sb.append(this.getPosition().x);
         sb.append("/ Y");
         sb.append(this.getPosition().y);
-        sb.append(") \u5ea7\u6a19 ");
+        sb.append(") 座標 ");
         sb.append(this.getHp());
         sb.append("/ ");
         sb.append(this.getMobMaxHp());
-        sb.append("\u8840\u91cf, ");
+        sb.append("血量, ");
         sb.append(this.getMp());
         sb.append("/ ");
         sb.append(this.getMobMaxMp());
-        sb.append(" \u9b54\u529b, \u53cd\u61c9\u5806: ");
+        sb.append(" 魔力, 反應堆: ");
         sb.append(this.getObjectId());
-        sb.append(" || \u4ec7\u6068\u76ee\u6a19 : ");
+        sb.append(" || 仇恨目標 : ");
         MapleCharacter chr = (MapleCharacter)this.controller.get();
-        sb.append(chr != null ? chr.getName() : "\u7121");
+        sb.append(chr != null ? chr.getName() : "無");
         return sb.toString();
     }
 

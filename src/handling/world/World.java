@@ -553,7 +553,6 @@ public class World {
                         guild.broadcast(MaplePacketCreator.disbandAlliance(allianceid));
                         continue;
                     }
-                    if (g_ == null) continue;
                     guild.broadcast(MaplePacketCreator.serverNotice(5, "[" + g_.getName() + "] Guild has left the alliance."));
                     guild.broadcast(MaplePacketCreator.changeGuildInAlliance(alliance, g_, false));
                     guild.broadcast(MaplePacketCreator.removeGuildFromAlliance(alliance, g_, expelled));
@@ -1110,11 +1109,9 @@ public class World {
         }
 
         public static void declineChat(String target, String namefrom) {
-            ChannelServer cs;
             MapleCharacter chr;
-            MapleMessenger messenger;
             int ch = Find.findChannel(target);
-            if (ch > 0 && (chr = (cs = ChannelServer.getInstance(ch)).getPlayerStorage().getCharacterByName(target)) != null && (messenger = chr.getMessenger()) != null) {
+            if (ch > 0 && (chr = (ChannelServer.getInstance(ch)).getPlayerStorage().getCharacterByName(target)) != null && (chr.getMessenger()) != null) {
                 chr.getClient().getSession().write((Object)MaplePacketCreator.messengerNote(namefrom, 5, 0));
             }
         }
@@ -1376,6 +1373,8 @@ public class World {
                     chr.getClient().getSession().write((Object)MaplePacketCreator.updateParty(chr.getClient().getChannel(), party, operation, target));
                     chr.setParty(null);
                 }
+			default:
+				break;
             }
         }
 

@@ -20,21 +20,9 @@
  */
 package handling.channel;
 
-import client.MapleCharacter;
-import client.MapleClient;
-import database.DatabaseConnection;
-import handling.ByteArrayMaplePacket;
-import handling.MaplePacket;
-import handling.MapleServerHandler;
-import handling.channel.PlayerStorage;
-import handling.login.LoginServer;
-import handling.mina.MapleCodecFactory;
-import handling.world.CheaterData;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.io.Serializable;
 import java.net.InetSocketAddress;
-import java.net.SocketAddress;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -51,21 +39,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
+
 import org.apache.mina.common.ByteBuffer;
-import org.apache.mina.common.ByteBufferAllocator;
-import org.apache.mina.common.DefaultIoFilterChainBuilder;
 import org.apache.mina.common.IoAcceptor;
-import org.apache.mina.common.IoFilter;
-import org.apache.mina.common.IoHandler;
-import org.apache.mina.common.IoServiceConfig;
-import org.apache.mina.common.IoSession;
 import org.apache.mina.common.SimpleByteBufferAllocator;
-import org.apache.mina.common.WriteFuture;
-import org.apache.mina.filter.codec.ProtocolCodecFactory;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.transport.socket.nio.SocketAcceptor;
 import org.apache.mina.transport.socket.nio.SocketAcceptorConfig;
-import org.apache.mina.transport.socket.nio.SocketSessionConfig;
+
+import client.MapleCharacter;
+import database.DatabaseConnection;
+import handling.ByteArrayMaplePacket;
+import handling.MaplePacket;
+import handling.MapleServerHandler;
+import handling.login.LoginServer;
+import handling.mina.MapleCodecFactory;
+import handling.world.CheaterData;
 import scripting.EventScriptManager;
 import server.MapleSquad;
 import server.ServerProperties;
@@ -78,13 +67,11 @@ import server.events.MapleOxQuiz;
 import server.events.MapleSnowball;
 import server.life.PlayerNPC;
 import server.maps.FakeCharacter;
-import server.maps.MapleMap;
 import server.maps.MapleMapFactory;
 import server.maps.MapleMapObject;
 import server.shops.HiredMerchant;
 import server.shops.HiredMerchantSave;
 import server.shops.IMaplePlayerShop;
-import server.shops.MaplePlayerShopItem;
 import tools.CollectionUtil;
 import tools.ConcurrentEnumMap;
 import tools.MaplePacketCreator;
@@ -104,13 +91,10 @@ implements Serializable {
     private int zidongExp = 1;
     private int zidongDrop = 1;
     private short port = (short)7574;
-    private static final short DEFAULT_PORT = 7574;
     private final int channel;
     private int running_MerchantID = 0;
     private int flags = 0;
     private String serverMessage;
-    private String key;
-    private String ip;
     private String serverName;
     private boolean shutdown = false;
     private boolean finishedShutdown = false;
@@ -126,10 +110,8 @@ implements Serializable {
     private final Map<Integer, HiredMerchant> merchants = new HashMap<Integer, HiredMerchant>();
     private final Map<Integer, PlayerNPC> playerNPCs = new HashMap<Integer, PlayerNPC>();
     private final ReentrantReadWriteLock merchLock = new ReentrantReadWriteLock();
-    private final ReentrantReadWriteLock squadLock = new ReentrantReadWriteLock();
     private int eventmap = -1;
     private final Map<MapleEventType, MapleEvent> events = new EnumMap<MapleEventType, MapleEvent>(MapleEventType.class);
-    private final boolean debugMode = false;
     private int instanceId = 0;
     private int statLimit;
     private Collection<FakeCharacter> clones = new LinkedList<FakeCharacter>();
@@ -173,20 +155,19 @@ implements Serializable {
         catch (NumberFormatException e) {
             throw new RuntimeException(e);
         }
-        this.ip = "144.0.3.89:" + this.port;
-        ByteBuffer.setUseDirectBuffers((boolean)false);
-        ByteBuffer.setAllocator((ByteBufferAllocator)new SimpleByteBufferAllocator());
+        ByteBuffer.setUseDirectBuffers(false);
+        ByteBuffer.setAllocator(new SimpleByteBufferAllocator());
         this.acceptor = new SocketAcceptor();
         SocketAcceptorConfig acceptor_config = new SocketAcceptorConfig();
         acceptor_config.getSessionConfig().setTcpNoDelay(true);
         acceptor_config.setDisconnectOnUnbind(true);
-        acceptor_config.getFilterChain().addLast("codec", (IoFilter)new ProtocolCodecFilter((ProtocolCodecFactory)new MapleCodecFactory()));
+        acceptor_config.getFilterChain().addLast("codec",new ProtocolCodecFilter(new MapleCodecFactory()));
         this.players = new PlayerStorage(this.channel);
         this.loadEvents();
         try {
             this.serverHandler = new MapleServerHandler(this.channel, false);
-            this.acceptor.bind((SocketAddress)new InetSocketAddress(this.port), (IoHandler)this.serverHandler, (IoServiceConfig)acceptor_config);
-            System.out.println("\u9891\u9053 " + this.channel + ": \u542f\u52a8\u7aef\u53e3 " + this.port + ": \u670d\u52a1\u5668IP " + this.ip + "");
+            this.acceptor.bind(new InetSocketAddress(this.port), this.serverHandler,acceptor_config);
+            System.out.println("频道 " + this.channel + ": 启动端口 " + this.port);
             this.eventSM.init();
         }
         catch (IOException e) {
@@ -300,14 +281,6 @@ implements Serializable {
 
     public static final Collection<ChannelServer> getAllInstances() {
         return Collections.unmodifiableCollection(instances.values());
-    }
-
-    public final String getIP() {
-        return this.ip;
-    }
-
-    public String getIPA() {
-        return this.ip;
     }
 
     public final boolean isShutdown() {
@@ -474,7 +447,7 @@ implements Serializable {
         try {
             Iterator<HiredMerchant> merchants_ = this.merchants.values().iterator();
             while (merchants_.hasNext()) {
-                HiredMerchant hm = (HiredMerchant)((Map.Entry)((Object)merchants_.next())).getValue();
+                HiredMerchant hm = merchants_.next();
                 HiredMerchantSave.QueueShopForSave(hm);
                 hm.getMap().removeMapObject(hm);
                 merchants_.remove();
@@ -793,8 +766,8 @@ implements Serializable {
     public void Startqmdb() throws InterruptedException {
         Calendar cc = Calendar.getInstance();
         int hour = cc.get(11);
-        int minute = cc.get(12);
-        int second = cc.get(13);
+        cc.get(12);
+        cc.get(13);
         int number = cc.get(7);
         if (number == 6 && hour == 20) {
             try {

@@ -104,17 +104,17 @@ public enum MapleBuffStat implements Serializable
     SHADOWPARTNER(0x400000000000000L),
     PICKPOCKET(0x800000000000000L),
     PUPPET(0x800000000000000L),
-    \u80fd\u91cf(0x2000000000L, true),
-    \u80fd\u91cf\u83b7\u53d6(0x2000000000L, true),
-    \u9a91\u5ba0\u6280\u80fd(0x10000000000L),
+    能量(0x2000000000L, true),
+    能量获取(0x2000000000L, true),
+    骑宠技能(0x10000000000L),
     MESOGUARD(0x1000000000000000L),
-    \u77db\u8fde\u51fb\u5f3a\u5316(0x100000000L, 3L),
-    \u77db\u8fde\u51fb\u5f3a\u53162(0x200000000L, true),
-    \u77db\u8fde\u51fb\u5f3a\u5316\u9632\u5fa1(0x200000000L, true),
-    \u77db\u8fde\u51fb\u5f3a\u5316\u9b54\u6cd5\u9632\u5fa1(0x800000000L, true),
-    \u8fde\u73af\u5438\u8840(0x40000000000000L),
-    \u7075\u5de7\u51fb\u9000(0x800000000000L),
-    \u6218\u795e\u4e4b\u76fe(0x800000000000L),
+    矛连击强化(0x100000000L, 3L),
+    矛连击强化2(0x200000000L, true),
+    矛连击强化防御(0x200000000L, true),
+    矛连击强化魔法防御(0x800000000L, true),
+    连环吸血(0x40000000000000L),
+    灵巧击退(0x800000000000L),
+    战神之盾(0x800000000000L),
     WEAKEN(0x4000000000000000L);
 
     private static final long serialVersionUID = 0L;
@@ -152,4 +152,3 @@ public enum MapleBuffStat implements Serializable
         return this.buffstat;
     }
 }
-

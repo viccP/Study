@@ -872,9 +872,9 @@ public class MaplePacketCreator {
         if (chr.getBuffedValue(MapleBuffStat.MORPH) != null) {
             buffvalue = (int)chr.getBuffedValue(MapleBuffStat.MORPH);
         }
-        if (chr.getBuffedValue(MapleBuffStat.\u80fd\u91cf) != null) {
-            buffmask |= MapleBuffStat.\u80fd\u91cf.getValue();
-            buffvalue = (int)chr.getBuffedValue(MapleBuffStat.\u80fd\u91cf);
+        if (chr.getBuffedValue(MapleBuffStat.能量) != null) {
+            buffmask |= MapleBuffStat.能量.getValue();
+            buffvalue = (int)chr.getBuffedValue(MapleBuffStat.能量);
         }
         mplew.writeInt((int)(buffmask >> 32 & 0xFFFFFFFFFFFFFFFFL));
         if (buffvalue != null) {
@@ -965,581 +965,581 @@ public class MaplePacketCreator {
         return mplew.getPacket();
     }
 
-    public static MaplePacket KspawnPlayerMapobject(MapleCharacter chr, int \u7c7b\u578b) {
+    public static MaplePacket KspawnPlayerMapobject(MapleCharacter chr, int magicPetType) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        String \u9b54\u5ba0\u540d\u5b57 = null;
-        if (\u7c7b\u578b == 0) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u514b\u9686\u2265";
-        } else if (\u7c7b\u578b == 1) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u82b1\u8611\u83c7\u2265";
-        } else if (\u7c7b\u578b == 2) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u6f02\u6f02\u732a\u2265";
-        } else if (\u7c7b\u578b == 3) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u767d\u5916\u661f\u4eba\u2265";
-        } else if (\u7c7b\u578b == 4) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u9f99\u65cf\u2265";
-        } else if (\u7c7b\u578b == 5) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u63d0\u5e72\u2265";
-        } else if (\u7c7b\u578b == 6) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u5f69\u8272\u8717\u725b\u2265";
-        } else if (\u7c7b\u578b == 7) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u5e7d\u7075\u2265";
-        } else if (\u7c7b\u578b == 8) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u82cf\u83f2\u8389\u4e9a\u4e22\u5f03\u7684\u4eba\u5076\u2265";
-        } else if (\u7c7b\u578b == 9) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u8d85\u4eba\u2160 \u2265";
-        } else if (\u7c7b\u578b == 10) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u8d85\u4eba\u2161\u2265";
-        } else if (\u7c7b\u578b == 11) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u8001\u9f20\u53d8\u8eab\u2265";
-        } else if (\u7c7b\u578b == 12) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u5c48\u539f\u2265";
-        } else if (\u7c7b\u578b == 13) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u767d\u8272\u5154\u5b50\u2265";
-        } else if (\u7c7b\u578b == 14) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u7c89\u7ea2\u5154\u5b50\u2265";
-        } else if (\u7c7b\u578b == 15) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u4f69\u6258\u2265";
-        } else if (\u7c7b\u578b == 16) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u5b9d\u8d1d\u9f99\u2265";
-        } else if (\u7c7b\u578b == 17) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u7535\u5b50\u72d7\u2265";
-        } else if (\u7c7b\u578b == 18) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u94f6\u8272\u96ea\u72ac\u2265";
-        } else if (\u7c7b\u578b == 19) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u7bb1\u5b50\u2265";
-        } else if (\u7c7b\u578b == 20) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u5723\u8bde\u96ea\u4eba\u2265";
-        } else if (\u7c7b\u578b == 21) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u6708\u7259\u725b\u9b54\u738b\u2265";
-        } else if (\u7c7b\u578b == 22) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u84dd\u67aa\u725b\u9b54\u738b\u2265";
-        } else if (\u7c7b\u578b == 23) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u6e29\u987a\u7684\u725b\u2265";
-        } else if (\u7c7b\u578b == 24) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u51f6\u6076\u7684\u725b\u2265";
-        } else if (\u7c7b\u578b == 25) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u9ec4\u91d1\u732a\u732a\u2265";
-        } else if (\u7c7b\u578b == 26) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u5339\u8bfa\u66f9\u7684\u7237\u7237\u2265";
-        } else if (\u7c7b\u578b == 27) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u5339\u8bfa\u66f9\u2265";
-        } else if (\u7c7b\u578b == 28) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u5916\u661f\u4eba\u2265";
-        } else if (\u7c7b\u578b == 29) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u6218\u795e\u5730\u56feNPCA\u2265";
-        } else if (\u7c7b\u578b == 30) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u6218\u795e\u5730\u56feNPCB\u2265";
-        } else if (\u7c7b\u578b == 31) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u6218\u795e\u5730\u56feNPCC\u2265";
-        } else if (\u7c7b\u578b == 32) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u6218\u795e\u5730\u56feNPCD\u2265";
-        } else if (\u7c7b\u578b == 33) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u6218\u795e\u5730\u56feNPCE\u2265";
-        } else if (\u7c7b\u578b == 34) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u5723\u8bde\u96ea\u4eba\u2265";
-        } else if (\u7c7b\u578b == 35) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u519c\u6c11\u2265";
-        } else if (\u7c7b\u578b == 36) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u4fdd\u6d01\u963f\u59e8\u2265";
-        } else if (\u7c7b\u578b == 37) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u718a\u5b69\u5b50\u2265";
-        } else if (\u7c7b\u578b == 38) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u8001\u7ec5\u58eb\u2265";
-        } else if (\u7c7b\u578b == 39) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u673a\u68b0\u88c5\u7532\u8f66\u2265";
-        } else if (\u7c7b\u578b == 40) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u5c0f\u8717\u725b\u2265";
-        } else if (\u7c7b\u578b == 41) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u5c0f\u96ea\u5a03\u5a03\u2265";
-        } else if (\u7c7b\u578b == 42) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u90c1\u95f7\u7684\u7eff\u8611\u83c7\u2265";
-        } else if (\u7c7b\u578b == 43) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u8759\u8760\u2265";
-        } else if (\u7c7b\u578b == 44) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u8b66\u7528\u98de\u8247\u2265";
-        } else if (\u7c7b\u578b == 45) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u5927\u5934\u86c7\u2265";
-        } else if (\u7c7b\u578b == 46) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u7334\u5b50\u2265";
-        } else if (\u7c7b\u578b == 47) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u8717\u725b\u738b\u2265";
-        } else if (\u7c7b\u578b == 48) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u84dd\u8272\u73a9\u5177\u8001\u9f20\u2265";
-        } else if (\u7c7b\u578b == 48) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u7d2b\u8272\u95f9\u949f\u602a\u2265";
-        } else if (\u7c7b\u578b == 50) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u65b9\u5757\u4eba\u2265";
-        } else if (\u7c7b\u578b == 51) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u5c0f\u96ea\u602a\u2265";
-        } else if (\u7c7b\u578b == 52) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u8001\u4ed9\u4eba\u638c\u2265";
-        } else if (\u7c7b\u578b == 53) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u6ed1\u96ea\u4f01\u9e45\u2265";
-        } else if (\u7c7b\u578b == 54) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u7eff\u9f99\u2265";
-        } else if (\u7c7b\u578b == 55) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u6076\u9b54\u732b\u2265";
-        } else if (\u7c7b\u578b == 56) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u5c0f\u8001\u864e\u2265";
-        } else if (\u7c7b\u578b == 57) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u6d77\u87ba\u738b\u2265";
-        } else if (\u7c7b\u578b == 58) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u72d0\u72f8\u2265";
-        } else if (\u7c7b\u578b == 59) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u77f3\u5934\u4eba\u2265";
-        } else if (\u7c7b\u578b == 60) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u4ed9\u732b\u2265";
-        } else if (\u7c7b\u578b == 61) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u5de5\u5730\u718a\u2265";
-        } else if (\u7c7b\u578b == 62) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u5927\u529b\u5916\u661f\u4eba\u2265";
-        } else if (\u7c7b\u578b == 63) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u523a\u732c\u2265";
-        } else if (\u7c7b\u578b == 64) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u4e09\u773c\u6728\u5996\u602a\u2265";
-        } else if (\u7c7b\u578b == 65) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u5de5\u5730\u677e\u9f20\u2265";
-        } else if (\u7c7b\u578b == 66) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u5c0f\u9e7f\u2265";
-        } else if (\u7c7b\u578b == 67) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u6076\u9b54\u732b\u738b\u2265";
-        } else if (\u7c7b\u578b == 68) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u4eba\u53c2\u2265";
-        } else if (\u7c7b\u578b == 69) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u65f6\u95f4\u6076\u9b54\u2265";
-        } else if (\u7c7b\u578b == 70) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u6bdb\u7403\u602a\u2265";
-        } else if (\u7c7b\u578b == 71) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u6d77\u76d7\u8239\u5458\u2265";
-        } else if (\u7c7b\u578b == 72) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u8759\u8760\u9b54\u2265";
-        } else if (\u7c7b\u578b == 73) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u65f6\u95f4\u5c0f\u4e11\u2265";
-        } else if (\u7c7b\u578b == 74) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u65f6\u95f4\u8239\u957f\u2265";
-        } else if (\u7c7b\u578b == 75) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u96ea\u4eba\u602a\u2265";
-        } else if (\u7c7b\u578b == 76) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u672a\u6765\u7f8e\u5973\u6218\u58eb\u2265";
-        } else if (\u7c7b\u578b == 77) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u5929\u9e70\u2265";
-        } else if (\u7c7b\u578b == 78) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u54ed\u6ce3\u7684\u84dd\u8611\u83c7\u2265";
-        } else if (\u7c7b\u578b == 79) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u7325\u7410\u7684\u72ec\u773c\u6728\u5996\u2265";
-        } else if (\u7c7b\u578b == 80) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u751f\u6c14\u7684\u50f5\u5c38\u8611\u83c7\u2265";
-        } else if (\u7c7b\u578b == 81) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u5fe7\u90c1\u7684\u91ce\u732a\u2265";
-        } else if (\u7c7b\u578b == 82) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u72ee\u5b50\u738b\u2265";
-        } else if (\u7c7b\u578b == 83) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u95f9\u949f\u2265";
-        } else if (\u7c7b\u578b == 84) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u84dd\u5154\u5b50\u2265";
-        } else if (\u7c7b\u578b == 85) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u7ea2\u5154\u5b50\u2265";
-        } else if (\u7c7b\u578b == 86) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u54ed\u6ce3\u7684\u5c0f\u51b0\u9a91\u58eb\u2265";
-        } else if (\u7c7b\u578b == 87) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u5c0f\u795e\u9f99\u2265";
-        } else if (\u7c7b\u578b == 88) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u9ed1\u86c7\u2265";
-        } else if (\u7c7b\u578b == 89) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u9ec4\u91d1\u9f99\u2265";
-        } else if (\u7c7b\u578b == 90) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u5c0f\u795e\u9f99\u2265";
-        } else if (\u7c7b\u578b == 91) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u77f3\u5316\u4e86\u2265";
-        } else if (\u7c7b\u578b == 92) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u5c0f\u795e\u9f99\u2265";
-        } else if (\u7c7b\u578b == 93) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u9ed1\u86c7\u2265";
-        } else if (\u7c7b\u578b == 94) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u54c1\u514b\u7f24\u2265";
-        } else if (\u7c7b\u578b == 95) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u7ea2\u53d1\u523a\u5ba2\u2265";
-        } else if (\u7c7b\u578b == 96) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u94f6\u67aa\u6218\u58eb\u2265";
-        } else if (\u7c7b\u578b == 97) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u7ea2\u53d1\u523a\u5ba2\u2265";
-        } else if (\u7c7b\u578b == 98) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u767d\u8001\u9f20\u2265";
-        } else if (\u7c7b\u578b == 99) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u8910\u8272\u8001\u9f20\u2265";
-        } else if (\u7c7b\u578b == 100) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u8910\u8272\u8001\u9f20\u2265";
-        } else if (\u7c7b\u578b == 101) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u9ec4\u91d1\u8001\u9f20\u2265";
-        } else if (\u7c7b\u578b == 102) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u7eff\u900f\u77f3\u5934\u4eba\u2265";
-        } else if (\u7c7b\u578b == 103) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u88c5\u7532\u8f66\u2265";
-        } else if (\u7c7b\u578b == 104) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u5f69\u5934\u86c7\u2265";
-        } else if (\u7c7b\u578b == 105) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u7ea2\u82b1\u86c7\u2265";
-        } else if (\u7c7b\u578b == 106) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u840c\u9ed1\u86c7\u2265";
-        } else if (\u7c7b\u578b == 107) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u840c\u767d\u86c7\u2265";
-        } else if (\u7c7b\u578b == 108) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u840c\u9f99\u6218\u58eb\u2265";
-        } else if (\u7c7b\u578b == 109) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u840c\u72ee\u738b\u2265";
-        } else if (\u7c7b\u578b == 110) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u840c\u9ed1\u6697\u6cd5\u5e08\u2265";
-        } else if (\u7c7b\u578b == 111) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u840c\u5973\u795e\u2265";
-        } else if (\u7c7b\u578b == 112) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u840c\u767d\u53d1\u59b9\u5b50\u2265";
-        } else if (\u7c7b\u578b == 113) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u840c\u624e\u6606\u2265";
-        } else if (\u7c7b\u578b == 114) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u840c\u9ed1\u9f99\u738b\u2265";
-        } else if (\u7c7b\u578b == 115) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u840c\u7ea2\u53d1\u59b9\u5b50\u2265";
-        } else if (\u7c7b\u578b == 116) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u840c\u5149\u6cd5\u5e08\u2265";
-        } else if (\u7c7b\u578b == 117) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u840c\u591c\u6cd5\u5e08\u2265";
-        } else if (\u7c7b\u578b == 118) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u840c\u591c\u5149\u6cd5\u5e08\u2265";
-        } else if (\u7c7b\u578b == 119) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u840c\u5e7b\u5f71\u2265";
-        } else if (\u7c7b\u578b == 120) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u840c\u53cc\u5f29\u2265";
-        } else if (\u7c7b\u578b == 121) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u7ea2\u53d1\u7f8e\u5973\u2265";
-        } else if (\u7c7b\u578b == 122) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u72c2\u9f99\u6218\u58eb\u2265";
-        } else if (\u7c7b\u578b == 123) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u9ed1\u6697\u9b54\u6cd5\u5e08\u2265";
-        } else if (\u7c7b\u578b == 124) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u9ed1\u6697\u9ab7\u9ac5\u6218\u58eb\u2265";
-        } else if (\u7c7b\u578b == 125) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u9ed1\u6697\u9ab7\u9ac5\u6cd5\u5e08\u2265";
-        } else if (\u7c7b\u578b == 126) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u9ed1\u6697\u9ab7\u9ac5\u5c04\u624b\u2265";
-        } else if (\u7c7b\u578b == 127) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u9ed1\u6697\u9ab7\u9ac5\u523a\u5ba2\u2265";
-        } else if (\u7c7b\u578b == 128) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u9ed1\u6697\u9ab7\u9ac5\u6d77\u76d7\u2265";
-        } else if (\u7c7b\u578b == 129) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u9ab7\u9ac5\u76d7\u8d3c\u2265";
-        } else if (\u7c7b\u578b == 130) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u6ed1\u96ea\u4f01\u9e45\u2265";
-        } else if (\u7c7b\u578b == 131) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u5e05\u54e5\u5b66\u9738\u2265";
-        } else if (\u7c7b\u578b == 132) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u5947\u602a\u7684\u7ae0\u9c7c\u2265";
-        } else if (\u7c7b\u578b == 133) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u53ef\u7591\u7684\u8ddf\u73ed\u2265";
-        } else if (\u7c7b\u578b == 134) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u795e\u79d8\u7684\u7bb1\u5b50\u2265";
-        } else if (\u7c7b\u578b == 135) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u840c\u767d\u7f8a\u2265";
-        } else if (\u7c7b\u578b == 136) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u840c\u84dd\u7f8a\u2265";
-        } else if (\u7c7b\u578b == 137) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u604b\u7231\u4e2d\u7684\u8910\u8272\u718a\u2265";
-        } else if (\u7c7b\u578b == 138) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u604b\u7231\u4e2d\u7684\u9ed1\u718a\u2265";
-        } else if (\u7c7b\u578b == 139) {
-            \u9b54\u5ba0\u540d\u5b57 = "\u2264\u57fa\u53cb\u8611\u83c7\u2265";
+        String magicPetName = null;
+        if (magicPetType == 0) {
+            magicPetName = "≤克隆≥";
+        } else if (magicPetType == 1) {
+            magicPetName = "≤花蘑菇≥";
+        } else if (magicPetType == 2) {
+            magicPetName = "≤漂漂猪≥";
+        } else if (magicPetType == 3) {
+            magicPetName = "≤白外星人≥";
+        } else if (magicPetType == 4) {
+            magicPetName = "≤龙族≥";
+        } else if (magicPetType == 5) {
+            magicPetName = "≤提干≥";
+        } else if (magicPetType == 6) {
+            magicPetName = "≤彩色蜗牛≥";
+        } else if (magicPetType == 7) {
+            magicPetName = "≤幽灵≥";
+        } else if (magicPetType == 8) {
+            magicPetName = "≤苏菲莉亚丢弃的人偶≥";
+        } else if (magicPetType == 9) {
+            magicPetName = "≤超人Ⅰ ≥";
+        } else if (magicPetType == 10) {
+            magicPetName = "≤超人Ⅱ≥";
+        } else if (magicPetType == 11) {
+            magicPetName = "≤老鼠变身≥";
+        } else if (magicPetType == 12) {
+            magicPetName = "≤屈原≥";
+        } else if (magicPetType == 13) {
+            magicPetName = "≤白色兔子≥";
+        } else if (magicPetType == 14) {
+            magicPetName = "≤粉红兔子≥";
+        } else if (magicPetType == 15) {
+            magicPetName = "≤佩托≥";
+        } else if (magicPetType == 16) {
+            magicPetName = "≤宝贝龙≥";
+        } else if (magicPetType == 17) {
+            magicPetName = "≤电子狗≥";
+        } else if (magicPetType == 18) {
+            magicPetName = "≤银色雪犬≥";
+        } else if (magicPetType == 19) {
+            magicPetName = "≤箱子≥";
+        } else if (magicPetType == 20) {
+            magicPetName = "≤圣诞雪人≥";
+        } else if (magicPetType == 21) {
+            magicPetName = "≤月牙牛魔王≥";
+        } else if (magicPetType == 22) {
+            magicPetName = "≤蓝枪牛魔王≥";
+        } else if (magicPetType == 23) {
+            magicPetName = "≤温顺的牛≥";
+        } else if (magicPetType == 24) {
+            magicPetName = "≤凶恶的牛≥";
+        } else if (magicPetType == 25) {
+            magicPetName = "≤黄金猪猪≥";
+        } else if (magicPetType == 26) {
+            magicPetName = "≤匹诺曹的爷爷≥";
+        } else if (magicPetType == 27) {
+            magicPetName = "≤匹诺曹≥";
+        } else if (magicPetType == 28) {
+            magicPetName = "≤外星人≥";
+        } else if (magicPetType == 29) {
+            magicPetName = "≤战神地图NPCA≥";
+        } else if (magicPetType == 30) {
+            magicPetName = "≤战神地图NPCB≥";
+        } else if (magicPetType == 31) {
+            magicPetName = "≤战神地图NPCC≥";
+        } else if (magicPetType == 32) {
+            magicPetName = "≤战神地图NPCD≥";
+        } else if (magicPetType == 33) {
+            magicPetName = "≤战神地图NPCE≥";
+        } else if (magicPetType == 34) {
+            magicPetName = "≤圣诞雪人≥";
+        } else if (magicPetType == 35) {
+            magicPetName = "≤农民≥";
+        } else if (magicPetType == 36) {
+            magicPetName = "≤保洁阿姨≥";
+        } else if (magicPetType == 37) {
+            magicPetName = "≤熊孩子≥";
+        } else if (magicPetType == 38) {
+            magicPetName = "≤老绅士≥";
+        } else if (magicPetType == 39) {
+            magicPetName = "≤机械装甲车≥";
+        } else if (magicPetType == 40) {
+            magicPetName = "≤小蜗牛≥";
+        } else if (magicPetType == 41) {
+            magicPetName = "≤小雪娃娃≥";
+        } else if (magicPetType == 42) {
+            magicPetName = "≤郁闷的绿蘑菇≥";
+        } else if (magicPetType == 43) {
+            magicPetName = "≤蝙蝠≥";
+        } else if (magicPetType == 44) {
+            magicPetName = "≤警用飞艇≥";
+        } else if (magicPetType == 45) {
+            magicPetName = "≤大头蛇≥";
+        } else if (magicPetType == 46) {
+            magicPetName = "≤猴子≥";
+        } else if (magicPetType == 47) {
+            magicPetName = "≤蜗牛王≥";
+        } else if (magicPetType == 48) {
+            magicPetName = "≤蓝色玩具老鼠≥";
+        } else if (magicPetType == 48) {
+            magicPetName = "≤紫色闹钟怪≥";
+        } else if (magicPetType == 50) {
+            magicPetName = "≤方块人≥";
+        } else if (magicPetType == 51) {
+            magicPetName = "≤小雪怪≥";
+        } else if (magicPetType == 52) {
+            magicPetName = "≤老仙人掌≥";
+        } else if (magicPetType == 53) {
+            magicPetName = "≤滑雪企鹅≥";
+        } else if (magicPetType == 54) {
+            magicPetName = "≤绿龙≥";
+        } else if (magicPetType == 55) {
+            magicPetName = "≤恶魔猫≥";
+        } else if (magicPetType == 56) {
+            magicPetName = "≤小老虎≥";
+        } else if (magicPetType == 57) {
+            magicPetName = "≤海螺王≥";
+        } else if (magicPetType == 58) {
+            magicPetName = "≤狐狸≥";
+        } else if (magicPetType == 59) {
+            magicPetName = "≤石头人≥";
+        } else if (magicPetType == 60) {
+            magicPetName = "≤仙猫≥";
+        } else if (magicPetType == 61) {
+            magicPetName = "≤工地熊≥";
+        } else if (magicPetType == 62) {
+            magicPetName = "≤大力外星人≥";
+        } else if (magicPetType == 63) {
+            magicPetName = "≤刺猬≥";
+        } else if (magicPetType == 64) {
+            magicPetName = "≤三眼木妖怪≥";
+        } else if (magicPetType == 65) {
+            magicPetName = "≤工地松鼠≥";
+        } else if (magicPetType == 66) {
+            magicPetName = "≤小鹿≥";
+        } else if (magicPetType == 67) {
+            magicPetName = "≤恶魔猫王≥";
+        } else if (magicPetType == 68) {
+            magicPetName = "≤人参≥";
+        } else if (magicPetType == 69) {
+            magicPetName = "≤时间恶魔≥";
+        } else if (magicPetType == 70) {
+            magicPetName = "≤毛球怪≥";
+        } else if (magicPetType == 71) {
+            magicPetName = "≤海盗船员≥";
+        } else if (magicPetType == 72) {
+            magicPetName = "≤蝙蝠魔≥";
+        } else if (magicPetType == 73) {
+            magicPetName = "≤时间小丑≥";
+        } else if (magicPetType == 74) {
+            magicPetName = "≤时间船长≥";
+        } else if (magicPetType == 75) {
+            magicPetName = "≤雪人怪≥";
+        } else if (magicPetType == 76) {
+            magicPetName = "≤未来美女战士≥";
+        } else if (magicPetType == 77) {
+            magicPetName = "≤天鹰≥";
+        } else if (magicPetType == 78) {
+            magicPetName = "≤哭泣的蓝蘑菇≥";
+        } else if (magicPetType == 79) {
+            magicPetName = "≤猥琐的独眼木妖≥";
+        } else if (magicPetType == 80) {
+            magicPetName = "≤生气的僵尸蘑菇≥";
+        } else if (magicPetType == 81) {
+            magicPetName = "≤忧郁的野猪≥";
+        } else if (magicPetType == 82) {
+            magicPetName = "≤狮子王≥";
+        } else if (magicPetType == 83) {
+            magicPetName = "≤闹钟≥";
+        } else if (magicPetType == 84) {
+            magicPetName = "≤蓝兔子≥";
+        } else if (magicPetType == 85) {
+            magicPetName = "≤红兔子≥";
+        } else if (magicPetType == 86) {
+            magicPetName = "≤哭泣的小冰骑士≥";
+        } else if (magicPetType == 87) {
+            magicPetName = "≤小神龙≥";
+        } else if (magicPetType == 88) {
+            magicPetName = "≤黑蛇≥";
+        } else if (magicPetType == 89) {
+            magicPetName = "≤黄金龙≥";
+        } else if (magicPetType == 90) {
+            magicPetName = "≤小神龙≥";
+        } else if (magicPetType == 91) {
+            magicPetName = "≤石化了≥";
+        } else if (magicPetType == 92) {
+            magicPetName = "≤小神龙≥";
+        } else if (magicPetType == 93) {
+            magicPetName = "≤黑蛇≥";
+        } else if (magicPetType == 94) {
+            magicPetName = "≤品克缤≥";
+        } else if (magicPetType == 95) {
+            magicPetName = "≤红发刺客≥";
+        } else if (magicPetType == 96) {
+            magicPetName = "≤银枪战士≥";
+        } else if (magicPetType == 97) {
+            magicPetName = "≤红发刺客≥";
+        } else if (magicPetType == 98) {
+            magicPetName = "≤白老鼠≥";
+        } else if (magicPetType == 99) {
+            magicPetName = "≤褐色老鼠≥";
+        } else if (magicPetType == 100) {
+            magicPetName = "≤褐色老鼠≥";
+        } else if (magicPetType == 101) {
+            magicPetName = "≤黄金老鼠≥";
+        } else if (magicPetType == 102) {
+            magicPetName = "≤绿透石头人≥";
+        } else if (magicPetType == 103) {
+            magicPetName = "≤装甲车≥";
+        } else if (magicPetType == 104) {
+            magicPetName = "≤彩头蛇≥";
+        } else if (magicPetType == 105) {
+            magicPetName = "≤红花蛇≥";
+        } else if (magicPetType == 106) {
+            magicPetName = "≤萌黑蛇≥";
+        } else if (magicPetType == 107) {
+            magicPetName = "≤萌白蛇≥";
+        } else if (magicPetType == 108) {
+            magicPetName = "≤萌龙战士≥";
+        } else if (magicPetType == 109) {
+            magicPetName = "≤萌狮王≥";
+        } else if (magicPetType == 110) {
+            magicPetName = "≤萌黑暗法师≥";
+        } else if (magicPetType == 111) {
+            magicPetName = "≤萌女神≥";
+        } else if (magicPetType == 112) {
+            magicPetName = "≤萌白发妹子≥";
+        } else if (magicPetType == 113) {
+            magicPetName = "≤萌扎昆≥";
+        } else if (magicPetType == 114) {
+            magicPetName = "≤萌黑龙王≥";
+        } else if (magicPetType == 115) {
+            magicPetName = "≤萌红发妹子≥";
+        } else if (magicPetType == 116) {
+            magicPetName = "≤萌光法师≥";
+        } else if (magicPetType == 117) {
+            magicPetName = "≤萌夜法师≥";
+        } else if (magicPetType == 118) {
+            magicPetName = "≤萌夜光法师≥";
+        } else if (magicPetType == 119) {
+            magicPetName = "≤萌幻影≥";
+        } else if (magicPetType == 120) {
+            magicPetName = "≤萌双弩≥";
+        } else if (magicPetType == 121) {
+            magicPetName = "≤红发美女≥";
+        } else if (magicPetType == 122) {
+            magicPetName = "≤狂龙战士≥";
+        } else if (magicPetType == 123) {
+            magicPetName = "≤黑暗魔法师≥";
+        } else if (magicPetType == 124) {
+            magicPetName = "≤黑暗骷髅战士≥";
+        } else if (magicPetType == 125) {
+            magicPetName = "≤黑暗骷髅法师≥";
+        } else if (magicPetType == 126) {
+            magicPetName = "≤黑暗骷髅射手≥";
+        } else if (magicPetType == 127) {
+            magicPetName = "≤黑暗骷髅刺客≥";
+        } else if (magicPetType == 128) {
+            magicPetName = "≤黑暗骷髅海盗≥";
+        } else if (magicPetType == 129) {
+            magicPetName = "≤骷髅盗贼≥";
+        } else if (magicPetType == 130) {
+            magicPetName = "≤滑雪企鹅≥";
+        } else if (magicPetType == 131) {
+            magicPetName = "≤帅哥学霸≥";
+        } else if (magicPetType == 132) {
+            magicPetName = "≤奇怪的章鱼≥";
+        } else if (magicPetType == 133) {
+            magicPetName = "≤可疑的跟班≥";
+        } else if (magicPetType == 134) {
+            magicPetName = "≤神秘的箱子≥";
+        } else if (magicPetType == 135) {
+            magicPetName = "≤萌白羊≥";
+        } else if (magicPetType == 136) {
+            magicPetName = "≤萌蓝羊≥";
+        } else if (magicPetType == 137) {
+            magicPetName = "≤恋爱中的褐色熊≥";
+        } else if (magicPetType == 138) {
+            magicPetName = "≤恋爱中的黑熊≥";
+        } else if (magicPetType == 139) {
+            magicPetName = "≤基友蘑菇≥";
         }
         
         mplew.writeShort(SendPacketOpcode.SPAWN_PLAYER.getValue());
         mplew.writeInt(chr.getId());
         mplew.write(chr.getLevel());
         mplew.writeMapleAsciiString(chr.getName());
-        mplew.writeMapleAsciiString(\u9b54\u5ba0\u540d\u5b57);
+        mplew.writeMapleAsciiString(magicPetName);
         mplew.write(new byte[6]);
         mplew.writeInt(0);
         mplew.write(0);
         mplew.write(224);
         mplew.write(31);
         mplew.write(0);
-        if (\u7c7b\u578b == 0) {
+        if (magicPetType == 0) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 00"));
-        } else if (\u7c7b\u578b == 1) {
+        } else if (magicPetType == 1) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 01"));
-        } else if (\u7c7b\u578b == 2) {
+        } else if (magicPetType == 2) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 02"));
-        } else if (\u7c7b\u578b == 3) {
+        } else if (magicPetType == 3) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 03"));
-        } else if (\u7c7b\u578b == 4) {
+        } else if (magicPetType == 4) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 04"));
-        } else if (\u7c7b\u578b == 5) {
+        } else if (magicPetType == 5) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 06"));
-        } else if (\u7c7b\u578b == 6) {
+        } else if (magicPetType == 6) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 07"));
-        } else if (\u7c7b\u578b == 7) {
+        } else if (magicPetType == 7) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 08"));
-        } else if (\u7c7b\u578b == 8) {
+        } else if (magicPetType == 8) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 09"));
-        } else if (\u7c7b\u578b == 9) {
+        } else if (magicPetType == 9) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 0A"));
-        } else if (\u7c7b\u578b == 10) {
+        } else if (magicPetType == 10) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 0B"));
-        } else if (\u7c7b\u578b == 11) {
+        } else if (magicPetType == 11) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 0C"));
-        } else if (\u7c7b\u578b == 12) {
+        } else if (magicPetType == 12) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 0F"));
-        } else if (\u7c7b\u578b == 13) {
+        } else if (magicPetType == 13) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 13"));
-        } else if (\u7c7b\u578b == 14) {
+        } else if (magicPetType == 14) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 14"));
-        } else if (\u7c7b\u578b == 15) {
+        } else if (magicPetType == 15) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 16"));
-        } else if (\u7c7b\u578b == 16) {
+        } else if (magicPetType == 16) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 1A"));
-        } else if (\u7c7b\u578b == 17) {
+        } else if (magicPetType == 17) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 1B"));
-        } else if (\u7c7b\u578b == 18) {
+        } else if (magicPetType == 18) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 1C"));
-        } else if (\u7c7b\u578b == 19) {
+        } else if (magicPetType == 19) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 1D"));
-        } else if (\u7c7b\u578b == 20) {
+        } else if (magicPetType == 20) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 1E"));
-        } else if (\u7c7b\u578b == 21) {
+        } else if (magicPetType == 21) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 1F"));
-        } else if (\u7c7b\u578b == 22) {
+        } else if (magicPetType == 22) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 20"));
-        } else if (\u7c7b\u578b == 23) {
+        } else if (magicPetType == 23) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 21"));
-        } else if (\u7c7b\u578b == 24) {
+        } else if (magicPetType == 24) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 22"));
-        } else if (\u7c7b\u578b == 25) {
+        } else if (magicPetType == 25) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 23"));
-        } else if (\u7c7b\u578b == 26) {
+        } else if (magicPetType == 26) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 23"));
-        } else if (\u7c7b\u578b == 27) {
+        } else if (magicPetType == 27) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 25"));
-        } else if (\u7c7b\u578b == 28) {
+        } else if (magicPetType == 28) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 28"));
-        } else if (\u7c7b\u578b == 29) {
+        } else if (magicPetType == 29) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 29"));
-        } else if (\u7c7b\u578b == 30) {
+        } else if (magicPetType == 30) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 2A"));
-        } else if (\u7c7b\u578b == 31) {
+        } else if (magicPetType == 31) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 2B"));
-        } else if (\u7c7b\u578b == 32) {
+        } else if (magicPetType == 32) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 2C"));
-        } else if (\u7c7b\u578b == 33) {
+        } else if (magicPetType == 33) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 2D"));
-        } else if (\u7c7b\u578b == 34) {
+        } else if (magicPetType == 34) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 32"));
-        } else if (\u7c7b\u578b == 35) {
+        } else if (magicPetType == 35) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 33"));
-        } else if (\u7c7b\u578b == 36) {
+        } else if (magicPetType == 36) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 34"));
-        } else if (\u7c7b\u578b == 37) {
+        } else if (magicPetType == 37) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 35"));
-        } else if (\u7c7b\u578b == 38) {
+        } else if (magicPetType == 38) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 3F"));
-        } else if (\u7c7b\u578b == 39) {
+        } else if (magicPetType == 39) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 43"));
-        } else if (\u7c7b\u578b == 40) {
+        } else if (magicPetType == 40) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 44"));
-        } else if (\u7c7b\u578b == 41) {
+        } else if (magicPetType == 41) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 45"));
-        } else if (\u7c7b\u578b == 42) {
+        } else if (magicPetType == 42) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 46"));
-        } else if (\u7c7b\u578b == 43) {
+        } else if (magicPetType == 43) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 47"));
-        } else if (\u7c7b\u578b == 44) {
+        } else if (magicPetType == 44) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 48"));
-        } else if (\u7c7b\u578b == 45) {
+        } else if (magicPetType == 45) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 49"));
-        } else if (\u7c7b\u578b == 46) {
+        } else if (magicPetType == 46) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 4A"));
-        } else if (\u7c7b\u578b == 47) {
+        } else if (magicPetType == 47) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 4B"));
-        } else if (\u7c7b\u578b == 48) {
+        } else if (magicPetType == 48) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 4C"));
-        } else if (\u7c7b\u578b == 48) {
+        } else if (magicPetType == 48) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 4D"));
-        } else if (\u7c7b\u578b == 50) {
+        } else if (magicPetType == 50) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 4E"));
-        } else if (\u7c7b\u578b == 51) {
+        } else if (magicPetType == 51) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 4F"));
-        } else if (\u7c7b\u578b == 52) {
+        } else if (magicPetType == 52) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 50"));
-        } else if (\u7c7b\u578b == 53) {
+        } else if (magicPetType == 53) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 51"));
-        } else if (\u7c7b\u578b == 54) {
+        } else if (magicPetType == 54) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 52"));
-        } else if (\u7c7b\u578b == 55) {
+        } else if (magicPetType == 55) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 53"));
-        } else if (\u7c7b\u578b == 56) {
+        } else if (magicPetType == 56) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 54"));
-        } else if (\u7c7b\u578b == 57) {
+        } else if (magicPetType == 57) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 55"));
-        } else if (\u7c7b\u578b == 58) {
+        } else if (magicPetType == 58) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 56"));
-        } else if (\u7c7b\u578b == 59) {
+        } else if (magicPetType == 59) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 57"));
-        } else if (\u7c7b\u578b == 60) {
+        } else if (magicPetType == 60) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 58"));
-        } else if (\u7c7b\u578b == 61) {
+        } else if (magicPetType == 61) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 59"));
-        } else if (\u7c7b\u578b == 62) {
+        } else if (magicPetType == 62) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 5A"));
-        } else if (\u7c7b\u578b == 63) {
+        } else if (magicPetType == 63) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 5B"));
-        } else if (\u7c7b\u578b == 64) {
+        } else if (magicPetType == 64) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 5C"));
-        } else if (\u7c7b\u578b == 65) {
+        } else if (magicPetType == 65) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 5D"));
-        } else if (\u7c7b\u578b == 66) {
+        } else if (magicPetType == 66) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 5E"));
-        } else if (\u7c7b\u578b == 67) {
+        } else if (magicPetType == 67) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 5F"));
-        } else if (\u7c7b\u578b == 68) {
+        } else if (magicPetType == 68) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 60"));
-        } else if (\u7c7b\u578b == 69) {
+        } else if (magicPetType == 69) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 61"));
-        } else if (\u7c7b\u578b == 70) {
+        } else if (magicPetType == 70) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 62"));
-        } else if (\u7c7b\u578b == 71) {
+        } else if (magicPetType == 71) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 63"));
-        } else if (\u7c7b\u578b == 72) {
+        } else if (magicPetType == 72) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 64"));
-        } else if (\u7c7b\u578b == 73) {
+        } else if (magicPetType == 73) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 65"));
-        } else if (\u7c7b\u578b == 74) {
+        } else if (magicPetType == 74) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 66"));
-        } else if (\u7c7b\u578b == 75) {
+        } else if (magicPetType == 75) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 67"));
-        } else if (\u7c7b\u578b == 76) {
+        } else if (magicPetType == 76) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 68"));
-        } else if (\u7c7b\u578b == 77) {
+        } else if (magicPetType == 77) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 69"));
-        } else if (\u7c7b\u578b == 78) {
+        } else if (magicPetType == 78) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 6A"));
-        } else if (\u7c7b\u578b == 79) {
+        } else if (magicPetType == 79) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 6B"));
-        } else if (\u7c7b\u578b == 80) {
+        } else if (magicPetType == 80) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 6C"));
-        } else if (\u7c7b\u578b == 81) {
+        } else if (magicPetType == 81) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 6D"));
-        } else if (\u7c7b\u578b == 82) {
+        } else if (magicPetType == 82) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 6E"));
-        } else if (\u7c7b\u578b == 83) {
+        } else if (magicPetType == 83) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 6F"));
-        } else if (\u7c7b\u578b == 84) {
+        } else if (magicPetType == 84) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 70"));
-        } else if (\u7c7b\u578b == 85) {
+        } else if (magicPetType == 85) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 71"));
-        } else if (\u7c7b\u578b == 86) {
+        } else if (magicPetType == 86) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 72"));
-        } else if (\u7c7b\u578b == 87) {
+        } else if (magicPetType == 87) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 73"));
-        } else if (\u7c7b\u578b == 88) {
+        } else if (magicPetType == 88) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 74"));
-        } else if (\u7c7b\u578b == 89) {
+        } else if (magicPetType == 89) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 7D"));
-        } else if (\u7c7b\u578b == 90) {
+        } else if (magicPetType == 90) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 7E"));
-        } else if (\u7c7b\u578b == 91) {
+        } else if (magicPetType == 91) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 80"));
-        } else if (\u7c7b\u578b == 92) {
+        } else if (magicPetType == 92) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 81"));
-        } else if (\u7c7b\u578b == 93) {
+        } else if (magicPetType == 93) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 82"));
-        } else if (\u7c7b\u578b == 94) {
+        } else if (magicPetType == 94) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 83"));
-        } else if (\u7c7b\u578b == 95) {
+        } else if (magicPetType == 95) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 84"));
-        } else if (\u7c7b\u578b == 96) {
+        } else if (magicPetType == 96) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 85"));
-        } else if (\u7c7b\u578b == 97) {
+        } else if (magicPetType == 97) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 86"));
-        } else if (\u7c7b\u578b == 98) {
+        } else if (magicPetType == 98) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 87"));
-        } else if (\u7c7b\u578b == 99) {
+        } else if (magicPetType == 99) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 88"));
-        } else if (\u7c7b\u578b == 100) {
+        } else if (magicPetType == 100) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 89"));
-        } else if (\u7c7b\u578b == 101) {
+        } else if (magicPetType == 101) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 8A"));
-        } else if (\u7c7b\u578b == 102) {
+        } else if (magicPetType == 102) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 8B"));
-        } else if (\u7c7b\u578b == 103) {
+        } else if (magicPetType == 103) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 8C"));
-        } else if (\u7c7b\u578b == 104) {
+        } else if (magicPetType == 104) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 8D"));
-        } else if (\u7c7b\u578b == 105) {
+        } else if (magicPetType == 105) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 8E"));
-        } else if (\u7c7b\u578b == 106) {
+        } else if (magicPetType == 106) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 8F"));
-        } else if (\u7c7b\u578b == 107) {
+        } else if (magicPetType == 107) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 90"));
-        } else if (\u7c7b\u578b == 108) {
+        } else if (magicPetType == 108) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 91"));
-        } else if (\u7c7b\u578b == 109) {
+        } else if (magicPetType == 109) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 92"));
-        } else if (\u7c7b\u578b == 110) {
+        } else if (magicPetType == 110) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 93"));
-        } else if (\u7c7b\u578b == 111) {
+        } else if (magicPetType == 111) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 94"));
-        } else if (\u7c7b\u578b == 112) {
+        } else if (magicPetType == 112) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 95"));
-        } else if (\u7c7b\u578b == 113) {
+        } else if (magicPetType == 113) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 96"));
-        } else if (\u7c7b\u578b == 114) {
+        } else if (magicPetType == 114) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 97"));
-        } else if (\u7c7b\u578b == 115) {
+        } else if (magicPetType == 115) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 98"));
-        } else if (\u7c7b\u578b == 116) {
+        } else if (magicPetType == 116) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 99"));
-        } else if (\u7c7b\u578b == 117) {
+        } else if (magicPetType == 117) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 9A"));
-        } else if (\u7c7b\u578b == 118) {
+        } else if (magicPetType == 118) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 9B"));
-        } else if (\u7c7b\u578b == 119) {
+        } else if (magicPetType == 119) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 9C"));
-        } else if (\u7c7b\u578b == 120) {
+        } else if (magicPetType == 120) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 9D"));
-        } else if (\u7c7b\u578b == 121) {
+        } else if (magicPetType == 121) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 A0"));
-        } else if (\u7c7b\u578b == 122) {
+        } else if (magicPetType == 122) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 A1"));
-        } else if (\u7c7b\u578b == 123) {
+        } else if (magicPetType == 123) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 A2"));
-        } else if (\u7c7b\u578b == 124) {
+        } else if (magicPetType == 124) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 A3"));
-        } else if (\u7c7b\u578b == 125) {
+        } else if (magicPetType == 125) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 A4"));
-        } else if (\u7c7b\u578b == 126) {
+        } else if (magicPetType == 126) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 A5"));
-        } else if (\u7c7b\u578b == 127) {
+        } else if (magicPetType == 127) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 A6"));
-        } else if (\u7c7b\u578b == 128) {
+        } else if (magicPetType == 128) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 A7"));
-        } else if (\u7c7b\u578b == 129) {
+        } else if (magicPetType == 129) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 A8"));
-        } else if (\u7c7b\u578b == 130) {
+        } else if (magicPetType == 130) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 A9"));
-        } else if (\u7c7b\u578b == 131) {
+        } else if (magicPetType == 131) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 AA"));
-        } else if (\u7c7b\u578b == 132) {
+        } else if (magicPetType == 132) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 AB"));
-        } else if (\u7c7b\u578b == 133) {
+        } else if (magicPetType == 133) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 AC"));
-        } else if (\u7c7b\u578b == 134) {
+        } else if (magicPetType == 134) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 AD"));
-        } else if (\u7c7b\u578b == 135) {
+        } else if (magicPetType == 135) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 AE"));
-        } else if (\u7c7b\u578b == 136) {
+        } else if (magicPetType == 136) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 AF"));
-        } else if (\u7c7b\u578b == 137) {
+        } else if (magicPetType == 137) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 B0"));
-        } else if (\u7c7b\u578b == 138) {
+        } else if (magicPetType == 138) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 B1"));
-        } else if (\u7c7b\u578b == 139) {
+        } else if (magicPetType == 139) {
             mplew.write(HexTool.getByteArrayFromHexString("02 00 00 00 00 00 00 00 B2"));
         }
         int CHAR_MAGIC_SPAWN = Randomizer.nextInt();
@@ -3790,7 +3790,7 @@ public class MaplePacketCreator {
             lew.writeInt(partychar.getId());
         }
         for (MaplePartyCharacter partychar : partymembers) {
-            lew.writeAsciiString(StringUtil.getRightPaddedStr(partychar.getName(), '\000', 16));
+            lew.writeAsciiString(StringUtil.getRightPaddedStr(partychar.getName(), '\000', 13));
         }
         for (MaplePartyCharacter partychar : partymembers) {
             lew.writeInt(partychar.getJobId());
@@ -4025,10 +4025,10 @@ public class MaplePacketCreator {
         for (BuddylistEntry buddy : buddylist) {
             if (buddy.isVisible()) {
 	            mplew.writeInt(buddy.getCharacterId());
-	            mplew.writeAsciiString(StringUtil.getRightPaddedStr(buddy.getName(), '\000', 16));
+	            mplew.writeAsciiString(StringUtil.getRightPaddedStr(buddy.getName(), '\000', 13));
 	            mplew.write(0);
 	            mplew.writeInt(buddy.getChannel() == -1 ? -1 : buddy.getChannel() - 1);
-	            mplew.writeAsciiString(StringUtil.getRightPaddedStr(buddy.getGroup(), '\000', 20));
+	            mplew.writeAsciiString(StringUtil.getRightPaddedStr(buddy.getGroup(), '\000', 17));
             }
         }
         for (int x = 0; x < buddylist.size(); x++) {
@@ -4049,12 +4049,12 @@ public class MaplePacketCreator {
         mplew.writeInt(cidFrom);
         mplew.writeMapleAsciiString(nameFrom);
         mplew.writeInt(cidFrom);
-        mplew.writeAsciiString(StringUtil.getRightPaddedStr(nameFrom, '\000', 16));
+        mplew.writeAsciiString(StringUtil.getRightPaddedStr(nameFrom, '\000', 13));
         mplew.write(1);
         mplew.write(5);
         mplew.write(0);
         mplew.writeShort(0);
-        mplew.writeAsciiString(StringUtil.getRightPaddedStr("\u7fa4\u672a\u5b9a", '\000', 20));
+        mplew.writeAsciiString(StringUtil.getRightPaddedStr("群未定", '\000', 17));
         mplew.write(0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
@@ -4406,7 +4406,7 @@ public class MaplePacketCreator {
         mplew.write(39);
         mplew.writeInt(mgc.getGuildId());
         mplew.writeInt(mgc.getId());
-        mplew.writeAsciiString(StringUtil.getRightPaddedStr(mgc.getName(), '\000', 16));
+        mplew.writeAsciiString(StringUtil.getRightPaddedStr(mgc.getName(), '\000', 13));
         mplew.writeInt(mgc.getJobId());
         mplew.writeInt(mgc.getLevel());
         mplew.writeInt(mgc.getGuildRank());
@@ -5198,7 +5198,7 @@ public class MaplePacketCreator {
         mplew.writeShort(time);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("skillCooldown-6574\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("skillCooldown-6574["+sid+","+time+"]\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -6536,12 +6536,12 @@ public class MaplePacketCreator {
         mplew.writeInt(cidFrom);
         mplew.writeMapleAsciiString(nameFrom);
         mplew.writeInt(cidFrom);
-        mplew.writeAsciiString(StringUtil.getRightPaddedStr(nameFrom, '\000', 16));
+        mplew.writeAsciiString(StringUtil.getRightPaddedStr(nameFrom, '\000', 13));
         mplew.write(1);
         mplew.write(5);
         mplew.write(0);
         mplew.writeShort(0);
-        mplew.writeAsciiString(StringUtil.getRightPaddedStr("\u7fa4\u672a\u5b9a", '\000', 20));
+        mplew.writeAsciiString(StringUtil.getRightPaddedStr("群未定", '\000', 17));
         mplew.write(0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();

@@ -158,11 +158,8 @@ public class CharLoginHandler {
             c.getSession().write((Object)MaplePacketCreator.serverNotice(1, "\u65e0\u6cd5\u521b\u5efa\u6218\u795e\u804c\u4e1a\uff01"));
             return;
         }
-        boolean db = false;
         int face = slea.readInt();
         int hair = slea.readInt();
-        boolean hairColor = false;
-        boolean skinColor = false;
         int top = slea.readInt();
         int bottom = slea.readInt();
         int shoes = slea.readInt();
@@ -292,7 +289,7 @@ public class CharLoginHandler {
         String ip = c.getSessionIPAddress();
         LoginServer.putLoginAuth(charId, ip.substring(ip.indexOf(47) + 1, ip.length()), c.getTempIP(), c.getChannel());
         c.updateLoginState(1, ip);
-        c.getSession().write((Object)MaplePacketCreator.getServerIP(Integer.parseInt(ChannelServer.getInstance(c.getChannel()).getIP().split(":")[1]), charId));
+        c.getSession().write(MaplePacketCreator.getServerIP(ChannelServer.getInstance(c.getChannel()).getPort(), charId));
     }
 
     public static final void Character_WithSecondPassword(SeekableLittleEndianAccessor slea, MapleClient c) {
@@ -308,7 +305,7 @@ public class CharLoginHandler {
                 c.getIdleTask().cancel(true);
             }
             c.updateLoginState(1, c.getSessionIPAddress());
-            c.getSession().write((Object)MaplePacketCreator.getServerIP(Integer.parseInt(ChannelServer.getInstance(c.getChannel()).getIP().split(":")[1]), charId));
+            c.getSession().write((Object)MaplePacketCreator.getServerIP(ChannelServer.getInstance(c.getChannel()).getPort(), charId));
         } else {
             c.getSession().write((Object)LoginPacket.secondPwError((byte)20));
         }

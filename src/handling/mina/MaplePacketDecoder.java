@@ -12,24 +12,21 @@
  */
 package handling.mina;
 
-import client.MapleCharacter;
-import client.MapleClient;
-import constants.ServerConstants;
-import handling.RecvPacketOpcode;
-import java.io.PrintStream;
 import org.apache.mina.common.ByteBuffer;
-import org.apache.mina.common.CloseFuture;
 import org.apache.mina.common.IoSession;
 import org.apache.mina.filter.codec.CumulativeProtocolDecoder;
 import org.apache.mina.filter.codec.ProtocolDecoderOutput;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import client.MapleClient;
+import constants.ServerConstants;
+import handling.RecvPacketOpcode;
 import tools.FileoutputUtil;
 import tools.HexTool;
 import tools.MapleAESOFB;
 import tools.MapleCustomEncryption;
 import tools.data.input.ByteArrayByteStream;
-import tools.data.input.ByteInputStream;
 import tools.data.input.GenericLittleEndianAccessor;
 
 public class MaplePacketDecoder
@@ -49,13 +46,13 @@ extends CumulativeProtocolDecoder {
                 int packetHeader = in.getInt();
                 if (!client.getReceiveCrypto().checkPacket(packetHeader)) {
                     session.close();
-                    String note = "\u65f6\u95f4\uff1a" + FileoutputUtil.CurrentReadable_Time() + " " + "|| \u73a9\u5bb6\u540d\u5b57\uff1a" + client.getPlayer().getName() + "" + "|| \u73a9\u5bb6\u5730\u56fe\uff1a" + client.getPlayer().getMapId() + "\r\n";
-                    FileoutputUtil.packetLog("logs\\\u5ba2\u6237\u7aef\u5305\u6389\u7ebf.log", note);
+                    String note = "时间：" + FileoutputUtil.CurrentReadable_Time() + " " + "|| 玩家名字：" + client.getPlayer().getName() + "" + "|| 玩家地图：" + client.getPlayer().getMapId() + "\r\n";
+                    FileoutputUtil.packetLog("logs\\客户端包掉线.log", note);
                     return false;
                 }
                 decoderState.packetlength = MapleAESOFB.getPacketLength(packetHeader);
             } else if (in.remaining() < 4 && decoderState.packetlength == -1) {
-                log.trace("\u89e3\u7801\u2026\u6ca1\u6709\u8db3\u591f\u7684\u6570\u636e/\u5c31\u662f\u6240\u8c13\u7684\u5305\u4e0d\u5b8c\u6574");
+                log.trace("解码…没有足够的数据/就是所谓的包不完整");
                 return false;
             }
         }
@@ -66,19 +63,19 @@ extends CumulativeProtocolDecoder {
             client.getReceiveCrypto().crypt(decryptedPacket);
             MapleCustomEncryption.decryptData(decryptedPacket);
             out.write((Object)decryptedPacket);
-            if (ServerConstants.\u5c01\u5305\u663e\u793a) {
+            if (ServerConstants.封包显示) {
                 int packetLen = decryptedPacket.length;
                 int pHeader = this.readFirstShort(decryptedPacket);
                 String pHeaderStr = Integer.toHexString(pHeader).toUpperCase();
                 String op = this.lookupSend(pHeader);
-                String Send = "\u5ba2\u6237\u7aef\u53d1\u9001 " + op + " [" + pHeaderStr + "] (" + packetLen + ")\r\n";
+                String Send = "客户端发送 " + op + " [" + pHeaderStr + "] (" + packetLen + ")\r\n";
                 if (packetLen <= 3000) {
                     String SendTo = Send + HexTool.toString(decryptedPacket) + "\r\n" + HexTool.toStringFromAscii(decryptedPacket);
-                    FileoutputUtil.packetLog("log\\\u5ba2\u6237\u7aef\u5c01\u5305.log", SendTo);
+                    FileoutputUtil.packetLog("log\\客户端封包.log", SendTo);
                     System.out.println(SendTo);
-                    String SendTos = "\r\n\u65f6\u95f4\uff1a" + FileoutputUtil.CurrentReadable_Time() + "  ";
+                    String SendTos = "\r\n时间：" + FileoutputUtil.CurrentReadable_Time() + "  ";
                     if (op.equals("UNKNOWN")) {
-                        FileoutputUtil.packetLog("log\\\u672a\u77e5\u5ba2\u670d\u7aef\u5c01\u5305.log", SendTos + SendTo);
+                        FileoutputUtil.packetLog("log\\未知客服端封包.log", SendTos + SendTo);
                     }
                 } else {
                     log.info(HexTool.toString(new byte[]{decryptedPacket[0], decryptedPacket[1]}) + "...");
@@ -106,4 +103,3 @@ extends CumulativeProtocolDecoder {
     }
 
 }
-

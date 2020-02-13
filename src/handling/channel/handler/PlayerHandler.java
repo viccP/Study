@@ -7,41 +7,26 @@
  */
 package handling.channel.handler;
 
+import java.awt.Point;
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.List;
+
 import client.ISkill;
 import client.MapleBuffStat;
 import client.MapleCharacter;
 import client.MapleClient;
-import client.MapleQuestStatus;
 import client.MapleStat;
-import client.MonsterBook;
 import client.PlayerStats;
 import client.SkillFactory;
 import client.SkillMacro;
-import client.anticheat.CheatTracker;
 import client.anticheat.CheatingOffense;
 import client.inventory.IItem;
 import client.inventory.ItemFlag;
-import client.inventory.MapleInventory;
 import client.inventory.MapleInventoryType;
 import constants.GameConstants;
 import constants.MapConstants;
-import handling.MaplePacket;
 import handling.channel.ChannelServer;
-import handling.channel.handler.AttackInfo;
-import handling.channel.handler.AttackType;
-import handling.channel.handler.DamageParse;
-import handling.channel.handler.MovementParse;
-import java.awt.Point;
-import java.awt.geom.Point2D;
-import java.io.PrintStream;
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.concurrent.ScheduledFuture;
-import org.apache.mina.common.IoSession;
-import org.apache.mina.common.WriteFuture;
-import scripting.EventInstanceManager;
 import server.AutobanManager;
 import server.MapleInventoryManipulator;
 import server.MapleItemInformationProvider;
@@ -55,17 +40,11 @@ import server.life.MobAttackInfo;
 import server.life.MobAttackInfoFactory;
 import server.life.MobSkill;
 import server.life.MobSkillFactory;
-import server.maps.Event_PyramidSubway;
 import server.maps.FakeCharacter;
 import server.maps.FieldLimitType;
-import server.maps.MapleFoothold;
-import server.maps.MapleFootholdTree;
 import server.maps.MapleMap;
-import server.maps.MapleMapFactory;
-import server.maps.MapleMapObject;
 import server.movement.LifeMovementFragment;
 import server.quest.MapleQuest;
-import tools.AttackPair;
 import tools.MaplePacketCreator;
 import tools.data.input.SeekableLittleEndianAccessor;
 import tools.packet.MTSCSPacket;
@@ -892,9 +871,8 @@ public class PlayerHandler {
     }
 
     public static final void ChangeEmotion(final int emote, MapleCharacter chr) {
-        MapleInventoryType type;
         int emoteid;
-        if (emote > 7 && chr.getInventory(type = GameConstants.getInventoryType(emoteid = 5159992 + emote)).findById(emoteid) == null) {
+        if (emote > 7 && chr.getInventory(GameConstants.getInventoryType(emoteid = 5159992 + emote)).findById(emoteid) == null) {
             chr.getCheatTracker().registerOffense(CheatingOffense.USING_UNAVAILABLE_ITEM, Integer.toString(emoteid));
             return;
         }
@@ -973,7 +951,7 @@ public class PlayerHandler {
             if (chr.getFollowId() > 0 && chr.isFollowOn() && chr.isFollowInitiator()) {
                 MapleCharacter fol = map.getCharacterById(chr.getFollowId());
                 if (fol != null) {
-                    Point original_pos = fol.getPosition();
+                    fol.getPosition();
                     MovementParse.updatePosition(res, fol, 0);
                 } else {
                     chr.checkFollow();
@@ -1058,17 +1036,13 @@ public class PlayerHandler {
     }
 
     public static final void ChangeMap(SeekableLittleEndianAccessor slea, MapleClient c, MapleCharacter chr) {
-        if (chr == null) {
-            chr.dropMessage(5, "\u4f60\u73fe\u5728\u4e0d\u80fd\u653b\u64ca\u6216\u4e0d\u80fd\u8ddfnpc\u5c0d\u8a71,\u8acb\u5728\u5c0d\u8a71\u6846\u6253 @\u89e3\u5361/@ea \u4f86\u89e3\u9664\u7570\u5e38\u72c0\u614b");
-            return;
-        }
         if (slea.available() == 0L) {
-            String[] socket = c.getChannelServer().getIP().split(":");
+            int port = c.getChannelServer().getPort();
             chr.saveToDB(false, false);
             c.getChannelServer().removePlayer(c.getPlayer());
             c.updateLoginState(1);
             try {
-                c.getSession().write((Object)MaplePacketCreator.getChannelChange(Integer.parseInt(socket[1])));
+                c.getSession().write(MaplePacketCreator.getChannelChange(port));
             }
             catch (Exception e) {
                 throw new RuntimeException(e);
@@ -1083,7 +1057,7 @@ public class PlayerHandler {
                 targetid = 1000000;
             }
             MaplePortal portal = chr.getMap().getPortal(slea.readMapleAsciiString());
-            boolean bl = wheel = slea.readShort() > 0 && !MapConstants.isEventMap(chr.getMapId()) && chr.haveItem(5510000, 1, false, true);
+            wheel = slea.readShort() > 0 && !MapConstants.isEventMap(chr.getMapId()) && chr.haveItem(5510000, 1, false, true);
             if (targetid != -1 && !chr.isAlive()) {
                 chr.setStance(0);
                 if (chr.getEventInstance() != null && chr.getEventInstance().revivePlayer(chr) && chr.isAlive()) {
@@ -1173,7 +1147,7 @@ public class PlayerHandler {
             return;
         }
         MaplePortal portal = chr.getMap().getPortal(slea.readMapleAsciiString());
-        Point Original_Pos = chr.getPosition();
+        chr.getPosition();
         short toX = slea.readShort();
         short toY = slea.readShort();
         if (portal == null) {

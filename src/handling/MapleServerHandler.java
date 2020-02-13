@@ -14,7 +14,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.EnumSet;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -74,9 +73,6 @@ extends IoHandlerAdapter {
     private final boolean cs;
     private final List<String> BlockedIP = new ArrayList<String>();
     private final Map<String, Pair<Long, Byte>> tracker = new ConcurrentHashMap<String, Pair<Long, Byte>>();
-    private static final String nl = System.getProperty("line.separator");
-    private static final File loggedIPs = new File("Logs/LogIPs.txt");
-    private static final HashMap<String, FileWriter> logIPMap = new HashMap();
     private static final boolean debugMode = Boolean.parseBoolean(ServerProperties.getProperty("KinMS.Debug", "false"));
     private static final EnumSet<RecvPacketOpcode> blocked = EnumSet.noneOf(RecvPacketOpcode.class);
 
@@ -232,7 +228,6 @@ extends IoHandlerAdapter {
     }
 
     public static void handlePacket(RecvPacketOpcode header, SeekableLittleEndianAccessor slea, MapleClient c, boolean cs) throws Exception {
-    	System.out.println(header.name());
         switch (header) {
             case PONG: {
                 c.pongReceived();
@@ -889,6 +884,8 @@ extends IoHandlerAdapter {
                 InventoryHandler.HeiLong_BaoWuHe(slea, c);
                 break;
             }
+		default:
+			break;
         }
     }
 

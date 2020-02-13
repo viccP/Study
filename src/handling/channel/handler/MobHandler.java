@@ -7,30 +7,18 @@
  */
 package handling.channel.handler;
 
+import java.awt.Point;
+import java.util.List;
+
 import client.MapleCharacter;
 import client.MapleClient;
 import client.inventory.MapleInventoryType;
-import handling.MaplePacket;
-import handling.channel.ChannelServer;
-import handling.channel.handler.MovementParse;
-import handling.world.MapleParty;
-import handling.world.MaplePartyCharacter;
-import java.awt.Point;
-import java.awt.geom.Point2D;
-import java.util.Collection;
-import java.util.List;
-import org.apache.mina.common.IoSession;
-import org.apache.mina.common.WriteFuture;
-import scripting.EventInstanceManager;
 import server.MapleInventoryManipulator;
-import server.MaplePortal;
 import server.Randomizer;
 import server.life.MapleMonster;
-import server.life.MapleMonsterStats;
 import server.life.MobSkill;
 import server.life.MobSkillFactory;
 import server.maps.MapleMap;
-import server.maps.MapleMapFactory;
 import server.maps.MapleNodes;
 import server.movement.LifeMovementFragment;
 import tools.MaplePacketCreator;
@@ -39,39 +27,50 @@ import tools.data.input.SeekableLittleEndianAccessor;
 import tools.packet.MobPacket;
 
 public class MobHandler {
-    public static final void MoveMonster(SeekableLittleEndianAccessor slea, MapleClient c, MapleCharacter chr) {
+    public static final void MoveMonster(final SeekableLittleEndianAccessor slea, final MapleClient c, final MapleCharacter chr) {
         if (chr == null || chr.getMap() == null) {
-            return;
+            return; //?
         }
-        int oid = slea.readInt();
-        MapleMonster monster = chr.getMap().getMonsterByOid(oid);
-        if (monster == null) {
+        final int oid = slea.readInt();
+        final MapleMonster monster = chr.getMap().getMonsterByOid(oid);
+       
+        if (monster == null) { // movin something which is not a monster
             chr.addMoveMob(oid);
             return;
         }
-        short moveid = slea.readShort();
-        boolean useSkill = slea.readByte() > 0;
-        byte skill = slea.readByte();
-        int skill1 = slea.readByte() & 0xFF;
-        byte skill2 = slea.readByte();
-        byte skill3 = slea.readByte();
-        byte skill4 = slea.readByte();
+        final short moveid = slea.readShort();
+        final boolean useSkill = slea.readByte() > 0;
+        final byte skill = slea.readByte();
+        final int skill1 = slea.readByte() & 0xFF; // unsigned?
+        final int skill2 = slea.readByte();
+        final int skill3 = slea.readByte();
+        final int skill4 = slea.readByte();
         int realskill = 0;
         int level = 0;
-        if (useSkill) {
-            MobSkill mobSkill;
-            Pair<Integer, Integer> skillToUse;
-            byte size = monster.getNoSkills();
+
+        if (useSkill) {// && (skill == -1 || skill == 0)) {
+            final byte size = monster.getNoSkills();
             boolean used = false;
-            if (size > 0 && (mobSkill = MobSkillFactory.getMobSkill(realskill = (skillToUse = monster.getSkills().get((byte)Randomizer.nextInt(size))).getLeft().intValue(), level = skillToUse.getRight().intValue())) != null && !mobSkill.checkCurrentBuff(chr, monster)) {
-                long now = System.currentTimeMillis();
-                long ls = monster.getLastSkillUsed(realskill);
-                if (ls == 0L || now - ls > mobSkill.getCoolTime()) {
-                    monster.setLastSkillUsed(realskill, now, mobSkill.getCoolTime());
-                    int reqHp = (int)((float)monster.getHp() / (float)monster.getMobMaxHp() * 100.0f);
-                    if (reqHp <= mobSkill.getHP()) {
-                        used = true;
-                        mobSkill.applyEffect(chr, monster, true);
+
+            if (size > 0) {
+                final Pair<Integer, Integer> skillToUse = monster.getSkills().get((byte) Randomizer.nextInt(size));
+                realskill = skillToUse.getLeft();
+                level = skillToUse.getRight();
+                // Skill ID and Level
+                final MobSkill mobSkill = MobSkillFactory.getMobSkill(realskill, level);
+
+                if (mobSkill != null && !mobSkill.checkCurrentBuff(chr, monster)) {
+                    final long now = System.currentTimeMillis();
+                    final long ls = monster.getLastSkillUsed(realskill);
+
+                    if (ls == 0 || ((now - ls) > mobSkill.getCoolTime())) {
+                        monster.setLastSkillUsed(realskill, now, mobSkill.getCoolTime());
+
+                        final int reqHp = (int) (((float) monster.getHp() / monster.getMobMaxHp()) * 100); // In case this monster have 2.1b and above HP
+                        if (reqHp <= mobSkill.getHP()) {
+                            used = true;
+                            mobSkill.applyEffect(chr, monster, true);
+                        }
                     }
                 }
             }
@@ -81,11 +80,11 @@ public class MobHandler {
             }
         }
         slea.read(13);
-        Point startPos = slea.readPos();
-        List<LifeMovementFragment> res = MovementParse.parseMovement(slea, 2, chr);
-        c.getSession().write((Object)MobPacket.moveMonsterResponse(monster.getObjectId(), moveid, monster.getMp(), monster.isControllerHasAggro(), realskill, level));
+        final Point startPos = slea.readPos();
+        final List<LifeMovementFragment> res = MovementParse.parseMovement(slea, 2,chr);
+        c.getSession().write(MobPacket.moveMonsterResponse(monster.getObjectId(), moveid, monster.getMp(), monster.isControllerHasAggro(), realskill, level));
         if (res != null && chr != null) {
-            MapleMap map = chr.getMap();
+            final MapleMap map = chr.getMap();
             MovementParse.updatePosition(res, monster, -1);
             map.moveMonster(monster, monster.getPosition());
             map.broadcastMessage(chr, MobPacket.moveMonster(useSkill, skill, skill1, skill2, skill3, skill4, monster.getObjectId(), startPos, monster.getPosition(), res), monster.getPosition());

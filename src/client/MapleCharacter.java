@@ -2396,7 +2396,7 @@ implements Serializable {
         }
         pyramid = this.pyramidSubway != null;
         if (this.map.getId() == nowmapid) {
-            this.client.getSession().write((Object)warpPacket);
+            this.client.getSession().write(warpPacket);
             this.map.removePlayer(this);
             if (!this.isClone() && this.client.getChannelServer().getPlayerStorage().getCharacterById(this.getId()) != null) {
                 this.map = to;
@@ -5220,7 +5220,7 @@ implements Serializable {
         this.client.updateLoginState(6, this.client.getSessionIPAddress());
         String s = this.client.getSessionIPAddress();
         LoginServer.addIPAuth(s.substring(s.indexOf(47) + 1, s.length()));
-        this.client.getSession().write(MaplePacketCreator.getChannelChange(Integer.parseInt(toch.getIP().split(":")[1])));
+        this.client.getSession().write(MaplePacketCreator.getChannelChange(toch.getPort()));
         this.saveToDB(false, false);
         this.getMap().removePlayer(this);
         this.client.setPlayer(null);

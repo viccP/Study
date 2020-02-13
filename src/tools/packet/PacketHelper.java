@@ -25,7 +25,6 @@ import client.inventory.MapleInventoryType;
 import client.inventory.MaplePet;
 import client.inventory.MapleRing;
 import constants.GameConstants;
-import constants.ServerConstants;
 import server.movement.LifeMovementFragment;
 import server.shops.AbstractPlayerStore;
 import server.shops.IMaplePlayerShop;
@@ -155,25 +154,15 @@ public class PacketHelper {
         mplew.writeInt(chr.getBeans());
         mplew.writeInt(0);
         mplew.write(chr.getInventory(MapleInventoryType.EQUIP).getSlotLimit());
-        if (ServerConstants.DEBUG_PACKET) {
-            System.out.println("-------\u80cc\u5305\u88c5\u5907\u683c\u5b50\u6570\u636e\u8f93\u51fa\uff1a" + chr.getInventory(MapleInventoryType.EQUIP).getSlotLimit());
-        }
+       
         mplew.write(chr.getInventory(MapleInventoryType.USE).getSlotLimit());
-        if (ServerConstants.DEBUG_PACKET) {
-            System.out.println("-------\u80cc\u5305\u6d88\u8017\u683c\u5b50\u6570\u636e\u8f93\u51fa\uff1a" + chr.getInventory(MapleInventoryType.USE).getSlotLimit());
-        }
+       
         mplew.write(chr.getInventory(MapleInventoryType.SETUP).getSlotLimit());
-        if (ServerConstants.DEBUG_PACKET) {
-            System.out.println("-------\u80cc\u5305\u7279\u6b8a\u683c\u5b50\u6570\u636e\u8f93\u51fa\uff1a" + chr.getInventory(MapleInventoryType.SETUP).getSlotLimit());
-        }
+       
         mplew.write(chr.getInventory(MapleInventoryType.ETC).getSlotLimit());
-        if (ServerConstants.DEBUG_PACKET) {
-            System.out.println("-------\u80cc\u5305\u5176\u4ed6\u683c\u5b50\u6570\u636e\u8f93\u51fa\uff1a" + chr.getInventory(MapleInventoryType.ETC).getSlotLimit());
-        }
+       
         mplew.write(chr.getInventory(MapleInventoryType.CASH).getSlotLimit());
-        if (ServerConstants.DEBUG_PACKET) {
-            System.out.println("-------\u80cc\u5305\u73b0\u91d1\u683c\u5b50\u6570\u636e\u8f93\u51fa\uff1a" + chr.getInventory(MapleInventoryType.CASH).getSlotLimit());
-        }
+       
         mplew.writeLong(PacketHelper.getTime(System.currentTimeMillis()));
         MapleInventory iv = chr.getInventory(MapleInventoryType.EQUIPPED);
         Collection<IItem> equippedC = iv.list();

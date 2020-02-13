@@ -3,13 +3,13 @@
  */
 package handling.channel.handler;
 
-import client.MapleCharacter;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
+
+import client.MapleCharacter;
 import server.maps.AnimatedMapleMapObject;
 import server.maps.FakeCharacter;
-import server.maps.MapleMap;
 import server.movement.AbsoluteLifeMovement;
 import server.movement.AranMovement;
 import server.movement.BounceMovement;
@@ -26,18 +26,18 @@ public class MovementParse {
     public static final List<LifeMovementFragment> parseMovement(SeekableLittleEndianAccessor lea, int kind, MapleCharacter chr) {
         ArrayList<LifeMovementFragment> res = new ArrayList<LifeMovementFragment>();
         byte numCommands = lea.readByte();
-        String \u7c7b\u578b = "";
-        if (kind == 1) {
-            \u7c7b\u578b = "\u89d2\u8272\u79fb\u52a8";
-        } else if (kind == 2) {
-            \u7c7b\u578b = "\u602a\u7269\u79fb\u52a8";
-        } else if (kind == 3) {
-            \u7c7b\u578b = "\u5ba0\u7269\u79fb\u52a8";
-        } else if (kind == 4) {
-            \u7c7b\u578b = "\u53ec\u5524\u517d\u79fb\u52a8";
-        } else if (kind == 5) {
-            \u7c7b\u578b = "\u9f99\u79fb\u52a8";
-        }
+//        String 类型 = "";
+//        if (kind == 1) {
+//            类型 = "角色移动";
+//        } else if (kind == 2) {
+//            类型 = "怪物移动";
+//        } else if (kind == 3) {
+//            类型 = "宠物移动";
+//        } else if (kind == 4) {
+//            类型 = "召唤兽移动";
+//        } else if (kind == 5) {
+//            类型 = "龙移动";
+//        }
         block10: for (byte i = 0; i < numCommands; i = (byte)(i + 1)) {
             byte command = lea.readByte();
             if (chr.hasFakeChar()) {
@@ -168,4 +168,3 @@ public class MovementParse {
         }
     }
 }
-

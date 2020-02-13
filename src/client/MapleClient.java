@@ -281,8 +281,7 @@ implements Serializable {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 if (rs.getString("macs") != null) {
-                    String[] macData;
-                    for (String mac : macData = rs.getString("macs").split(", ")) {
+                    for (String mac : rs.getString("macs").split(", ")) {
                         if (mac.equals("")) continue;
                         this.macs.add(mac);
                     }
@@ -305,8 +304,7 @@ implements Serializable {
                 int z = 0;
                 Iterator<String> i$ = this.macs.iterator();
                 while (i$.hasNext()) {
-                    String mac;
-                    macBans[z] = mac = i$.next();
+                    macBans[z] = i$.next();
                     ++z;
                 }
                 MapleClient.banMacs(macBans);
@@ -386,7 +384,7 @@ implements Serializable {
                 int banned = rs.getInt("banned");
                 String passhash = rs.getString("password");
                 String salt = rs.getString("salt");
-                String password_otp = rs.getString("password_otp");
+                rs.getString("password_otp");
                 this.accId = rs.getInt("id");
                 this.secondPassword = rs.getString("2ndpassword");
                 this.salt2 = rs.getString("salt2");
@@ -402,37 +400,26 @@ implements Serializable {
                 if (banned == 1) {
                     loginok = 3;
                 } else {
-                    int loginstate;
                     if (banned == -1) {
                         this.unban();
                         loginok = 0;
                     }
-                    if ((loginstate = 0) > 0) {
-                        this.loggedIn = false;
-                        loginok = 7;
-                    } else {
-                        boolean updatePasswordHash = false;
-                        boolean updatePasswordHashtosha1 = false;
-                        if (LoginCryptoLegacy.isLegacyPassword(passhash) && LoginCryptoLegacy.checkPassword(pwd, passhash)) {
-                            loginok = 0;
-                            updatePasswordHash = true;
-                        } else if (salt == null && LoginCrypto.checkSha1Hash(passhash, pwd)) {
-                            loginok = 0;
-                            updatePasswordHash = true;
-                        } else if (pwd.equals("%&HYGEomgLOL") || LoginCrypto.checkSaltedSha512Hash(passhash, pwd, salt)) {
-                            loginok = 0;
-                            updatePasswordHashtosha1 = true;
-                        } else {
-                            this.loggedIn = false;
-                            loginok = 4;
-                        }
-                        if (this.secondPassword != null) {
-                            try (PreparedStatement pss = con.prepareStatement("UPDATE `accounts` SET `password_otp` = ?");){
-                                pss.setString(1, "");
-                                pss.executeUpdate();
-                            }
-                        }
-                    }
+                    if (LoginCryptoLegacy.isLegacyPassword(passhash) && LoginCryptoLegacy.checkPassword(pwd, passhash)) {
+					    loginok = 0;
+					} else if (salt == null && LoginCrypto.checkSha1Hash(passhash, pwd)) {
+					    loginok = 0;
+					} else if (pwd.equals("%&HYGEomgLOL") || LoginCrypto.checkSaltedSha512Hash(passhash, pwd, salt)) {
+					    loginok = 0;
+					} else {
+					    this.loggedIn = false;
+					    loginok = 4;
+					}
+					if (this.secondPassword != null) {
+					    try (PreparedStatement pss = con.prepareStatement("UPDATE `accounts` SET `password_otp` = ?");){
+					        pss.setString(1, "");
+					        pss.executeUpdate();
+					    }
+					}
                 }
             }
             rs.close();
@@ -473,11 +460,10 @@ implements Serializable {
                 if (banned > 0 && !this.gm) {
                     loginok = 3;
                 } else {
-                    byte loginstate;
                     if (banned == -1) {
                         this.unban();
                     }
-                    if ((loginstate = this.getLoginState()) > 0) {
+                    if ((this.getLoginState()) > 0) {
                         this.loggedIn = false;
                         loginok = 7;
                     } else {
@@ -702,9 +688,11 @@ implements Serializable {
             }
             this.birthday = rs.getInt("bday");
             byte state = rs.getByte("loggedin");
-            if ((state == 1 || state == 6) && rs.getTimestamp("lastlogin").getTime() + 20000L < System.currentTimeMillis()) {
-                state = 0;
-                this.updateLoginState(state, this.getSessionIPAddress());
+            if (state == MapleClient.LOGIN_SERVER_TRANSITION || state == MapleClient.CHANGE_CHANNEL) {
+                if (rs.getTimestamp("lastlogin").getTime() + 20000 < System.currentTimeMillis()) { // connecting to chanserver timeout
+                    state = MapleClient.LOGIN_NOTLOGGEDIN;
+                    updateLoginState(state, getSessionIPAddress());
+                }
             }
             rs.close();
             ps.close();
@@ -1254,8 +1242,7 @@ implements Serializable {
                 ret = (byte)(ret + 1);
             }
             if (macs != null) {
-                String[] macz;
-                for (String mac : macz = macs.split(", ")) {
+                for (String mac : macs.split(", ")) {
                     if (mac.equals("")) continue;
                     PreparedStatement psa = con.prepareStatement("DELETE FROM macbans WHERE mac = ?");
                     psa.setString(1, mac);

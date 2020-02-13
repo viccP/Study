@@ -18,61 +18,46 @@
  */
 package handling.cashshop;
 
-import handling.MapleServerHandler;
-import handling.channel.PlayerStorage;
-import handling.mina.MapleCodecFactory;
-import java.io.PrintStream;
 import java.net.InetSocketAddress;
-import java.net.SocketAddress;
+
 import org.apache.mina.common.ByteBuffer;
-import org.apache.mina.common.ByteBufferAllocator;
-import org.apache.mina.common.DefaultIoFilterChainBuilder;
 import org.apache.mina.common.IoAcceptor;
-import org.apache.mina.common.IoFilter;
-import org.apache.mina.common.IoHandler;
-import org.apache.mina.common.IoServiceConfig;
 import org.apache.mina.common.SimpleByteBufferAllocator;
-import org.apache.mina.filter.codec.ProtocolCodecFactory;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.transport.socket.nio.SocketAcceptor;
 import org.apache.mina.transport.socket.nio.SocketAcceptorConfig;
-import org.apache.mina.transport.socket.nio.SocketSessionConfig;
-import server.ServerProperties;
+
+import handling.MapleServerHandler;
+import handling.channel.PlayerStorage;
+import handling.mina.MapleCodecFactory;
 
 public class CashShopServer {
-    private static String ip;
-    private static InetSocketAddress InetSocketadd;
     private static final int PORT = 8596;
     private static IoAcceptor acceptor;
     private static PlayerStorage players;
     private static PlayerStorage playersMTS;
-    private static boolean finishedShutdown;
+    private static boolean finishedShutdown=false;
 
     public static final void run_startup_configurations() {
-        ip = ServerProperties.getProperty("KinMS.IP") + ":" + 8596;
-        ByteBuffer.setUseDirectBuffers((boolean)false);
-        ByteBuffer.setAllocator((ByteBufferAllocator)new SimpleByteBufferAllocator());
+        ByteBuffer.setUseDirectBuffers(false);
+        ByteBuffer.setAllocator(new SimpleByteBufferAllocator());
         acceptor = new SocketAcceptor();
         SocketAcceptorConfig cfg = new SocketAcceptorConfig();
         cfg.getSessionConfig().setTcpNoDelay(true);
         cfg.setDisconnectOnUnbind(true);
-        cfg.getFilterChain().addLast("codec", (IoFilter)new ProtocolCodecFilter((ProtocolCodecFactory)new MapleCodecFactory()));
+        cfg.getFilterChain().addLast("codec", new ProtocolCodecFilter(new MapleCodecFactory()));
         players = new PlayerStorage(-10);
         playersMTS = new PlayerStorage(-20);
         try {
-            InetSocketadd = new InetSocketAddress(8596);
-            acceptor.bind((SocketAddress)InetSocketadd, (IoHandler)new MapleServerHandler(-1, true), (IoServiceConfig)cfg);
-            System.out.println("\u5546\u57ce    1: \u542f\u52a8\u7aef\u53e3 8596");
+            InetSocketAddress InetSocketadd = new InetSocketAddress(PORT);
+            acceptor.bind(InetSocketadd,new MapleServerHandler(-1, true), cfg);
+            System.out.println("商城    1: 启动端口 8596");
         }
         catch (Exception e) {
-            System.err.println("Binding to port 8596 failed");
+            System.err.println("Binding to port "+PORT+" failed");
             e.printStackTrace();
             throw new RuntimeException("Binding failed.", e);
         }
-    }
-
-    public static final String getIP() {
-        return ip;
     }
 
     public static final PlayerStorage getPlayerStorage() {
@@ -99,8 +84,7 @@ public class CashShopServer {
         return finishedShutdown;
     }
 
-    static {
-        finishedShutdown = false;
-    }
+	public static int getPort() {
+		return PORT;
+	}
 }
-
