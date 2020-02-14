@@ -82,7 +82,7 @@ public class CheatTracker {
             this.Attack_tickResetCount = 0;
             this.Server_ClientAtkTickDiff = STime_TC;
         }
-        ((MapleCharacter)this.chr.get()).updateTick(tickcount);
+        this.chr.get().updateTick(tickcount);
         this.lastAttackTickCount = tickcount;
     }
 

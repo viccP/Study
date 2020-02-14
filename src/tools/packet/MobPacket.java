@@ -176,7 +176,7 @@ public class MobPacket {
         MobPacket.serializeMovementList(mplew, moves);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("moveMonster-234\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("moveMonster-234:\n" + mplew.getPacket() + "\n");
         }
         return mplew.getPacket();
     }

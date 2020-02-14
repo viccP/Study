@@ -24,7 +24,7 @@ function playerRevive(eim, player) {
 function scheduledTimeout(eim) {
     eim.disposeIfPlayerBelow(100, 270050300);
     em.setProperty("state", "0");
-		em.setProperty("leader", "true");
+	em.setProperty("leader", "true");
 }
 
 function changedMap(eim, player, mapid) {

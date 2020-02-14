@@ -7,14 +7,6 @@
  */
 package scripting;
 
-import client.MapleCharacter;
-import client.MapleClient;
-import client.MapleQuestStatus;
-import handling.channel.ChannelServer;
-import handling.world.MapleParty;
-import handling.world.MaplePartyCharacter;
-import java.io.PrintStream;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -24,20 +16,19 @@ import java.util.Properties;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
-import javax.script.Invocable;
+
 import javax.script.ScriptException;
-import org.apache.mina.common.IoSession;
-import org.apache.mina.common.WriteFuture;
-import scripting.EventManager;
-import scripting.EventScriptManager;
+
+import client.MapleCharacter;
+import client.MapleQuestStatus;
+import handling.channel.ChannelServer;
+import handling.world.MapleParty;
+import handling.world.MaplePartyCharacter;
 import server.MapleCarnivalParty;
 import server.MapleItemInformationProvider;
-import server.MaplePortal;
 import server.MapleSquad;
-import server.MapleStatEffect;
 import server.Timer;
 import server.life.MapleMonster;
-import server.life.MapleMonsterStats;
 import server.maps.MapleMap;
 import server.maps.MapleMapFactory;
 import server.quest.MapleQuest;
@@ -241,6 +232,7 @@ public class EventInstanceManager {
      * WARNING - Removed try catching itself - possible behaviour change.
      */
     public final boolean disposeIfPlayerBelow(byte size, int towarp) {
+    	System.out.println("this in*********************************************************************************");
         if (this.disposed) {
             return true;
         }

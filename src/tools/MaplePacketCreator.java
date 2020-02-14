@@ -1633,7 +1633,7 @@ public class MaplePacketCreator {
         ServerConstants ERROR = new ServerConstants();
         if (ServerConstants.PACKET_ERROR_OFF && ERROR.getChannel() != 1 || ERROR.getRemovePlayerFromMap() != 1) {
             String note = "\u65f6\u95f4\uff1a" + FileoutputUtil.CurrentReadable_Time() + " " + "|| \u73a9\u5bb6\u540d\u5b57\uff1a" + chr.getName() + "" + "|| \u73a9\u5bb6\u5730\u56fe\uff1a" + chr.getMapId() + "\r\n" + "38\u9519\u8bef\uff1a" + ERROR.getPACKET_ERROR() + "\r\n\r\n";
-            FileoutputUtil.packetLog("logs\\38\u6389\u7ebf\\" + chr.getName() + ".log", note);
+            FileoutputUtil.packetLog("C:\\Users\\viness\\Desktop\\logs\\" + chr.getName() + "掉线.log", note);
         }
         return mplew.getPacket();
     }

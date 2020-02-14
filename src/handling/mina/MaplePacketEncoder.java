@@ -50,7 +50,7 @@ implements ProtocolEncoder {
                 String op = this.lookupRecv(pHeader);
                 String Recv = "服务端发送 " + op + " [" + pHeaderStr + "] (" + packetLen + ")\n";
                 if (packetLen <= 50000) {
-                    String RecvTo = Recv + HexTool.toString(inputInitialPacket);
+                    String RecvTo = Recv + HexTool.toString(inputInitialPacket)+"\n"+HexTool.toStringFromAscii(inputInitialPacket);
                     FileoutputUtil.packetLog("C:\\Users\\viness\\Desktop\\logs\\server_packet.log", RecvTo);
                     System.out.println(RecvTo);
                 } else {
