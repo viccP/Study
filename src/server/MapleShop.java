@@ -7,35 +7,25 @@
  */
 package server;
 
-import client.ISkill;
-import client.MapleCharacter;
-import client.MapleClient;
-import client.SkillFactory;
-import client.inventory.IItem;
-import client.inventory.Item;
-import client.inventory.MapleInventory;
-import client.inventory.MapleInventoryIdentifier;
-import client.inventory.MapleInventoryType;
-import client.inventory.MaplePet;
-import constants.GameConstants;
-import database.DatabaseConnection;
-import java.io.PrintStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-import org.apache.mina.common.IoSession;
-import org.apache.mina.common.WriteFuture;
-import server.AutobanManager;
-import server.MapleInventoryManipulator;
-import server.MapleItemInformationProvider;
-import server.MapleShopItem;
+
+import client.MapleClient;
+import client.SkillFactory;
+import client.inventory.IItem;
+import client.inventory.Item;
+import client.inventory.MapleInventoryIdentifier;
+import client.inventory.MapleInventoryType;
+import client.inventory.MaplePet;
+import constants.GameConstants;
+import database.DatabaseConnection;
 import tools.MaplePacketCreator;
 
 public class MapleShop {
@@ -56,16 +46,16 @@ public class MapleShop {
 
     public void sendShop(MapleClient c) {
         c.getPlayer().setShop(this);
-        c.getSession().write((Object)MaplePacketCreator.getNPCShop(c, this.getNpcId(), this.items));
+        c.getSession().write(MaplePacketCreator.getNPCShop(c, this.getNpcId(), this.items));
     }
 
     public void buy(MapleClient c, int itemId, short quantity) {
         if (quantity <= 0) {
-            AutobanManager.getInstance().addPoints(c, 1000, 0L, "\u8d2d\u4e70\u9053\u5177\u6570\u91cf " + quantity + " \u9053\u5177: " + itemId);
+            AutobanManager.getInstance().addPoints(c, 1000, 0L, "购买道具数量 " + quantity + " 道具: " + itemId);
             return;
         }
         if (c.getPlayer().getMapId() != 809030000 && this.getId() == 9100109) {
-            c.getPlayer().dropMessage(5, "\u65e0\u6cd5\u6b63\u5e38\u64cd\u4f5cA\uff01" + c.getPlayer().getMapId() + "/" + this.getId());
+            c.getPlayer().dropMessage(5, "无法正常操作A！" + c.getPlayer().getMapId() + "/" + this.getId());
         } else if (c.getPlayer().getMapId() == 809030000 && this.getId() == 9100109) {
             MapleShopItem item = this.findById(itemId);
             if (item != null && item.getPrice() > 0) {
@@ -83,17 +73,17 @@ public class MapleShop {
                             }
                             MapleInventoryManipulator.addById(c, itemId, quantity, (byte)0);
                         }
-                        c.getPlayer().dropMessage(1, "\u8d2d\u4e70\u6210\u529f.\r\n\u6d88\u8d39\uff1a" + price + "\u8c46\u8c46\u4e2d\u5956\u6b21\u6570\uff01\r\n\u5269\u4f59\uff1a" + c.getPlayer().getddj() + "\u8c46\u8c46\u4e2d\u5956\u6b21\u6570\uff01");
+                        c.getPlayer().dropMessage(1, "购买成功.\r\n消费：" + price + "豆豆中奖次数！\r\n剩余：" + c.getPlayer().getddj() + "豆豆中奖次数！");
                     } else {
-                        c.getPlayer().dropMessage(1, "\u8bf7\u7559\u51fa\u8db3\u591f\u7684\u80cc\u5305\u7a7a\u95f4\uff01");
+                        c.getPlayer().dropMessage(1, "请留出足够的背包空间！");
                     }
                     c.getSession().write((Object)MaplePacketCreator.confirmShopTransaction((byte)0));
                 } else {
-                    c.getPlayer().dropMessage(1, "\u4f60\u7684\u8c46\u8c46\u673a\u4e2d\u5956\u6b21\u6570\u4e0d\u8db3!\r\n\u8bf7\u7ee7\u7eed\u6253\u8c46\u8c46\u4e2d\u5956!\r\n\u4e2d\u5956\u6b21\u6570\u591f\u4e86\u4ee5\u540e\u624d\u80fd\r\n\u5f53\u524d\u8c46\u8c46\u4e2d\u5956\u6b21\u6570\uff1a" + c.getPlayer().getddj());
+                    c.getPlayer().dropMessage(1, "你的豆豆机中奖次数不足!\r\n请继续打豆豆中奖!\r\n中奖次数够了以后才能\r\n当前豆豆中奖次数：" + c.getPlayer().getddj());
                 }
             }
         } else if (c.getPlayer().getMapId() != 809030000 && this.getId() == 9120104) {
-            c.getPlayer().dropMessage(5, "\u65e0\u6cd5\u6b63\u5e38\u64cd\u4f5cA\uff01" + c.getPlayer().getMapId() + "/" + this.getId());
+            c.getPlayer().dropMessage(5, "无法正常操作A！" + c.getPlayer().getMapId() + "/" + this.getId());
         } else if (c.getPlayer().getMapId() == 809030000 && this.getId() == 9120104) {
             MapleShopItem item = this.findById(itemId);
             if (item != null && item.getPrice() > 0) {
@@ -111,20 +101,19 @@ public class MapleShop {
                             }
                             MapleInventoryManipulator.addById(c, itemId, quantity, (byte)0);
                         }
-                        c.getPlayer().dropMessage(1, "\u8d2d\u4e70\u6210\u529f.\r\n\u6d88\u8d39\uff1a" + price + "\u8c46\u8c46\uff01\r\n\u5269\u4f59\uff1a" + c.getPlayer().getBeans() + "\u8c46\u8c46\uff01");
+                        c.getPlayer().dropMessage(1, "购买成功.\r\n消费：" + price + "豆豆！\r\n剩余：" + c.getPlayer().getBeans() + "豆豆！");
                     } else {
-                        c.getPlayer().dropMessage(1, "\u8bf7\u7559\u51fa\u8db3\u591f\u7684\u80cc\u5305\u7a7a\u95f4\uff01");
+                        c.getPlayer().dropMessage(1, "请留出足够的背包空间！");
                     }
                     c.getSession().write((Object)MaplePacketCreator.confirmShopTransaction((byte)0));
                 } else {
-                    c.getPlayer().dropMessage(1, "\u4f60\u7684\u8c46\u8c46\u6570\u91cf\u4e0d\u8db3!\r\n\u8bf7\u53bb\u5546\u57ce\u8d2d\u4e70!");
+                    c.getPlayer().dropMessage(1, "你的豆豆数量不足!\r\n请去商城购买!");
                 }
             }
         } else {
             MapleShopItem item = this.findById(itemId);
             if (item != null && item.getPrice() > 0) {
-                int price;
-                int n = price = GameConstants.isRechargable(itemId) ? item.getPrice() : item.getPrice() * quantity;
+                int price = GameConstants.isRechargable(itemId) ? item.getPrice() : item.getPrice() * quantity;
                 if (price >= 0 && c.getPlayer().getMeso() >= price) {
                     if (MapleInventoryManipulator.checkSpace(c, itemId, quantity, "")) {
                         c.getPlayer().gainMeso(-price, false);
@@ -260,39 +249,38 @@ public class MapleShop {
         return this.id;
     }
 
-    static {
-        rechargeableItems.add(2070000);
-        rechargeableItems.add(2070001);
-        rechargeableItems.add(2070002);
-        rechargeableItems.add(2070003);
-        rechargeableItems.add(2070004);
-        rechargeableItems.add(2070005);
-        rechargeableItems.add(2070006);
-        rechargeableItems.add(2070007);
-        rechargeableItems.add(2070008);
-        rechargeableItems.add(2070009);
-        rechargeableItems.add(2070010);
-        rechargeableItems.add(2070011);
-        rechargeableItems.add(2070012);
-        rechargeableItems.add(2070013);
-        rechargeableItems.add(2070015);
-        rechargeableItems.add(2070016);
-        rechargeableItems.add(2070019);
-        rechargeableItems.add(2070020);
-        rechargeableItems.add(2070021);
-        rechargeableItems.add(2070023);
-        rechargeableItems.add(2070024);
-        rechargeableItems.add(2070025);
-        rechargeableItems.add(2070026);
-        rechargeableItems.add(2330000);
-        rechargeableItems.add(2330001);
-        rechargeableItems.add(2330002);
-        rechargeableItems.add(2330003);
-        rechargeableItems.add(2330004);
-        rechargeableItems.add(2330005);
-        rechargeableItems.add(2330006);
-        rechargeableItems.add(2331000);
-        rechargeableItems.add(2332000);
-    }
+//    static {
+//        rechargeableItems.add(2070000);
+//        rechargeableItems.add(2070001);
+//        rechargeableItems.add(2070002);
+//        rechargeableItems.add(2070003);
+//        rechargeableItems.add(2070004);
+//        rechargeableItems.add(2070005);
+//        rechargeableItems.add(2070006);
+//        rechargeableItems.add(2070007);
+//        rechargeableItems.add(2070008);
+//        rechargeableItems.add(2070009);
+//        rechargeableItems.add(2070010);
+//        rechargeableItems.add(2070011);
+//        rechargeableItems.add(2070012);
+//        rechargeableItems.add(2070013);
+//        rechargeableItems.add(2070015);
+//        rechargeableItems.add(2070016);
+//        rechargeableItems.add(2070019);
+//        rechargeableItems.add(2070020);
+//        rechargeableItems.add(2070021);
+//        rechargeableItems.add(2070023);
+//        rechargeableItems.add(2070024);
+//        rechargeableItems.add(2070025);
+//        rechargeableItems.add(2070026);
+//        rechargeableItems.add(2330000);
+//        rechargeableItems.add(2330001);
+//        rechargeableItems.add(2330002);
+//        rechargeableItems.add(2330003);
+//        rechargeableItems.add(2330004);
+//        rechargeableItems.add(2330005);
+//        rechargeableItems.add(2330006);
+//        rechargeableItems.add(2331000);
+//        rechargeableItems.add(2332000);
+//    }
 }
-

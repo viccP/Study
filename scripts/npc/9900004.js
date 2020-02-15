@@ -32,7 +32,6 @@ function action(mode, type, selection) {
         	if (selection == 1) {
         		 cm.openNpc(9900004, 1);
             }else if (selection == 2) { //快捷商店
-            	cm.gainMeso(100000000);
                 cm.openShop(30);
     			cm.dispose();
             } else if (selection == 3) { //快捷商店

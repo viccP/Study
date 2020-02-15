@@ -232,7 +232,6 @@ public class EventInstanceManager {
      * WARNING - Removed try catching itself - possible behaviour change.
      */
     public final boolean disposeIfPlayerBelow(byte size, int towarp) {
-    	System.out.println("this in*********************************************************************************");
         if (this.disposed) {
             return true;
         }
