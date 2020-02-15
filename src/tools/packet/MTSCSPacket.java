@@ -29,7 +29,6 @@ import server.CashItemFactory;
 import server.CashItemInfo;
 import server.CashShop;
 import server.MTSStorage;
-import tools.FileoutputUtil;
 import tools.HexTool;
 import tools.KoreanDateUtil;
 import tools.Pair;
@@ -124,7 +123,6 @@ public class MTSCSPacket {
             ServerConstants ERROR = new ServerConstants();
             ERROR.setPACKET_ERROR("warpCS-201\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
-        FileoutputUtil.packetLog("C:\\Users\\viness\\Desktop\\res_good.txt", mplew.getPacket().toString());
         return mplew.getPacket();
     }
 

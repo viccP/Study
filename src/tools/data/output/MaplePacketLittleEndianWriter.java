@@ -7,13 +7,11 @@ import java.io.ByteArrayOutputStream;
 
 import handling.ByteArrayMaplePacket;
 import handling.MaplePacket;
-import server.ServerProperties;
 import tools.HexTool;
 
 public class MaplePacketLittleEndianWriter
 extends GenericLittleEndianWriter {
     private final ByteArrayOutputStream baos;
-    private static boolean debugMode = Boolean.parseBoolean(ServerProperties.getProperty("KinMS.Debug", "false"));
 
     public MaplePacketLittleEndianWriter() {
         this(32);
@@ -25,10 +23,6 @@ extends GenericLittleEndianWriter {
     }
 
     public final MaplePacket getPacket() {
-        if (debugMode) {
-            ByteArrayMaplePacket packet = new ByteArrayMaplePacket(this.baos.toByteArray());
-            System.out.println("Packet to be sent:\n" + ((Object)packet).toString());
-        }
         return new ByteArrayMaplePacket(this.baos.toByteArray());
     }
 

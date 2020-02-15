@@ -56,9 +56,7 @@ import handling.login.handler.PacketErrorHandler;
 import handling.mina.MaplePacketDecoder;
 import server.MTSStorage;
 import server.Randomizer;
-import server.ServerProperties;
 import tools.FileoutputUtil;
-import tools.HexTool;
 import tools.MapleAESOFB;
 import tools.Pair;
 import tools.data.input.ByteArrayByteStream;
@@ -73,7 +71,6 @@ extends IoHandlerAdapter {
     private final boolean cs;
     private final List<String> BlockedIP = new ArrayList<String>();
     private final Map<String, Pair<Long, Byte>> tracker = new ConcurrentHashMap<String, Pair<Long, Byte>>();
-    private static final boolean debugMode = Boolean.parseBoolean(ServerProperties.getProperty("KinMS.Debug", "false"));
     private static final EnumSet<RecvPacketOpcode> blocked = EnumSet.noneOf(RecvPacketOpcode.class);
 
     public MapleServerHandler(int channel, boolean cs) {
@@ -188,11 +185,6 @@ extends IoHandlerAdapter {
             for (RecvPacketOpcode recv : RecvPacketOpcode.values()) {
                 MapleClient c;
                 if (recv.getValue() != header_num) continue;
-                if (debugMode) {
-                    StringBuilder sb = new StringBuilder("Received data \u5df2\u8655\u7406 :" + String.valueOf(recv) + "\n");
-                    sb.append(HexTool.toString((byte[])message)).append("\n").append(HexTool.toStringFromAscii((byte[])message));
-                    System.out.println(sb.toString());
-                }
                 if (!(c = (MapleClient)session.getAttribute("CLIENT")).isReceiving()) {
                     return;
                 }
@@ -207,11 +199,6 @@ extends IoHandlerAdapter {
                 }
                 MapleServerHandler.handlePacket(recv, slea, c, this.cs);
                 return;
-            }
-            if (debugMode) {
-                StringBuilder sb = new StringBuilder("Received data \u672a\u8655\u7406 : ");
-                sb.append(HexTool.toString((byte[])message)).append("\n").append(HexTool.toStringFromAscii((byte[])message));
-                System.out.println(sb.toString());
             }
         }
         catch (Exception e) {

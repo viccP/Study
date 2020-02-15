@@ -3,10 +3,6 @@
  */
 package scripting;
 
-import client.MapleCharacter;
-import client.MapleClient;
-import database.DatabaseConnection;
-import java.io.PrintStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,10 +11,12 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
-import scripting.AbstractScriptManager;
-import scripting.ReactorActionManager;
+
+import client.MapleClient;
+import database.DatabaseConnection;
 import server.maps.MapleReactor;
 import server.maps.ReactorDropEntry;
 import tools.FileoutputUtil;
@@ -36,7 +34,7 @@ extends AbstractScriptManager {
         try {
             Invocable iv;
             if (c.getPlayer().isGM()) {
-                c.getPlayer().dropMessage("[\u7cfb\u7edf\u63d0\u793a]\u60a8\u5df2\u7ecf\u5efa\u7acb\u4e0ereactor:" + reactor.getReactorId() + "\u7684\u5bf9\u8bdd\u3002");
+                c.getPlayer().dropMessage("[系统提示]您已经建立与reactor:" + reactor.getReactorId() + "的对话。");
             }
             if ((iv = this.getInvocable("reactor/" + reactor.getReactorId() + ".js", c)) == null) {
                 return;
@@ -100,4 +98,3 @@ extends AbstractScriptManager {
         this.drops.clear();
     }
 }
-

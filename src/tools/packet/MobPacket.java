@@ -162,7 +162,6 @@ public class MobPacket {
 
     public static MaplePacket moveMonster(boolean useskill, int skill, int skill1, int skill2, int skill3, int skill4, int oid, Point startPos, Point endPos, List<LifeMovementFragment> moves) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-       
         mplew.writeShort(SendPacketOpcode.MOVE_MONSTER.getValue());
         mplew.writeInt(oid);
         mplew.write(0);
@@ -370,7 +369,7 @@ public class MobPacket {
         mplew.write(skillLevel);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("moveMonsterResponse-489\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("moveMonsterResponse-489:\n" + mplew.getPacket() + "\n");
         }
         return mplew.getPacket();
     }

@@ -137,9 +137,9 @@ public class CheatTracker {
             ++this.monsterMoveCount;
             if (this.monsterMoveCount > 50) {
                 this.monsterMoveCount = 0;
-                World.Broadcast.broadcastGMMessage(MaplePacketCreator.serverNotice(6, "[\u7ba1\u7406\u54e1\u8a0a\u606f] \u5f00\u6302\u73a9\u5bb6[" + MapleCharacterUtil.makeMapleReadable(chr.getName()) + "] \u5730\u56feID[" + chr.getMapId() + "] \u6000\u7591\u4f7f\u7528\u5438\u602a! ").getBytes());
-                String note = "\u65f6\u95f4\uff1a" + FileoutputUtil.CurrentReadable_Time() + " " + "|| \u73a9\u5bb6\u540d\u5b57\uff1a" + chr.getName() + "" + "|| \u73a9\u5bb6\u5730\u56fe\uff1a" + chr.getMapId() + "\r\n";
-                FileoutputUtil.packetLog("log\\\u5438\u602a\u68c0\u6d4b\\" + chr.getName() + ".log", note);
+                World.Broadcast.broadcastGMMessage(MaplePacketCreator.serverNotice(6, "[管理員訊息] 开挂玩家[" + MapleCharacterUtil.makeMapleReadable(chr.getName()) + "] 地图ID[" + chr.getMapId() + "] 怀疑使用吸怪! ").getBytes());
+                String note = "时间：" + FileoutputUtil.CurrentReadable_Time() + " " + "|| 玩家名字：" + chr.getName() + "" + "|| 玩家地图：" + chr.getMapId() + "\r\n";
+                FileoutputUtil.packetLog("log\\吸怪检测\\" + chr.getName() + ".log", note);
             }
         } else {
             this.lastMonsterMove = pos;
@@ -151,7 +151,7 @@ public class CheatTracker {
         if (dmg > 2000 && this.lastDamage == (long)dmg && this.chr.get() != null && (((MapleCharacter)this.chr.get()).getLevel() < 180 || (double)dmg > expected * 2.0)) {
             ++this.numSameDamage;
             if (this.numSameDamage > 5) {
-                this.registerOffense(CheatingOffense.SAME_DAMAGE, this.numSameDamage + " times, \u653b\u51fb\u4f24\u5bb3 " + dmg + ", \u9884\u671f\u4f24\u5bb3 " + expected + " [\u7b49\u7ea7: " + ((MapleCharacter)this.chr.get()).getLevel() + ", \u804c\u4e1a: " + ((MapleCharacter)this.chr.get()).getJob() + "]");
+                this.registerOffense(CheatingOffense.SAME_DAMAGE, this.numSameDamage + " times, 攻击伤害 " + dmg + ", 预期伤害 " + expected + " [等级: " + ((MapleCharacter)this.chr.get()).getLevel() + ", 职业: " + ((MapleCharacter)this.chr.get()).getJob() + "]");
                 this.numSameDamage = 0;
             }
         } else {
@@ -281,10 +281,10 @@ public class CheatTracker {
             case FASTATTACK2: {
                 --this.gm_message;
                 if (this.gm_message != 0) break;
-                System.out.println(MapleCharacterUtil.makeMapleReadable(chrhardref.getName()) + "\u7591\u4f3c\u4f7f\u7528\u5916\u639b");
-                World.Broadcast.broadcastGMMessage(MaplePacketCreator.serverNotice(6, "[\u7ba1\u7406\u54e1\u8a0a\u606f] \u5f00\u6302\u73a9\u5bb6[" + MapleCharacterUtil.makeMapleReadable(chrhardref.getName()) + "] \u5730\u56feID[" + chrhardref.getMapId() + "] suspected of hacking! " + StringUtil.makeEnumHumanReadable(offense.name()) + (param == null ? "" : " - " + param)).getBytes());
-                String note = "\u65f6\u95f4\uff1a" + FileoutputUtil.CurrentReadable_Time() + " " + "|| \u73a9\u5bb6\u540d\u5b57\uff1a" + chrhardref.getName() + "" + "|| \u73a9\u5bb6\u5730\u56fe\uff1a" + chrhardref.getMapId() + "" + "|| \u5916\u6302\u7c7b\u578b\uff1a" + offense.name() + "\r\n";
-                FileoutputUtil.packetLog("log\\\u5916\u6302\u68c0\u6d4b\\" + chrhardref.getName() + ".log", note);
+                System.out.println(MapleCharacterUtil.makeMapleReadable(chrhardref.getName()) + "疑似使用外掛");
+                World.Broadcast.broadcastGMMessage(MaplePacketCreator.serverNotice(6, "[管理員訊息] 开挂玩家[" + MapleCharacterUtil.makeMapleReadable(chrhardref.getName()) + "] 地图ID[" + chrhardref.getMapId() + "] suspected of hacking! " + StringUtil.makeEnumHumanReadable(offense.name()) + (param == null ? "" : " - " + param)).getBytes());
+                String note = "时间：" + FileoutputUtil.CurrentReadable_Time() + " " + "|| 玩家名字：" + chrhardref.getName() + "" + "|| 玩家地图：" + chrhardref.getMapId() + "" + "|| 外挂类型：" + offense.name() + "\r\n";
+                FileoutputUtil.packetLog("log\\外挂检测\\" + chrhardref.getName() + ".log", note);
                 this.gm_message = 50;
             }
         }
@@ -408,4 +408,3 @@ public class CheatTracker {
     }
 
 }
-

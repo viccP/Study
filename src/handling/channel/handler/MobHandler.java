@@ -79,9 +79,6 @@ public class MobHandler
     slea.read(13);
     Point startPos = slea.readPos();
     List<LifeMovementFragment> res = MovementParse.parseMovement(slea, 2, chr);
-    if(skill==0xFF) {
-    	return;
-    }
     c.getSession().write(MobPacket.moveMonsterResponse(monster.getObjectId(), moveid, monster.getMp(), monster.isControllerHasAggro(), realskill, level));
     if ((res != null) && (chr != null))
     {

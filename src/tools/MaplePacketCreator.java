@@ -96,7 +96,7 @@ public class MaplePacketCreator {
         mplew.write(new byte[]{1, 0, 0, 0, 0});
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getServerIP-124\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getServerIP-124：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -133,7 +133,7 @@ public class MaplePacketCreator {
         mplew.writeLong(PacketHelper.getTime(System.currentTimeMillis()));
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getCharInfo-175\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getCharInfo-175：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -190,7 +190,7 @@ public class MaplePacketCreator {
         mplew.writeShort(0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("updatePlayerStats-238\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("updatePlayerStats-238：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -202,7 +202,7 @@ public class MaplePacketCreator {
         mplew.writeInt(0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("blockedPortal-253\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("blockedPortal-253：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -220,7 +220,7 @@ public class MaplePacketCreator {
         mplew.write(1);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("weirdStatUpdate-276\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("weirdStatUpdate-276：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -238,7 +238,7 @@ public class MaplePacketCreator {
         mplew.writeShort(0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("updateSp-310\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("updateSp-310：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -257,7 +257,7 @@ public class MaplePacketCreator {
         mplew.writeLong(PacketHelper.getTime(System.currentTimeMillis()));
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getWarpToMap-336\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getWarpToMap-336：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -269,7 +269,7 @@ public class MaplePacketCreator {
         mplew.write(portal);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("instantMapWarp-353\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("instantMapWarp-353：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -284,7 +284,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("spawnPortal-374\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("spawnPortal-374：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -297,7 +297,7 @@ public class MaplePacketCreator {
         mplew.writePos(pos);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("spawnDoor-392\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("spawnDoor-392：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -315,7 +315,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("removeDoor-415\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("removeDoor-415：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -336,7 +336,7 @@ public class MaplePacketCreator {
         mplew.write(animated ? 0 : 1);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("spawnSummon-452\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("spawnSummon-452：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -349,7 +349,7 @@ public class MaplePacketCreator {
         mplew.write(animated ? 4 : 1);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("removeSummon-470\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("removeSummon-470：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -360,7 +360,7 @@ public class MaplePacketCreator {
         mplew.write(1);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getRelogResponse-486\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getRelogResponse-486：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -371,7 +371,7 @@ public class MaplePacketCreator {
         mplew.write(type);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("serverBlocked-516\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("serverBlocked-516：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -417,7 +417,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("serverMessage-596\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("serverMessage-596：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -431,7 +431,7 @@ public class MaplePacketCreator {
         PacketHelper.addItemInfo(mplew, item, true, true);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getGachaponMega-616\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getGachaponMega-616：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -452,7 +452,7 @@ public class MaplePacketCreator {
         mplew.write(ear ? 1 : 0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("tripleSmega-644\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("tripleSmega-644：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -469,7 +469,7 @@ public class MaplePacketCreator {
         PacketHelper.addCharLook(mplew, chr, true);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getAvatarMega-665\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getAvatarMega-665：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -489,7 +489,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("itemMegaphone-689\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("itemMegaphone-689：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -509,7 +509,7 @@ public class MaplePacketCreator {
         mplew.write(show ? 1 : 0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("spawnNPC-713\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("spawnNPC-713：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -521,7 +521,7 @@ public class MaplePacketCreator {
         mplew.writeInt(objectid);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("removeNPC-729\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("removeNPC-729：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -542,7 +542,7 @@ public class MaplePacketCreator {
         mplew.write(MiniMap ? 1 : 0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("spawnNPCRequestController-754\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("spawnNPCRequestController-754：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -599,7 +599,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("spawnPlayerNPC-812\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("spawnPlayerNPC-812：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -614,7 +614,7 @@ public class MaplePacketCreator {
         mplew.write(show);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getChatText-831\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getChatText-831：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -627,7 +627,7 @@ public class MaplePacketCreator {
         mplew.writeZeroBytes(17);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("GameMaster_Func-848\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("GameMaster_Func-848：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -639,7 +639,7 @@ public class MaplePacketCreator {
         mplew.writeInt(value);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("testCombo-864\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("testCombo-864：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -649,7 +649,7 @@ public class MaplePacketCreator {
         return new ByteArrayMaplePacket(HexTool.getByteArrayFromHexString(hex));
     }
 
-    public static final MaplePacket GainEXP_Monster(int gain, boolean white, int partyinc, int Class_Bonus_EXP, int Equipment_Bonus_EXP, int Premium_Bonus_EXP, int \u7ed3\u5a5a\u7ecf\u9a8c) {
+    public static final MaplePacket GainEXP_Monster(int gain, boolean white, int partyinc, int Class_Bonus_EXP, int Equipment_Bonus_EXP, int Premium_Bonus_EXP, int 结婚经验) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
         
         mplew.writeShort(SendPacketOpcode.SHOW_STATUS_INFO.getValue());
@@ -659,14 +659,14 @@ public class MaplePacketCreator {
         mplew.write(0);
         mplew.writeInt(0);
         mplew.writeShort(0);
-        mplew.writeInt(\u7ed3\u5a5a\u7ecf\u9a8c);
+        mplew.writeInt(结婚经验);
         mplew.write(0);
         mplew.writeInt(partyinc);
         mplew.writeInt(Equipment_Bonus_EXP);
         mplew.writeInt(Premium_Bonus_EXP);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("GainEXP_Monster-903\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("GainEXP_Monster-903：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -689,7 +689,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("GainEXP_Others-935\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("GainEXP_Others-935：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -702,7 +702,7 @@ public class MaplePacketCreator {
         mplew.writeInt(gain);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getShowFameGain-952\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getShowFameGain-952：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -722,7 +722,7 @@ public class MaplePacketCreator {
         mplew.writeShort(0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("showMesoGain-976\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("showMesoGain-976：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -751,7 +751,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getShowItemGain-1014\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getShowItemGain-1014：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -768,7 +768,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("showRewardItemAnimationA-1035\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("showRewardItemAnimationA-1035：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -786,7 +786,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("showRewardItemAnimationB-1057\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("showRewardItemAnimationB-1057：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -816,7 +816,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("dropItemFromMapObject-1095\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("dropItemFromMapObject-1095：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -1620,7 +1620,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("spawnPlayerMapobject-2057\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("spawnPlayerMapobject-2057：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -1632,8 +1632,8 @@ public class MaplePacketCreator {
         mplew.writeInt(cid);
         ServerConstants ERROR = new ServerConstants();
         if (ServerConstants.PACKET_ERROR_OFF && ERROR.getChannel() != 1 || ERROR.getRemovePlayerFromMap() != 1) {
-            String note = "\u65f6\u95f4\uff1a" + FileoutputUtil.CurrentReadable_Time() + " " + "|| \u73a9\u5bb6\u540d\u5b57\uff1a" + chr.getName() + "" + "|| \u73a9\u5bb6\u5730\u56fe\uff1a" + chr.getMapId() + "\r\n" + "38\u9519\u8bef\uff1a" + ERROR.getPACKET_ERROR() + "\r\n\r\n";
-            FileoutputUtil.packetLog("C:\\Users\\viness\\Desktop\\logs\\" + chr.getName() + "掉线.log", note);
+            String note = "时间：" + FileoutputUtil.CurrentReadable_Time() + " " + "|| 玩家名字：" + chr.getName() + "" + "|| 玩家地图：" + chr.getMapId() + "\r\n" + "38错误：" + ERROR.getPACKET_ERROR() + "\r\n\r\n";
+            FileoutputUtil.packetLog(ServerConstants.LOG_FILE + chr.getName() + "掉线.log", note);
         }
         return mplew.getPacket();
     }
@@ -1646,7 +1646,7 @@ public class MaplePacketCreator {
         mplew.writeInt(expression);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("facialExpression-2092\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("facialExpression-2092：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -1660,7 +1660,7 @@ public class MaplePacketCreator {
         PacketHelper.serializeMovementList(mplew, moves);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("movePlayer-2111\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("movePlayer-2111：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -1675,7 +1675,7 @@ public class MaplePacketCreator {
         PacketHelper.serializeMovementList(mplew, moves);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("moveSummon-2131\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("moveSummon-2131：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -1686,7 +1686,7 @@ public class MaplePacketCreator {
         mplew.writeShort(SendPacketOpcode.SUMMON_ATTACK.getValue());
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("summonAttack-2158\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("summonAttack-2158：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -1736,7 +1736,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("closeRangeAttack-2219\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("closeRangeAttack-2219：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -1775,7 +1775,7 @@ public class MaplePacketCreator {
         mplew.writePos(pos);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("rangedAttack-2265\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("rangedAttack-2265：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -1812,7 +1812,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("magicAttack-2309\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("magicAttack-2309：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -1838,7 +1838,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getNPCShop-2341\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getNPCShop-2341：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -1850,7 +1850,7 @@ public class MaplePacketCreator {
         mplew.write(code);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("confirmShopTransaction-2357\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("confirmShopTransaction-2357：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -1871,7 +1871,7 @@ public class MaplePacketCreator {
         PacketHelper.addItemInfo(mplew, item, true, false);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("addInventorySlot-2384\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("addInventorySlot-2384：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -1888,7 +1888,7 @@ public class MaplePacketCreator {
         mplew.writeShort(item.getQuantity());
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("updateInventorySlot-2411\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("updateInventorySlot-2411：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -1911,7 +1911,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("moveInventoryItemB-2439\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("moveInventoryItemB-2439：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -1929,7 +1929,7 @@ public class MaplePacketCreator {
         mplew.writeShort(total);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("moveAndMergeInventoryItem-2461\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("moveAndMergeInventoryItem-2461：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -1948,7 +1948,7 @@ public class MaplePacketCreator {
         mplew.writeShort(dstQ);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("moveAndMergeWithRestInventoryItem-2484\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("moveAndMergeWithRestInventoryItem-2484：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -1963,7 +1963,7 @@ public class MaplePacketCreator {
         mplew.writeShort(slot);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("clearInventoryItem-2503\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("clearInventoryItem-2503：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -1995,7 +1995,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("updateSpecialItemUseB-2541\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("updateSpecialItemUseB-2541：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -2024,7 +2024,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("updateSpecialItemUse_B-2576\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("updateSpecialItemUse_B-2576：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -2057,7 +2057,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("scrolledItem-2614\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("scrolledItem-2614：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -2087,7 +2087,7 @@ public class MaplePacketCreator {
         mplew.write(0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getScrollEffect-2646\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getScrollEffect-2646：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -2100,7 +2100,7 @@ public class MaplePacketCreator {
         mplew.writeInt(itemid);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getPotentialEffect-2663\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getPotentialEffect-2663：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -2113,7 +2113,7 @@ public class MaplePacketCreator {
         mplew.writeShort(pos);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getPotentialReset-2680\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getPotentialReset-2680：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -2126,7 +2126,7 @@ public class MaplePacketCreator {
         mplew.writeZeroBytes(4);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("ItemMaker_Success-2697\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("ItemMaker_Success-2697：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -2140,7 +2140,7 @@ public class MaplePacketCreator {
         mplew.writeZeroBytes(4);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("ItemMaker_Success_3rdParty-2715\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("ItemMaker_Success_3rdParty-2715：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -2154,7 +2154,7 @@ public class MaplePacketCreator {
         mplew.writeShort(655);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("explodeDrop-2733\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("explodeDrop-2733：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -2178,7 +2178,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("removeItemFromMapB-2762\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("removeItemFromMapB-2762：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -2196,7 +2196,7 @@ public class MaplePacketCreator {
         mplew.writeZeroBytes(1);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("updateCharLook-2784\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("updateCharLook-2784：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -2224,7 +2224,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("dropInventoryItem-2818\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("dropInventoryItem-2818：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -2239,7 +2239,7 @@ public class MaplePacketCreator {
         mplew.writeShort(item.getQuantity());
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("dropInventoryItemUpdate-2838\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("dropInventoryItemUpdate-2838：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -2274,7 +2274,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("damagePlayer-2873\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("damagePlayer-2873：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -2301,7 +2301,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("updateQuest-2902\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("updateQuest-2902：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -2315,7 +2315,7 @@ public class MaplePacketCreator {
         mplew.writeMapleAsciiString(data);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("updateInfoQuest-2920\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("updateInfoQuest-2920：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -2330,7 +2330,7 @@ public class MaplePacketCreator {
         mplew.writeInt(0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("updateQuestInfo-2939\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("updateQuestInfo-2939：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -2345,7 +2345,7 @@ public class MaplePacketCreator {
         mplew.writeInt(nextquest);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("updateQuestFinish-2956\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("updateQuestFinish-2956：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -2424,19 +2424,19 @@ public class MaplePacketCreator {
         for (IItem item : chairItems) {
             mplew.writeInt(item.getItemId());
         }
-        MapleInventory \u52cb\u7ae0\u5217\u8868 = chr.getInventory(MapleInventoryType.EQUIP);
-        ArrayList<Item> \u52cb\u7ae0\u5217\u8868Items = new ArrayList<Item>();
-        for (IItem item : \u52cb\u7ae0\u5217\u8868.list()) {
+        MapleInventory 勋章列表 = chr.getInventory(MapleInventoryType.EQUIP);
+        ArrayList<Item> 勋章列表Items = new ArrayList<Item>();
+        for (IItem item : 勋章列表.list()) {
             if (item.getItemId() < 1142000 || item.getItemId() > 1142999) continue;
-            \u52cb\u7ae0\u5217\u8868Items.add((Item)item);
+            勋章列表Items.add((Item)item);
         }
-        mplew.writeInt(\u52cb\u7ae0\u5217\u8868Items.size());
-        for (IItem item : \u52cb\u7ae0\u5217\u8868Items) {
+        mplew.writeInt(勋章列表Items.size());
+        for (IItem item : 勋章列表Items) {
             mplew.writeInt(item.getItemId());
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("charInfo-3080\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("charInfo-3080：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -2527,7 +2527,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("giveMount-3191\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("giveMount-3191：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -2618,7 +2618,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("givePirate-3285\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("givePirate-3285：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -2644,7 +2644,7 @@ public class MaplePacketCreator {
         mplew.writeShort(infusion ? 600 : 0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("giveForeignPirate-3310\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("giveForeignPirate-3310：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -2663,7 +2663,7 @@ public class MaplePacketCreator {
         mplew.writeShort(0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("giveHoming-3333\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("giveHoming-3333：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -2696,7 +2696,7 @@ public class MaplePacketCreator {
         mplew.writeInt(bar >= 10000 ? bufflength : 0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("giveEnergyChargeTestA-3357\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("giveEnergyChargeTestA-3357：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -2720,12 +2720,12 @@ public class MaplePacketCreator {
         mplew.write(0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("givePirateBuff-3385\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("givePirateBuff-3385：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
 
-    public static MaplePacket \u80fd\u91cf\u6761(List<Pair<MapleBuffStat, Integer>> statups, int duration) {
+    public static MaplePacket 能量条(List<Pair<MapleBuffStat, Integer>> statups, int duration) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
         
         mplew.writeShort(SendPacketOpcode.GIVE_BUFF.getValue());
@@ -2744,7 +2744,7 @@ public class MaplePacketCreator {
         mplew.write(2);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("\u80fd\u91cf\u6761-3413\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("能量条-3413：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -2762,7 +2762,7 @@ public class MaplePacketCreator {
         mplew.writeInt(bar >= 10000 ? bufflength : 0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("giveEnergyChargeTestB-3439\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("giveEnergyChargeTestB-3439：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -2784,7 +2784,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("giveBuff-3469\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("giveBuff-3469：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -2805,7 +2805,7 @@ public class MaplePacketCreator {
         mplew.write(2);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("giveDebuff-3496\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("giveDebuff-3496：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -2823,7 +2823,7 @@ public class MaplePacketCreator {
         mplew.write(3);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("giveForeignDebuff-3523\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("giveForeignDebuff-3523：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -2837,7 +2837,7 @@ public class MaplePacketCreator {
         mplew.writeLong(first ? 0L : mask);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("cancelForeignDebuff-3541\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("cancelForeignDebuff-3541：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -2857,7 +2857,7 @@ public class MaplePacketCreator {
         mplew.write(0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("showMonsterRiding-3567\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("showMonsterRiding-3567：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -2887,7 +2887,7 @@ public class MaplePacketCreator {
         mplew.write(0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("giveForeignBuff-3605\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("giveForeignBuff-3605：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -2900,7 +2900,7 @@ public class MaplePacketCreator {
         MaplePacketCreator.writeLongMaskFromList(mplew, statups);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("cancelForeignBuff-3623\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("cancelForeignBuff-3623：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -2913,7 +2913,7 @@ public class MaplePacketCreator {
         MaplePacketCreator.writeLongMaskFromListM(mplew, statups);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("cancelForeignBuffA-3641\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("cancelForeignBuffA-3641：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -2928,7 +2928,7 @@ public class MaplePacketCreator {
         mplew.write(3);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("cancelForeignBuffA-3662\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("cancelForeignBuffA-3662：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -2941,7 +2941,7 @@ public class MaplePacketCreator {
         mplew.write(3);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("cancelBuffMONSTER-3686\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("cancelBuffMONSTER-3686：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -2955,7 +2955,7 @@ public class MaplePacketCreator {
         mplew.write(3);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("cancelBuffMONSTERS-3711\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("cancelBuffMONSTERS-3711：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -2968,7 +2968,7 @@ public class MaplePacketCreator {
         mplew.write(3);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("cancelBuffA-3735\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("cancelBuffA-3735：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -2981,7 +2981,7 @@ public class MaplePacketCreator {
         mplew.writeLong(0L);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("cancelHoming-3753\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("cancelHoming-3753：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -2995,7 +2995,7 @@ public class MaplePacketCreator {
         mplew.write(0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("cancelDebuff-3771\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("cancelDebuff-3771：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3011,7 +3011,7 @@ public class MaplePacketCreator {
         mplew.write(levelup ? 1 : 0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("updateMount-3791\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("updateMount-3791：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3027,7 +3027,7 @@ public class MaplePacketCreator {
         mplew.writeInt(chr.getMount().getFatigue());
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("mountInfo-3811\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("mountInfo-3811：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3041,7 +3041,7 @@ public class MaplePacketCreator {
         mplew.writeMapleAsciiString(c.getName());
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getPlayerShopNewVisitor-3830\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getPlayerShopNewVisitor-3830：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3053,7 +3053,7 @@ public class MaplePacketCreator {
         mplew.write(HexTool.getByteArrayFromHexString("0A 0" + slot));
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getPlayerShopRemoveVisitor-3846\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getPlayerShopRemoveVisitor-3846：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3068,22 +3068,22 @@ public class MaplePacketCreator {
         mplew.writeMapleAsciiString(c.getName());
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getTradePartnerAdd-3866\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getTradePartnerAdd-3866：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
 
-    public static MaplePacket getTradeInvite(MapleCharacter c, boolean \u73b0\u91d1\u4ea4\u6613) {
+    public static MaplePacket getTradeInvite(MapleCharacter c, boolean 现金交易) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
         
         mplew.writeShort(SendPacketOpcode.PLAYER_INTERACTION.getValue());
         mplew.write(2);
-        mplew.write(\u73b0\u91d1\u4ea4\u6613 ? 6 : 3);
+        mplew.write(现金交易 ? 6 : 3);
         mplew.writeMapleAsciiString(c.getName());
         mplew.writeInt(0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getTradeInvite-3885\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getTradeInvite-3885：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3097,7 +3097,7 @@ public class MaplePacketCreator {
         mplew.writeInt(meso);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getTradeMesoSet-3903\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getTradeMesoSet-3903：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3111,17 +3111,17 @@ public class MaplePacketCreator {
         PacketHelper.addItemInfo(mplew, item, false, false, true);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getTradeItemAdd-3921\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getTradeItemAdd-3921：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
 
-    public static MaplePacket getTradeStart(MapleClient c, MapleTrade trade, byte number, boolean \u73b0\u91d1\u4ea4\u6613) {
+    public static MaplePacket getTradeStart(MapleClient c, MapleTrade trade, byte number, boolean 现金交易) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
         
         mplew.writeShort(SendPacketOpcode.PLAYER_INTERACTION.getValue());
         mplew.write(5);
-        mplew.write(\u73b0\u91d1\u4ea4\u6613 ? 6 : 3);
+        mplew.write(现金交易 ? 6 : 3);
         mplew.write(2);
         mplew.write(number);
         if (number == 1) {
@@ -3135,7 +3135,7 @@ public class MaplePacketCreator {
         mplew.write(255);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getTradeStart-3952\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getTradeStart-3952：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3147,7 +3147,7 @@ public class MaplePacketCreator {
         mplew.write(16);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getTradeConfirmation-3968\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getTradeConfirmation-3968：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3161,7 +3161,7 @@ public class MaplePacketCreator {
         mplew.write(message);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("TradeMessage-3991\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("TradeMessage-3991：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3175,7 +3175,7 @@ public class MaplePacketCreator {
         mplew.write(unsuccessful == 0 ? 2 : (unsuccessful == 1 ? 9 : 10));
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getTradeCancel-4009\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getTradeCancel-4009：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3192,7 +3192,7 @@ public class MaplePacketCreator {
         mplew.write(HexTool.getByteArrayFromHexString(endBytes));
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getNPCTalk-4030\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getNPCTalk-4030：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3209,7 +3209,7 @@ public class MaplePacketCreator {
         mplew.writeMapleAsciiString(sel);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getMapSelection-4051\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getMapSelection-4051：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3229,7 +3229,7 @@ public class MaplePacketCreator {
         mplew.writeInt(card);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getNPCTalkStyle-4075\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getNPCTalkStyle-4075：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3248,7 +3248,7 @@ public class MaplePacketCreator {
         mplew.writeInt(0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getNPCTalkNum-4098\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getNPCTalkNum-4098：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3265,7 +3265,7 @@ public class MaplePacketCreator {
         mplew.writeInt(0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getNPCTalkText-4119\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getNPCTalkText-4119：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3278,7 +3278,7 @@ public class MaplePacketCreator {
         mplew.write(effect);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("showForeignEffect-4136\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("showForeignEffect-4136：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3302,7 +3302,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("showBuffeffectA-4165\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("showBuffeffectA-4165：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3325,7 +3325,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("showOwnBuffEffectB-4194\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("showOwnBuffEffectB-4194：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3359,7 +3359,7 @@ public class MaplePacketCreator {
         mplew.write(effect);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("showSpecialEffectA-4236\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("showSpecialEffectA-4236：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3372,7 +3372,7 @@ public class MaplePacketCreator {
         mplew.write(effect);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("showSpecialEffectB-4253\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("showSpecialEffectB-4253：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3389,7 +3389,7 @@ public class MaplePacketCreator {
         mplew.write(1);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("updateSkill-4275\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("updateSkill-4275：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3409,12 +3409,12 @@ public class MaplePacketCreator {
         mplew.writeZeroBytes(8);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("updateQuestMobKills-4300\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("updateQuestMobKills-4300：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
 
-    public static MaplePacket \u6e38\u620f\u5c4f\u5e55\u4e2d\u95f4\u9ec4\u8272\u5b57\u4f53(String status) {
+    public static MaplePacket 游戏屏幕中间黄色字体(String status) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
         
         mplew.writeShort(SendPacketOpcode.SHOW_STATUS_INFO.getValue());
@@ -3425,12 +3425,12 @@ public class MaplePacketCreator {
         mplew.writeZeroBytes(8);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("\u6e38\u620f\u5c4f\u5e55\u4e2d\u95f4\u9ec4\u8272\u5b57\u4f53-4325\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("游戏屏幕中间黄色字体-4325：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
 
-    public static MaplePacket \u6e38\u620f\u5c4f\u5e55\u4e2d\u95f4\u9ec4\u8272\u5b57\u4f53(String status, int id) {
+    public static MaplePacket 游戏屏幕中间黄色字体(String status, int id) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
         
         mplew.writeShort(SendPacketOpcode.SHOW_STATUS_INFO.getValue());
@@ -3441,7 +3441,7 @@ public class MaplePacketCreator {
         mplew.writeZeroBytes(8);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("\u6e38\u620f\u5c4f\u5e55\u4e2d\u95f4\u9ec4\u8272\u5b57\u4f53-4350\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("游戏屏幕中间黄色字体-4350：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3453,7 +3453,7 @@ public class MaplePacketCreator {
         mplew.writeShort(id);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getShowQuestCompletion-4366\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getShowQuestCompletion-4366：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3465,7 +3465,7 @@ public class MaplePacketCreator {
         layout.writeData(mplew);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getKeymap4384\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getKeymap4384：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3480,7 +3480,7 @@ public class MaplePacketCreator {
         mplew.writeMapleAsciiString(text);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getWhisper-4403\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getWhisper-4403：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3494,7 +3494,7 @@ public class MaplePacketCreator {
         mplew.write(reply);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getWhisperReply-4421\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getWhisperReply-4421：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3510,7 +3510,7 @@ public class MaplePacketCreator {
         mplew.writeZeroBytes(8);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getFindReplyWithMap-4441\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getFindReplyWithMap-4441：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3525,7 +3525,7 @@ public class MaplePacketCreator {
         mplew.writeInt(channel - 1);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getFindReply-4460\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getFindReply-4460：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3538,7 +3538,7 @@ public class MaplePacketCreator {
         mplew.write(0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getInventoryFull-4477\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getInventoryFull-4477：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3563,7 +3563,7 @@ public class MaplePacketCreator {
         mplew.writeInt(0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getShowInventoryStatus-4510\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getShowInventoryStatus-4510：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3581,7 +3581,7 @@ public class MaplePacketCreator {
         mplew.writeInt(meso);
         mplew.write((byte)items.size());
         for (IItem item : items) {
-            if (GameConstants.is\u8c46\u8c46\u88c5\u5907(item.getItemId())) {
+            if (GameConstants.is豆豆装备(item.getItemId())) {
                 PacketHelper.addDDItemInfo(mplew, item, true, true, false);
                 continue;
             }
@@ -3591,7 +3591,7 @@ public class MaplePacketCreator {
         mplew.writeShort(0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getStorage-4544\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getStorage-4544：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3604,7 +3604,7 @@ public class MaplePacketCreator {
         mplew.write(0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getStorageFull-4561\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getStorageFull-4561：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3621,7 +3621,7 @@ public class MaplePacketCreator {
         mplew.writeInt(meso);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("mesoStorage-4582\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("mesoStorage-4582：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3641,7 +3641,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("storeStorage-4605\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("storeStorage-4605：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3661,7 +3661,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("takeOutStorage-4628\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("takeOutStorage-4628：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3677,7 +3677,7 @@ public class MaplePacketCreator {
         mplew.writeShort(0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("fairyPendantMessage-4648\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("fairyPendantMessage-4648：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3693,7 +3693,7 @@ public class MaplePacketCreator {
         mplew.writeShort(0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("giveFameResponse-4668\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("giveFameResponse-4668：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3705,7 +3705,7 @@ public class MaplePacketCreator {
         mplew.write(status);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("giveFameErrorResponse-4691\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("giveFameErrorResponse-4691：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3719,7 +3719,7 @@ public class MaplePacketCreator {
         mplew.write(mode);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("receiveFame-4709\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("receiveFame-4709：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3735,7 +3735,7 @@ public class MaplePacketCreator {
         mplew.writeInt(0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("partyCreated-4729\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("partyCreated-4729：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3750,7 +3750,7 @@ public class MaplePacketCreator {
         mplew.write(0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("partyInvite-4750\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("partyInvite-4750：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3762,7 +3762,7 @@ public class MaplePacketCreator {
         mplew.write(message);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("partyStatusMessageA-4772\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("partyStatusMessageA-4772：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3775,7 +3775,7 @@ public class MaplePacketCreator {
         mplew.writeMapleAsciiString(charname);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("partyStatusMessageB-4789\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("partyStatusMessageB-4789：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3873,7 +3873,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("updateParty-4897\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("updateParty-4897：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3888,7 +3888,7 @@ public class MaplePacketCreator {
         mplew.writePos(position);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("partyPortal-4917\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("partyPortal-4917：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3902,7 +3902,7 @@ public class MaplePacketCreator {
         mplew.writeInt(maxhp);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("updatePartyMemberHP-4935\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("updatePartyMemberHP-4935：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3916,7 +3916,7 @@ public class MaplePacketCreator {
         mplew.writeMapleAsciiString(chattext);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("multiChat-4953\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("multiChat-4953：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3929,7 +3929,7 @@ public class MaplePacketCreator {
         mplew.writeInt(time);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getClock-4970\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getClock-4970：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3944,7 +3944,7 @@ public class MaplePacketCreator {
         mplew.write(sec);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getClockTime-4989\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getClockTime-4989：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3970,7 +3970,7 @@ public class MaplePacketCreator {
         mplew.writeInt(0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("spawnMist-5019\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("spawnMist-5019：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3982,7 +3982,7 @@ public class MaplePacketCreator {
         mplew.writeInt(oid);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("removeMist-5036\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("removeMist-5036：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -3999,7 +3999,7 @@ public class MaplePacketCreator {
         mplew.write(0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("damageSummon-5057\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("damageSummon-5057：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4011,7 +4011,7 @@ public class MaplePacketCreator {
         mplew.write(message);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("buddylistMessage-5073\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("buddylistMessage-5073：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4036,7 +4036,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("updateBuddylist-5104\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("updateBuddylist-5104：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4058,7 +4058,7 @@ public class MaplePacketCreator {
         mplew.write(0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("requestBuddylistAdd-5130\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("requestBuddylistAdd-5130：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4073,7 +4073,7 @@ public class MaplePacketCreator {
         mplew.writeInt(channel);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("updateBuddyChannel-5149\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("updateBuddyChannel-5149：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4086,7 +4086,7 @@ public class MaplePacketCreator {
         mplew.writeInt(itemid);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("itemEffect-5166\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("itemEffect-5166：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4099,7 +4099,7 @@ public class MaplePacketCreator {
         mplew.writeInt(itemid);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("itemEffect-5183\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("itemEffect-5183：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4112,7 +4112,7 @@ public class MaplePacketCreator {
         mplew.write(capacity);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("updateBuddyCapacity-5200\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("updateBuddyCapacity-5200：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4125,7 +4125,7 @@ public class MaplePacketCreator {
         mplew.writeInt(itemid);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("showChair-5217\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("showChair-5217：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4142,7 +4142,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("cancelChair-5237\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("cancelChair-5237：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4158,7 +4158,7 @@ public class MaplePacketCreator {
         mplew.write(reactor.getFacingDirection());
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("spawnReactor-5258\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("spawnReactor-5258：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4173,7 +4173,7 @@ public class MaplePacketCreator {
         mplew.writeInt(stance);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("triggerReactor-5279\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("triggerReactor-5279：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4187,7 +4187,7 @@ public class MaplePacketCreator {
         mplew.writePos(reactor.getPosition());
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("destroyReactor-5297\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("destroyReactor-5297：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4215,7 +4215,7 @@ public class MaplePacketCreator {
         mplew.writeMapleAsciiString(env);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("environmentChange-5335\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("environmentChange-5335：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4228,7 +4228,7 @@ public class MaplePacketCreator {
         mplew.writeInt(mode);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("environmentMove-5352\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("environmentMove-5352：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4244,7 +4244,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("startMapEffect-5372\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("startMapEffect-5372：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4261,13 +4261,13 @@ public class MaplePacketCreator {
         mplew.write(26);
         String Prefix = "";
         if (c.getPrefix() == 1) {
-            Prefix = "[\u6280\u8853\u5718\u968a\u6210\u54e1]";
+            Prefix = "[技術團隊成員]";
         }
         if (c.getPrefix() == 2) {
-            Prefix = "[\u904a\u6232\u7ba1\u7406\u6210\u54e1]";
+            Prefix = "[遊戲管理成員]";
         }
         if (c.getPrefix() == 3) {
-            Prefix = "[\u6d3b\u52d5\u8fa6\u7406\u6210\u54e1]";
+            Prefix = "[活動辦理成員]";
         }
         mplew.write(1);
         mplew.writeInt(0);
@@ -4289,7 +4289,7 @@ public class MaplePacketCreator {
         mplew.writeInt(0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("fuckGuildInfo-5427\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("fuckGuildInfo-5427：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4303,7 +4303,7 @@ public class MaplePacketCreator {
             mplew.write(0);
             if (ServerConstants.PACKET_ERROR_OFF) {
                 ServerConstants ERROR = new ServerConstants();
-                ERROR.setPACKET_ERROR("showGuildInfo-5445\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+                ERROR.setPACKET_ERROR("showGuildInfo-5445：\r\n" + mplew.getPacket() + "\r\n\r\n");
             }
             return mplew.getPacket();
         }
@@ -4312,7 +4312,7 @@ public class MaplePacketCreator {
             mplew.write(0);
             if (ServerConstants.PACKET_ERROR_OFF) {
                 ServerConstants ERROR = new ServerConstants();
-                ERROR.setPACKET_ERROR("showGuildInfo-5454\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+                ERROR.setPACKET_ERROR("showGuildInfo-5454：\r\n" + mplew.getPacket() + "\r\n\r\n");
             }
             return mplew.getPacket();
         }
@@ -4322,7 +4322,7 @@ public class MaplePacketCreator {
         MaplePacketCreator.getGuildInfo(mplew, g);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("showGuildInfo-5465\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("showGuildInfo-5465：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4355,7 +4355,7 @@ public class MaplePacketCreator {
         mplew.write(bOnline ? 1 : 0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("guildMemberOnline-5528\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("guildMemberOnline-5528：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4369,7 +4369,7 @@ public class MaplePacketCreator {
         mplew.writeMapleAsciiString(charName);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("guildInvite-5548\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("guildInvite-5548：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4382,7 +4382,7 @@ public class MaplePacketCreator {
         mplew.writeMapleAsciiString(charname);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("denyGuildInvitation-5565\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("denyGuildInvitation-5565：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4394,7 +4394,7 @@ public class MaplePacketCreator {
         mplew.write(code);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("genericGuildMessage-5581\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("genericGuildMessage-5581：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4415,7 +4415,7 @@ public class MaplePacketCreator {
         mplew.writeInt(mgc.getAllianceRank());
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("newGuildMember-5607\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("newGuildMember-5607：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4430,7 +4430,7 @@ public class MaplePacketCreator {
         mplew.writeMapleAsciiString(mgc.getName());
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("memberLeft-5628\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("memberLeft-5628：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4445,7 +4445,7 @@ public class MaplePacketCreator {
         mplew.write(mgc.getGuildRank());
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("changeRank-5647\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("changeRank-5647：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4459,7 +4459,7 @@ public class MaplePacketCreator {
         mplew.writeMapleAsciiString(notice);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("guildNotice-5665\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("guildNotice-5665：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4475,7 +4475,7 @@ public class MaplePacketCreator {
         mplew.writeInt(mgc.getJobId());
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("guildMemberLevelJobUpdate-5685\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("guildMemberLevelJobUpdate-5685：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4491,7 +4491,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("rankTitleChange-5705\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("rankTitleChange-5705：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4505,7 +4505,7 @@ public class MaplePacketCreator {
         mplew.write(1);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("guildDisband-5723\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("guildDisband-5723：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4522,7 +4522,7 @@ public class MaplePacketCreator {
         mplew.write(logocolor);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("guildEmblemChange-5744\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("guildEmblemChange-5744：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4536,7 +4536,7 @@ public class MaplePacketCreator {
         mplew.write(capacity);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("guildCapacityChange-5762\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("guildCapacityChange-5762：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4551,7 +4551,7 @@ public class MaplePacketCreator {
         mplew.write(expelled ? 1 : 0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("removeGuildFromAlliance-5780\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("removeGuildFromAlliance-5780：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4583,7 +4583,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("changeAlliance-5816\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("changeAlliance-5816：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4598,7 +4598,7 @@ public class MaplePacketCreator {
         mplew.writeInt(newLeader);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("changeAllianceLeaderA-5834\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("changeAllianceLeaderA-5834：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4613,7 +4613,7 @@ public class MaplePacketCreator {
         mplew.writeInt(newLeader);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("updateAllianceLeaderB-5852\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("updateAllianceLeaderB-5852：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4628,7 +4628,7 @@ public class MaplePacketCreator {
         mplew.writeMapleAsciiString(allianceName);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("sendAllianceInvite-5871\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("sendAllianceInvite-5871：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4648,7 +4648,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("changeGuildInAlliance-5894\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("changeGuildInAlliance-5894：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4663,7 +4663,7 @@ public class MaplePacketCreator {
         mplew.writeInt(player.getAllianceRank());
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("changeAllianceRank-5912\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("changeAllianceRank-5912：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4686,7 +4686,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("createGuildAlliance-5939\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("createGuildAlliance-5939：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4702,7 +4702,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getAllianceInfo-5958\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getAllianceInfo-5958：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4715,7 +4715,7 @@ public class MaplePacketCreator {
         MaplePacketCreator.addAllianceInfo(mplew, alliance);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getAllianceUpdate-5973\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getAllianceUpdate-5973：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4729,7 +4729,7 @@ public class MaplePacketCreator {
             mplew.writeInt(0);
             if (ServerConstants.PACKET_ERROR_OFF) {
                 ServerConstants ERROR = new ServerConstants();
-                ERROR.setPACKET_ERROR("getGuildAlliance-5991\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+                ERROR.setPACKET_ERROR("getGuildAlliance-5991：\r\n" + mplew.getPacket() + "\r\n\r\n");
             }
             return mplew.getPacket();
         }
@@ -4746,7 +4746,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getGuildAlliance-6009\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getGuildAlliance-6009：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4762,7 +4762,7 @@ public class MaplePacketCreator {
         mplew.write(0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("addGuildToAlliance-6028\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("addGuildToAlliance-6028：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4794,7 +4794,7 @@ public class MaplePacketCreator {
         mplew.write(online2 ? 1 : 0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("allianceMemberOnline-6065\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("allianceMemberOnline-6065：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4811,7 +4811,7 @@ public class MaplePacketCreator {
         mplew.writeInt(mgc.getJobId());
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("updateAlliance-6086\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("updateAlliance-6086：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4826,7 +4826,7 @@ public class MaplePacketCreator {
         mplew.writeInt(mgc.getAllianceRank());
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("updateAllianceRank-6105\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("updateAllianceRank-6105：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4839,7 +4839,7 @@ public class MaplePacketCreator {
         mplew.writeInt(alliance);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("disbandAlliance-6122\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("disbandAlliance-6122：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4854,7 +4854,7 @@ public class MaplePacketCreator {
             mplew.writeLong(0L);
             if (ServerConstants.PACKET_ERROR_OFF) {
                 ServerConstants ERROR = new ServerConstants();
-                ERROR.setPACKET_ERROR("BBSThreadList-6141\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+                ERROR.setPACKET_ERROR("BBSThreadList-6141：\r\n" + mplew.getPacket() + "\r\n\r\n");
             }
             return mplew.getPacket();
         }
@@ -4882,7 +4882,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("BBSThreadList-6173\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("BBSThreadList-6173：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4917,7 +4917,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("showThread-6214\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("showThread-6214：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4939,7 +4939,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("showGuildRanks-6241\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("showGuildRanks-6241：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4953,7 +4953,7 @@ public class MaplePacketCreator {
         mplew.writeInt(GP);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("updateGP-6259\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("updateGP-6259：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4970,7 +4970,7 @@ public class MaplePacketCreator {
         mplew.write(unk);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("skillEffect-6280\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("skillEffect-6280：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4983,7 +4983,7 @@ public class MaplePacketCreator {
         mplew.writeInt(skillId);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("skillCancel-6297\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("skillCancel-6297：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -4996,7 +4996,7 @@ public class MaplePacketCreator {
         mplew.write(success);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("showMagnet-6314\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("showMagnet-6314：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5017,7 +5017,7 @@ public class MaplePacketCreator {
         mplew.write(1);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("sendHint-6342\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("sendHint-6342：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5033,7 +5033,7 @@ public class MaplePacketCreator {
         mplew.write(0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("messengerInvite-6362\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("messengerInvite-6362：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5049,7 +5049,7 @@ public class MaplePacketCreator {
         mplew.writeShort(channel);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("addMessengerPlayer-6382\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("addMessengerPlayer-6382：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5062,7 +5062,7 @@ public class MaplePacketCreator {
         mplew.write(position);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("removeMessengerPlayer-6399\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("removeMessengerPlayer-6399：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5078,7 +5078,7 @@ public class MaplePacketCreator {
         mplew.writeShort(channel);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("updateMessengerPlayer-6419\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("updateMessengerPlayer-6419：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5091,7 +5091,7 @@ public class MaplePacketCreator {
         mplew.write(position);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("joinMessenger-6436\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("joinMessenger-6436：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5104,7 +5104,7 @@ public class MaplePacketCreator {
         mplew.writeMapleAsciiString(text);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("messengerChat-6453\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("messengerChat-6453：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5118,7 +5118,7 @@ public class MaplePacketCreator {
         mplew.write(mode2);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("messengerNote-6471\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("messengerNote-6471：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5133,7 +5133,7 @@ public class MaplePacketCreator {
         mplew.writeInt(-1);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getFindReplyWithCS-6490\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getFindReplyWithCS-6490：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5148,7 +5148,7 @@ public class MaplePacketCreator {
         mplew.writeInt(-1);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getFindReplyWithMTS-6509\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getFindReplyWithMTS-6509：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5159,7 +5159,7 @@ public class MaplePacketCreator {
         mplew.writeShort(SendPacketOpcode.SHOW_EQUIP_EFFECT.getValue());
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("showEquipEffectA-6524\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("showEquipEffectA-6524：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5171,7 +5171,7 @@ public class MaplePacketCreator {
         mplew.writeShort(team);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("showEquipEffectB-6539\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("showEquipEffectB-6539：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5185,7 +5185,7 @@ public class MaplePacketCreator {
         mplew.write(newStance);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("summonSkill-6557\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("summonSkill-6557：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5198,7 +5198,7 @@ public class MaplePacketCreator {
         mplew.writeShort(time);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("skillCooldown-6574["+sid+","+time+"]\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("skillCooldown-6574["+sid+","+time+"]：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5215,7 +5215,7 @@ public class MaplePacketCreator {
         mplew.write(success ? 1 : 0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("useSkillBook-6596\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("useSkillBook-6596：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5242,7 +5242,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getMacros-6627\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getMacros-6627：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5258,7 +5258,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("updateAriantPQRanking-6646\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("updateAriantPQRanking-6646：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5276,7 +5276,7 @@ public class MaplePacketCreator {
         mplew.write(success);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("catchMonster6668\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("catchMonster6668：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5287,7 +5287,7 @@ public class MaplePacketCreator {
         mplew.writeShort(SendPacketOpcode.ARIANT_SCOREBOARD.getValue());
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("showAriantScoreBoard-6687\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("showAriantScoreBoard-6687：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5299,7 +5299,7 @@ public class MaplePacketCreator {
         mplew.writeShort(type ? 1 : 2);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("boatPacket-6702\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("boatPacket-6702：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5311,7 +5311,7 @@ public class MaplePacketCreator {
         mplew.writeShort(effect);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("boatPacket-6720\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("boatPacket-6720：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5323,7 +5323,7 @@ public class MaplePacketCreator {
         mplew.writeShort(effect);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("boatEffect-6738\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("boatEffect-6738：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5337,7 +5337,7 @@ public class MaplePacketCreator {
         mplew.write(remove ? 3 : 4);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("removeItemFromDuey-6756\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("removeItemFromDuey-6756：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5373,7 +5373,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("sendDuey-6081\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("sendDuey-6081：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5385,7 +5385,7 @@ public class MaplePacketCreator {
         mplew.write(7);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("Mulung_DojoUp2-6817\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("Mulung_DojoUp2-6817：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5398,7 +5398,7 @@ public class MaplePacketCreator {
         mplew.write(6);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("dojoWarpUp-6832\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("dojoWarpUp-6832：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5411,7 +5411,7 @@ public class MaplePacketCreator {
         mplew.writeMapleAsciiString(msg);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("showQuestMsg-6847\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("showQuestMsg-6847：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5423,7 +5423,7 @@ public class MaplePacketCreator {
 
     public static MaplePacket Mulung_Pts(int recv, int total) {
         
-        return MaplePacketCreator.showQuestMsg("\u4f60\u7372\u5f97 " + recv + " \u4fee\u7149\u9ede\u6578, \u76ee\u524d\u7d2f\u7a4d\u4e86 " + total + " \u9ede\u4fee\u7149\u9ede\u6578");
+        return MaplePacketCreator.showQuestMsg("你獲得 " + recv + " 修煉點數, 目前累積了 " + total + " 點修煉點數");
     }
 
     public static MaplePacket showOXQuiz(int questionSet, int questionId, boolean askQuestion) {
@@ -5435,7 +5435,7 @@ public class MaplePacketCreator {
         mplew.writeShort(questionId);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("showOXQuiz-6877\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("showOXQuiz-6877：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5446,7 +5446,7 @@ public class MaplePacketCreator {
         mplew.writeShort(SendPacketOpcode.LEFT_KNOCK_BACK.getValue());
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("leftKnockBack-6890\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("leftKnockBack-6890：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5464,7 +5464,7 @@ public class MaplePacketCreator {
         mplew.writeZeroBytes(11);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("rollSnowball-6910\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("rollSnowball-6910：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5484,7 +5484,7 @@ public class MaplePacketCreator {
         mplew.write(delay);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("hitSnowBall-6934\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("hitSnowBall-6934：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5497,7 +5497,7 @@ public class MaplePacketCreator {
         mplew.writeInt(message);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("snowballMessage6949\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("snowballMessage6949：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5510,7 +5510,7 @@ public class MaplePacketCreator {
         mplew.write(type);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("finishedSort-6964\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("finishedSort-6964：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5523,7 +5523,7 @@ public class MaplePacketCreator {
         mplew.writeShort(coconutscore[1]);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("coconutScore-6980\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("coconutScore-6980：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5541,7 +5541,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("hitCoconut-7001\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("hitCoconut-7001：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5554,7 +5554,7 @@ public class MaplePacketCreator {
         mplew.write(type);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("finishedGather-7016\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("finishedGather-7016：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5567,7 +5567,7 @@ public class MaplePacketCreator {
         mplew.writeMapleAsciiString(msg);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("yellowChat-7031\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("yellowChat-7031：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5583,7 +5583,7 @@ public class MaplePacketCreator {
         mplew.writeInt(quantity2);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getPeanutResult-7051\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getPeanutResult-7051：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5597,7 +5597,7 @@ public class MaplePacketCreator {
         mplew.writeMapleAsciiString(name);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("sendLevelup-7069\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("sendLevelup-7069：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5610,7 +5610,7 @@ public class MaplePacketCreator {
         mplew.writeMapleAsciiString(name);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("sendMarriage-7086\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("sendMarriage-7086：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5624,7 +5624,7 @@ public class MaplePacketCreator {
         mplew.writeMapleAsciiString(name);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("sendJobup-7104\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("sendJobup-7104：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5637,7 +5637,7 @@ public class MaplePacketCreator {
         mplew.writeInt(time);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("showZakumShrine-7119\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("showZakumShrine-7119：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5650,7 +5650,7 @@ public class MaplePacketCreator {
         mplew.writeInt(time);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("showHorntailShrine-7134\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("showHorntailShrine-7134：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5663,7 +5663,7 @@ public class MaplePacketCreator {
         mplew.writeInt(time);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("showChaosZakumShrine-7149\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("showChaosZakumShrine-7149：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5676,7 +5676,7 @@ public class MaplePacketCreator {
         mplew.writeInt(time);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("showChaosHorntailShrine-7164\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("showChaosHorntailShrine-7164：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5687,7 +5687,7 @@ public class MaplePacketCreator {
         mplew.writeShort(SendPacketOpcode.STOP_CLOCK.getValue());
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("stopClock-7177\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("stopClock-7177：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5704,7 +5704,7 @@ public class MaplePacketCreator {
         mplew.writeShort(d.getJobId());
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("spawnDragon-7196\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("spawnDragon-7196：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5716,7 +5716,7 @@ public class MaplePacketCreator {
         mplew.writeInt(chrid);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("removeDragon-7210\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("removeDragon-7210：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5731,7 +5731,7 @@ public class MaplePacketCreator {
         PacketHelper.serializeMovementList(mplew, moves);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("moveDragon-7230\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("moveDragon-7230：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5752,7 +5752,7 @@ public class MaplePacketCreator {
         mplew.write(140);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("addTutorialStats-7253\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("addTutorialStats-7253：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5817,7 +5817,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("temporaryStats-7335\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("temporaryStats-7335：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5828,7 +5828,7 @@ public class MaplePacketCreator {
         mplew.writeShort(SendPacketOpcode.TEMP_STATS_RESET.getValue());
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("temporaryStats_Reset-7348\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("temporaryStats_Reset-7348：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5842,7 +5842,7 @@ public class MaplePacketCreator {
         mplew.writeInt(amount);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("showHpHealed-7365\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("showHpHealed-7365：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5855,7 +5855,7 @@ public class MaplePacketCreator {
         mplew.writeInt(amount);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("showOwnHpHealed-7380\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("showOwnHpHealed-7380：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5868,7 +5868,7 @@ public class MaplePacketCreator {
         mplew.writeInt(npc);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("sendRepairWindow-7395\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("sendRepairWindow-7395：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5891,7 +5891,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("sendPyramidUpdate-7409\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("sendPyramidUpdate-7409：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5904,7 +5904,7 @@ public class MaplePacketCreator {
         mplew.writeInt(amount);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("sendPyramidResult-7424\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("sendPyramidResult-7424：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5934,7 +5934,7 @@ public class MaplePacketCreator {
         mplew.writeMapleAsciiString(amount);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("sendString-7461\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("sendString-7461：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5967,7 +5967,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getPollQuestion-7504\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getPollQuestion-7504：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5979,7 +5979,7 @@ public class MaplePacketCreator {
         mplew.writeMapleAsciiString(message);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getPollReply-7520\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getPollReply-7520：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -5996,7 +5996,7 @@ public class MaplePacketCreator {
         mplew.writeMapleAsciiString(data);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getEvanTutorial-7542\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getEvanTutorial-7542：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -6008,7 +6008,7 @@ public class MaplePacketCreator {
         mplew.write(0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("showEventInstructions-7556\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("showEventInstructions-7556：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -6024,7 +6024,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getOwlOpen-7574\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getOwlOpen-7574：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -6071,7 +6071,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getOwlSearched-7623\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getOwlSearched-7623：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -6098,7 +6098,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getRPSMode-7655\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getRPSMode-7655：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -6111,7 +6111,7 @@ public class MaplePacketCreator {
         mplew.write(newSlots);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getSlotUpdate-7671\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getSlotUpdate-7671：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -6123,7 +6123,7 @@ public class MaplePacketCreator {
         mplew.writeInt(chrid);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("followRequest-7685\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("followRequest-7685：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -6143,7 +6143,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("followEffect-7707\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("followEffect-7707：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -6155,7 +6155,7 @@ public class MaplePacketCreator {
         mplew.writeLong(opcode);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getFollowMsg-7721\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getFollowMsg-7721：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -6176,7 +6176,7 @@ public class MaplePacketCreator {
         mplew.writePos(otherStart);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("moveFollow-7746\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("moveFollow-7746：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -6189,7 +6189,7 @@ public class MaplePacketCreator {
         mplew.writeMapleAsciiString(msg);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getFollowMessage-7762\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getFollowMessage-7762：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -6215,7 +6215,7 @@ public class MaplePacketCreator {
         mplew.writeZeroBytes(6);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getNodeProperties-7793\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getNodeProperties-7793：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         objectid.setNodePacket(mplew.getPacket());
         return objectid.getNodePacket();
@@ -6244,7 +6244,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getMovingPlatforms-7826\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getMovingPlatforms-7826：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -6260,7 +6260,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("getUpdateEnvironment-7845\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("getUpdateEnvironment-7845：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -6274,7 +6274,7 @@ public class MaplePacketCreator {
         mplew.writeInt(cid);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("sendEngagementRequest-7861\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("sendEngagementRequest-7861：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -6288,7 +6288,7 @@ public class MaplePacketCreator {
         mplew.writeInt(delay);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("trembleEffect-7883\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("trembleEffect-7883：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -6312,7 +6312,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("sendEngagement-7930\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("sendEngagement-7930：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -6325,7 +6325,7 @@ public class MaplePacketCreator {
         mplew.writeMapleAsciiString(msg);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("englishQuizMsg-7947\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("englishQuizMsg-7947：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -6338,7 +6338,7 @@ public class MaplePacketCreator {
         mplew.write(type);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("openBeans-7962\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("openBeans-7962：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -6352,7 +6352,7 @@ public class MaplePacketCreator {
         mplew.writeInt(0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("updateBeans-7978\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("updateBeans-7978：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -6423,7 +6423,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("showBeans-8004\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("showBeans-8004：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -6436,7 +6436,7 @@ public class MaplePacketCreator {
         mplew.writeInt(chr.getCSPoints(2));
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("showCharCash-8021\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("showCharCash-8021：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -6453,7 +6453,7 @@ public class MaplePacketCreator {
         mplew.writeShort(pos.y + ft);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("spawnLove-8040\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("spawnLove-8040：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -6465,7 +6465,7 @@ public class MaplePacketCreator {
         mplew.writeInt(oid);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("removeLove-8054\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("removeLove-8054：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -6477,7 +6477,7 @@ public class MaplePacketCreator {
         mplew.write(22);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("licenseRequest-8069\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("licenseRequest-8069：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -6489,7 +6489,7 @@ public class MaplePacketCreator {
         mplew.write(1);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("licenseResult-8084\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("licenseResult-8084：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -6501,7 +6501,7 @@ public class MaplePacketCreator {
         mplew.writeInt(0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("showForcedEquip-8098\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("showForcedEquip-8098：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -6523,7 +6523,7 @@ public class MaplePacketCreator {
         mplew.write(type);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("spawnTutorialSummon-8125\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("spawnTutorialSummon-8125：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -6545,7 +6545,7 @@ public class MaplePacketCreator {
         mplew.write(0);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("requestBuddylistAdd-8151\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("requestBuddylistAdd-8151：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -6557,7 +6557,7 @@ public class MaplePacketCreator {
         mplew.writeInt(itemId);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("sendAutoHpPot-8167\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("sendAutoHpPot-8167：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -6569,7 +6569,7 @@ public class MaplePacketCreator {
         mplew.writeInt(itemId);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("sendAutoMpPot-8183\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("sendAutoMpPot-8183：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -6580,7 +6580,7 @@ public class MaplePacketCreator {
         mplew.write(testmsg);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("testPacket-8196\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("testPacket-8196：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -6594,7 +6594,7 @@ public class MaplePacketCreator {
         mplew.writeMapleAsciiString(laba);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("testPacket-8196\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("testPacket-8196：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -6613,7 +6613,7 @@ public class MaplePacketCreator {
         }
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("sendEventWindow-8218\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("sendEventWindow-8218：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -6625,7 +6625,7 @@ public class MaplePacketCreator {
         mplew.writeMapleAsciiString(web);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("openWeb-8232\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("openWeb-8232：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -6905,7 +6905,7 @@ public class MaplePacketCreator {
         mplew.writeInt(v1);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
@@ -6917,10 +6917,9 @@ public class MaplePacketCreator {
         mplew.writeInt(value);
         if (ServerConstants.PACKET_ERROR_OFF) {
             ServerConstants ERROR = new ServerConstants();
-            ERROR.setPACKET_ERROR("\uff1a\r\n" + mplew.getPacket() + "\r\n\r\n");
+            ERROR.setPACKET_ERROR("：\r\n" + mplew.getPacket() + "\r\n\r\n");
         }
         return mplew.getPacket();
     }
 
 }
-
