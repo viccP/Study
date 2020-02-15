@@ -3,22 +3,19 @@
  */
 package server;
 
-import database.DatabaseConnection;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.PrintStream;
-import java.io.Reader;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import database.DatabaseConnection;
+
 public class ServerProperties {
     private static final Properties props = new Properties();
-    private static final String[] toLoad;
-
     private ServerProperties() {
     }
 
@@ -35,14 +32,21 @@ public class ServerProperties {
     }
 
     static {
-        for (String s : toLoad = new String[]{"Settings.ini"}) {
+        for (String s : new String[]{"Settings.ini"}) {
+        	InputStreamReader fr=null;
             try {
-                InputStreamReader fr = new InputStreamReader((InputStream)new FileInputStream(s), "UTF-8");
+                fr = new InputStreamReader((InputStream)new FileInputStream(s), "UTF-8");
                 props.load(fr);
                 fr.close();
             }
             catch (IOException ex) {
-                System.out.println("\u52a0\u8f7dSettings\u9519\u8bef\uff1a" + ex);
+                System.out.println("加载Settings错误：" + ex);
+            } finally {
+            	try {
+					if(fr!=null)fr.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
             }
         }
         try {
@@ -60,4 +64,3 @@ public class ServerProperties {
         }
     }
 }
-
