@@ -3,24 +3,23 @@
  */
 package server;
 
-import database.DatabaseConnection;
 import java.io.File;
-import java.io.PrintStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import database.DatabaseConnection;
 import provider.MapleData;
 import provider.MapleDataProvider;
 import provider.MapleDataProviderFactory;
 import provider.MapleDataTool;
-import server.CashItemInfo;
+import server.CashItemInfo.CashModInfo;
 
 public class CashItemFactory {
     private static final CashItemFactory instance = new CashItemFactory();
@@ -42,11 +41,16 @@ public class CashItemFactory {
 
     public void initialize() {
         System.out.println("Loading CashItemFactory :::");
-        ArrayList<Integer> itemids = new ArrayList<Integer>();
+        List<Integer> itemids = new ArrayList<>();
         for (MapleData field : this.data.getData("Commodity.img").getChildren()) {
             int SN = MapleDataTool.getIntConvert("SN", field, 0);
             int itemId = MapleDataTool.getIntConvert("ItemId", field, 0);
-            CashItemInfo stats = new CashItemInfo(itemId, MapleDataTool.getIntConvert("Count", field, 1), MapleDataTool.getIntConvert("Price", field, 0), SN, MapleDataTool.getIntConvert("Period", field, 0), MapleDataTool.getIntConvert("Gender", field, 2), MapleDataTool.getIntConvert("OnSale", field, 0) > 0);
+            int count=MapleDataTool.getIntConvert("Count", field, 1);
+            int price=MapleDataTool.getIntConvert("Price", field, 0);
+            int expire=MapleDataTool.getIntConvert("Period", field, 0);
+            int gender=MapleDataTool.getIntConvert("Gender", field, 2);
+            boolean sale=MapleDataTool.getIntConvert("OnSale", field, 0) > 0;
+            CashItemInfo stats = new CashItemInfo(itemId, count, price, SN, expire,gender ,sale );
             if (SN > 0) {
                 this.itemStats.put(SN, stats);
                 this.idLookup.put(itemId, SN);
@@ -54,17 +58,12 @@ public class CashItemFactory {
             if (itemId <= 0) continue;
             itemids.add(itemId);
         }
-        Iterator<Integer> i$ = itemids.iterator();
-        while (i$.hasNext()) {
-            int i = (Integer)((Object)i$.next());
-            this.getPackageItems(i);
+        
+        for(Integer itemid:itemids) {
+        	 this.getPackageItems(itemid);
         }
-        i$ = this.itemStats.keySet().iterator();
-        while (i$.hasNext()) {
-            int i = (Integer)i$.next();
-            this.getModInfo(i);
-            this.getItem(i);
-        }
+        //设置全部ModInfo
+        setModCashInfoAll(this.itemStats.keySet());
         this.initialized = true;
     }
 
@@ -120,6 +119,35 @@ public class CashItemFactory {
         }
         return ret;
     }
+    
+    /**
+     * 设置全部的商品信息
+     * @param set
+     */
+    public final void setModCashInfoAll(Set<Integer> set) {
+    	try {
+            Connection con = DatabaseConnection.getConnection();
+            for(Integer sn:set) {
+            	PreparedStatement ps = con.prepareStatement("SELECT * FROM cashshop_modified_items WHERE serial = ?");
+                ps.setInt(1, sn);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    CashModInfo ret = new CashItemInfo.CashModInfo(sn, rs.getInt("discount_price"), rs.getInt("mark"), rs.getInt("showup") > 0, rs.getInt("itemid"), rs.getInt("priority"), rs.getInt("package") > 0, rs.getInt("period"), rs.getInt("gender"), rs.getInt("count"), rs.getInt("meso"), rs.getInt("unk_1"), rs.getInt("unk_2"), rs.getInt("unk_3"), rs.getInt("extra_flags"));
+                    this.itemMods.put(sn, ret);
+                    CashItemInfo stats = this.itemStats.get(sn);
+                    if (ret != null && ret.showUp) {
+                        ret.toCItem(stats);
+                    }
+                }
+                rs.close();
+                ps.close();
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
 
     public final int getItemSN(int itemid) {
         for (Map.Entry<Integer, CashItemInfo> ci : this.itemStats.entrySet()) {

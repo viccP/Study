@@ -288,7 +288,6 @@ implements Serializable {
     private long lasttime = 0L;
     private long currenttime = 0L;
     private long deadtime = 1000L;
-    private MapleCharacter chars;
     private long nengl = 0L;
     private long nengls = 0L;
     private boolean isfake = false;
@@ -893,7 +892,7 @@ implements Serializable {
         }
         catch (SQLException ess) {
             ess.printStackTrace();
-            System.out.println("\u52a0\u8f7d\u89d2\u8272\u6570\u636e\u4fe1\u606f\u51fa\u9519...");
+            System.out.println("加载角色数据信息出错...");
             FileoutputUtil.outputFileError("log\\Packet_Except.log", ess);
         }
         finally {
@@ -1312,7 +1311,7 @@ implements Serializable {
                 this.cs.save();
             }
             PlayerNPC.updateByCharId(this);
-            this.keylayout.saveKeys(this.id);
+            this.keylayout.saveKeys(con,this.id);
             this.mount.saveMount(this.id);
             this.monsterbook.saveCards(this.id);
             this.deleteWhereCharacterId(con, "DELETE FROM wishlist WHERE characterid = ?");
@@ -1969,27 +1968,27 @@ implements Serializable {
         byte skilllevel = this.getSkillLevel(echskill);
         if (skilllevel > 0) {
             MapleStatEffect echeff = echskill.getEffect(skilllevel);
-            System.out.println("\u83b7\u53d6\u6280\u80fd\u7b49\u7ea7\uff1a" + skilllevel);
+            System.out.println("获取技能等级：" + skilllevel);
             if (targets > 0) {
                 if (this.getBuffedValue(MapleBuffStat.ENERGY_CHARGE) == null) {
                     echeff.applyEnergyBuff(this, true);
                 } else {
                     Integer energyLevel = this.getBuffedValue(MapleBuffStat.ENERGY_CHARGE);
-                    System.out.println("\u83b7\u53d6\u80fd\u91cf\u7b49\u7ea7\uff1a" + energyLevel);
+                    System.out.println("获取能量等级：" + energyLevel);
                     if (energyLevel > 10000) {
                         energyLevel = 10000;
                     }
                     if (energyLevel <= 10000) {
                         energyLevel = energyLevel + echeff.getX() * targets;
-                        System.out.println("\u83b7\u53d6\u80fd\u7b49\u7ea7\uff1a" + energyLevel);
+                        System.out.println("获取能等级：" + energyLevel);
                         this.client.getSession().write((Object)MaplePacketCreator.showOwnBuffEffect(skillid, 2));
                         this.map.broadcastMessage(this, MaplePacketCreator.showBuffeffect(this.id, skillid, 2), false);
                         if (energyLevel > 10000) {
                             energyLevel = 10000;
                         }
-                        System.out.println("\u83b7\u53d6\u80fd\u91cfE\uff1a" + energyLevel);
+                        System.out.println("获取能量E：" + energyLevel);
                         List<Pair<MapleBuffStat, Integer>> stat = Collections.singletonList(new Pair<MapleBuffStat, Integer>(MapleBuffStat.ENERGY_CHARGE, energyLevel));
-                        this.client.getSession().write((Object)MaplePacketCreator.\u80fd\u91cf\u6761(stat, energyLevel / 10000));
+                        this.client.getSession().write((Object)MaplePacketCreator.能量条(stat, energyLevel / 10000));
                         if (energyLevel == 10000) {
                             this.client.getSession().write((Object)MaplePacketCreator.givePirateBuff(energyLevel, 50, stat));
                             this.client.getSession().write((Object)MaplePacketCreator.giveEnergyChargeTest(energyLevel, echeff.getDuration() / 10000));
@@ -2007,7 +2006,7 @@ implements Serializable {
                                         MapleCharacter.this.setBuffedValue(MapleBuffStat.ENERGY_CHARGE, energyLevel);
                                     }
                                     List<Pair<MapleBuffStat, Integer>> stat = Collections.singletonList(new Pair<MapleBuffStat, Integer>(MapleBuffStat.ENERGY_CHARGE, energyLevel));
-                                    MapleCharacter.this.client.getSession().write((Object)MaplePacketCreator.\u80fd\u91cf\u6761(stat, energyLevel / 10000));
+                                    MapleCharacter.this.client.getSession().write((Object)MaplePacketCreator.能量条(stat, energyLevel / 10000));
                                     MapleCharacter.this.setBuffedValue(MapleBuffStat.ENERGY_CHARGE, energyLevel);
                                 }
                                 catch (Exception e) {
@@ -2042,13 +2041,13 @@ implements Serializable {
                             ++this.nengls;
                         }
                         List<Pair<MapleBuffStat, Integer>> stat = Collections.singletonList(new Pair<MapleBuffStat, Integer>(MapleBuffStat.ENERGY_CHARGE, energyLevel));
-                        this.client.getSession().write((Object)MaplePacketCreator.\u80fd\u91cf\u6761(stat, energyLevel / 1000));
+                        this.client.getSession().write((Object)MaplePacketCreator.能量条(stat, energyLevel / 1000));
                         this.setBuffedValue(MapleBuffStat.ENERGY_CHARGE, energyLevel);
                     } else if (this.nengls > 20L) {
                         this.nengls = 0L;
                         this.nengl = 0L;
                         List<Pair<MapleBuffStat, Integer>> stat = Collections.singletonList(new Pair<MapleBuffStat, Integer>(MapleBuffStat.ENERGY_CHARGE, 0));
-                        this.client.getSession().write((Object)MaplePacketCreator.\u80fd\u91cf\u6761(stat, 0));
+                        this.client.getSession().write((Object)MaplePacketCreator.能量条(stat, 0));
                         this.setBuffedValue(MapleBuffStat.ENERGY_CHARGE, 0);
                     }
                 }
@@ -2728,7 +2727,7 @@ implements Serializable {
             break;
         }
         if (possesed > 0) {
-            this.getClient().getSession().write((Object)MaplePacketCreator.serverNotice(5, "\u56e0\u4f7f\u7528\u4e86 [\u62a4\u8eab\u7b26] \u6b7b\u4ea1\u540e\u60a8\u7684\u7ecf\u9a8c\u4e0d\u4f1a\u51cf\u5c11\uff01\u5269\u4f59 (" + --possesed + " \u4e2a)"));
+            this.getClient().getSession().write((Object)MaplePacketCreator.serverNotice(5, "因使用了 [护身符] 死亡后您的经验不会减少！剩余 (" + --possesed + " 个)"));
             MapleInventoryManipulator.removeById(this.getClient(), MapleItemInformationProvider.getInstance().getInventoryType(charmID[i]), charmID[i], 1, true, false);
         } else if (this.job != 0 && this.job != 1000 && this.job != 2000 && this.job != 2001 && this.job != 3000) {
             int charms = this.getItemQuantity(5130000, false);
@@ -2891,13 +2890,13 @@ implements Serializable {
     }
 
     public void gainExpMonster(int gain, boolean show, boolean white, byte pty, int Class_Bonus_EXP, int Equipment_Bonus_EXP, int Premium_Bonus_EXP) {
-        int \u7ed3\u5a5a\u7ecf\u9a8c = gain * this.getvip() / 10;
-        if (\u7ed3\u5a5a\u7ecf\u9a8c <= 0 && this.getvip() >= 1) {
-            \u7ed3\u5a5a\u7ecf\u9a8c = 1;
+        int 结婚经验 = gain * this.getvip() / 10;
+        if (结婚经验 <= 0 && this.getvip() >= 1) {
+            结婚经验 = 1;
         } else if (this.getvip() == 0) {
-            \u7ed3\u5a5a\u7ecf\u9a8c = 0;
+            结婚经验 = 0;
         }
-        int total = gain + Class_Bonus_EXP + Equipment_Bonus_EXP + Premium_Bonus_EXP + \u7ed3\u5a5a\u7ecf\u9a8c;
+        int total = gain + Class_Bonus_EXP + Equipment_Bonus_EXP + Premium_Bonus_EXP + 结婚经验;
         int partyinc = 0;
         int prevexp = gain;
         int zdjy = 0;
@@ -2948,7 +2947,7 @@ implements Serializable {
             }
             this.updateSingleStat(MapleStat.EXP, this.getExp());
             if (show) {
-                this.client.getSession().write((Object)MaplePacketCreator.GainEXP_Monster(gain, white, partyinc, Class_Bonus_EXP, Equipment_Bonus_EXP, Premium_Bonus_EXP, \u7ed3\u5a5a\u7ecf\u9a8c));
+                this.client.getSession().write((Object)MaplePacketCreator.GainEXP_Monster(gain, white, partyinc, Class_Bonus_EXP, Equipment_Bonus_EXP, Premium_Bonus_EXP, 结婚经验));
             }
         }
     }
@@ -3309,7 +3308,7 @@ implements Serializable {
         this.level = (short)(this.level + 1);
         short level = this.getLevel();
         if (level == 200 && !this.isGM()) {
-            StringBuilder sb = new StringBuilder("[\u606d\u559c] ");
+            StringBuilder sb = new StringBuilder("[恭喜] ");
             IItem medal = this.getInventory(MapleInventoryType.EQUIPPED).getItem((short)-21);
             if (medal != null) {
                 sb.append("<");
@@ -3317,7 +3316,7 @@ implements Serializable {
                 sb.append("> ");
             }
             sb.append(this.getName());
-            sb.append(" \u9054\u5230\u4e86 200 \u7b49 \u662f\u6211\u5011\u7684\u82f1\u96c4!");
+            sb.append(" 達到了 200 等 是我們的英雄!");
             World.Broadcast.broadcastMessage(MaplePacketCreator.serverNotice(6, sb.toString()).getBytes());
         }
         maxhp = Math.min(30000, maxhp);
@@ -5058,7 +5057,7 @@ implements Serializable {
         ret.maplepoints = this.maplepoints;
         ret.clone = true;
         ret.client.setChannel(this.client.getChannel());
-        System.out.println("cloneLooks\u8f93\u51fa\uff1a" + this.client.getChannel());
+        System.out.println("cloneLooks输出：" + this.client.getChannel());
         while (this.map.getCharacterById(ret.id) != null || this.client.getChannelServer().getPlayerStorage().getCharacterById(ret.id) != null) {
             ++ret.id;
         }
@@ -5842,7 +5841,7 @@ implements Serializable {
             rs.close();
         }
         catch (SQLException ex) {
-            System.err.println("\u83b7\u53d6\u9493\u9c7c\u79ef\u5206\u4fe1\u606f\u53d1\u751f\u9519\u8bef: " + ex);
+            System.err.println("获取钓鱼积分信息发生错误: " + ex);
         }
         return jf;
     }
@@ -5866,7 +5865,7 @@ implements Serializable {
             return 1;
         }
         catch (SQLException ex) {
-            System.err.println("\u52a0\u51cf\u9493\u9c7c\u79ef\u5206\u4fe1\u606f\u53d1\u751f\u9519\u8bef: " + ex);
+            System.err.println("加减钓鱼积分信息发生错误: " + ex);
             return 0;
         }
     }
@@ -5890,7 +5889,7 @@ implements Serializable {
             return 1;
         }
         catch (SQLException ex) {
-            System.err.println("\u52a0\u51cf\u9493\u9c7c\u79ef\u5206\u4fe1\u606f\u53d1\u751f\u9519\u8bef: " + ex);
+            System.err.println("加减钓鱼积分信息发生错误: " + ex);
             return -1;
         }
     }
@@ -5917,7 +5916,7 @@ implements Serializable {
             rs.close();
         }
         catch (SQLException ex) {
-            System.err.println("\u83b7\u53d6\u5145\u503c\u4fe1\u606f\u53d1\u751f\u9519\u8bef: " + ex);
+            System.err.println("获取充值信息发生错误: " + ex);
         }
         return pay;
     }
@@ -5941,7 +5940,7 @@ implements Serializable {
             return 1;
         }
         catch (SQLException ex) {
-            System.err.println("\u52a0\u51cf\u5145\u503c\u4fe1\u606f\u53d1\u751f\u9519\u8bef: " + ex);
+            System.err.println("加减充值信息发生错误: " + ex);
             return 0;
         }
     }
@@ -5965,7 +5964,7 @@ implements Serializable {
             return 1;
         }
         catch (SQLException ex) {
-            System.err.println("\u52a0\u51cf\u5145\u503c\u4fe1\u606f\u53d1\u751f\u9519\u8bef: " + ex);
+            System.err.println("加减充值信息发生错误: " + ex);
             return -1;
         }
     }
@@ -5988,7 +5987,7 @@ implements Serializable {
             return 1;
         }
         catch (SQLException ex) {
-            System.err.println("\u52a0\u51cf\u6d88\u8d39\u5956\u52b1\u4fe1\u606f\u53d1\u751f\u9519\u8bef: " + ex);
+            System.err.println("加减消费奖励信息发生错误: " + ex);
             return -1;
         }
     }
@@ -6029,7 +6028,7 @@ implements Serializable {
             return gamePoints;
         }
         catch (SQLException Ex) {
-            System.err.println("\u83b7\u53d6\u89d2\u8272\u5e10\u53f7\u7684\u5728\u7ebf\u65f6\u95f4\u70b9\u51fa\u73b0\u9519\u8bef - \u6570\u636e\u5e93\u67e5\u8be2\u5931\u8d25" + Ex);
+            System.err.println("获取角色帐号的在线时间点出现错误 - 数据库查询失败" + Ex);
             return -1;
         }
     }
@@ -6070,7 +6069,7 @@ implements Serializable {
             return gamePointsPD;
         }
         catch (SQLException Ex) {
-            System.err.println("\u83b7\u53d6\u89d2\u8272\u5e10\u53f7\u7684\u5728\u7ebf\u65f6\u95f4\u70b9\u51fa\u73b0\u9519\u8bef - \u6570\u636e\u5e93\u67e5\u8be2\u5931\u8d25" + Ex);
+            System.err.println("获取角色帐号的在线时间点出现错误 - 数据库查询失败" + Ex);
             return -1;
         }
     }
@@ -6100,7 +6099,7 @@ implements Serializable {
             ps.close();
         }
         catch (SQLException Ex) {
-            System.err.println("\u66f4\u65b0\u89d2\u8272\u5e10\u53f7\u7684\u5728\u7ebf\u65f6\u95f4\u51fa\u73b0\u9519\u8bef - \u6570\u636e\u5e93\u66f4\u65b0\u5931\u8d25." + Ex);
+            System.err.println("更新角色帐号的在线时间出现错误 - 数据库更新失败." + Ex);
         }
     }
 
@@ -6119,7 +6118,7 @@ implements Serializable {
             ps.close();
         }
         catch (SQLException Ex) {
-            System.err.println("\u66f4\u65b0\u89d2\u8272\u5e10\u53f7\u7684\u5728\u7ebf\u65f6\u95f4\u51fa\u73b0\u9519\u8bef - \u6570\u636e\u5e93\u66f4\u65b0\u5931\u8d25." + Ex);
+            System.err.println("更新角色帐号的在线时间出现错误 - 数据库更新失败." + Ex);
         }
     }
 
@@ -6159,7 +6158,7 @@ implements Serializable {
             return gamePointsRQ;
         }
         catch (SQLException Ex) {
-            System.err.println("\u83b7\u53d6\u89d2\u8272\u5e10\u53f7\u7684\u5728\u7ebf\u65f6\u95f4\u70b9\u51fa\u73b0\u9519\u8bef - \u6570\u636e\u5e93\u67e5\u8be2\u5931\u8d25" + Ex);
+            System.err.println("获取角色帐号的在线时间点出现错误 - 数据库查询失败" + Ex);
             return -1;
         }
     }
@@ -6184,7 +6183,7 @@ implements Serializable {
             ps.close();
         }
         catch (SQLException Ex) {
-            System.err.println("\u66f4\u65b0\u89d2\u8272\u5e10\u53f7\u7684\u5728\u7ebf\u65f6\u95f4\u51fa\u73b0\u9519\u8bef - \u6570\u636e\u5e93\u66f4\u65b0\u5931\u8d25." + Ex);
+            System.err.println("更新角色帐号的在线时间出现错误 - 数据库更新失败." + Ex);
         }
     }
 
@@ -6224,7 +6223,7 @@ implements Serializable {
             return gamePointsRQ;
         }
         catch (SQLException Ex) {
-            System.err.println("\u83b7\u53d6\u89d2\u8272\u5e10\u53f7\u7684\u5728\u7ebf\u65f6\u95f4\u70b9\u51fa\u73b0\u9519\u8bef - \u6570\u636e\u5e93\u67e5\u8be2\u5931\u8d25" + Ex);
+            System.err.println("获取角色帐号的在线时间点出现错误 - 数据库查询失败" + Ex);
             return -1;
         }
     }
@@ -6249,7 +6248,7 @@ implements Serializable {
             ps.close();
         }
         catch (SQLException Ex) {
-            System.err.println("\u66f4\u65b0\u89d2\u8272\u5e10\u53f7\u7684\u5728\u7ebf\u65f6\u95f4\u51fa\u73b0\u9519\u8bef - \u6570\u636e\u5e93\u66f4\u65b0\u5931\u8d25." + Ex);
+            System.err.println("更新角色帐号的在线时间出现错误 - 数据库更新失败." + Ex);
         }
     }
 
@@ -6266,15 +6265,15 @@ implements Serializable {
         for (IItem item : this.getInventory(MapleInventoryType.EQUIPPED).list()) {
             Equip nEquip = (Equip)item;
             String itemName = mii.getName(nEquip.getItemId());
-            if (itemName == null || (!itemName.contains("\u91cd\u751f") || nEquip.getEquipLevel() >= 4) && (!itemName.contains("\u6c38\u6052") || nEquip.getEquipLevel() >= 6)) continue;
-            nEquip.gainItemExp(this.client, mobexp, itemName.contains("\u6c38\u6052"));
+            if (itemName == null || (!itemName.contains("重生") || nEquip.getEquipLevel() >= 4) && (!itemName.contains("永恒") || nEquip.getEquipLevel() >= 6)) continue;
+            nEquip.gainItemExp(this.client, mobexp, itemName.contains("永恒"));
         }
     }
 
     public void petName(String name) {
         MaplePet pet = this.getPet(0);
         if (pet == null) {
-            this.getClient().getSession().write((Object)MaplePacketCreator.serverNotice(1, "\u8bf7\u53ec\u5524\u4e00\u53ea\u5ba0\u7269\u51fa\u6765\uff01"));
+            this.getClient().getSession().write((Object)MaplePacketCreator.serverNotice(1, "请召唤一只宠物出来！"));
             this.getClient().getSession().write((Object)MaplePacketCreator.enableActions());
             return;
         }
@@ -6309,7 +6308,7 @@ implements Serializable {
                 this.name = name;
             }
             catch (SQLException se) {
-                System.err.println("SQL error: " + se.getLocalizedMessage() + "-----\u9519\u8bef\u8f93\u51fa\uff1a" + se);
+                System.err.println("SQL error: " + se.getLocalizedMessage() + "-----错误输出：" + se);
             }
         }
     }
@@ -6366,7 +6365,7 @@ implements Serializable {
             return sjrw;
         }
         catch (SQLException Ex) {
-            System.err.println("\u83b7\u53d6\u89d2\u8272\u5e10\u53f7\u7684\u5728\u7ebf\u65f6\u95f4\u70b9\u51fa\u73b0\u9519\u8bef - \u6570\u636e\u5e93\u67e5\u8be2\u5931\u8d25" + Ex);
+            System.err.println("获取角色帐号的在线时间点出现错误 - 数据库查询失败" + Ex);
             return -1;
         }
     }
@@ -6391,7 +6390,7 @@ implements Serializable {
             ps.close();
         }
         catch (SQLException Ex) {
-            System.err.println("\u66f4\u65b0\u89d2\u8272\u5e10\u53f7\u7684\u5728\u7ebf\u65f6\u95f4\u51fa\u73b0\u9519\u8bef - \u6570\u636e\u5e93\u66f4\u65b0\u5931\u8d25." + Ex);
+            System.err.println("更新角色帐号的在线时间出现错误 - 数据库更新失败." + Ex);
         }
     }
 
@@ -6431,7 +6430,7 @@ implements Serializable {
             return fbrw;
         }
         catch (SQLException Ex) {
-            System.err.println("\u83b7\u53d6\u89d2\u8272\u5e10\u53f7\u7684\u5728\u7ebf\u65f6\u95f4\u70b9\u51fa\u73b0\u9519\u8bef - \u6570\u636e\u5e93\u67e5\u8be2\u5931\u8d25" + Ex);
+            System.err.println("获取角色帐号的在线时间点出现错误 - 数据库查询失败" + Ex);
             return -1;
         }
     }
@@ -6456,7 +6455,7 @@ implements Serializable {
             ps.close();
         }
         catch (SQLException Ex) {
-            System.err.println("\u66f4\u65b0\u89d2\u8272\u5e10\u53f7\u7684\u5728\u7ebf\u65f6\u95f4\u51fa\u73b0\u9519\u8bef - \u6570\u636e\u5e93\u66f4\u65b0\u5931\u8d25." + Ex);
+            System.err.println("更新角色帐号的在线时间出现错误 - 数据库更新失败." + Ex);
         }
     }
 
@@ -6496,7 +6495,7 @@ implements Serializable {
             return fbrwa;
         }
         catch (SQLException Ex) {
-            System.err.println("\u83b7\u53d6\u89d2\u8272\u5e10\u53f7\u7684\u5728\u7ebf\u65f6\u95f4\u70b9\u51fa\u73b0\u9519\u8bef - \u6570\u636e\u5e93\u67e5\u8be2\u5931\u8d25" + Ex);
+            System.err.println("获取角色帐号的在线时间点出现错误 - 数据库查询失败" + Ex);
             return -1;
         }
     }
@@ -6521,7 +6520,7 @@ implements Serializable {
             ps.close();
         }
         catch (SQLException Ex) {
-            System.err.println("\u66f4\u65b0\u89d2\u8272\u5e10\u53f7\u7684\u5728\u7ebf\u65f6\u95f4\u51fa\u73b0\u9519\u8bef - \u6570\u636e\u5e93\u66f4\u65b0\u5931\u8d25." + Ex);
+            System.err.println("更新角色帐号的在线时间出现错误 - 数据库更新失败." + Ex);
         }
     }
 
@@ -6561,7 +6560,7 @@ implements Serializable {
             return sgrw;
         }
         catch (SQLException Ex) {
-            System.err.println("\u83b7\u53d6\u89d2\u8272\u5e10\u53f7\u7684\u5728\u7ebf\u65f6\u95f4\u70b9\u51fa\u73b0\u9519\u8bef - \u6570\u636e\u5e93\u67e5\u8be2\u5931\u8d25" + Ex);
+            System.err.println("获取角色帐号的在线时间点出现错误 - 数据库查询失败" + Ex);
             return -1;
         }
     }
@@ -6586,7 +6585,7 @@ implements Serializable {
             ps.close();
         }
         catch (SQLException Ex) {
-            System.err.println("\u66f4\u65b0\u89d2\u8272\u5e10\u53f7\u7684\u5728\u7ebf\u65f6\u95f4\u51fa\u73b0\u9519\u8bef - \u6570\u636e\u5e93\u66f4\u65b0\u5931\u8d25." + Ex);
+            System.err.println("更新角色帐号的在线时间出现错误 - 数据库更新失败." + Ex);
         }
     }
 
@@ -6626,7 +6625,7 @@ implements Serializable {
             return sgrwa;
         }
         catch (SQLException Ex) {
-            System.err.println("\u83b7\u53d6\u89d2\u8272\u5e10\u53f7\u7684\u5728\u7ebf\u65f6\u95f4\u70b9\u51fa\u73b0\u9519\u8bef - \u6570\u636e\u5e93\u67e5\u8be2\u5931\u8d25" + Ex);
+            System.err.println("获取角色帐号的在线时间点出现错误 - 数据库查询失败" + Ex);
             return -1;
         }
     }
@@ -6651,7 +6650,7 @@ implements Serializable {
             ps.close();
         }
         catch (SQLException Ex) {
-            System.err.println("\u66f4\u65b0\u89d2\u8272\u5e10\u53f7\u7684\u5728\u7ebf\u65f6\u95f4\u51fa\u73b0\u9519\u8bef - \u6570\u636e\u5e93\u66f4\u65b0\u5931\u8d25." + Ex);
+            System.err.println("更新角色帐号的在线时间出现错误 - 数据库更新失败." + Ex);
         }
     }
 
@@ -6691,7 +6690,7 @@ implements Serializable {
             return sbossrw;
         }
         catch (SQLException Ex) {
-            System.err.println("\u83b7\u53d6\u89d2\u8272\u5e10\u53f7\u7684\u5728\u7ebf\u65f6\u95f4\u70b9\u51fa\u73b0\u9519\u8bef - \u6570\u636e\u5e93\u67e5\u8be2\u5931\u8d25" + Ex);
+            System.err.println("获取角色帐号的在线时间点出现错误 - 数据库查询失败" + Ex);
             return -1;
         }
     }
@@ -6716,7 +6715,7 @@ implements Serializable {
             ps.close();
         }
         catch (SQLException Ex) {
-            System.err.println("\u66f4\u65b0\u89d2\u8272\u5e10\u53f7\u7684\u5728\u7ebf\u65f6\u95f4\u51fa\u73b0\u9519\u8bef - \u6570\u636e\u5e93\u66f4\u65b0\u5931\u8d25." + Ex);
+            System.err.println("更新角色帐号的在线时间出现错误 - 数据库更新失败." + Ex);
         }
     }
 
@@ -6756,7 +6755,7 @@ implements Serializable {
             return sbossrwa;
         }
         catch (SQLException Ex) {
-            System.err.println("\u83b7\u53d6\u89d2\u8272\u5e10\u53f7\u7684\u5728\u7ebf\u65f6\u95f4\u70b9\u51fa\u73b0\u9519\u8bef - \u6570\u636e\u5e93\u67e5\u8be2\u5931\u8d25" + Ex);
+            System.err.println("获取角色帐号的在线时间点出现错误 - 数据库查询失败" + Ex);
             return -1;
         }
     }
@@ -6781,7 +6780,7 @@ implements Serializable {
             ps.close();
         }
         catch (SQLException Ex) {
-            System.err.println("\u66f4\u65b0\u89d2\u8272\u5e10\u53f7\u7684\u5728\u7ebf\u65f6\u95f4\u51fa\u73b0\u9519\u8bef - \u6570\u636e\u5e93\u66f4\u65b0\u5931\u8d25." + Ex);
+            System.err.println("更新角色帐号的在线时间出现错误 - 数据库更新失败." + Ex);
         }
     }
 
@@ -6821,7 +6820,7 @@ implements Serializable {
             return lb;
         }
         catch (SQLException Ex) {
-            System.err.println("\u83b7\u53d6\u89d2\u8272\u5e10\u53f7\u7684\u5728\u7ebf\u65f6\u95f4\u70b9\u51fa\u73b0\u9519\u8bef - \u6570\u636e\u5e93\u67e5\u8be2\u5931\u8d25" + Ex);
+            System.err.println("获取角色帐号的在线时间点出现错误 - 数据库查询失败" + Ex);
             return -1;
         }
     }
@@ -6846,7 +6845,7 @@ implements Serializable {
             ps.close();
         }
         catch (SQLException Ex) {
-            System.err.println("\u66f4\u65b0\u89d2\u8272\u5e10\u53f7\u7684\u5728\u7ebf\u65f6\u95f4\u51fa\u73b0\u9519\u8bef - \u6570\u636e\u5e93\u66f4\u65b0\u5931\u8d25." + Ex);
+            System.err.println("更新角色帐号的在线时间出现错误 - 数据库更新失败." + Ex);
         }
     }
 
@@ -6986,157 +6985,6 @@ implements Serializable {
         this.mrsbossrwas = s;
     }
 
-    public int \u83b7\u53d6\u5168\u6c11\u593a\u5b9d\u603b\u6570() throws SQLException {
-        Connection con = DatabaseConnection.getConnection();
-        String sql = "SELECT count(*) from qmdbplayer";
-        PreparedStatement ps = con.prepareStatement(sql);
-        ResultSet rs = ps.executeQuery();
-        int count = -1;
-        if (rs.next()) {
-            count = rs.getInt(1);
-        }
-        rs.close();
-        ps.close();
-        return count;
-    }
-
-    public int \u5168\u6c11\u593a\u5b9d(int type) {
-        int pay = 0;
-        try {
-            Connection con = DatabaseConnection.getConnection();
-            PreparedStatement ps = con.prepareStatement("select * from qmdb");
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                pay = type == 1 ? rs.getInt("itemid") : (type == 2 ? rs.getInt("money") : (type == 3 ? rs.getInt("characterid") : (type == 4 ? rs.getInt("type") : (type == 5 ? rs.getInt("sl") : 0))));
-            }
-            ps.close();
-            rs.close();
-        }
-        catch (SQLException ex) {
-            System.err.println("\u67e5\u8be2\u5168\u6c11\u593a\u5b9d\u4fe1\u606f\u9519\u8bef: " + ex);
-        }
-        return pay;
-    }
-
-    public String \u5168\u6c11\u593a\u5b9d2(int id) {
-        String pay = "";
-        try {
-            Connection con = DatabaseConnection.getConnection();
-            PreparedStatement ps = con.prepareStatement("select * from qmdbplayer where id = " + id + "");
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                pay = rs.getString("name");
-            }
-            ps.close();
-            rs.close();
-        }
-        catch (SQLException ex) {
-            System.err.println("\u67e5\u8be2\u5168\u6c11\u593a\u5b9d\u4fe1\u606fName\u9519\u8bef: " + ex);
-        }
-        return pay;
-    }
-
-    public int \u5168\u6c11\u593a\u5b9d3(int id) {
-        int pay = 0;
-        try {
-            Connection con = DatabaseConnection.getConnection();
-            PreparedStatement ps = con.prepareStatement("select * from qmdbplayer where id = " + id + "");
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                pay = rs.getInt("characterid");
-            }
-            ps.close();
-            rs.close();
-        }
-        catch (SQLException ex) {
-            System.err.println("\u67e5\u8be2\u5168\u6c11\u593a\u5b9d\u4fe1\u606fId\u9519\u8bef: " + ex);
-        }
-        return pay;
-    }
-
-    public String \u9886\u53d6\u65e5\u5fd7() {
-        String result = "";
-        try {
-            Connection con = DatabaseConnection.getConnection();
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM qmdblog");
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                result = result + "#b\u65f6\u95f4#r#e[" + rs.getTimestamp("sj") + "]#n#k\r\n\u5e78\u8fd0\u73a9\u5bb6\uff1a#b#e" + rs.getString("name") + "#n #k\u8d62\u53d6\u5956\u52b1:#b#e#z" + rs.getInt("itemid") + "#x" + rs.getInt("sl") + "#n\r\n---------------------------------------------\r\n";
-            }
-        }
-        catch (SQLException ex) {
-            return "";
-        }
-        return result;
-    }
-
-    public int \u73a9\u5bb6\u83b7\u5f97\u7269\u54c1(int id, String name) {
-        try {
-            Connection con = DatabaseConnection.getConnection();
-            PreparedStatement ps = con.prepareStatement("UPDATE qmdb SET characterid = " + id + ",name = " + name + ",type = 1");
-            PreparedStatement ps2 = con.prepareStatement("UPDATE qmdblog SET sj = CURRENT_TIMESTAMP(),characterid = " + id + ",name = " + name + "");
-            ps.executeUpdate();
-            ps2.executeUpdate();
-            ps.close();
-            ps2.cancel();
-            return 1;
-        }
-        catch (SQLException ex) {
-            System.err.println("\u6570\u636e\u5e93\u64cd\u4f5c\u9519\u8bef\uff0c\u65b9\u6cd5:\u73a9\u5bb6\u83b7\u5f97\u7269\u54c1(int id,String name) " + ex);
-            return 0;
-        }
-    }
-
-    public int \u73a9\u5bb6\u83b7\u5f97\u7269\u54c12(int lx) {
-        int pay = 0;
-        try {
-            Connection con = DatabaseConnection.getConnection();
-            PreparedStatement ps = con.prepareStatement("select * from qmdb where characterid  = " + this.getId() + "");
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                if (lx == 1) {
-                    pay = rs.getInt("itemid");
-                } else if (lx == 2) {
-                    pay = rs.getInt("sl");
-                }
-            }
-            ps.close();
-            rs.close();
-        }
-        catch (SQLException ex) {
-            System.err.println("\u67e5\u8be2\u5168\u6c11\u593a\u5b9d\u4fe1\u606fId\u9519\u8bef: " + ex);
-        }
-        return pay;
-    }
-
-    public void \u5168\u6c11\u593a\u5b9d\u5220\u9664() {
-        try {
-            Connection con = DatabaseConnection.getConnection();
-            PreparedStatement ps = con.prepareStatement("Truncate Table qmdb ");
-            PreparedStatement ps2 = con.prepareStatement("Truncate Table qmdbplayer ");
-            ps.executeUpdate();
-            ps2.executeUpdate();
-            ps.close();
-            ps2.cancel();
-        }
-        catch (SQLException ex) {
-            System.err.println("\u6570\u636e\u5e93\u64cd\u4f5c\u9519\u8bef\uff0c\u5168\u6c11\u593a\u5b9d\u5220\u9664 " + ex);
-        }
-    }
-
-    public void \u53c2\u52a0\u5168\u6c11\u593a\u5b9d() {
-        try {
-            Connection con = DatabaseConnection.getConnection();
-            PreparedStatement psu = con.prepareStatement("insert into qmdbplayer (characterid, name) VALUES (?, ?)");
-            psu.setInt(1, this.getId());
-            psu.setString(2, this.getName());
-            psu.executeUpdate();
-            psu.close();
-        }
-        catch (SQLException ex) {
-            System.err.println("\u53c2\u52a0\u5168\u6c11\u593a\u5b9d\u53d1\u751f\u4e86\u9519\u8bef: " + ex);
-        }
-    }
 
     public static enum FameStatus {
         OK,
@@ -7146,4 +6994,3 @@ implements Serializable {
     }
 
 }
-

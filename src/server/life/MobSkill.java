@@ -216,15 +216,15 @@ public class MobSkill {
             }
             case 129: {
                 BanishInfo info;
-//                if (monster == null || monster.getEventInstance() != null && monster.getEventInstance().getName().indexOf("BossQuest") != -1 || (info = monster.getStats().getBanishInfo()) == null) break;
-//                if (this.lt != null && this.rb != null && skill && player != null) {
-//                    for (MapleCharacter chr : this.getPlayersInRange(monster, player)) {
-//                        chr.changeMapBanish(info.getMap(), info.getPortal(), info.getMsg());
-//                    }
-//                    break;
-//                }
-//                if (player == null) break;
-//                player.changeMapBanish(info.getMap(), info.getPortal(), info.getMsg());
+                if (monster == null || monster.getEventInstance() != null && monster.getEventInstance().getName().indexOf("BossQuest") != -1 || (info = monster.getStats().getBanishInfo()) == null) break;
+                if (this.lt != null && this.rb != null && skill && player != null) {
+                    for (MapleCharacter chr : this.getPlayersInRange(monster, player)) {
+                        chr.changeMapBanish(info.getMap(), info.getPortal(), info.getMsg());
+                    }
+                    break;
+                }
+                if (player == null) break;
+                player.changeMapBanish(info.getMap(), info.getPortal(), info.getMsg());
                 break;
             }
             case 131: {

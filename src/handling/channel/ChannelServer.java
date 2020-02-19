@@ -23,11 +23,6 @@ package handling.channel;
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.InetSocketAddress;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumMap;
@@ -48,7 +43,6 @@ import org.apache.mina.transport.socket.nio.SocketAcceptor;
 import org.apache.mina.transport.socket.nio.SocketAcceptorConfig;
 
 import client.MapleCharacter;
-import database.DatabaseConnection;
 import handling.ByteArrayMaplePacket;
 import handling.MaplePacket;
 import handling.MapleServerHandler;
@@ -75,7 +69,6 @@ import server.shops.IMaplePlayerShop;
 import tools.CollectionUtil;
 import tools.ConcurrentEnumMap;
 import tools.MaplePacketCreator;
-import tools.packet.UIPacket;
 
 public class ChannelServer
 implements Serializable {
@@ -179,7 +172,7 @@ implements Serializable {
         if (this.finishedShutdown) {
             return;
         }
-        this.broadcastPacket(MaplePacketCreator.serverNotice(0, "\u9019\u500b\u983b\u9053\u6b63\u5728\u95dc\u9589\u4e2d."));
+        this.broadcastPacket(MaplePacketCreator.serverNotice(0, "這個頻道正在關閉中."));
         this.shutdown = true;
         System.out.println("Channel " + this.channel + ", Saving hired merchants...");
         this.closeAllMerchants();
@@ -482,12 +475,12 @@ implements Serializable {
             }
         }
         catch (Exception e) {
-            System.out.println("\u5173\u95ed\u96c7\u4f63\u5546\u5e97\u51fa\u73b0\u9519\u8bef..." + e);
+            System.out.println("关闭雇佣商店出现错误..." + e);
         }
         finally {
             this.merchLock.writeLock().unlock();
         }
-        System.out.println("\u9891\u9053 " + this.channel + " \u5171\u4fdd\u5b58\u96c7\u4f63\u5546\u5e97: " + ret + " | \u8017\u65f6: " + (System.currentTimeMillis() - Start2) + " \u6beb\u79d2.");
+        System.out.println("频道 " + this.channel + " 共保存雇佣商店: " + ret + " | 耗时: " + (System.currentTimeMillis() - Start2) + " 毫秒.");
     }
 
     /*
@@ -503,7 +496,7 @@ implements Serializable {
             }
         }
         catch (Exception e) {
-            System.out.println("\u5173\u95ed\u96c7\u4f63\u5546\u5e97\u51fa\u73b0\u9519\u8bef..." + e);
+            System.out.println("关闭雇佣商店出现错误..." + e);
         }
         finally {
             this.merchLock.writeLock().unlock();
@@ -644,7 +637,7 @@ implements Serializable {
 
     public final void setFinishShutdown() {
         this.finishedShutdown = true;
-        System.out.println("\u9891\u9053 " + this.channel + " \u5df2\u5173\u95ed\u5b8c\u6210.");
+        System.out.println("频道 " + this.channel + " 已关闭完成.");
     }
 
     public final boolean isAdminOnly() {
@@ -704,7 +697,7 @@ implements Serializable {
             ++ppl;
             chr.saveToDB(false, false);
         }
-        System.out.println("[\u81ea\u52a8\u5b58\u6863] \u5df2\u7ecf\u5c06\u9891\u9053 " + this.channel + " \u7684 " + ppl + " \u4e2a\u73a9\u5bb6\u4fdd\u5b58\u5230\u6570\u636e\u4e2d.");
+        System.out.println("[自动存档] 已经将频道 " + this.channel + " 的 " + ppl + " 个玩家保存到数据中.");
     }
 
     public void AutoNx(int dy) {
@@ -738,13 +731,13 @@ implements Serializable {
         if (this.finishedShutdown) {
             return;
         }
-        this.broadcastPacket(MaplePacketCreator.serverNotice(0, "\u6e38\u620f\u5373\u5c06\u5173\u95ed\u7ef4\u62a4..."));
+        this.broadcastPacket(MaplePacketCreator.serverNotice(0, "游戏即将关闭维护..."));
         this.shutdown = true;
-        System.out.println("\u9891\u9053 " + this.channel + " \u6b63\u5728\u6e05\u7406\u6d3b\u52a8\u811a\u672c...");
+        System.out.println("频道 " + this.channel + " 正在清理活动脚本...");
         this.eventSM.cancel();
-        System.out.println("\u9891\u9053 " + this.channel + " \u6b63\u5728\u4fdd\u5b58\u6240\u6709\u89d2\u8272\u6570\u636e...");
+        System.out.println("频道 " + this.channel + " 正在保存所有角色数据...");
         this.getPlayerStorage().disconnectAll();
-        System.out.println("\u9891\u9053 " + this.channel + " \u89e3\u9664\u7ed1\u5b9a\u7aef\u53e3...");
+        System.out.println("频道 " + this.channel + " 解除绑定端口...");
         this.acceptor.unbindAll();
         this.acceptor = null;
         instances.remove(this.channel);
@@ -763,60 +756,7 @@ implements Serializable {
         return Collections.unmodifiableCollection(this.clones);
     }
 
-    public void Startqmdb() throws InterruptedException {
-        Calendar cc = Calendar.getInstance();
-        int hour = cc.get(11);
-        cc.get(12);
-        cc.get(13);
-        int number = cc.get(7);
-        if (number == 6 && hour == 20) {
-            try {
-                this.qqq();
-            }
-            catch (SQLException ex) {
-                System.out.println("\u5f00\u542f\u5168\u6c11\u593a\u5b9d\u9519\u8bef\u3002\u8bf7\u68c0\u67e5" + ex);
-            }
-        }
-    }
-
-    private void qqq() throws SQLException, InterruptedException {
-        for (int ii = 0; ii <= 20; ++ii) {
-            Thread.sleep(700L);
-            int \u603b\u6570 = this.\u83b7\u53d6\u5168\u6c11\u593a\u5b9d\u603b\u6570();
-            double a = Math.random() * (double)\u603b\u6570 + 1.0;
-            int A = new Double(a).intValue();
-            Iterator<ChannelServer> i$ = ChannelServer.getAllInstances().iterator();
-            if (!i$.hasNext()) continue;
-            ChannelServer cserv1 = i$.next();
-            for (MapleCharacter mch : cserv1.getPlayerStorage().getAllCharacters()) {
-                mch.getClient().getSession().write((Object)MaplePacketCreator.sendHint("#b===========\u5168\u6c11\u5192\u9669\u5c9b==========#k\r\n==============================#r\r\n#b========\u5168\u6c11\u593a\u5b9d\u6d3b\u52a8\u5f00\u59cb=======#k\r\n==============================#r\r\n#b===========\u968f\u673a\u62bd\u53d6\u4e2d==========#k\r\n\u25c6\u6b63\u5728\u968f\u673a\u62bd\u9009\u4e2d\u5956\u7684\u5e78\u8fd0\u73a9\u5bb6\u25c6\r\n#b===========\u5e78\u8fd0\u73a9\u5bb6===========#r\r\n" + mch.\u5168\u6c11\u593a\u5b9d2(A), 200, 200));
-                if (ii != 20) continue;
-                mch.getClient().getSession().write((Object)MaplePacketCreator.sendHint("#e#r\u2605\u2605\u2605\u2605\u2605\u5168\u6c11\u593a\u5b9d\u2605\u2605\u2605\u2605\u2605\r\n\u4e2d\u5956\u73a9\u5bb6\uff1a" + mch.\u5168\u6c11\u593a\u5b9d2(A), 200, 200));
-                mch.startMapEffect("\u2605\u606d\u559c\u73a9\u5bb6:" + mch.\u5168\u6c11\u593a\u5b9d2(A) + " \u8d62\u5f97\u4e86 [\u5168\u6c11\u593a\u5b9d] !!\u2605", 5120025);
-                mch.getMap().broadcastMessage(MaplePacketCreator.yellowChat("[\u5168\u6c11\u593a\u5b9d\u6d3b\u52a8]\u606d\u559c\u73a9\u5bb6" + mch.\u5168\u6c11\u593a\u5b9d2(A) + "\u6210\u4e3a\u4e86\u672c\u671f\u593a\u5b9d\u7684\u5e78\u8fd0\u73a9\u5bb6!!!"));
-                mch.getClient().getSession().write((Object)UIPacket.getTopMsg("[\u5168\u6c11\u593a\u5b9d\u6d3b\u52a8]\u606d\u559c\u73a9\u5bb6" + mch.\u5168\u6c11\u593a\u5b9d2(A) + "\u6210\u4e3a\u4e86\u672c\u671f\u593a\u5b9d\u7684\u5e78\u8fd0\u73a9\u5bb6!!!"));
-                mch.\u73a9\u5bb6\u83b7\u5f97\u7269\u54c1(mch.\u5168\u6c11\u593a\u5b9d3(A), mch.\u5168\u6c11\u593a\u5b9d2(A));
-                mch.getClient().getSession().write((Object)MaplePacketCreator.enableActions());
-            }
-        }
-    }
-
-    public int \u83b7\u53d6\u5168\u6c11\u593a\u5b9d\u603b\u6570() throws SQLException {
-        Connection con = DatabaseConnection.getConnection();
-        String sql = "SELECT count(*) from qmdbplayer";
-        PreparedStatement ps = con.prepareStatement(sql);
-        ResultSet rs = ps.executeQuery();
-        int count = -1;
-        if (rs.next()) {
-            count = rs.getInt(1);
-        }
-        rs.close();
-        ps.close();
-        return count;
-    }
-
     static {
         instances = new HashMap<Integer, ChannelServer>();
     }
 }
-

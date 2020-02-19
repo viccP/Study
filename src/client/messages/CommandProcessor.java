@@ -3,6 +3,14 @@
  */
 package client.messages;
 
+import java.lang.reflect.Modifier;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 import client.MapleCharacter;
 import client.MapleClient;
 import client.messages.commands.CommandExecute;
@@ -12,21 +20,11 @@ import client.messages.commands.InternCommand;
 import client.messages.commands.PlayerCommand;
 import constants.ServerConstants;
 import database.DatabaseConnection;
-import java.io.PrintStream;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import server.maps.MapleMap;
 import tools.FileoutputUtil;
 
 public class CommandProcessor {
-    private static final HashMap<String, CommandObject> commands;
-    private static final HashMap<Integer, ArrayList<String>> commandList;
+    private static final Map<String, CommandObject> commands;
+    private static final Map<Integer, ArrayList<String>> commandList;
 
     private static void sendDisplayMessage(MapleClient c, String msg, ServerConstants.CommandType type) {
         if (c.getPlayer() == null) {
@@ -38,7 +36,7 @@ public class CommandProcessor {
                 break;
             }
             case TRADE: {
-                c.getPlayer().dropMessage(-2, "\u932f\u8aa4 : " + msg);
+                c.getPlayer().dropMessage(-2, "錯誤 : " + msg);
             }
         }
     }
@@ -50,16 +48,16 @@ public class CommandProcessor {
                 splitted[0] = splitted[0].toLowerCase();
                 CommandObject co = commands.get(splitted[0]);
                 if (co == null || co.getType() != type) {
-                    CommandProcessor.sendDisplayMessage(c, "\u8f93\u5165\u7684\u73a9\u5bb6\u547d\u4ee4\u4e0d\u5b58\u5728,\u53ef\u4ee5\u4f7f\u7528 @\u5e2e\u52a9/@help \u6765\u67e5\u770b\u6307\u4ee4.", type);
+                    CommandProcessor.sendDisplayMessage(c, "输入的玩家命令不存在,可以使用 @帮助/@help 来查看指令.", type);
                     return true;
                 }
                 try {
-                    int ret = co.execute(c, splitted);
+                    co.execute(c, splitted);
                 }
                 catch (Exception e) {
-                    CommandProcessor.sendDisplayMessage(c, "\u6709\u9519\u8bef.", type);
+                    CommandProcessor.sendDisplayMessage(c, "有错误.", type);
                     if (!c.getPlayer().isGM()) break block10;
-                    CommandProcessor.sendDisplayMessage(c, "\u9519\u8bef: " + e, type);
+                    CommandProcessor.sendDisplayMessage(c, "错误: " + e, type);
                 }
             }
             return true;
@@ -70,17 +68,17 @@ public class CommandProcessor {
             if (line.charAt(0) == '!') {
                 CommandObject co = commands.get(splitted[0]);
                 if (co == null || co.getType() != type) {
-                    CommandProcessor.sendDisplayMessage(c, "\u8f93\u5165\u7684\u547d\u4ee4\u4e0d\u5b58\u5728.", type);
+                    CommandProcessor.sendDisplayMessage(c, "输入的命令不存在.", type);
                     return true;
                 }
                 if (c.getPlayer().getGMLevel() >= co.getReqGMLevel()) {
                     int ret = co.execute(c, splitted);
                     if (ret > 0 && c.getPlayer() != null) {
                         CommandProcessor.logGMCommandToDB(c.getPlayer(), line);
-                        System.out.println("[ " + c.getPlayer().getName() + " ] \u4f7f\u7528\u4e86\u6307\u4ee4: " + line);
+                        System.out.println("[ " + c.getPlayer().getName() + " ] 使用了指令: " + line);
                     }
                 } else {
-                    CommandProcessor.sendDisplayMessage(c, "\u60a8\u7684\u6743\u9650\u7b49\u7ea7\u4e0d\u8db3\u4ee5\u4f7f\u7528\u6b21\u547d\u4ee4.", type);
+                    CommandProcessor.sendDisplayMessage(c, "您的权限等级不足以使用次命令.", type);
                 }
                 return true;
             }
@@ -114,12 +112,11 @@ public class CommandProcessor {
     }
 
     static {
-        Class[] CommandFiles;
-        commands = new HashMap();
-        commandList = new HashMap();
-        for (Class clasz : CommandFiles = new Class[]{PlayerCommand.class, GMCommand.class, InternCommand.class}) {
+        commands = new HashMap<>();
+        commandList = new HashMap<>();
+        for (Class<?> clasz : new Class[]{PlayerCommand.class, GMCommand.class, InternCommand.class}) {
             try {
-                ServerConstants.PlayerGMRank rankNeeded = (ServerConstants.PlayerGMRank)((Object)clasz.getMethod("getPlayerLevelRequired", new Class[0]).invoke(null, null));
+                ServerConstants.PlayerGMRank rankNeeded = (ServerConstants.PlayerGMRank)(clasz.getMethod("getPlayerLevelRequired", new Class[0]).invoke(null, null));
                 Class<?>[] a = clasz.getDeclaredClasses();
                 ArrayList<String> cL = new ArrayList<String>();
                 for (Class<?> c : a) {
@@ -153,4 +150,3 @@ public class CommandProcessor {
     }
 
 }
-

@@ -1215,7 +1215,7 @@ extends AbstractPlayerInteraction {
         if (SpeedRunner.getInstance().getSpeedRunData(type) != null) {
             return SpeedRunner.getInstance().getSpeedRunData(type);
         }
-        return new Pair<String, Map<Integer, String>>("", new HashMap());
+        return new Pair<String, Map<Integer, String>>("", new HashMap<Integer, String>());
     }
 
     public boolean getSR(Pair<String, Map<Integer, String>> ma, int sel) {
@@ -1856,7 +1856,7 @@ extends AbstractPlayerInteraction {
                 cserv.setZiDongExp(3);
                 for (MapleCharacter chr : cserv.getPlayerStorage().getAllCharacters()) {
                     if (chr == null) continue;
-                    chr.startMapEffect("\u653e\u70df\u706b\u5f00\u542f3\u500d\u7ecf\u9a8c3\u500d\u7206\u7387\u6d3b\u52a8\uff01", 5120000);
+                    chr.startMapEffect("放烟火开启3倍经验3倍爆率活动！", 5120000);
                 }
             }
             this.hyt = 0;
@@ -1870,7 +1870,7 @@ extends AbstractPlayerInteraction {
                         cserv.setZiDongExp(1);
                         for (MapleCharacter chr : cserv.getPlayerStorage().getAllCharacters()) {
                             if (chr == null) continue;
-                            chr.startMapEffect("\u653e\u70df\u706b\u5173\u95ed3\u500d\u7ecf\u9a8c3\u500d\u7206\u7387\u6d3b\u52a8\uff01\u671f\u5f85\u4e0b\u6b21\u6d3b\u52a8\uff01", 5120000);
+                            chr.startMapEffect("放烟火关闭3倍经验3倍爆率活动！期待下次活动！", 5120000);
                         }
                     }
                 }
@@ -1878,18 +1878,18 @@ extends AbstractPlayerInteraction {
         }
     }
 
-    public void \u5587\u53ed(int lx, String msg) throws RemoteException {
+    public void 喇叭(int lx, String msg) throws RemoteException {
         switch (lx) {
             case 1: {
-                World.Broadcast.broadcastSmega(MaplePacketCreator.serverNotice(11, this.c.getChannel(), "\u5168\u670d\u5587\u53ed]" + this.c.getPlayer().getName() + " : " + msg).getBytes());
+                World.Broadcast.broadcastSmega(MaplePacketCreator.serverNotice(11, this.c.getChannel(), "全服喇叭]" + this.c.getPlayer().getName() + " : " + msg).getBytes());
                 break;
             }
             case 2: {
-                World.Broadcast.broadcastSmega(MaplePacketCreator.serverNotice(12, this.c.getChannel(), "\u5168\u670d\u5587\u53ed]" + this.c.getPlayer().getName() + " : " + msg).getBytes());
+                World.Broadcast.broadcastSmega(MaplePacketCreator.serverNotice(12, this.c.getChannel(), "全服喇叭]" + this.c.getPlayer().getName() + " : " + msg).getBytes());
                 break;
             }
             case 3: {
-                World.Broadcast.broadcastSmega(MaplePacketCreator.serverNotice(3, this.c.getChannel(), "\u5168\u670d\u5587\u53ed]" + this.c.getPlayer().getName() + " : " + msg).getBytes());
+                World.Broadcast.broadcastSmega(MaplePacketCreator.serverNotice(3, this.c.getChannel(), "全服喇叭]" + this.c.getPlayer().getName() + " : " + msg).getBytes());
             }
         }
     }
@@ -1913,52 +1913,5 @@ extends AbstractPlayerInteraction {
     public void \u4eba\u6c14\u6392\u884c\u699c() {
         MapleGuild.\u4eba\u6c14\u6392\u884c(this.getClient(), this.npc);
     }
-
-    public void Startqmdb() throws InterruptedException, SQLException {
-        for (int ii = 0; ii <= 20; ++ii) {
-            Thread.sleep(700L);
-            int \u603b\u6570 = this.getPlayer().\u83b7\u53d6\u5168\u6c11\u593a\u5b9d\u603b\u6570();
-            double a = Math.random() * (double)\u603b\u6570 + 1.0;
-            int A = new Double(a).intValue();
-            Iterator<ChannelServer> i$ = ChannelServer.getAllInstances().iterator();
-            if (!i$.hasNext()) continue;
-            ChannelServer cserv1 = i$.next();
-            for (MapleCharacter mch : cserv1.getPlayerStorage().getAllCharacters()) {
-                mch.getClient().getSession().write((Object)MaplePacketCreator.sendHint("#b===========\u5168\u6c11\u5192\u9669\u5c9b==========#k\r\n==============================#r\r\n#b========\u5168\u6c11\u593a\u5b9d\u6d3b\u52a8\u5f00\u59cb=======#k\r\n==============================#r\r\n#b===========\u968f\u673a\u62bd\u53d6\u4e2d==========#k\r\n\u25c6\u6b63\u5728\u968f\u673a\u62bd\u9009\u4e2d\u5956\u7684\u5e78\u8fd0\u73a9\u5bb6\u25c6\r\n#b===========\u5e78\u8fd0\u73a9\u5bb6===========#r\r\n" + mch.\u5168\u6c11\u593a\u5b9d2(A), 200, 200));
-                if (ii != 20) continue;
-                mch.getClient().getSession().write((Object)MaplePacketCreator.sendHint("#e#r\u2605\u2605\u2605\u2605\u2605\u5168\u6c11\u593a\u5b9d\u2605\u2605\u2605\u2605\u2605\r\n\u4e2d\u5956\u73a9\u5bb6\uff1a" + mch.\u5168\u6c11\u593a\u5b9d2(A), 200, 200));
-                mch.startMapEffect("\u2605\u606d\u559c\u73a9\u5bb6:" + mch.\u5168\u6c11\u593a\u5b9d2(A) + " \u8d62\u5f97\u4e86 [\u5168\u6c11\u593a\u5b9d] !!\u2605", 5120025);
-                this.c.getSession().write((Object)MaplePacketCreator.enableActions());
-            }
-        }
-    }
-
-    public void \u8c01\u662f\u5367\u5e95() {
-        if (this.getPlayer().getParty() == null || this.getPlayer().getParty().getMembers().size() < 6) {
-            return;
-        }
-        int cMap = this.getPlayer().getMapId();
-        int \u968f\u673a\u7ed9\u4e88\u5367\u5e95\u503c = Randomizer.nextInt(6);
-        int \u968f\u673a\u7ed9\u4e88\u5367\u5e95\u503c2 = Randomizer.nextInt(6);
-        int \u4eba\u6570 = this.getPlayer().getParty().getMembers().size();
-        int \u786e\u5b9a\u4eba\u6570 = 0;
-        for (MaplePartyCharacter chr : this.getPlayer().getParty().getMembers()) {
-            MapleCharacter curChar = this.getChannelServer().getPlayerStorage().getCharacterById(chr.getId());
-            if (curChar == null || curChar.getMapId() != cMap) continue;
-            ++\u786e\u5b9a\u4eba\u6570;
-            if (\u968f\u673a\u7ed9\u4e88\u5367\u5e95\u503c == \u968f\u673a\u7ed9\u4e88\u5367\u5e95\u503c2) {
-                // empty if block
-            }
-            if (\u4eba\u6570 != \u786e\u5b9a\u4eba\u6570) continue;
-            Timer.MapTimer tMan = Timer.MapTimer.getInstance();
-            tMan.schedule(new Runnable(){
-
-                @Override
-                public void run() {
-                }
-            }, 60000L);
-        }
-    }
-
 }
 

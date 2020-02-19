@@ -81,48 +81,48 @@ public class GMCommand {
             if (!c.getPlayer().isAdmin()) {
                 return 0;
             }
-            ArrayMap<Pair<Short, Short>, MapleInventoryType> eqs = new ArrayMap<Pair<Short, Short>, MapleInventoryType>();
-            if (splitted[1].equals("\u5168\u90e8")) {
+            Map<Pair<Short, Short>, MapleInventoryType> eqs = new ArrayMap<>();
+            if (splitted[1].equals("全部")) {
                 for (MapleInventoryType type : MapleInventoryType.values()) {
                     for (IItem item : c.getPlayer().getInventory(type)) {
                         eqs.put(new Pair<Short, Short>(item.getPosition(), item.getQuantity()), type);
                     }
                 }
-            } else if (splitted[1].equals("\u5df2\u88dd\u5099\u9053\u5177")) {
+            } else if (splitted[1].equals("已裝備道具")) {
                 for (IItem item : c.getPlayer().getInventory(MapleInventoryType.EQUIPPED)) {
                     eqs.put(new Pair<Short, Short>(item.getPosition(), item.getQuantity()), MapleInventoryType.EQUIPPED);
                 }
-            } else if (splitted[1].equals("\u6b66\u5668")) {
+            } else if (splitted[1].equals("武器")) {
                 for (IItem item : c.getPlayer().getInventory(MapleInventoryType.EQUIP)) {
                     eqs.put(new Pair<Short, Short>(item.getPosition(), item.getQuantity()), MapleInventoryType.EQUIP);
                 }
-            } else if (splitted[1].equals("\u6d88\u8017")) {
+            } else if (splitted[1].equals("消耗")) {
                 for (IItem item : c.getPlayer().getInventory(MapleInventoryType.USE)) {
                     eqs.put(new Pair<Short, Short>(item.getPosition(), item.getQuantity()), MapleInventoryType.USE);
                 }
-            } else if (splitted[1].equals("\u88dd\u98fe")) {
+            } else if (splitted[1].equals("裝飾")) {
                 for (IItem item : c.getPlayer().getInventory(MapleInventoryType.SETUP)) {
                     eqs.put(new Pair<Short, Short>(item.getPosition(), item.getQuantity()), MapleInventoryType.SETUP);
                 }
-            } else if (splitted[1].equals("\u5176\u4ed6")) {
+            } else if (splitted[1].equals("其他")) {
                 for (IItem item : c.getPlayer().getInventory(MapleInventoryType.ETC)) {
                     eqs.put(new Pair<Short, Short>(item.getPosition(), item.getQuantity()), MapleInventoryType.ETC);
                 }
-            } else if (splitted[1].equals("\u7279\u6b8a")) {
+            } else if (splitted[1].equals("特殊")) {
                 for (IItem item : c.getPlayer().getInventory(MapleInventoryType.CASH)) {
                     eqs.put(new Pair<Short, Short>(item.getPosition(), item.getQuantity()), MapleInventoryType.CASH);
                 }
             } else {
-                c.getPlayer().dropMessage(6, "[\u5168\u90e8/\u5df2\u88dd\u5099\u9053\u5177/\u6b66\u5668/\u6d88\u8017/\u88dd\u98fe/\u5176\u4ed6/\u7279\u6b8a]");
+                c.getPlayer().dropMessage(6, "[全部/已裝備道具/武器/消耗/裝飾/其他/特殊]");
             }
-            for (Map.Entry eq : eqs.entrySet()) {
-                MapleInventoryManipulator.removeFromSlot(c, (MapleInventoryType)((Object)eq.getValue()), (Short)((Pair)eq.getKey()).left, (Short)((Pair)eq.getKey()).right, false, false);
+            for (Map.Entry<Pair<Short, Short>, MapleInventoryType> eq : eqs.entrySet()) {
+                MapleInventoryManipulator.removeFromSlot(c, eq.getValue(), eq.getKey().left, eq.getKey().right, false, false);
             }
             return 1;
         }
     }
 
-    public static class \u6c38\u4e45NPC
+    public static class 永久NPC
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -173,7 +173,7 @@ public class GMCommand {
         }
     }
 
-    public static class \u4e34\u65f6NPC
+    public static class 临时NPC
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -195,7 +195,7 @@ public class GMCommand {
         }
     }
 
-    public static class \u516c\u544a
+    public static class 公告
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -217,12 +217,12 @@ public class GMCommand {
         }
     }
 
-    public static class \u5f00\u542f\u6d3b\u52a8\u526f\u672c
+    public static class 开启活动副本
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
             if (splitted.length < 2) {
-                c.getPlayer().dropMessage(6, "\u7528\u6cd5: !\u5f00\u542f\u6d3b\u52a8\u526f\u672c <\u526f\u672c\u9891\u9053> <\u7c7b\u578b1-6>");
+                c.getPlayer().dropMessage(6, "用法: !开启活动副本 <副本频道> <类型1-6>");
                 return 0;
             }
             int channel = Integer.parseInt(splitted[1]);
@@ -235,7 +235,7 @@ public class GMCommand {
         }
     }
 
-    public static class \u5305
+    public static class 包
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -248,12 +248,12 @@ public class GMCommand {
             mplew.writeShort(packetheader);
             mplew.write(HexTool.getByteArrayFromHexString(packet_in));
             c.getSession().write((Object)mplew.getPacket());
-            c.getPlayer().dropMessage(packetheader + "\u5df2\u4f20\u9001\u5c01\u5305[" + mplew.getPacket().getBytes().length + "] : " + mplew.toString());
+            c.getPlayer().dropMessage(packetheader + "已传送封包[" + mplew.getPacket().getBytes().length + "] : " + mplew.toString());
             return 1;
         }
     }
 
-    public static class \u5305\u5934
+    public static class 包头
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -267,12 +267,12 @@ public class GMCommand {
             mplew.write(HexTool.getByteArrayFromHexString(packet_in));
             mplew.writeZeroBytes(20);
             c.getSession().write((Object)mplew.getPacket());
-            c.getPlayer().dropMessage(packetheader + "\u5df2\u4f20\u9001\u5c01\u5305[" + mplew.getPacket().getBytes().length + "] : " + mplew.toString());
+            c.getPlayer().dropMessage(packetheader + "已传送封包[" + mplew.getPacket().getBytes().length + "] : " + mplew.toString());
             return 1;
         }
     }
 
-    public static class \u91cd\u8f7d\u8dd1\u5546
+    public static class 重载跑商
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -305,16 +305,16 @@ public class GMCommand {
         @Override
         public int execute(MapleClient c, String[] splitted) {
             if (splitted.length < 3) {
-                c.getPlayer().dropMessage(6, "\u6307\u4ee4\u898f\u5247 <name> <itemid>");
+                c.getPlayer().dropMessage(6, "指令規則 <name> <itemid>");
                 return 0;
             }
             int itemId = Integer.parseInt(splitted[2]);
             if (!GameConstants.isEffectRing(itemId)) {
-                c.getPlayer().dropMessage(6, "\u932f\u8aa4\u7684\u7269\u54c1ID.");
+                c.getPlayer().dropMessage(6, "錯誤的物品ID.");
             } else {
                 MapleCharacter fff = c.getChannelServer().getPlayerStorage().getCharacterByName(splitted[1]);
                 if (fff == null) {
-                    c.getPlayer().dropMessage(6, "\u73a9\u5bb6\u5fc5\u9808\u4e0a\u7dda");
+                    c.getPlayer().dropMessage(6, "玩家必須上線");
                 } else {
                     int[] ringID = new int[]{MapleInventoryIdentifier.getInstance(), MapleInventoryIdentifier.getInstance()};
                     try {
@@ -322,12 +322,12 @@ public class GMCommand {
                         for (int i = 0; i < chrz.length; ++i) {
                             Equip eq = (Equip)MapleItemInformationProvider.getInstance().getEquipById(itemId);
                             if (eq == null) {
-                                c.getPlayer().dropMessage(6, "\u932f\u8aa4\u7684\u7269\u54c1ID.");
+                                c.getPlayer().dropMessage(6, "錯誤的物品ID.");
                                 return 0;
                             }
                             eq.setUniqueId(ringID[i]);
                             MapleInventoryManipulator.addbyItem(chrz[i].getClient(), eq.copy());
-                            chrz[i].dropMessage(6, "\u6210\u529f\u8207  " + chrz[i == 0 ? 1 : 0].getName() + " \u7d50\u5a5a");
+                            chrz[i].dropMessage(6, "成功與  " + chrz[i == 0 ? 1 : 0].getName() + " 結婚");
                         }
                         MapleRing.addToDB(itemId, c.getPlayer(), fff.getName(), fff.getId(), ringID);
                     }
@@ -360,7 +360,7 @@ public class GMCommand {
         }
     }
 
-    public static class \u65f6\u95f4\u8c03\u8bd5
+    public static class 时间调试
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -370,13 +370,13 @@ public class GMCommand {
             int hour = Calendar.getInstance().get(11);
             int minute = Calendar.getInstance().get(12);
             int second = Calendar.getInstance().get(13);
-            c.getPlayer().dropMessage(6, year + ":\u5e74 " + month + ":\u6708 " + date + ":\u65e5 " + hour + ":\u5c0f\u65f6 " + minute + ":\u5206\u949f " + second + ":\u6beb\u79d2");
-            System.out.println(year + ":\u5e74 " + month + ":\u6708 " + date + ":\u65e5 " + hour + ":\u5c0f\u65f6 " + minute + ":\u5206\u949f " + second + ":\u6beb\u79d2");
+            c.getPlayer().dropMessage(6, year + ":年 " + month + ":月 " + date + ":日 " + hour + ":小时 " + minute + ":分钟 " + second + ":毫秒");
+            System.out.println(year + ":年 " + month + ":月 " + date + ":日 " + hour + ":小时 " + minute + ":分钟 " + second + ":毫秒");
             return 1;
         }
     }
 
-    public static class \u514b\u9686\u6d4b\u8bd5
+    public static class 克隆测试
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -384,26 +384,26 @@ public class GMCommand {
                 return 0;
             }
             if (splitted.length < 2) {
-                c.getPlayer().dropMessage(5, "\u6700\u597d\u522b\u4e71\u641e\uff01.");
+                c.getPlayer().dropMessage(5, "最好别乱搞！.");
                 return 0;
             }
-            int \u7c7b\u578b = Integer.parseInt(splitted[1]);
+            int 类型 = Integer.parseInt(splitted[1]);
             if (c.getPlayer().getFakeChars().size() > 1) {
-                c.getPlayer().dropMessage("\u5143\u795e\u6570\u91cf\u6700\u5927\u4e3a1\u4e2a.");
+                c.getPlayer().dropMessage("元神数量最大为1个.");
             } else {
                 for (int i = 0; i < 1 && i + c.getPlayer().getFakeChars().size() < 1; ++i) {
-                    FakeCharacter fc = new FakeCharacter(c.getPlayer(), c.getPlayer().getId() + c.getPlayer().getFakeChars().size() + 1 + i, \u7c7b\u578b);
-                    new FakeCharacter(c.getPlayer(), c.getPlayer().getId(), \u7c7b\u578b);
+                    FakeCharacter fc = new FakeCharacter(c.getPlayer(), c.getPlayer().getId() + c.getPlayer().getFakeChars().size() + 1 + i, 类型);
+                    new FakeCharacter(c.getPlayer(), c.getPlayer().getId(), 类型);
                     c.getPlayer().getFakeChars().add(fc);
                     c.getChannelServer().addClone(fc);
                 }
-                c.getPlayer().dropMessage("\u4f60\u7684\u5143\u795e\u6570\u91cf " + c.getPlayer().getFakeChars().size() + "\u4e2a\u5206\u8eab.");
+                c.getPlayer().dropMessage("你的元神数量 " + c.getPlayer().getFakeChars().size() + "个分身.");
             }
             return 1;
         }
     }
 
-    public static class \u5220\u9664\u514b\u9686
+    public static class 删除克隆
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -413,12 +413,12 @@ public class GMCommand {
                 c.getPlayer().getMap().removePlayer(fc.getFakeChar());
             }
             c.getPlayer().getFakeChars().clear();
-            c.getPlayer().dropMessage("\u4f60\u5df2\u7ecf\u5220\u9664\u4e86\u9b54\u5ba0.");
+            c.getPlayer().dropMessage("你已经删除了魔宠.");
             return 1;
         }
     }
 
-    public static class \u5c01\u5305\u8c03\u8bd5
+    public static class 封包调试
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -457,13 +457,13 @@ public class GMCommand {
             if (!c.getPlayer().isAdmin()) {
                 return 0;
             }
-            c.getPlayer().dropMessage(6, "\u6e38\u620f\u5373\u5c06\u5173\u95ed...");
+            c.getPlayer().dropMessage(6, "游戏即将关闭...");
             if (t == null || !t.isAlive()) {
                 t = new Thread(ShutdownServer.getInstance());
                 ShutdownServer.getInstance().shutdown();
                 t.start();
             } else {
-                c.getPlayer().dropMessage(6, "\u5df2\u7ecf\u4f7f\u7528\u8fc7\u4e00\u6b21\u8fd9\u4e2a\u547d\u4ee4\uff0c\u6682\u65f6\u65e0\u6cd5\u4f7f\u7528.");
+                c.getPlayer().dropMessage(6, "已经使用过一次这个命令，暂时无法使用.");
             }
             return 1;
         }
@@ -480,7 +480,7 @@ public class GMCommand {
                 return 0;
             }
             this.minutesLeft = Integer.parseInt(splitted[1]);
-            c.getPlayer().dropMessage(6, "\u6e38\u620f\u5c06\u5728 " + this.minutesLeft + " \u5206\u949f\u4e4b\u540e\u5173\u95ed...");
+            c.getPlayer().dropMessage(6, "游戏将在 " + this.minutesLeft + " 分钟之后关闭...");
             if (!(ts != null || t != null && t.isAlive())) {
                 t = new Thread(ShutdownServer.getInstance());
                 ts = Timer.EventTimer.getInstance().register(new Runnable(){
@@ -493,23 +493,23 @@ public class GMCommand {
                             ts.cancel(false);
                             return;
                         }
-                        World.Broadcast.broadcastMessage(MaplePacketCreator.serverNotice(0, " \u6e38\u620f\u5c06\u4e8e " + ShutdownTime.this.minutesLeft + " \u5206\u949f\u4e4b\u540e\u5173\u95ed\u7ef4\u62a4.\u8bf7\u73a9\u5bb6\u5b89\u5168\u4e0b\u7ebf."));
+                        World.Broadcast.broadcastMessage(MaplePacketCreator.serverNotice(0, " 游戏将于 " + ShutdownTime.this.minutesLeft + " 分钟之后关闭维护.请玩家安全下线."));
                         ShutdownTime.this.minutesLeft--;
                     }
                 }, 60000L);
             } else {
-                c.getPlayer().dropMessage(6, "\u5df2\u7ecf\u4f7f\u7528\u8fc7\u4e00\u6b21\u8fd9\u4e2a\u547d\u4ee4\uff0c\u6682\u65f6\u65e0\u6cd5\u4f7f\u7528.");
+                c.getPlayer().dropMessage(6, "已经使用过一次这个命令，暂时无法使用.");
             }
             return 1;
         }
 
     }
 
-    public static class \u91cd\u542f\u670d\u52a1\u7aef
+    public static class 重启服务端
     extends ShutdownTime {
     }
 
-    public static class \u91cd\u8f7d\u7206\u7387
+    public static class 重载爆率
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -518,22 +518,22 @@ public class GMCommand {
             }
             MapleMonsterInformationProvider.getInstance().clearDrops();
             ReactorScriptManager.getInstance().clearDrops();
-            c.getPlayer().dropMessage(5, "\u91cd\u65b0\u52a0\u8f7d\u7206\u7387\u5b8c\u6210.");
+            c.getPlayer().dropMessage(5, "重新加载爆率完成.");
             return 1;
         }
     }
 
-    public static class \u91cd\u8f7d\u4f20\u9001
+    public static class 重载传送
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
             PortalScriptManager.getInstance().clearScripts();
-            c.getPlayer().dropMessage(5, "\u91cd\u65b0\u52a0\u8f7d\u4f20\u9001\u70b9\u811a\u672c\u5b8c\u6210.");
+            c.getPlayer().dropMessage(5, "重新加载传送点脚本完成.");
             return 1;
         }
     }
 
-    public static class \u91cd\u8f7d\u5546\u5e97
+    public static class 重载商店
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -541,12 +541,12 @@ public class GMCommand {
                 return 0;
             }
             MapleShopFactory.getInstance().clear();
-            c.getPlayer().dropMessage(5, "\u91cd\u65b0\u52a0\u8f7d\u5546\u5e97\u8d29\u5356\u9053\u5177\u5b8c\u6210.");
+            c.getPlayer().dropMessage(5, "重新加载商店贩卖道具完成.");
             return 1;
         }
     }
 
-    public static class \u91cd\u8f7d\u526f\u672c
+    public static class 重载副本
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -556,12 +556,12 @@ public class GMCommand {
             for (ChannelServer instance : ChannelServer.getAllInstances()) {
                 instance.reloadEvents();
             }
-            c.getPlayer().dropMessage(5, "\u91cd\u65b0\u52a0\u8f7d\u6d3b\u52a8\u811a\u672c\u5b8c\u6210.");
+            c.getPlayer().dropMessage(5, "重新加载活动脚本完成.");
             return 1;
         }
     }
 
-    public static class \u91cd\u8f7d\u5305\u5934
+    public static class 重载包头
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -570,12 +570,12 @@ public class GMCommand {
             }
             SendPacketOpcode.reloadValues();
             RecvPacketOpcode.reloadValues();
-            c.getPlayer().dropMessage(5, "\u91cd\u65b0\u83b7\u53d6\u5305\u5934\u5b8c\u6210.");
+            c.getPlayer().dropMessage(5, "重新获取包头完成.");
             return 1;
         }
     }
 
-    public static class \u91cd\u8f7d\u5546\u57ce
+    public static class 重载商城
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -583,12 +583,12 @@ public class GMCommand {
                 return 0;
             }
             CashItemFactory.getInstance().clearCashShop();
-            c.getPlayer().dropMessage(5, "\u91cd\u65b0\u52a0\u8f7d\u5546\u57ce\u5b8c\u6210.");
+            c.getPlayer().dropMessage(5, "重新加载商城完成.");
             return 1;
         }
     }
 
-    public static class \u91cd\u8f7d\u4efb\u52a1
+    public static class 重载任务
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -596,12 +596,12 @@ public class GMCommand {
                 return 0;
             }
             MapleQuest.clearQuests();
-            c.getPlayer().dropMessage(5, "\u91cd\u65b0\u52a0\u8f7d\u4efb\u52a1\u811a\u672c\u5b8c\u6210.");
+            c.getPlayer().dropMessage(5, "重新加载任务脚本完成.");
             return 1;
         }
     }
 
-    public static class \u5237\u70b9\u5377
+    public static class 刷点卷
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -609,7 +609,7 @@ public class GMCommand {
                 return 0;
             }
             if (splitted.length < 2) {
-                c.getPlayer().dropMessage(5, "\u8bf7\u8f93\u5165\u6570\u91cf.");
+                c.getPlayer().dropMessage(5, "请输入数量.");
                 return 0;
             }
             c.getPlayer().modifyCSPoints(1, Integer.parseInt(splitted[1]), true);
@@ -617,7 +617,7 @@ public class GMCommand {
         }
     }
 
-    public static class \u5237\u62b5\u7528\u5377
+    public static class 刷抵用卷
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -625,7 +625,7 @@ public class GMCommand {
                 return 0;
             }
             if (splitted.length < 2) {
-                c.getPlayer().dropMessage(5, "\u8bf7\u8f93\u5165\u6570\u91cf.");
+                c.getPlayer().dropMessage(5, "请输入数量.");
                 return 0;
             }
             c.getPlayer().modifyCSPoints(2, Integer.parseInt(splitted[1]), true);
@@ -640,7 +640,7 @@ public class GMCommand {
             if (!c.getPlayer().isAdmin()) {
                 return 0;
             }
-            World.Broadcast.broadcastGMMessage(MaplePacketCreator.serverNotice(5, "<GM\u804a\u5929\u8996\u7a97>\u983b\u9053" + c.getPlayer().getClient().getChannel() + " [" + c.getPlayer().getName() + "] : " + StringUtil.joinStringFrom(splitted, 1)).getBytes());
+            World.Broadcast.broadcastGMMessage(MaplePacketCreator.serverNotice(5, "<GM聊天視窗>頻道" + c.getPlayer().getClient().getChannel() + " [" + c.getPlayer().getName() + "] : " + StringUtil.joinStringFrom(splitted, 1)).getBytes());
             return 1;
         }
     }
@@ -739,31 +739,31 @@ public class GMCommand {
                 for (MapleCharacter chr : cserv.getPlayerStorage().getAllCharacters()) {
                     if (chr == null || c.getPlayer().getGMLevel() < chr.getGMLevel()) continue;
                     StringBuilder ret = new StringBuilder();
-                    ret.append(" \u9891\u9053: ");
+                    ret.append(" 频道: ");
                     ret.append(chr.getClient().getChannel());
-                    ret.append(" \u89d2\u8272\u540d\u5b57 ");
+                    ret.append(" 角色名字 ");
                     ret.append(StringUtil.getRightPaddedStr(chr.getName(), ' ', 13));
                     ret.append(" ID: ");
                     ret.append(chr.getId());
-                    ret.append(" \u7b49\u7ea7: ");
+                    ret.append(" 等级: ");
                     ret.append(StringUtil.getRightPaddedStr(String.valueOf(chr.getLevel()), ' ', 3));
-                    ret.append(" \u804c\u4e1a: ");
+                    ret.append(" 职业: ");
                     ret.append(chr.getJob());
                     if (chr.getMap() != null) {
-                        ret.append(" \u5730\u56fe: ");
+                        ret.append(" 地图: ");
                         ret.append(chr.getMapId() + " - " + chr.getMap().getMapName().toString());
                         c.getPlayer().dropMessage(6, ret.toString());
                     }
                     ++p;
                 }
             }
-            c.getPlayer().dropMessage(6, "\u5f53\u524d\u670d\u52a1\u5668\u603b\u4eba\u6570: " + p);
+            c.getPlayer().dropMessage(6, "当前服务器总人数: " + p);
             c.getPlayer().dropMessage(6, "-------------------------------------------------------------------------------------");
             return 1;
         }
     }
 
-    public static class \u603b\u5728\u7ebf\u4eba\u6570
+    public static class 总在线人数
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -771,7 +771,7 @@ public class GMCommand {
                 return 0;
             }
             Map<Integer, Integer> connected = World.getConnected();
-            StringBuilder conStr = new StringBuilder("\u8fde\u63a5\u6570\u91cf: ");
+            StringBuilder conStr = new StringBuilder("连接数量: ");
             boolean first = true;
             for (int i : connected.keySet()) {
                 if (!first) {
@@ -780,11 +780,11 @@ public class GMCommand {
                     first = false;
                 }
                 if (i == 0) {
-                    conStr.append("\u603b\u8ba1: ");
+                    conStr.append("总计: ");
                     conStr.append(connected.get(i));
                     continue;
                 }
-                conStr.append("\u9891\u9053 ");
+                conStr.append("频道 ");
                 conStr.append(i);
                 conStr.append(": ");
                 conStr.append(connected.get(i));
@@ -809,11 +809,11 @@ public class GMCommand {
                 onemob = MapleLifeFactory.getMonster(mid);
             }
             catch (RuntimeException e) {
-                c.getPlayer().dropMessage(5, "\u9519\u8bef: " + e.getMessage());
+                c.getPlayer().dropMessage(5, "错误: " + e.getMessage());
                 return 0;
             }
             if (onemob == null) {
-                c.getPlayer().dropMessage(5, "\u8f93\u5165\u7684\u602a\u7269\u4e0d\u5b58\u5728.");
+                c.getPlayer().dropMessage(5, "输入的怪物不存在.");
                 return 0;
             }
             long newhp = 0L;
@@ -841,7 +841,7 @@ public class GMCommand {
             if (!c.getPlayer().isAdmin()) {
                 return 0;
             }
-            c.getPlayer().dropMessage(6, "\u4e0a\u7ebf\u7684\u89d2\u8272 \u9891\u9053-" + c.getChannel() + ":");
+            c.getPlayer().dropMessage(6, "上线的角色 频道-" + c.getChannel() + ":");
             c.getPlayer().dropMessage(6, c.getChannelServer().getPlayerStorage().getOnlinePlayers(true));
             return 1;
         }
@@ -855,21 +855,21 @@ public class GMCommand {
                 return 0;
             }
             if (splitted.length < 2) {
-                c.getPlayer().dropMessage(6, "\u4f7f\u7528\u898f\u5247: !spy <\u73a9\u5bb6\u540d\u5b57>");
+                c.getPlayer().dropMessage(6, "使用規則: !spy <玩家名字>");
             } else {
                 MapleCharacter victim = c.getChannelServer().getPlayerStorage().getCharacterByName(splitted[1]);
-                if (victim.getGMLevel() > 3) {
-                    c.getPlayer().dropMessage(5, "\u4f60\u4e0d\u80fd\u67e5\u770b\u6bd4\u4f60\u9ad8\u6b0a\u9650\u7684\u4eba!");
-                    return 0;
-                }
                 if (victim != null) {
-                    c.getPlayer().dropMessage(5, "\u6b64\u73a9\u5bb6\u72c0\u614b:");
-                    c.getPlayer().dropMessage(5, "\u7b49\u7d1a: " + victim.getLevel() + "\u804c\u4e1a: " + victim.getJob() + "\u4eba\u6c14: " + victim.getFame());
-                    c.getPlayer().dropMessage(5, "\u5730\u5716: " + victim.getMapId() + " - " + victim.getMap().getMapName().toString());
-                    c.getPlayer().dropMessage(5, "\u529b\u91cf: " + victim.getStat().getStr() + "  ||  \u654f\u6377: " + victim.getStat().getDex() + "  ||  \u667a\u529b: " + victim.getStat().getInt() + "  ||  \u8fd0\u6c14: " + victim.getStat().getLuk());
-                    c.getPlayer().dropMessage(5, "\u62e5\u6709 " + victim.getMeso() + " \u5192\u9669\u5e01.");
+                	if (victim.getGMLevel() > 3) {
+                		c.getPlayer().dropMessage(5, "你不能查看比你高權限的人!");
+                		return 0;
+                	}
+                    c.getPlayer().dropMessage(5, "此玩家狀態:");
+                    c.getPlayer().dropMessage(5, "等級: " + victim.getLevel() + "职业: " + victim.getJob() + "人气: " + victim.getFame());
+                    c.getPlayer().dropMessage(5, "地圖: " + victim.getMapId() + " - " + victim.getMap().getMapName().toString());
+                    c.getPlayer().dropMessage(5, "力量: " + victim.getStat().getStr() + "  ||  敏捷: " + victim.getStat().getDex() + "  ||  智力: " + victim.getStat().getInt() + "  ||  运气: " + victim.getStat().getLuk());
+                    c.getPlayer().dropMessage(5, "拥有 " + victim.getMeso() + " 冒险币.");
                 } else {
-                    c.getPlayer().dropMessage(5, "\u627e\u4e0d\u5230\u6b64\u73a9\u5bb6.");
+                    c.getPlayer().dropMessage(5, "找不到此玩家.");
                 }
             }
             return 1;
@@ -913,7 +913,7 @@ public class GMCommand {
             if (GameConstants.isPet(itemId)) {
                 c.getPlayer().dropMessage(5, "Please purchase a pet from the cash shop instead.");
             } else if (!ii.itemExists(itemId)) {
-                c.getPlayer().dropMessage(5, itemId + " \u70ba\u7121\u6548\u7684\u7269\u54c1");
+                c.getPlayer().dropMessage(5, itemId + " 為無效的物品");
             } else {
                 client.inventory.Item item;
                 int flag = 0;
@@ -957,7 +957,7 @@ public class GMCommand {
             if (GameConstants.isPet(itemId)) {
                 c.getPlayer().dropMessage(5, "Please purchase a pet from the cash shop instead.");
             } else if (!ii.itemExists(itemId)) {
-                c.getPlayer().dropMessage(5, itemId + " \u70ba\u7121\u6548\u7684\u7269\u54c1");
+                c.getPlayer().dropMessage(5, itemId + " 為無效的物品");
             } else {
                 client.inventory.Item item;
                 int flag = 0;
@@ -1004,7 +1004,7 @@ public class GMCommand {
         }
     }
 
-    public static class \u6ee1\u6280\u80fd
+    public static class 满技能
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -1016,7 +1016,7 @@ public class GMCommand {
         }
     }
 
-    public static class \u91cd\u7f6e\u602a\u7269
+    public static class 重置怪物
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -1028,7 +1028,7 @@ public class GMCommand {
         }
     }
 
-    public static class \u96c7\u4f63\u5b58\u6863
+    public static class 雇佣存档
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -1041,17 +1041,17 @@ public class GMCommand {
                     Thread.sleep(2000L);
                 }
                 catch (InterruptedException ex) {
-                    System.out.println("\u7ebf\u7a0b\u9501\u5f00\u542f\u5931\u8d25\uff1a" + ex);
+                    System.out.println("线程锁开启失败：" + ex);
                 }
                 cserv.closeAllMerchants();
                 ++p;
             }
-            c.getPlayer().dropMessage(5, "[\u4fdd\u5b58\u96c7\u4f63\u5546\u4eba\u7cfb\u7edf] \u96c7\u4f63\u5546\u4eba\u4fdd\u5b58" + p + "\u4e2a\u9891\u9053\u6210\u529f\u3002");
+            c.getPlayer().dropMessage(5, "[保存雇佣商人系统] 雇佣商人保存" + p + "个频道成功。");
             return 1;
         }
     }
 
-    public static class \u5168\u90e8\u5b58\u6863
+    public static class 全部存档
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -1065,19 +1065,19 @@ public class GMCommand {
                     ++p;
                 }
             }
-            c.getPlayer().dropMessage(5, "[\u5168\u90e8\u5b58\u6863] \u4fdd\u5b58" + p + "\u4e2a\u73a9\u5bb6\u6210\u529f\u3002");
+            c.getPlayer().dropMessage(5, "[全部存档] 保存" + p + "个玩家成功。");
             return 1;
         }
     }
 
-    public static class \u8c01\u5728\u8fd9\u4e2a\u5730\u56fe
+    public static class 谁在这个地图
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
             if (!c.getPlayer().isAdmin()) {
                 return 0;
             }
-            StringBuilder builder = new StringBuilder("\u5f53\u524d\u5730\u56fe\u73a9\u5bb6: ").append(c.getPlayer().getMap().getCharactersThreadsafe().size()).append(" \u4eba. ");
+            StringBuilder builder = new StringBuilder("当前地图玩家: ").append(c.getPlayer().getMap().getCharactersThreadsafe().size()).append(" 人. ");
             for (MapleCharacter chr : c.getPlayer().getMap().getCharactersThreadsafe()) {
                 if (builder.length() > 150) {
                     builder.setLength(builder.length() - 2);
@@ -1093,7 +1093,7 @@ public class GMCommand {
         }
     }
 
-    public static class \u627e\u73a9\u5bb6\u4f4d\u7f6e
+    public static class 找玩家位置
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -1102,7 +1102,7 @@ public class GMCommand {
             }
             MapleCharacter victim = c.getChannelServer().getPlayerStorage().getCharacterByName(splitted[1]);
             if (victim == null) {
-                c.getPlayer().dropMessage(5, "\u6ca1\u6709\u627e\u5230 " + splitted[1] + " \u73a9\u5bb6.");
+                c.getPlayer().dropMessage(5, "没有找到 " + splitted[1] + " 玩家.");
                 return 0;
             }
             victim.getMap().broadcastMessage(MaplePacketCreator.getChatText(victim.getId(), StringUtil.joinStringFrom(splitted, 2), victim.isGM(), 0));
@@ -1110,7 +1110,7 @@ public class GMCommand {
         }
     }
 
-    public static class \u68c0\u6d4b\u4f5c\u5f0a
+    public static class 检测作弊
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -1126,7 +1126,7 @@ public class GMCommand {
         }
     }
 
-    public static class \u68c0\u67e5\u73a9\u5bb6\u7269\u54c1\u4fe1\u606f
+    public static class 检查玩家物品信息
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -1134,22 +1134,22 @@ public class GMCommand {
                 return 0;
             }
             if (splitted.length < 3 || splitted[1] == null || splitted[1].equals("") || splitted[2] == null || splitted[2].equals("")) {
-                c.getPlayer().dropMessage(6, "\u7528\u6cd5: !\u68c0\u67e5\u73a9\u5bb6\u7269\u54c1\u4fe1\u606f <\u73a9\u5bb6\u540d\u5b57> <\u9053\u5177ID>");
+                c.getPlayer().dropMessage(6, "用法: !检查玩家物品信息 <玩家名字> <道具ID>");
                 return 0;
             }
             int item = Integer.parseInt(splitted[2]);
             MapleCharacter chr = c.getChannelServer().getPlayerStorage().getCharacterByName(splitted[1]);
             int itemamount = chr.getItemQuantity(item, true);
             if (itemamount > 0) {
-                c.getPlayer().dropMessage(6, chr.getName() + " \u62e5\u6709 " + itemamount + " (" + item + ").");
+                c.getPlayer().dropMessage(6, chr.getName() + " 拥有 " + itemamount + " (" + item + ").");
             } else {
-                c.getPlayer().dropMessage(6, chr.getName() + " \u6ca1\u6709ID\u4e3a (" + item + ") \u7684\u9053\u5177.");
+                c.getPlayer().dropMessage(6, chr.getName() + " 没有ID为 (" + item + ") 的道具.");
             }
             return 1;
         }
     }
 
-    public static class \u5237\u65b0\u5730\u56fe
+    public static class 刷新地图
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -1160,7 +1160,7 @@ public class GMCommand {
             boolean custMap = splitted.length >= 2;
             MapleCharacter player = c.getPlayer();
             int mapid = custMap ? Integer.parseInt(splitted[1]) : player.getMapId();
-            MapleMap mapleMap = map = custMap ? player.getClient().getChannelServer().getMapFactory().getMap(mapid) : player.getMap();
+            map = custMap ? player.getClient().getChannelServer().getMapFactory().getMap(mapid) : player.getMap();
             if (player.getClient().getChannelServer().getMapFactory().destroyMap(mapid)) {
                 MapleMap newMap = player.getClient().getChannelServer().getMapFactory().getMap(mapid);
                 MaplePortal newPor = newMap.getPortal(0);
@@ -1181,7 +1181,7 @@ public class GMCommand {
         }
     }
 
-    public static class \u62c9\u6240\u6709\u73a9\u5bb6
+    public static class 拉所有玩家
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -1197,7 +1197,7 @@ public class GMCommand {
         }
     }
 
-    public static class \u62c9\u73a9\u5bb6id
+    public static class 拉玩家id
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -1211,7 +1211,7 @@ public class GMCommand {
         }
     }
 
-    public static class \u62c9\u73a9\u5bb6
+    public static class 拉玩家
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -1225,7 +1225,7 @@ public class GMCommand {
         }
     }
 
-    public static class \u89e3\u9664\u9690\u8eab
+    public static class 解除隐身
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -1237,7 +1237,7 @@ public class GMCommand {
         }
     }
 
-    public static class \u9690\u8eab\u6a21\u5f0f
+    public static class 隐身模式
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -1245,38 +1245,38 @@ public class GMCommand {
                 return 0;
             }
             SkillFactory.getSkill(9001004).getEffect(1).applyTo(c.getPlayer());
-            c.getPlayer().dropMessage(6, "\u9690\u8eab\u6a21\u5f0f\u5df2\u5f00\u542f.");
+            c.getPlayer().dropMessage(6, "隐身模式已开启.");
             return 0;
         }
     }
 
-    public static class \u5728\u7ebf
+    public static class 在线
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
             if (!c.getPlayer().isAdmin()) {
                 return 0;
             }
-            c.getPlayer().dropMessage(6, "\u9891\u9053\u5728\u7ebf " + c.getChannel() + ":");
+            c.getPlayer().dropMessage(6, "频道在线 " + c.getChannel() + ":");
             c.getPlayer().dropMessage(6, c.getChannelServer().getPlayerStorage().getOnlinePlayers(true));
             return 1;
         }
     }
 
-    public static class \u9891\u9053\u5728\u7ebf
+    public static class 频道在线
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
             if (!c.getPlayer().isAdmin()) {
                 return 0;
             }
-            c.getPlayer().dropMessage(6, "\u9891\u9053\u5728\u7ebf: " + Integer.parseInt(splitted[1]) + ":");
+            c.getPlayer().dropMessage(6, "频道在线: " + Integer.parseInt(splitted[1]) + ":");
             c.getPlayer().dropMessage(6, ChannelServer.getInstance(Integer.parseInt(splitted[1])).getPlayerStorage().getOnlinePlayers(true));
             return 1;
         }
     }
 
-    public static class \u65ad\u5f00\u73a9\u5bb6\u8fde\u63a5
+    public static class 断开玩家连接
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -1287,15 +1287,15 @@ public class GMCommand {
             if (victim != null && c.getPlayer().getGMLevel() >= victim.getGMLevel()) {
                 victim.getClient().getSession().close();
                 victim.getClient().disconnect(true, false);
-                c.getPlayer().dropMessage(6, "\u5df2\u7ecf\u6210\u529f\u65ad\u5f00 " + victim.getName() + " \u7684\u8fde\u63a5.");
+                c.getPlayer().dropMessage(6, "已经成功断开 " + victim.getName() + " 的连接.");
                 return 1;
             }
-            c.getPlayer().dropMessage(6, "\u4f7f\u7528\u7684\u5bf9\u8c61\u4e0d\u5b58\u5728\u6216\u8005\u89d2\u8272\u540d\u5b57\u9519\u8bef\u6216\u8005\u5bf9\u653e\u7684GM\u6743\u9650\u6bd4\u4f60\u9ad8.");
+            c.getPlayer().dropMessage(6, "使用的对象不存在或者角色名字错误或者对放的GM权限比你高.");
             return 0;
         }
     }
 
-    public static class \u6740\u6b7b\u73a9\u5bb6
+    public static class 杀死玩家
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -1304,7 +1304,7 @@ public class GMCommand {
             }
             MapleCharacter player = c.getPlayer();
             if (splitted.length < 2) {
-                c.getPlayer().dropMessage(6, "\u7528\u6cd5: !\u6740\u6b7b\u73a9\u5bb6 <list player names>");
+                c.getPlayer().dropMessage(6, "用法: !杀死玩家 <list player names>");
                 return 0;
             }
             MapleCharacter victim = null;
@@ -1313,7 +1313,7 @@ public class GMCommand {
                     victim = c.getChannelServer().getPlayerStorage().getCharacterByName(splitted[i]);
                 }
                 catch (Exception e) {
-                    c.getPlayer().dropMessage(6, "\u6ca1\u6709\u627e\u5230\u540d\u5b57\u4e3a: " + splitted[i] + " \u7684\u73a9\u5bb6.");
+                    c.getPlayer().dropMessage(6, "没有找到名字为: " + splitted[i] + " 的玩家.");
                 }
                 if (!player.allowedToTarget(victim) || player.getGMLevel() < victim.getGMLevel()) continue;
                 victim.getStat().setHp(0);
@@ -1335,7 +1335,7 @@ public class GMCommand {
             try {
                 MapleMap target = c.getChannelServer().getMapFactory().getMap(Integer.parseInt(splitted[1]));
                 if (target == null) {
-                    c.getPlayer().dropMessage(6, "\u8f93\u5165\u7684\u5730\u56fe\u4e0d\u5b58\u5728.");
+                    c.getPlayer().dropMessage(6, "输入的地图不存在.");
                     return 0;
                 }
                 MapleMap from = c.getPlayer().getMap();
@@ -1344,7 +1344,7 @@ public class GMCommand {
                 }
             }
             catch (Exception e) {
-                c.getPlayer().dropMessage(5, "\u9519\u8bef: " + e.getMessage());
+                c.getPlayer().dropMessage(5, "错误: " + e.getMessage());
                 return 0;
             }
             return 1;
@@ -1369,7 +1369,7 @@ public class GMCommand {
                 }
             }
             if (map == null) {
-                c.getPlayer().dropMessage(6, "\u8f93\u5165\u7684\u5730\u56fe\u4e0d\u5b58\u5728.");
+                c.getPlayer().dropMessage(6, "输入的地图不存在.");
                 return 0;
             }
             for (MapleMapObject monstermo : map.getMapObjectsInRange(c.getPlayer().getPosition(), range, Arrays.asList(new MapleMapObjectType[]{MapleMapObjectType.MONSTER}))) {
@@ -1381,19 +1381,19 @@ public class GMCommand {
         }
     }
 
-    public static class \u67e5\u770b\u5f53\u524d\u5730\u56fe\u4fe1\u606f
+    public static class 查看当前地图信息
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
             if (!c.getPlayer().isAdmin()) {
                 return 0;
             }
-            c.getPlayer().dropMessage(6, "\u5f53\u524d\u5730\u56fe\u4fe1\u606f: ID " + c.getPlayer().getMapId() + " \u540d\u5b57 " + c.getPlayer().getMap().getMapName() + " \u5f53\u524d\u5750\u6807: X " + c.getPlayer().getPosition().x + " Y " + c.getPlayer().getPosition().y);
+            c.getPlayer().dropMessage(6, "当前地图信息: ID " + c.getPlayer().getMapId() + " 名字 " + c.getPlayer().getMap().getMapName() + " 当前坐标: X " + c.getPlayer().getPosition().x + " Y " + c.getPlayer().getPosition().y);
             return 1;
         }
     }
 
-    public static class \u4eba\u6c14
+    public static class 人气
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -1402,7 +1402,7 @@ public class GMCommand {
             }
             MapleCharacter player = c.getPlayer();
             if (splitted.length < 2) {
-                c.getPlayer().dropMessage(6, "\u7528\u6cd5: !\u4eba\u6c14 <\u73a9\u5bb6\u540d\u5b57> <\u8981\u52a0\u4eba\u6c14\u7684\u6570\u91cf>");
+                c.getPlayer().dropMessage(6, "用法: !人气 <玩家名字> <要加人气的数量>");
                 return 0;
             }
             MapleCharacter victim = c.getChannelServer().getPlayerStorage().getCharacterByName(splitted[1]);
@@ -1411,7 +1411,7 @@ public class GMCommand {
                 fame = Integer.parseInt(splitted[2]);
             }
             catch (NumberFormatException nfe) {
-                c.getPlayer().dropMessage(6, "\u8f93\u5165\u7684\u6570\u5b57\u65e0\u6548...");
+                c.getPlayer().dropMessage(6, "输入的数字无效...");
                 return 0;
             }
             if (victim != null && player.allowedToTarget(victim)) {
@@ -1422,7 +1422,7 @@ public class GMCommand {
         }
     }
 
-    public static class \u5220\u9664\u9053\u5177
+    public static class 删除道具
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -1430,16 +1430,16 @@ public class GMCommand {
                 return 0;
             }
             if (splitted.length < 3) {
-                c.getPlayer().dropMessage(6, "\u9700\u8981\u8f93\u5165 <\u89d2\u8272\u540d\u5b57> <\u9053\u5177ID>");
+                c.getPlayer().dropMessage(6, "需要输入 <角色名字> <道具ID>");
                 return 0;
             }
             MapleCharacter chr = c.getChannelServer().getPlayerStorage().getCharacterByName(splitted[1]);
             if (chr == null) {
-                c.getPlayer().dropMessage(6, "\u8f93\u5165\u7684\u89d2\u8272\u4e0d\u5b58\u5728\u6216\u8005\u89d2\u8272\u4e0d\u5728\u7ebf\u6216\u8005\u4e0d\u5728\u8fd9\u4e2a\u9891\u9053.");
+                c.getPlayer().dropMessage(6, "输入的角色不存在或者角色不在线或者不在这个频道.");
                 return 0;
             }
             chr.removeAll(Integer.parseInt(splitted[2]), false, false);
-            c.getPlayer().dropMessage(6, "\u5df2\u7ecf\u6210\u529f\u7684\u5c06ID\u4e3a: " + splitted[2] + " \u7684\u6240\u6709\u9053\u5177\u4ece\u89d2\u8272: " + splitted[1] + " \u7684\u80cc\u5305\u4e2d\u5220\u9664.");
+            c.getPlayer().dropMessage(6, "已经成功的将ID为: " + splitted[2] + " 的所有道具从角色: " + splitted[1] + " 的背包中删除.");
             return 1;
         }
     }
@@ -1491,21 +1491,21 @@ public class GMCommand {
             }
             if (range == 0) {
                 c.getPlayer().getMap().disconnectAll();
-                c.getPlayer().dropMessage(5, "\u5df2\u6210\u529f\u65ad\u5f00\u5f53\u524d\u5730\u56fe\u6240\u6709\u73a9\u5bb6\u7684\u8fde\u63a5.");
+                c.getPlayer().dropMessage(5, "已成功断开当前地图所有玩家的连接.");
             } else if (range == 1) {
                 c.getChannelServer().getPlayerStorage().disconnectAll(true);
-                c.getPlayer().dropMessage(5, "\u5df2\u6210\u529f\u65ad\u5f00\u5f53\u524d\u9891\u9053\u6240\u6709\u73a9\u5bb6\u7684\u8fde\u63a5.");
+                c.getPlayer().dropMessage(5, "已成功断开当前频道所有玩家的连接.");
             } else if (range == 2) {
                 for (ChannelServer cserv : ChannelServer.getAllInstances()) {
                     cserv.getPlayerStorage().disconnectAll(true);
                 }
-                c.getPlayer().dropMessage(5, "\u5df2\u6210\u529f\u65ad\u5f00\u5f53\u524d\u6e38\u620f\u6240\u6709\u73a9\u5bb6\u7684\u8fde\u63a5.");
+                c.getPlayer().dropMessage(5, "已成功断开当前游戏所有玩家的连接.");
             }
             return 1;
         }
     }
 
-    public static class \u7ed9\u73a9\u5bb6\u7269\u54c1
+    public static class 给玩家物品
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -1513,26 +1513,24 @@ public class GMCommand {
                 return 0;
             }
             if (splitted.length < 3) {
-                c.getPlayer().dropMessage(6, "\u7528\u6cd5: !\u7ed9\u73a9\u5bb6\u7269\u54c1 [\u89d2\u8272\u540d\u5b57][\u7269\u54c1ID] [\u6570\u91cf]");
+                c.getPlayer().dropMessage(6, "用法: !给玩家物品 [角色名字][物品ID] [数量]");
                 return 0;
             }
-            MapleItemInformationProvider ii = MapleItemInformationProvider.getInstance();
             String name = splitted[1];
             int item = Integer.parseInt(splitted[2]);
             int quantity = Integer.parseInt(splitted[3]);
-            String mz = ii.getName(item);
             for (ChannelServer cserv : ChannelServer.getAllInstances()) {
                 for (MapleCharacter mch : cserv.getPlayerStorage().getAllCharacters()) {
                     if (!mch.getName().equals(name)) continue;
                     MapleInventoryManipulator.addById(mch.getClient(), item, (short)quantity, (byte)0);
-                    c.getPlayer().dropMessage(6, "\u7ed9\u4e88\u6210\u529f\uff01");
+                    c.getPlayer().dropMessage(6, "给予成功！");
                 }
             }
             return 1;
         }
     }
 
-    public static class \u7ed9\u5f53\u524d\u5730\u56fe\u7269\u54c1
+    public static class 给当前地图物品
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -1540,7 +1538,7 @@ public class GMCommand {
                 return 0;
             }
             if (splitted.length < 2) {
-                c.getPlayer().dropMessage(6, "\u7528\u6cd5: !\u7ed9\u5f53\u524d\u5730\u56fe\u7269\u54c1 [\u7269\u54c1ID] [\u6570\u91cf]");
+                c.getPlayer().dropMessage(6, "用法: !给当前地图物品 [物品ID] [数量]");
                 return 0;
             }
             MapleItemInformationProvider ii = MapleItemInformationProvider.getInstance();
@@ -1557,18 +1555,18 @@ public class GMCommand {
                 for (MapleCharacter mch : cserv1.getPlayerStorage().getAllCharacters()) {
                     if (quantity <= 1) {
                         if (c.getPlayer().getMapId() != mch.getMapId()) continue;
-                        mch.startMapEffect(ServerProperties.getProperty("KinMS.CommandMessage") + "\u7ba1\u7406\u5458\u53d1\u653e\u3010" + mz + "\u3011\u7269\u54c1\u7ed9\u5f53\u524d\u5730\u56fe\u5728\u7ebf\u7684\u6240\u4ee5\u73a9\u5bb6\uff01\u5feb\u611f\u8c22\u7ba1\u7406\u5458\u5427\uff01", 5120000);
+                        mch.startMapEffect(ServerProperties.getProperty("KinMS.CommandMessage") + "管理员发放【" + mz + "】物品给当前地图在线的所以玩家！快感谢管理员吧！", 5120000);
                         continue;
                     }
                     if (c.getPlayer().getMapId() != mch.getMapId()) continue;
-                    mch.startMapEffect(ServerProperties.getProperty("KinMS.CommandMessage") + "\u7ba1\u7406\u5458\u53d1\u653e\u3010" + mz + "\u3011\u7269\u54c1\u3010" + quantity + "\u3011\u4e2a\u7ed9\u5f53\u524d\u5730\u56fe\u5728\u7ebf\u7684\u6240\u4ee5\u73a9\u5bb6\uff01\u5feb\u611f\u8c22\u7ba1\u7406\u5458\u5427\uff01", 5120000);
+                    mch.startMapEffect(ServerProperties.getProperty("KinMS.CommandMessage") + "管理员发放【" + mz + "】物品【" + quantity + "】个给当前地图在线的所以玩家！快感谢管理员吧！", 5120000);
                 }
             }
             return 1;
         }
     }
 
-    public static class \u7ed9\u5f53\u524d\u5730\u56fe\u5192\u9669\u5e01
+    public static class 给当前地图冒险币
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -1585,14 +1583,14 @@ public class GMCommand {
             for (ChannelServer cserv1 : ChannelServer.getAllInstances()) {
                 for (MapleCharacter mch : cserv1.getPlayerStorage().getAllCharacters()) {
                     if (c.getPlayer().getMapId() != mch.getMapId()) continue;
-                    mch.startMapEffect(ServerProperties.getProperty("KinMS.CommandMessage") + "\u7ba1\u7406\u5458\u53d1\u653e" + quantity + "\u5192\u9669\u5e01\u7ed9\u5f53\u524d\u5730\u56fe\u5728\u7ebf\u7684\u6240\u4ee5\u73a9\u5bb6\uff01\u5feb\u611f\u8c22\u7ba1\u7406\u5458\u5427\uff01", 5121020);
+                    mch.startMapEffect(ServerProperties.getProperty("KinMS.CommandMessage") + "管理员发放" + quantity + "冒险币给当前地图在线的所以玩家！快感谢管理员吧！", 5121020);
                 }
             }
             return 1;
         }
     }
 
-    public static class \u7ed9\u5f53\u524d\u5730\u56fe\u7ecf\u9a8c
+    public static class 给当前地图经验
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -1609,14 +1607,14 @@ public class GMCommand {
             for (ChannelServer cserv1 : ChannelServer.getAllInstances()) {
                 for (MapleCharacter mch : cserv1.getPlayerStorage().getAllCharacters()) {
                     if (c.getPlayer().getMapId() != mch.getMapId()) continue;
-                    mch.startMapEffect(ServerProperties.getProperty("KinMS.CommandMessage") + "\u7ba1\u7406\u5458\u53d1\u653e" + quantity + "\u7ecf\u9a8c\u7ed9\u5f53\u524d\u5730\u56fe\u5728\u7ebf\u7684\u6240\u4ee5\u73a9\u5bb6\uff01\u5feb\u611f\u8c22\u7ba1\u7406\u5458\u5427\uff01", 5121020);
+                    mch.startMapEffect(ServerProperties.getProperty("KinMS.CommandMessage") + "管理员发放" + quantity + "经验给当前地图在线的所以玩家！快感谢管理员吧！", 5121020);
                 }
             }
             return 1;
         }
     }
 
-    public static class \u7ed9\u5f53\u524d\u5730\u56fe\u70b9\u5377
+    public static class 给当前地图点卷
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -1624,7 +1622,7 @@ public class GMCommand {
                 return 0;
             }
             if (splitted.length < 2) {
-                c.getPlayer().dropMessage(6, "\u7528\u6cd5: !\u7ed9\u5f53\u524d\u5730\u56fe\u70b9\u5377 [\u70b9\u5377\u7c7b\u578b1\uff1a\u70b9\u5377 - 2\uff1a\u62b5\u7528] [\u70b9\u5377\u6570\u91cf]");
+                c.getPlayer().dropMessage(6, "用法: !给当前地图点卷 [点卷类型1：点卷 - 2：抵用] [点卷数量]");
                 return 0;
             }
             int type = Integer.parseInt(splitted[1]);
@@ -1640,7 +1638,7 @@ public class GMCommand {
                 for (MapleCharacter mch : cserv.getPlayerStorage().getAllCharacters()) {
                     if (c.getPlayer().getMapId() != mch.getMapId()) continue;
                     mch.modifyCSPoints(type, quantity, false);
-                    mch.dropMessage(-11, "[\u7cfb\u7edf\u63d0\u793a] \u606d\u559c\u60a8\u83b7\u5f97\u7ba1\u7406\u5458\u8d60\u9001\u7ed9\u60a8\u7684" + (type == 1 ? "\u70b9\u5238 " : " \u62b5\u7528\u5238 ") + quantity + " \u70b9.");
+                    mch.dropMessage(-11, "[系统提示] 恭喜您获得管理员赠送给您的" + (type == 1 ? "点券 " : " 抵用券 ") + quantity + " 点.");
                     ++ret;
                 }
             }
@@ -1648,23 +1646,23 @@ public class GMCommand {
                 for (ChannelServer cserv1 : ChannelServer.getAllInstances()) {
                     for (MapleCharacter mch : cserv1.getPlayerStorage().getAllCharacters()) {
                         if (c.getPlayer().getMapId() != mch.getMapId()) continue;
-                        mch.startMapEffect(ServerProperties.getProperty("KinMS.CommandMessage") + "\u7ba1\u7406\u5458\u53d1\u653e" + quantity + "\u70b9\u5377\u7ed9\u5f53\u524d\u5730\u56fe\u5728\u7ebf\u7684\u6240\u4ee5\u73a9\u5bb6\uff01\u5feb\u611f\u8c22\u7ba1\u7406\u5458\u5427\uff01", 5120004);
+                        mch.startMapEffect(ServerProperties.getProperty("KinMS.CommandMessage") + "管理员发放" + quantity + "点卷给当前地图在线的所以玩家！快感谢管理员吧！", 5120004);
                     }
                 }
             } else if (type == 2) {
                 for (ChannelServer cserv1 : ChannelServer.getAllInstances()) {
                     for (MapleCharacter mch : cserv1.getPlayerStorage().getAllCharacters()) {
                         if (c.getPlayer().getMapId() != mch.getMapId()) continue;
-                        mch.startMapEffect(ServerProperties.getProperty("KinMS.CommandMessage") + "\u7ba1\u7406\u5458\u53d1\u653e" + quantity + "\u62b5\u7528\u5377\u7ed9\u5f53\u524d\u5730\u56fe\u5728\u7ebf\u7684\u6240\u4ee5\u73a9\u5bb6\uff01\u5feb\u611f\u8c22\u7ba1\u7406\u5458\u5427\uff01", 5120004);
+                        mch.startMapEffect(ServerProperties.getProperty("KinMS.CommandMessage") + "管理员发放" + quantity + "抵用卷给当前地图在线的所以玩家！快感谢管理员吧！", 5120004);
                     }
                 }
             }
-            c.getPlayer().dropMessage(6, "\u547d\u4ee4\u4f7f\u7528\u6210\u529f\uff0c\u5f53\u524d\u5171\u6709: " + ret + " \u4e2a\u73a9\u5bb6\u83b7\u5f97: " + quantity + " \u70b9\u7684" + (type == 1 ? "\u70b9\u5238 " : " \u62b5\u7528\u5238 ") + " \u603b\u8ba1: " + ret * quantity);
+            c.getPlayer().dropMessage(6, "命令使用成功，当前共有: " + ret + " 个玩家获得: " + quantity + " 点的" + (type == 1 ? "点券 " : " 抵用券 ") + " 总计: " + ret * quantity);
             return 1;
         }
     }
 
-    public static class \u7ed9\u6240\u6709\u4eba\u7269\u54c1
+    public static class 给所有人物品
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -1672,7 +1670,7 @@ public class GMCommand {
                 return 0;
             }
             if (splitted.length < 2) {
-                c.getPlayer().dropMessage(6, "\u7528\u6cd5: !\u7ed9\u6240\u6709\u4eba\u7269\u54c1 [\u7269\u54c1ID] [\u6570\u91cf]");
+                c.getPlayer().dropMessage(6, "用法: !给所有人物品 [物品ID] [数量]");
                 return 0;
             }
             MapleItemInformationProvider ii = MapleItemInformationProvider.getInstance();
@@ -1687,17 +1685,17 @@ public class GMCommand {
             for (ChannelServer cserv1 : ChannelServer.getAllInstances()) {
                 for (MapleCharacter mch : cserv1.getPlayerStorage().getAllCharacters()) {
                     if (quantity <= 1) {
-                        mch.startMapEffect(ServerProperties.getProperty("KinMS.CommandMessage") + "\u7ba1\u7406\u5458\u53d1\u653e\u3010" + mz + "\u3011\u7269\u54c1\u7ed9\u5728\u7ebf\u7684\u6240\u4ee5\u73a9\u5bb6\uff01\u5feb\u611f\u8c22\u7ba1\u7406\u5458\u5427\uff01", 5120000);
+                        mch.startMapEffect(ServerProperties.getProperty("KinMS.CommandMessage") + "管理员发放【" + mz + "】物品给在线的所以玩家！快感谢管理员吧！", 5120000);
                         continue;
                     }
-                    mch.startMapEffect(ServerProperties.getProperty("KinMS.CommandMessage") + "\u7ba1\u7406\u5458\u53d1\u653e\u3010" + mz + "\u3011\u7269\u54c1\u3010" + quantity + "\u3011\u4e2a\u7ed9\u5728\u7ebf\u7684\u6240\u4ee5\u73a9\u5bb6\uff01\u5feb\u611f\u8c22\u7ba1\u7406\u5458\u5427\uff01", 5120000);
+                    mch.startMapEffect(ServerProperties.getProperty("KinMS.CommandMessage") + "管理员发放【" + mz + "】物品【" + quantity + "】个给在线的所以玩家！快感谢管理员吧！", 5120000);
                 }
             }
             return 1;
         }
     }
 
-    public static class \u7ed9\u6240\u6709\u4eba\u5192\u9669\u5e01
+    public static class 给所有人冒险币
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -1712,14 +1710,14 @@ public class GMCommand {
             }
             for (ChannelServer cserv1 : ChannelServer.getAllInstances()) {
                 for (MapleCharacter mch : cserv1.getPlayerStorage().getAllCharacters()) {
-                    mch.startMapEffect(ServerProperties.getProperty("KinMS.CommandMessage") + "\u7ba1\u7406\u5458\u53d1\u653e" + quantity + "\u5192\u9669\u5e01\u7ed9\u5728\u7ebf\u7684\u6240\u4ee5\u73a9\u5bb6\uff01\u5feb\u611f\u8c22\u7ba1\u7406\u5458\u5427\uff01", 5121020);
+                    mch.startMapEffect(ServerProperties.getProperty("KinMS.CommandMessage") + "管理员发放" + quantity + "冒险币给在线的所以玩家！快感谢管理员吧！", 5121020);
                 }
             }
             return 1;
         }
     }
 
-    public static class \u7ed9\u6240\u6709\u4eba\u7ecf\u9a8c
+    public static class 给所有人经验
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -1734,14 +1732,14 @@ public class GMCommand {
             }
             for (ChannelServer cserv1 : ChannelServer.getAllInstances()) {
                 for (MapleCharacter mch : cserv1.getPlayerStorage().getAllCharacters()) {
-                    mch.startMapEffect(ServerProperties.getProperty("KinMS.CommandMessage") + "\u7ba1\u7406\u5458\u53d1\u653e" + quantity + "\u7ecf\u9a8c\u7ed9\u5728\u7ebf\u7684\u6240\u4ee5\u73a9\u5bb6\uff01\u5feb\u611f\u8c22\u7ba1\u7406\u5458\u5427\uff01", 5121020);
+                    mch.startMapEffect(ServerProperties.getProperty("KinMS.CommandMessage") + "管理员发放" + quantity + "经验给在线的所以玩家！快感谢管理员吧！", 5121020);
                 }
             }
             return 1;
         }
     }
 
-    public static class \u7ed9\u6240\u6709\u4eba\u70b9\u5377
+    public static class 给所有人点卷
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
@@ -1749,7 +1747,7 @@ public class GMCommand {
                 return 0;
             }
             if (splitted.length < 2) {
-                c.getPlayer().dropMessage(6, "\u7528\u6cd5: !\u7ed9\u6240\u6709\u4eba\u70b9\u5377 [\u70b9\u5377\u7c7b\u578b1\uff1a\u70b9\u5377 - 2\uff1a\u62b5\u7528] [\u70b9\u5377\u6570\u91cf]");
+                c.getPlayer().dropMessage(6, "用法: !给所有人点卷 [点卷类型1：点卷 - 2：抵用] [点卷数量]");
                 return 0;
             }
             int type = Integer.parseInt(splitted[1]);
@@ -1764,29 +1762,29 @@ public class GMCommand {
             for (ChannelServer cserv : ChannelServer.getAllInstances()) {
                 for (MapleCharacter mch : cserv.getPlayerStorage().getAllCharacters()) {
                     mch.modifyCSPoints(type, quantity, false);
-                    mch.dropMessage(-11, "[\u7cfb\u7edf\u63d0\u793a] \u606d\u559c\u60a8\u83b7\u5f97\u7ba1\u7406\u5458\u8d60\u9001\u7ed9\u60a8\u7684" + (type == 1 ? "\u70b9\u5238 " : " \u62b5\u7528\u5238 ") + quantity + " \u70b9.");
+                    mch.dropMessage(-11, "[系统提示] 恭喜您获得管理员赠送给您的" + (type == 1 ? "点券 " : " 抵用券 ") + quantity + " 点.");
                     ++ret;
                 }
             }
             if (type == 1) {
                 for (ChannelServer cserv1 : ChannelServer.getAllInstances()) {
                     for (MapleCharacter mch : cserv1.getPlayerStorage().getAllCharacters()) {
-                        mch.startMapEffect(ServerProperties.getProperty("KinMS.CommandMessage") + "\u7ba1\u7406\u5458\u53d1\u653e" + quantity + "\u70b9\u5377\u7ed9\u5728\u7ebf\u7684\u6240\u4ee5\u73a9\u5bb6\uff01\u5feb\u611f\u8c22\u7ba1\u7406\u5458\u5427\uff01", 5120004);
+                        mch.startMapEffect(ServerProperties.getProperty("KinMS.CommandMessage") + "管理员发放" + quantity + "点卷给在线的所以玩家！快感谢管理员吧！", 5120004);
                     }
                 }
             } else if (type == 2) {
                 for (ChannelServer cserv1 : ChannelServer.getAllInstances()) {
                     for (MapleCharacter mch : cserv1.getPlayerStorage().getAllCharacters()) {
-                        mch.startMapEffect(ServerProperties.getProperty("KinMS.CommandMessage") + "\u7ba1\u7406\u5458\u53d1\u653e" + quantity + "\u62b5\u7528\u5377\u7ed9\u5728\u7ebf\u7684\u6240\u4ee5\u73a9\u5bb6\uff01\u5feb\u611f\u8c22\u7ba1\u7406\u5458\u5427\uff01", 5120004);
+                        mch.startMapEffect(ServerProperties.getProperty("KinMS.CommandMessage") + "管理员发放" + quantity + "抵用卷给在线的所以玩家！快感谢管理员吧！", 5120004);
                     }
                 }
             }
-            c.getPlayer().dropMessage(6, "\u547d\u4ee4\u4f7f\u7528\u6210\u529f\uff0c\u5f53\u524d\u5171\u6709: " + ret + " \u4e2a\u73a9\u5bb6\u83b7\u5f97: " + quantity + " \u70b9\u7684" + (type == 1 ? "\u70b9\u5238 " : " \u62b5\u7528\u5238 ") + " \u603b\u8ba1: " + ret * quantity);
+            c.getPlayer().dropMessage(6, "命令使用成功，当前共有: " + ret + " 个玩家获得: " + quantity + " 点的" + (type == 1 ? "点券 " : " 抵用券 ") + " 总计: " + ret * quantity);
             return 1;
         }
     }
 
-    public static class \u53cc\u500d\u91d1\u5e01
+    public static class 双倍金币
     extends CommandExecute {
         private int change = 0;
 
@@ -1797,32 +1795,32 @@ public class GMCommand {
             }
             this.change = Integer.parseInt(splitted[1]);
             if (this.change == 1 || this.change == 2) {
-                c.getPlayer().dropMessage(5, "\u4ee5\u524d - \u7ecf\u9a8c: " + c.getChannelServer().getExpRate() + " \u91d1\u5e01: " + c.getChannelServer().getMesoRate() + " \u7206\u7387: " + c.getChannelServer().getDropRate());
+                c.getPlayer().dropMessage(5, "以前 - 经验: " + c.getChannelServer().getExpRate() + " 金币: " + c.getChannelServer().getMesoRate() + " 爆率: " + c.getChannelServer().getDropRate());
                 for (ChannelServer cserv : ChannelServer.getAllInstances()) {
                     cserv.setDoubleMeso(this.change);
                 }
-                c.getPlayer().dropMessage(5, "\u73b0\u5728 - \u7ecf\u9a8c: " + c.getChannelServer().getExpRate() + " \u91d1\u5e01: " + c.getChannelServer().getMesoRate() + " \u7206\u7387: " + c.getChannelServer().getDropRate());
+                c.getPlayer().dropMessage(5, "现在 - 经验: " + c.getChannelServer().getExpRate() + " 金币: " + c.getChannelServer().getMesoRate() + " 爆率: " + c.getChannelServer().getDropRate());
                 if (this.change == 1) {
                     for (ChannelServer cserv1 : ChannelServer.getAllInstances()) {
                         for (MapleCharacter mch : cserv1.getPlayerStorage().getAllCharacters()) {
-                            mch.startMapEffect(ServerProperties.getProperty("KinMS.CommandMessage") + "\u7ba1\u7406\u5458\u5173\u95ed\u3010\u53cc\u500d\u5192\u9669\u5e01\u3011\u6d3b\u52a8\uff01\u5feb\u611f\u8c22\u7ba1\u7406\u5458\u5427\uff01", 5121020);
+                            mch.startMapEffect(ServerProperties.getProperty("KinMS.CommandMessage") + "管理员关闭【双倍冒险币】活动！快感谢管理员吧！", 5121020);
                         }
                     }
                 } else if (this.change == 2) {
                     for (ChannelServer cserv1 : ChannelServer.getAllInstances()) {
                         for (MapleCharacter mch : cserv1.getPlayerStorage().getAllCharacters()) {
-                            mch.startMapEffect(ServerProperties.getProperty("KinMS.CommandMessage") + "\u7ba1\u7406\u5458\u5f00\u542f\u3010\u53cc\u500d\u5192\u9669\u5e01\u3011\u6d3b\u52a8\uff01\u5feb\u611f\u8c22\u7ba1\u7406\u5458\u5427\uff01", 5121020);
+                            mch.startMapEffect(ServerProperties.getProperty("KinMS.CommandMessage") + "管理员开启【双倍冒险币】活动！快感谢管理员吧！", 5121020);
                         }
                     }
                 }
                 return 1;
             }
-            c.getPlayer().dropMessage(5, "\u8f93\u5165\u7684\u6570\u5b57\u65e0\u6548\uff0c1\u4e3a\u5173\u95ed\u6d3b\u52a8\u7ecf\u9a8c\uff0c2\u4e3a\u5f00\u542f\u6d3b\u52a8\u7ecf\u9a8c\u3002\u5f53\u524d\u8f93\u5165\u4e3a: " + this.change);
+            c.getPlayer().dropMessage(5, "输入的数字无效，1为关闭活动经验，2为开启活动经验。当前输入为: " + this.change);
             return 0;
         }
     }
 
-    public static class \u53cc\u500d\u7206\u7387
+    public static class 双倍爆率
     extends CommandExecute {
         private int change = 0;
 
@@ -1833,32 +1831,32 @@ public class GMCommand {
             }
             this.change = Integer.parseInt(splitted[1]);
             if (this.change == 1 || this.change == 2) {
-                c.getPlayer().dropMessage(5, "\u4ee5\u524d - \u7ecf\u9a8c: " + c.getChannelServer().getExpRate() + " \u91d1\u5e01: " + c.getChannelServer().getMesoRate() + " \u7206\u7387: " + c.getChannelServer().getDropRate());
+                c.getPlayer().dropMessage(5, "以前 - 经验: " + c.getChannelServer().getExpRate() + " 金币: " + c.getChannelServer().getMesoRate() + " 爆率: " + c.getChannelServer().getDropRate());
                 for (ChannelServer cserv : ChannelServer.getAllInstances()) {
                     cserv.setDoubleDrop(this.change);
                 }
-                c.getPlayer().dropMessage(5, "\u73b0\u5728 - \u7ecf\u9a8c: " + c.getChannelServer().getExpRate() + " \u91d1\u5e01: " + c.getChannelServer().getMesoRate() + " \u7206\u7387: " + c.getChannelServer().getDropRate());
+                c.getPlayer().dropMessage(5, "现在 - 经验: " + c.getChannelServer().getExpRate() + " 金币: " + c.getChannelServer().getMesoRate() + " 爆率: " + c.getChannelServer().getDropRate());
                 if (this.change == 1) {
                     for (ChannelServer cserv1 : ChannelServer.getAllInstances()) {
                         for (MapleCharacter mch : cserv1.getPlayerStorage().getAllCharacters()) {
-                            mch.startMapEffect(ServerProperties.getProperty("KinMS.CommandMessage") + "\u7ba1\u7406\u5458\u5173\u95ed\u3010\u53cc\u500d\u7206\u7387\u3011\u6d3b\u52a8\uff01\u5feb\u611f\u8c22\u7ba1\u7406\u5458\u5427\uff01", 5121009);
+                            mch.startMapEffect(ServerProperties.getProperty("KinMS.CommandMessage") + "管理员关闭【双倍爆率】活动！快感谢管理员吧！", 5121009);
                         }
                     }
                 } else if (this.change == 2) {
                     for (ChannelServer cserv1 : ChannelServer.getAllInstances()) {
                         for (MapleCharacter mch : cserv1.getPlayerStorage().getAllCharacters()) {
-                            mch.startMapEffect(ServerProperties.getProperty("KinMS.CommandMessage") + "\u7ba1\u7406\u5458\u5f00\u542f\u3010\u53cc\u500d\u7206\u7387\u3011\u6d3b\u52a8\uff01\u5feb\u611f\u8c22\u7ba1\u7406\u5458\u5427\uff01", 5121009);
+                            mch.startMapEffect(ServerProperties.getProperty("KinMS.CommandMessage") + "管理员开启【双倍爆率】活动！快感谢管理员吧！", 5121009);
                         }
                     }
                 }
                 return 1;
             }
-            c.getPlayer().dropMessage(5, "\u8f93\u5165\u7684\u6570\u5b57\u65e0\u6548\uff0c1\u4e3a\u5173\u95ed\u6d3b\u52a8\u7ecf\u9a8c\uff0c2\u4e3a\u5f00\u542f\u6d3b\u52a8\u7ecf\u9a8c\u3002\u5f53\u524d\u8f93\u5165\u4e3a: " + this.change);
+            c.getPlayer().dropMessage(5, "输入的数字无效，1为关闭活动经验，2为开启活动经验。当前输入为: " + this.change);
             return 0;
         }
     }
 
-    public static class \u53cc\u500d\u7ecf\u9a8ctime
+    public static class 双倍经验time
     extends CommandExecute {
         private int time = 0;
 
@@ -1872,7 +1870,7 @@ public class GMCommand {
                 cserv.setDoubleExp(1);
                 for (MapleCharacter chr : cserv.getPlayerStorage().getAllCharacters()) {
                     if (chr == null) continue;
-                    chr.startMapEffect(ServerProperties.getProperty("KinMS.CommandMessage") + "\u7ba1\u7406\u5458\u5f00\u542f\u3010\u53cc\u500d\u7ecf\u9a8c\u3011\u6d3b\u52a8\uff01", 5120000);
+                    chr.startMapEffect(ServerProperties.getProperty("KinMS.CommandMessage") + "管理员开启【双倍经验】活动！", 5120000);
                 }
             }
             Timer.WorldTimer.getInstance().register(new Runnable(){
@@ -1883,7 +1881,7 @@ public class GMCommand {
                         cserv.setDoubleExp(0);
                         for (MapleCharacter chr : cserv.getPlayerStorage().getAllCharacters()) {
                             if (chr == null) continue;
-                            chr.startMapEffect(ServerProperties.getProperty("KinMS.CommandMessage") + "\u7ba1\u7406\u5458\u5173\u95ed\u3010\u53cc\u500d\u7ecf\u9a8c\u3011\u6d3b\u52a8\uff01\u671f\u5f85\u4e0b\u6b21\u6d3b\u52a8\uff01", 5120000);
+                            chr.startMapEffect(ServerProperties.getProperty("KinMS.CommandMessage") + "管理员关闭【双倍经验】活动！期待下次活动！", 5120000);
                         }
                     }
                 }
@@ -1893,7 +1891,7 @@ public class GMCommand {
 
     }
 
-    public static class \u53cc\u500d\u7ecf\u9a8c
+    public static class 双倍经验
     extends CommandExecute {
         private int change = 0;
 
@@ -1904,27 +1902,27 @@ public class GMCommand {
             }
             this.change = Integer.parseInt(splitted[1]);
             if (this.change == 0 || this.change == 1) {
-                c.getPlayer().dropMessage(5, "\u4ee5\u524d - \u7ecf\u9a8c: " + c.getChannelServer().getExpRate() + " \u91d1\u5e01: " + c.getChannelServer().getMesoRate() + " \u7206\u7387: " + c.getChannelServer().getDropRate());
+                c.getPlayer().dropMessage(5, "以前 - 经验: " + c.getChannelServer().getExpRate() + " 金币: " + c.getChannelServer().getMesoRate() + " 爆率: " + c.getChannelServer().getDropRate());
                 for (ChannelServer cserv : ChannelServer.getAllInstances()) {
                     cserv.setDoubleExp(this.change);
                 }
-                c.getPlayer().dropMessage(5, "\u73b0\u5728 - \u7ecf\u9a8c: " + c.getChannelServer().getExpRate() + " \u91d1\u5e01: " + c.getChannelServer().getMesoRate() + " \u7206\u7387: " + c.getChannelServer().getDropRate());
+                c.getPlayer().dropMessage(5, "现在 - 经验: " + c.getChannelServer().getExpRate() + " 金币: " + c.getChannelServer().getMesoRate() + " 爆率: " + c.getChannelServer().getDropRate());
                 if (this.change == 0) {
                     for (ChannelServer cserv1 : ChannelServer.getAllInstances()) {
                         for (MapleCharacter mch : cserv1.getPlayerStorage().getAllCharacters()) {
-                            mch.startMapEffect(ServerProperties.getProperty("KinMS.CommandMessage") + "\u7ba1\u7406\u5458\u5173\u95ed\u3010\u53cc\u500d\u7ecf\u9a8c\u3011\u6d3b\u52a8\uff01\u5feb\u611f\u8c22\u7ba1\u7406\u5458\u5427\uff01", 5120000);
+                            mch.startMapEffect(ServerProperties.getProperty("KinMS.CommandMessage") + "管理员关闭【双倍经验】活动！快感谢管理员吧！", 5120000);
                         }
                     }
                 } else if (this.change == 1) {
                     for (ChannelServer cserv1 : ChannelServer.getAllInstances()) {
                         for (MapleCharacter mch : cserv1.getPlayerStorage().getAllCharacters()) {
-                            mch.startMapEffect(ServerProperties.getProperty("KinMS.CommandMessage") + "\u7ba1\u7406\u5458\u5f00\u542f\u3010\u53cc\u500d\u7ecf\u9a8c\u3011\u6d3b\u52a8\uff01\u5feb\u611f\u8c22\u7ba1\u7406\u5458\u5427\uff01", 5120000);
+                            mch.startMapEffect(ServerProperties.getProperty("KinMS.CommandMessage") + "管理员开启【双倍经验】活动！快感谢管理员吧！", 5120000);
                         }
                     }
                 }
                 return 1;
             }
-            c.getPlayer().dropMessage(5, "\u8f93\u5165\u7684\u6570\u5b57\u65e0\u6548\uff0c0\u4e3a\u5173\u95ed\u6d3b\u52a8\u7ecf\u9a8c\uff0c1\u4e3a\u5f00\u542f\u6d3b\u52a8\u7ecf\u9a8c\u3002\u5f53\u524d\u8f93\u5165\u4e3a: " + this.change);
+            c.getPlayer().dropMessage(5, "输入的数字无效，0为关闭活动经验，1为开启活动经验。当前输入为: " + this.change);
             return 0;
         }
     }
@@ -1943,7 +1941,7 @@ public class GMCommand {
                 return 0;
             }
             if (splitted.length < 2) {
-                c.getPlayer().dropMessage(6, "[Syntax] !" + this.getCommand() + " <\u539f\u56e0>");
+                c.getPlayer().dropMessage(6, "[Syntax] !" + this.getCommand() + " <原因>");
                 return 0;
             }
             byte ret = this.hellban ? MapleClient.unHellban(splitted[1]) : MapleClient.unban(splitted[1]);
@@ -1986,7 +1984,7 @@ public class GMCommand {
                 return 0;
             }
             if (splitted.length < 3) {
-                c.getPlayer().dropMessage(5, "[Syntax] !" + this.getCommand() + " <\u73a9\u5bb6> <\u539f\u56e0>");
+                c.getPlayer().dropMessage(5, "[Syntax] !" + this.getCommand() + " <玩家> <原因>");
                 return 0;
             }
             StringBuilder sb = new StringBuilder(c.getPlayer().getName());
@@ -1996,23 +1994,22 @@ public class GMCommand {
                 if (c.getPlayer().getGMLevel() > target.getGMLevel() || c.getPlayer().isAdmin()) {
                     sb.append(" (IP: ").append(target.getClient().getSessionIPAddress()).append(")");
                     if (target.ban(sb.toString(), c.getPlayer().isAdmin(), false, this.hellban)) {
-                        c.getPlayer().dropMessage(6, "[" + this.getCommand() + "] \u6210\u529f\u5c01\u9396 " + splitted[1] + ".");
+                        c.getPlayer().dropMessage(6, "[" + this.getCommand() + "] 成功封鎖 " + splitted[1] + ".");
                         return 1;
                     }
-                    c.getPlayer().dropMessage(6, "[" + this.getCommand() + "] \u5c01\u9396\u5931\u6557.");
+                    c.getPlayer().dropMessage(6, "[" + this.getCommand() + "] 封鎖失敗.");
                     return 0;
                 }
                 c.getPlayer().dropMessage(6, "[" + this.getCommand() + "] May not ban GMs...");
                 return 1;
             }
             if (MapleCharacter.ban(splitted[1], sb.toString(), false, c.getPlayer().isAdmin() ? 250 : c.getPlayer().getGMLevel(), splitted[0].equals("!hellban"))) {
-                c.getPlayer().dropMessage(6, "[" + this.getCommand() + "] \u6210\u529f\u96e2\u7dda\u5c01\u9396 " + splitted[1] + ".");
+                c.getPlayer().dropMessage(6, "[" + this.getCommand() + "] 成功離線封鎖 " + splitted[1] + ".");
                 return 1;
             }
-            c.getPlayer().dropMessage(6, "[" + this.getCommand() + "] \u5c01\u9396\u5931\u6557 " + splitted[1]);
+            c.getPlayer().dropMessage(6, "[" + this.getCommand() + "] 封鎖失敗 " + splitted[1]);
             return 0;
         }
     }
 
 }
-

@@ -3,14 +3,13 @@
  */
 package client;
 
-import database.DatabaseConnection;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
+
 import tools.Pair;
 import tools.data.output.MaplePacketLittleEndianWriter;
 
@@ -54,11 +53,10 @@ implements Serializable {
         }
     }
 
-    public final void saveKeys(int charid) throws SQLException {
+    public final void saveKeys(Connection con,int charid) throws SQLException {
         if (!this.changed) {
             return;
         }
-        Connection con = DatabaseConnection.getConnection();
         PreparedStatement ps = con.prepareStatement("DELETE FROM keymap WHERE characterid = ?");
         ps.setInt(1, charid);
         ps.execute();
