@@ -14,9 +14,9 @@ import database.DatabaseConnection;
 
 public class AddCashItemToDB {
 	public static void addItem(int id, int Count, int Price, int SN, int Expire, int Gender, int OnSale) throws Exception {
+		Connection con = DatabaseConnection.getConnection();
 		try {
-			Connection conn = DatabaseConnection.getConnection();
-			PreparedStatement ps = conn.prepareStatement("INSERT INTO `cashshop_items` VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?)");
+			PreparedStatement ps = con.prepareStatement("INSERT INTO `cashshop_items` VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?)");
 			ps.setInt(1, id);
 			ps.setInt(2, Count);
 			ps.setInt(3, Price);
@@ -27,6 +27,12 @@ public class AddCashItemToDB {
 			ps.executeUpdate();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
+		}finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }

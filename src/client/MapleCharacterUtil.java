@@ -73,7 +73,13 @@ public class MapleCharacterUtil {
         catch (SQLException e) {
             System.err.println("error 'getIdByName' " + e);
             return -1;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     /*
@@ -88,8 +94,9 @@ public class MapleCharacterUtil {
         PreparedStatement ps = null;
         ResultSet rs = null;
         boolean prompt = false;
+        Connection con = DatabaseConnection.getConnection();
         try {
-        	ps = DatabaseConnection.getConnection().prepareStatement("SELECT * from game_poll_reply where AccountId = ?");
+        	ps = con.prepareStatement("SELECT * from game_poll_reply where AccountId = ?");
         	ps.setInt(1, accountid);
         	rs = ps.executeQuery();
         	prompt = !rs.next();
@@ -97,35 +104,18 @@ public class MapleCharacterUtil {
                 ps.close();
             }
             rs.close();
-            return prompt;
+            ps.close();
         }
         catch (SQLException e) {
-            try {
-                if (ps != null) {
-                    ps.close();
-                }
-                if (rs == null) return prompt;
-                rs.close();
-                return prompt;
-            }
-            catch (SQLException e2) {
-                return prompt;
-            }
-            catch (Throwable throwable) {
-                try {
-                    if (ps != null) {
-                        ps.close();
-                    }
-                    if (rs == null) throw throwable;
-                    rs.close();
-                    throw throwable;
-                }
-                catch (SQLException e3) {
-                    // empty catch block
-                }
-                throw throwable;
-            }
-        }
+           
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return prompt;
     }
 
     /*
@@ -141,8 +131,9 @@ public class MapleCharacterUtil {
             return false;
         }
         PreparedStatement ps = null;
+        Connection con = DatabaseConnection.getConnection();
         try {
-        	ps = DatabaseConnection.getConnection().prepareStatement("INSERT INTO game_poll_reply (AccountId, SelectAns) VALUES (?, ?)");
+        	ps = con.prepareStatement("INSERT INTO game_poll_reply (AccountId, SelectAns) VALUES (?, ?)");
         	ps.setInt(1, accountid);
         	ps.setInt(2, selection);
         	ps.execute();
@@ -158,18 +149,13 @@ public class MapleCharacterUtil {
             catch (SQLException e2) {
                 return true;
             }
-            catch (Throwable throwable) {
-                try {
-                    if (ps == null) throw throwable;
-                    ps.close();
-                    throw throwable;
-                }
-                catch (SQLException e3) {
-                    // empty catch block
-                }
-                throw throwable;
-            }
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public static final int Change_SecondPassword(int accid, String password, String newpassword) {
@@ -220,7 +206,13 @@ public class MapleCharacterUtil {
         catch (SQLException e) {
             System.err.println("error 'getIdByName' " + e);
             return -2;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     private static final boolean check_ifPasswordEquals(String passhash, String pwd, String salt) {
@@ -234,8 +226,8 @@ public class MapleCharacterUtil {
     }
 
     public static Pair<Integer, Pair<Integer, Integer>> getInfoByName(String name, int world) {
+    	Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT * FROM characters WHERE name = ? AND world = ?");
             ps.setString(1, name);
             ps.setInt(2, world);
@@ -253,21 +245,38 @@ public class MapleCharacterUtil {
         catch (Exception e) {
             e.printStackTrace();
             return null;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public static void setNXCodeUsed(String name, String code) throws SQLException {
         Connection con = DatabaseConnection.getConnection();
-        PreparedStatement ps = con.prepareStatement("UPDATE nxcode SET `user` = ?, `valid` = 0 WHERE code = ?");
-        ps.setString(1, name);
-        ps.setString(2, code);
-        ps.execute();
-        ps.close();
+        try {
+			PreparedStatement ps = con.prepareStatement("UPDATE nxcode SET `user` = ?, `valid` = 0 WHERE code = ?");
+			ps.setString(1, name);
+			ps.setString(2, code);
+			ps.execute();
+			ps.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public static void sendNote(String to, String name, String msg, int fame) {
+    	Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("INSERT INTO notes (`to`, `from`, `message`, `timestamp`, `gift`) VALUES (?, ?, ?, ?, ?)");
             ps.setString(1, to);
             ps.setString(2, name);
@@ -279,47 +288,85 @@ public class MapleCharacterUtil {
         }
         catch (SQLException e) {
             System.err.println("Unable to send note" + e);
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public static boolean getNXCodeValid(String code, boolean validcode) throws SQLException {
         Connection con = DatabaseConnection.getConnection();
-        PreparedStatement ps = con.prepareStatement("SELECT `valid` FROM nxcode WHERE code = ?");
-        ps.setString(1, code);
-        ResultSet rs = ps.executeQuery();
-        if (rs.next()) {
-            validcode = rs.getInt("valid") > 0;
-        }
-        rs.close();
-        ps.close();
+        try {
+			PreparedStatement ps = con.prepareStatement("SELECT `valid` FROM nxcode WHERE code = ?");
+			ps.setString(1, code);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+			    validcode = rs.getInt("valid") > 0;
+			}
+			rs.close();
+			ps.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
         return validcode;
     }
 
     public static int getNXCodeType(String code) throws SQLException {
         int type = -1;
         Connection con = DatabaseConnection.getConnection();
-        PreparedStatement ps = con.prepareStatement("SELECT `type` FROM nxcode WHERE code = ?");
-        ps.setString(1, code);
-        ResultSet rs = ps.executeQuery();
-        if (rs.next()) {
-            type = rs.getInt("type");
-        }
-        rs.close();
-        ps.close();
+        try {
+			PreparedStatement ps = con.prepareStatement("SELECT `type` FROM nxcode WHERE code = ?");
+			ps.setString(1, code);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+			    type = rs.getInt("type");
+			}
+			rs.close();
+			ps.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
         return type;
     }
 
     public static int getNXCodeItem(String code) throws SQLException {
         int item = -1;
         Connection con = DatabaseConnection.getConnection();
-        PreparedStatement ps = con.prepareStatement("SELECT `item` FROM nxcode WHERE code = ?");
-        ps.setString(1, code);
-        ResultSet rs = ps.executeQuery();
-        if (rs.next()) {
-            item = rs.getInt("item");
-        }
-        rs.close();
-        ps.close();
+        try {
+			PreparedStatement ps = con.prepareStatement("SELECT `item` FROM nxcode WHERE code = ?");
+			ps.setString(1, code);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+			    item = rs.getInt("item");
+			}
+			rs.close();
+			ps.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
         return item;
     }
 }

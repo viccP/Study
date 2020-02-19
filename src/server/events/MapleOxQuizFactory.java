@@ -3,8 +3,6 @@
  */
 package server.events;
 
-import database.DatabaseConnection;
-import java.io.PrintStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,7 +10,8 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
+
+import database.DatabaseConnection;
 import server.Randomizer;
 import tools.Pair;
 
@@ -48,8 +47,8 @@ public class MapleOxQuizFactory {
             return;
         }
         System.out.println("\u52a0\u8f7d OX Quiz :::");
+        Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT * FROM wz_oxdata");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -60,15 +59,21 @@ public class MapleOxQuizFactory {
         }
         catch (Exception e) {
             e.printStackTrace();
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
         System.out.print("Done\r");
         this.initialized = true;
     }
 
     public MapleOxQuizEntry getFromSQL(String sql) {
         MapleOxQuizEntry ret = null;
+        Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -79,7 +84,13 @@ public class MapleOxQuizFactory {
         }
         catch (Exception e) {
             e.printStackTrace();
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
         return ret;
     }
 

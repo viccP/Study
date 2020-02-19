@@ -37,15 +37,27 @@ public class BuddyListHandler {
 
     private static final CharacterIdNameBuddyCapacity getCharacterIdAndNameFromDatabase(String name, String group) throws SQLException {
         Connection con = DatabaseConnection.getConnection();
-        PreparedStatement ps = con.prepareStatement("SELECT * FROM characters WHERE name LIKE ?");
-        ps.setString(1, name);
-        ResultSet rs = ps.executeQuery();
-        CharacterIdNameBuddyCapacity ret = null;
-        if (rs.next() && rs.getInt("gm") == 0) {
-            ret = new CharacterIdNameBuddyCapacity(rs.getInt("id"), rs.getString("name"), rs.getInt("level"), rs.getInt("job"), group, rs.getInt("buddyCapacity"));
-        }
-        rs.close();
-        ps.close();
+        CharacterIdNameBuddyCapacity ret=null;
+		try {
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM characters WHERE name LIKE ?");
+			ps.setString(1, name);
+			ResultSet rs = ps.executeQuery();
+			ret = null;
+			if (rs.next() && rs.getInt("gm") == 0) {
+			    ret = new CharacterIdNameBuddyCapacity(rs.getInt("id"), rs.getString("name"), rs.getInt("level"), rs.getInt("job"), group, rs.getInt("buddyCapacity"));
+			}
+			rs.close();
+			ps.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
         return ret;
     }
 
@@ -86,29 +98,40 @@ public class BuddyListHandler {
                             buddyAddResult = World.Buddy.requestBuddyAdd(addName, c.getChannel(), c.getPlayer().getId(), c.getPlayer().getName(), c.getPlayer().getLevel(), c.getPlayer().getJob());
                         } else {
                             Connection con = DatabaseConnection.getConnection();
-                            PreparedStatement ps = con.prepareStatement("SELECT COUNT(*) as buddyCount FROM buddies WHERE characterid = ? AND pending = 0");
-                            ps.setInt(1, charWithId.getId());
-                            ResultSet rs = ps.executeQuery();
-                            if (!rs.next()) {
-                                ps.close();
-                                rs.close();
-                                throw new RuntimeException("Result set expected");
-                            }
-                            int count = rs.getInt("buddyCount");
-                            if (count >= charWithId.getBuddyCapacity()) {
-                                buddyAddResult = BuddyList.BuddyAddResult.BUDDYLIST_FULL;
-                            }
-                            rs.close();
-                            ps.close();
-                            ps = con.prepareStatement("SELECT pending FROM buddies WHERE characterid = ? AND buddyid = ?");
-                            ps.setInt(1, charWithId.getId());
-                            ps.setInt(2, c.getPlayer().getId());
-                            rs = ps.executeQuery();
-                            if (rs.next()) {
-                                buddyAddResult = BuddyList.BuddyAddResult.ALREADY_ON_LIST;
-                            }
-                            rs.close();
-                            ps.close();
+                            try {
+								PreparedStatement ps = con.prepareStatement("SELECT COUNT(*) as buddyCount FROM buddies WHERE characterid = ? AND pending = 0");
+								ps.setInt(1, charWithId.getId());
+								ResultSet rs = ps.executeQuery();
+								if (!rs.next()) {
+								    ps.close();
+								    rs.close();
+								    throw new RuntimeException("Result set expected");
+								}
+								int count = rs.getInt("buddyCount");
+								if (count >= charWithId.getBuddyCapacity()) {
+								    buddyAddResult = BuddyList.BuddyAddResult.BUDDYLIST_FULL;
+								}
+								rs.close();
+								ps.close();
+								ps = con.prepareStatement("SELECT pending FROM buddies WHERE characterid = ? AND buddyid = ?");
+								ps.setInt(1, charWithId.getId());
+								ps.setInt(2, c.getPlayer().getId());
+								rs = ps.executeQuery();
+								if (rs.next()) {
+								    buddyAddResult = BuddyList.BuddyAddResult.ALREADY_ON_LIST;
+								}
+								rs.close();
+								ps.close();
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}finally {
+				    			try {
+				    				if(con!=null) con.close();
+				    			} catch (SQLException e) {
+				    				e.printStackTrace();
+				    			}
+				    		}
                         }
                         if (buddyAddResult == BuddyList.BuddyAddResult.BUDDYLIST_FULL) {
                             c.getSession().write((Object)MaplePacketCreator.buddylistMessage((byte)12));

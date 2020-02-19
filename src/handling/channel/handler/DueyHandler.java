@@ -179,7 +179,13 @@ public class DueyHandler {
         catch (SQLException se) {
             se.printStackTrace();
             return false;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     private static final boolean addItemToDB(IItem item, int quantity, int mesos, String sName, int recipientID, boolean isOn) {
@@ -204,7 +210,13 @@ public class DueyHandler {
         catch (SQLException se) {
             se.printStackTrace();
             return false;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public static final List<MapleDueyActions> loadItems(MapleCharacter chr) {
@@ -228,7 +240,13 @@ public class DueyHandler {
         catch (SQLException se) {
             se.printStackTrace();
             return null;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public static final MapleDueyActions loadSingleItem(int packageid, int charid) {
@@ -255,7 +273,13 @@ public class DueyHandler {
         }
         catch (SQLException se) {
             return null;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public static final void reciveMsg(MapleClient c, int recipientId) {
@@ -268,7 +292,13 @@ public class DueyHandler {
         }
         catch (SQLException se) {
             se.printStackTrace();
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     private static final void removeItemFromDB(int packageid, int charid) {
@@ -282,7 +312,13 @@ public class DueyHandler {
         }
         catch (SQLException se) {
             se.printStackTrace();
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     private static final MapleDueyActions getItemByPID(int packageid) {

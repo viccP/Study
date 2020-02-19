@@ -152,7 +152,13 @@ public class MTSStorage {
         }
         catch (SQLException e) {
             // empty catch block
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
         this.packageId.set(lastPackage);
     }
 
@@ -212,6 +218,11 @@ public class MTSStorage {
         }
         finally {
             this.mutex.writeLock().unlock();
+    		try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
         }
         if (isShutDown) {
             System.out.println("Saving MTS items...");

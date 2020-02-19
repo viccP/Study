@@ -171,7 +171,13 @@ implements IMaplePlayerShop {
             String note = "\u65f6\u95f4\uff1a" + FileoutputUtil.CurrentReadable_Time() + " " + "|| \u73a9\u5bb6\u540d\u5b57\uff1a" + this.getOwnerName() + "\r\n";
             FileoutputUtil.packetLog("log\\\u96c7\u4f63\u51fa\u9519-2\\" + this.getOwnerName() + ".log", note + "\r\n" + se);
             return false;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public MapleCharacter getVisitor(int num) {

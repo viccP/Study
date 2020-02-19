@@ -13,6 +13,7 @@ import java.awt.Rectangle;
 import java.lang.ref.WeakReference;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -2927,20 +2928,31 @@ public final class MapleMap {
                 z = z.substring(0, z.length() - 1);
             }
             Connection con = DatabaseConnection.getConnection();
-            PreparedStatement ps = con.prepareStatement("INSERT INTO speedruns(`type`, `leader`, `timestring`, `time`, `members`) VALUES (?,?,?,?,?)");
-            ps.setString(1, type.name());
-            ps.setString(2, leader);
-            ps.setString(3, time);
-            ps.setLong(4, timz);
-            ps.setString(5, z);
-            ps.executeUpdate();
-            ps.close();
-            if (SpeedRunner.getInstance().getSpeedRunData(type) == null) {
-                SpeedRunner.getInstance().addSpeedRunData(type, SpeedRunner.getInstance().addSpeedRunData(new StringBuilder("#rThese are the speedrun times for " + (type) + ".#k\r\n\r\n"), new HashMap<Integer, String>(), z, leader, 1, time));
-            } else {
-                SpeedRunner.getInstance().removeSpeedRunData(type);
-                SpeedRunner.getInstance().loadSpeedRunData(type);
-            }
+            try {
+				PreparedStatement ps = con.prepareStatement("INSERT INTO speedruns(`type`, `leader`, `timestring`, `time`, `members`) VALUES (?,?,?,?,?)");
+				ps.setString(1, type.name());
+				ps.setString(2, leader);
+				ps.setString(3, time);
+				ps.setLong(4, timz);
+				ps.setString(5, z);
+				ps.executeUpdate();
+				ps.close();
+				if (SpeedRunner.getInstance().getSpeedRunData(type) == null) {
+				    SpeedRunner.getInstance().addSpeedRunData(type, SpeedRunner.getInstance().addSpeedRunData(new StringBuilder("#rThese are the speedrun times for " + (type) + ".#k\r\n\r\n"), new HashMap<Integer, String>(), z, leader, 1, time));
+				} else {
+				    SpeedRunner.getInstance().removeSpeedRunData(type);
+				    SpeedRunner.getInstance().loadSpeedRunData(type);
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				try {
+					if(con!=null) con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
         }
         catch (Exception e) {
             e.printStackTrace();

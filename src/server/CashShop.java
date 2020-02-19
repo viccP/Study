@@ -186,7 +186,9 @@ implements Serializable {
     }
 
     public void gift(int recipient, String from, String message, int sn, int uniqueid) {
-        try (PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement("INSERT INTO `gifts` VALUES (DEFAULT, ?, ?, ?, ?, ?)");){
+    	Connection con = DatabaseConnection.getConnection();
+        try {
+        	PreparedStatement ps = con.prepareStatement("INSERT INTO `gifts` VALUES (DEFAULT, ?, ?, ?, ?, ?)");
             ps.setInt(1, recipient);
             ps.setString(2, from);
             ps.setString(3, message);
@@ -196,7 +198,13 @@ implements Serializable {
         }
         catch (SQLException sqle) {
             // empty catch block
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public List<Pair<IItem, String>> loadGifts() {
@@ -230,7 +238,13 @@ implements Serializable {
         }
         catch (SQLException sqle) {
             sqle.printStackTrace();
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
         return gifts;
     }
 

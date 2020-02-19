@@ -3,10 +3,6 @@
  */
 package server.life;
 
-import client.inventory.MapleInventoryType;
-import constants.GameConstants;
-import database.DatabaseConnection;
-import java.io.PrintStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,8 +12,10 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import server.life.MonsterDropEntry;
-import server.life.MonsterGlobalDropEntry;
+
+import client.inventory.MapleInventoryType;
+import constants.GameConstants;
+import database.DatabaseConnection;
 
 public class MapleMonsterInformationProvider {
     private static final MapleMonsterInformationProvider instance = new MapleMonsterInformationProvider();
@@ -42,8 +40,8 @@ public class MapleMonsterInformationProvider {
     private final void retrieveGlobal() {
         PreparedStatement ps = null;
         ResultSet rs = null;
+        Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             ps = con.prepareStatement("SELECT * FROM drop_data_global WHERE chance > 0");
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -63,6 +61,7 @@ public class MapleMonsterInformationProvider {
                 if (rs != null) {
                     rs.close();
                 }
+        		if(con!=null) con.close();
             }
             catch (SQLException ignore) {}
         }
@@ -78,8 +77,9 @@ public class MapleMonsterInformationProvider {
         LinkedList<MonsterDropEntry> ret = new LinkedList<MonsterDropEntry>();
         PreparedStatement ps = null;
         ResultSet rs = null;
+        Connection con = DatabaseConnection.getConnection();
         try {
-            ps = DatabaseConnection.getConnection().prepareStatement("SELECT * FROM drop_data WHERE dropperid = ?");
+            ps = con.prepareStatement("SELECT * FROM drop_data WHERE dropperid = ?");
             ps.setInt(1, monsterId);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -103,6 +103,7 @@ public class MapleMonsterInformationProvider {
                 if (rs != null) {
                     rs.close();
                 }
+        		if(con!=null) con.close();
             }
             catch (SQLException ignore) {
                 return ret;

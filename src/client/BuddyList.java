@@ -126,8 +126,12 @@ implements Serializable {
 			ps.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			if(con!=null) con.close();
+		}finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
     }
 

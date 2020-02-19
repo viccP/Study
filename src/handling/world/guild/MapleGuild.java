@@ -61,8 +61,8 @@ implements Serializable {
     private boolean init = false;
 
     public MapleGuild(int guildid) {
+    	Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT * FROM guilds WHERE guildid = ?");
             ps.setInt(1, guildid);
             ResultSet rs = ps.executeQuery();
@@ -138,7 +138,13 @@ implements Serializable {
         catch (SQLException se) {
             System.err.println("unable to read guild information from sql");
             se.printStackTrace();
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public boolean isProper() {
@@ -147,8 +153,8 @@ implements Serializable {
 
     public static final Collection<MapleGuild> loadAll() {
         ArrayList<MapleGuild> ret = new ArrayList<MapleGuild>();
+        Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT guildid FROM guilds");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -162,13 +168,19 @@ implements Serializable {
         catch (SQLException se) {
             System.err.println("unable to read guild information from sql");
             se.printStackTrace();
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
         return ret;
     }
 
     public final void writeToDB(boolean bDisband) {
+    	Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             if (!bDisband) {
                 StringBuilder buf = new StringBuilder("UPDATE guilds SET GP = ?, logo = ?, logoColor = ?, logoBG = ?, logoBGColor = ?, ");
                 for (int i = 1; i < 6; ++i) {
@@ -255,7 +267,13 @@ implements Serializable {
         catch (SQLException se) {
             System.err.println("Error saving guild to SQL");
             se.printStackTrace();
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public final int getId() {
@@ -435,8 +453,8 @@ implements Serializable {
 
     public void setAllianceId(int a) {
         this.allianceid = a;
+        Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("UPDATE guilds SET alliance = ? WHERE guildid = ?");
             ps.setInt(1, a);
             ps.setInt(2, this.id);
@@ -445,15 +463,21 @@ implements Serializable {
         }
         catch (SQLException e) {
             System.err.println("Saving allianceid ERROR" + e);
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public static final int createGuild(int leaderId, String name) {
         if (name.length() > 12) {
             return 0;
         }
+        Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT guildid FROM guilds WHERE name = ?");
             ps.setString(1, name);
             ResultSet rs = ps.executeQuery();
@@ -482,7 +506,13 @@ implements Serializable {
             System.err.println("SQL THROW");
             se.printStackTrace();
             return 0;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     /*
@@ -660,8 +690,8 @@ implements Serializable {
     }
 
     public static void displayGuildRanks(MapleClient c, int npcid) {
+    	Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT `name`, `GP`, `logoBG`, `logoBGColor`, `logo`, `logoColor` FROM guilds ORDER BY `GP` DESC LIMIT 50");
             ResultSet rs = ps.executeQuery();
             c.getSession().write((Object)MaplePacketCreator.showGuildRanks(npcid, rs));
@@ -670,12 +700,18 @@ implements Serializable {
         }
         catch (SQLException e) {
             // empty catch block
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public static void meso(MapleClient c, int npcid) {
+    	Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT `name`,`meso`,`vip`, `level`FROM characters ORDER BY `meso` DESC LIMIT 100");
             ResultSet rs = ps.executeQuery();
             c.getSession().write((Object)MaplePacketCreator.showMesoRanks(npcid, rs));
@@ -684,12 +720,18 @@ implements Serializable {
         }
         catch (SQLException e) {
             // empty catch block
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public static void displayLevelRanks(MapleClient c, int npcid) {
+    	Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT `name`, `vip`, `level`, `meso` FROM characters ORDER BY `level` DESC LIMIT 100");
             ResultSet rs = ps.executeQuery();
             c.getSession().write((Object)MaplePacketCreator.showLevelRanks(npcid, rs));
@@ -698,12 +740,18 @@ implements Serializable {
         }
         catch (SQLException e) {
             // empty catch block
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public static void displayRenwu2Ranks(MapleClient c, int npcid) {
+    	Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT `name`,  `renwu2`, `vip`, `level`, `meso` FROM characters ORDER BY `renwu2` DESC LIMIT 100");
             ResultSet rs = ps.executeQuery();
             c.getSession().write((Object)MaplePacketCreator.showRenwu2Ranks(npcid, rs));
@@ -712,12 +760,18 @@ implements Serializable {
         }
         catch (SQLException e) {
             // empty catch block
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public static void \u4eba\u6c14\u6392\u884c(MapleClient c, int npcid) {
+    	Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT `name`, `fame`, `level`, `meso` FROM characters ORDER BY `fame` DESC LIMIT 100");
             ResultSet rs = ps.executeQuery();
             c.getSession().write((Object)MaplePacketCreator.showRQRanks(npcid, rs));
@@ -726,7 +780,13 @@ implements Serializable {
         }
         catch (SQLException e) {
             // empty catch block
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public final void setGuildEmblem(short bg, byte bgcolor, short logo, byte logocolor) {
@@ -735,8 +795,8 @@ implements Serializable {
         this.logo = logo;
         this.logoColor = logocolor;
         this.broadcast(null, -1, BCOp.EMBELMCHANGE);
+        Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("UPDATE guilds SET logo = ?, logoColor = ?, logoBG = ?, logoBGColor = ? WHERE guildid = ?");
             ps.setInt(1, logo);
             ps.setInt(2, this.logoColor);
@@ -749,7 +809,13 @@ implements Serializable {
         catch (SQLException e) {
             System.err.println("Saving guild logo / BG colo ERROR");
             e.printStackTrace();
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public final MapleGuildCharacter getMGC(int cid) {
@@ -766,8 +832,8 @@ implements Serializable {
         }
         this.capacity += 5;
         this.broadcast(MaplePacketCreator.guildCapacityChange(this.id, this.capacity));
+        Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("UPDATE guilds SET capacity = ? WHERE guildid = ?");
             ps.setInt(1, this.capacity);
             ps.setInt(2, this.id);
@@ -777,7 +843,13 @@ implements Serializable {
         catch (SQLException e) {
             System.err.println("Saving guild capacity ERROR");
             e.printStackTrace();
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
         return true;
     }
 
@@ -878,8 +950,8 @@ implements Serializable {
     }
 
     public static void setOfflineGuildStatus(int guildid, byte guildrank, byte alliancerank, int cid) {
+    	Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("UPDATE characters SET guildid = ?, guildrank = ?, alliancerank = ? WHERE id = ?");
             ps.setInt(1, guildid);
             ps.setInt(2, guildrank);
@@ -891,7 +963,13 @@ implements Serializable {
         catch (SQLException se) {
             System.out.println("SQLException: " + se.getLocalizedMessage());
             se.printStackTrace();
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public int getPrefix(MapleCharacter chr) {

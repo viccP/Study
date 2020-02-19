@@ -3,18 +3,17 @@
  */
 package server;
 
-import database.DatabaseConnection;
-import java.io.PrintStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import server.MapleCarnivalChallenge;
+
+import database.DatabaseConnection;
 
 public class RankingWorker {
     private final Map<Integer, List<RankingInformation>> rankings = new HashMap<Integer, List<RankingInformation>>();
@@ -42,7 +41,7 @@ public class RankingWorker {
     }
 
     public final void run() {
-        System.out.println("\u52a0\u8f7d \u6392\u540d\u670d\u52a1\u5668 :::");
+        System.out.println("加载 排名服务器 :::");
         this.loadJobCommands();
         try {
             this.con = DatabaseConnection.getConnection();
@@ -51,7 +50,13 @@ public class RankingWorker {
         catch (Exception ex) {
             ex.printStackTrace();
             System.err.println("Could not update rankings");
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     private void updateRanking() throws Exception {
@@ -65,7 +70,7 @@ public class RankingWorker {
         LinkedHashMap<Integer, Integer> rankMap = new LinkedHashMap<Integer, Integer>();
         for (int i : this.jobCommands.values()) {
             rankMap.put(i, 0);
-            this.rankings.put(i, new ArrayList());
+            this.rankings.put(i, new ArrayList<RankingInformation>());
         }
         while (rs.next()) {
             int job = rs.getInt("job");
@@ -135,4 +140,3 @@ public class RankingWorker {
     }
 
 }
-

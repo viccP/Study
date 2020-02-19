@@ -10,8 +10,10 @@ import java.io.ObjectInputStream;
 import java.io.PrintStream;
 import java.io.Serializable;
 import java.sql.Blob;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import provider.MapleData;
 import server.quest.MapleCustomQuestData;
@@ -28,9 +30,10 @@ implements Serializable {
 
     public MapleCustomQuest(int id) {
         super(id);
+        Connection con = DatabaseConnection.getConnection();
         try {
             MapleCustomQuestData data;
-            PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement("SELECT * FROM questrequirements WHERE questid = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM questrequirements WHERE questid = ?");
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -48,7 +51,7 @@ implements Serializable {
             }
             rs.close();
             ps.close();
-            ps = DatabaseConnection.getConnection().prepareStatement("SELECT * FROM questactions WHERE questid = ?");
+            ps = con.prepareStatement("SELECT * FROM questactions WHERE questid = ?");
             ps.setInt(1, id);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -71,6 +74,13 @@ implements Serializable {
             ex.printStackTrace();
             System.err.println("Error loading custom quest from SQL." + ex);
         }
+        finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 }
 

@@ -365,8 +365,8 @@ implements Serializable {
         ret.stats.maxmp = (short)50;
         ret.stats.mp = (short)50;
         ret.prefix = 0;
+        Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT * FROM accounts WHERE id = ?");
             ps.setInt(1, ret.accountid);
             ResultSet rs = ps.executeQuery();
@@ -382,7 +382,13 @@ implements Serializable {
         }
         catch (SQLException e) {
             System.err.println("Error getting character default" + e);
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
         return ret;
     }
 
@@ -896,16 +902,12 @@ implements Serializable {
             FileoutputUtil.outputFileError("log\\Packet_Except.log", ess);
         }
         finally {
-            try {
-                if (ps != null) {
-                    ps.close();
-                }
-                if (rs != null) {
-                    rs.close();
-                }
-            }
-            catch (SQLException ignore) {}
-        }
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
         return ret;
     }
 
@@ -1059,7 +1061,13 @@ implements Serializable {
                 e.printStackTrace();
                 FileoutputUtil.outputFileError("log\\Packet_Except.log", e);
                 System.err.println("[charsave] Error going back to autocommit mode");
-            }
+            }finally {
+    			try {
+    				if(con!=null) con.close();
+    			} catch (SQLException e) {
+    				e.printStackTrace();
+    			}
+    		}
         }
     }
 
@@ -1367,6 +1375,7 @@ implements Serializable {
                 }
                 con.setAutoCommit(true);
                 con.setTransactionIsolation(4);
+                con.close();
             }
             catch (SQLException e) {
                 FileoutputUtil.outputFileError("log\\Packet_Except.log", e);
@@ -3397,8 +3406,8 @@ implements Serializable {
         if (IPMac) {
             this.client.banMacs();
         }
+        Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("INSERT INTO ipbans VALUES (DEFAULT, ?)");
             ps.setString(1, this.client.getSession().getRemoteAddress().toString().split(":")[0]);
             ps.execute();
@@ -3415,15 +3424,21 @@ implements Serializable {
         }
         catch (SQLException ex) {
             System.err.println("Error while tempbanning" + ex);
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public final boolean ban(String reason, boolean IPMac, boolean autoban, boolean hellban) {
         if (this.lastmonthfameids == null) {
             throw new RuntimeException("Trying to ban a non-loaded character (testhack)");
         }
+        Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("UPDATE accounts SET banned = ?, banreason = ? WHERE id = ?");
             ps.setInt(1, autoban ? 2 : 1);
             ps.setString(2, reason);
@@ -3457,14 +3472,20 @@ implements Serializable {
         catch (SQLException ex) {
             System.err.println("Error while banning" + ex);
             return false;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
         this.client.getSession().close();
         return true;
     }
 
     public static boolean ban(String id, String reason, boolean accountId, int gmlevel, boolean hellban) {
+    	Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             if (id.matches("/[0-9]{1,3}\\..*")) {
                 PreparedStatement ps = con.prepareStatement("INSERT INTO ipbans VALUES (DEFAULT, ?)");
                 ps.setString(1, id);
@@ -3523,7 +3544,13 @@ implements Serializable {
         catch (SQLException ex) {
             System.err.println("Error while banning" + ex);
             return false;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     @Override
@@ -3761,7 +3788,13 @@ implements Serializable {
         }
         catch (SQLException e) {
             System.err.println("ERROR writing famelog for char " + this.getName() + " to " + to.getName() + e);
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public final MapleKeyLayout getKeyLayout() {
@@ -3977,8 +4010,8 @@ implements Serializable {
     }
 
     public void saveFamilyStatus() {
+    	Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("UPDATE characters SET familyid = ?, seniorid = ?, junior1 = ?, junior2 = ? WHERE id = ?");
             if (this.mfc == null) {
                 ps.setInt(1, 0);
@@ -3998,7 +4031,13 @@ implements Serializable {
         catch (SQLException se) {
             System.out.println("SQLException: " + se.getLocalizedMessage());
             se.printStackTrace();
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public void modifyCSPoints(int type, int quantity) {
@@ -4148,8 +4187,8 @@ implements Serializable {
                 this.coolDowns.put(cooldown.skillId, cooldown);
             }
         } else {
+        	Connection con = DatabaseConnection.getConnection();
             try {
-                Connection con = DatabaseConnection.getConnection();
                 PreparedStatement ps = con.prepareStatement("SELECT SkillID,StartTime,length FROM skills_cooldowns WHERE charid = ?");
                 ps.setInt(1, this.getId());
                 ResultSet rs = ps.executeQuery();
@@ -4163,7 +4202,13 @@ implements Serializable {
             }
             catch (SQLException e) {
                 System.err.println("Error while retriving cooldown from SQL storage");
-            }
+            }finally {
+    			try {
+    				if(con!=null) con.close();
+    			} catch (SQLException e) {
+    				e.printStackTrace();
+    			}
+    		}
         }
     }
 
@@ -4238,8 +4283,8 @@ implements Serializable {
     }
 
     public void showNote() {
+    	Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT * FROM notes WHERE `to`=?", 1005, 1008);
             ps.setString(1, this.getName());
             ResultSet rs = ps.executeQuery();
@@ -4252,12 +4297,18 @@ implements Serializable {
         }
         catch (SQLException e) {
             System.err.println("Unable to show note" + e);
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public void deleteNote(int id, int fame) {
+    	Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT gift FROM notes WHERE `id`=?");
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
@@ -4275,7 +4326,13 @@ implements Serializable {
         }
         catch (SQLException e) {
             System.err.println("Unable to delete note" + e);
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public void mulung_EnergyModify(boolean inc) {
@@ -4529,7 +4586,13 @@ implements Serializable {
         }
         catch (SQLException Ex) {
             return -1;
-        }
+        }finally {
+			try {
+				if(con1!=null) con1.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public void setBossLog(String bossid) {
@@ -4543,7 +4606,13 @@ implements Serializable {
         }
         catch (SQLException Ex) {
             // empty catch block
-        }
+        }finally {
+			try {
+				if(con1!=null) con1.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public void dropMessage(int type, String message) {
@@ -5821,8 +5890,8 @@ implements Serializable {
 
     public int getFishingJF(int type) {
         int jf = 0;
+        Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("select * from fishingjf where accname = ?");
             ps.setString(1, this.getClient().getAccountName());
             ResultSet rs = ps.executeQuery();
@@ -5842,7 +5911,13 @@ implements Serializable {
         }
         catch (SQLException ex) {
             System.err.println("获取钓鱼积分信息发生错误: " + ex);
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
         return jf;
     }
 
@@ -5853,8 +5928,8 @@ implements Serializable {
         if (hypay <= 0) {
             return 0;
         }
+        Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("UPDATE fishingjf SET fishing = ? ,XX = ? ,XXX = ? where accname = ?");
             ps.setInt(1, hypay + jf);
             ps.setInt(2, XX);
@@ -5867,7 +5942,13 @@ implements Serializable {
         catch (SQLException ex) {
             System.err.println("加减钓鱼积分信息发生错误: " + ex);
             return 0;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public int addFishingJF(int hypay) {
@@ -5877,8 +5958,8 @@ implements Serializable {
         if (hypay > jf) {
             return -1;
         }
+        Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("UPDATE fishingjf SET fishing = ? ,XX = ? ,XXX = ? where accname = ?");
             ps.setInt(1, jf - hypay);
             ps.setInt(2, XX);
@@ -5891,13 +5972,19 @@ implements Serializable {
         catch (SQLException ex) {
             System.err.println("加减钓鱼积分信息发生错误: " + ex);
             return -1;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public int getHyPay(int type) {
         int pay = 0;
+        Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("select * from hypay where accname = ?");
             ps.setString(1, this.getClient().getAccountName());
             ResultSet rs = ps.executeQuery();
@@ -5917,7 +6004,13 @@ implements Serializable {
         }
         catch (SQLException ex) {
             System.err.println("获取充值信息发生错误: " + ex);
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
         return pay;
     }
 
@@ -5928,8 +6021,8 @@ implements Serializable {
         if (hypay <= 0) {
             return 0;
         }
+        Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("UPDATE hypay SET pay = ? ,payUsed = ? ,payReward = ? where accname = ?");
             ps.setInt(1, pay + hypay);
             ps.setInt(2, payUsed);
@@ -5942,7 +6035,13 @@ implements Serializable {
         catch (SQLException ex) {
             System.err.println("加减充值信息发生错误: " + ex);
             return 0;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public int addHyPay(int hypay) {
@@ -5952,8 +6051,8 @@ implements Serializable {
         if (hypay > pay) {
             return -1;
         }
+        Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("UPDATE hypay SET pay = ? ,payUsed = ? ,payReward = ? where accname = ?");
             ps.setInt(1, pay - hypay);
             ps.setInt(2, payUsed + hypay);
@@ -5966,7 +6065,13 @@ implements Serializable {
         catch (SQLException ex) {
             System.err.println("加减充值信息发生错误: " + ex);
             return -1;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public int delPayReward(int pay) {
@@ -5977,8 +6082,8 @@ implements Serializable {
         if (pay > payReward) {
             return -1;
         }
+        Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("UPDATE hypay SET payReward = ? where accname = ?");
             ps.setInt(1, payReward - pay);
             ps.setString(2, this.getClient().getAccountName());
@@ -5989,13 +6094,19 @@ implements Serializable {
         catch (SQLException ex) {
             System.err.println("加减消费奖励信息发生错误: " + ex);
             return -1;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public int getGamePoints() {
+    	Connection con = DatabaseConnection.getConnection();
         try {
             int gamePoints = 0;
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT * FROM accounts_info WHERE accId = ? AND worldId = ?");
             ps.setInt(1, this.getClient().getAccID());
             ps.setInt(2, this.getWorld());
@@ -6030,13 +6141,19 @@ implements Serializable {
         catch (SQLException Ex) {
             System.err.println("获取角色帐号的在线时间点出现错误 - 数据库查询失败" + Ex);
             return -1;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public int getGamePointsPD() {
+    	Connection con = DatabaseConnection.getConnection();
         try {
             int gamePointsPD = 0;
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT * FROM accounts_info WHERE accId = ? AND worldId = ?");
             ps.setInt(1, this.getClient().getAccID());
             ps.setInt(2, this.getWorld());
@@ -6071,7 +6188,13 @@ implements Serializable {
         catch (SQLException Ex) {
             System.err.println("获取角色帐号的在线时间点出现错误 - 数据库查询失败" + Ex);
             return -1;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public void gainGamePoints(int amount) {
@@ -6089,8 +6212,8 @@ implements Serializable {
     }
 
     public void updateGamePointsPD(int amount) {
+    	Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("UPDATE accounts_info SET gamePointspd = ?, updateTime = CURRENT_TIMESTAMP() WHERE accId = ? AND worldId = ?");
             ps.setInt(1, amount);
             ps.setInt(2, this.getClient().getAccID());
@@ -6100,7 +6223,13 @@ implements Serializable {
         }
         catch (SQLException Ex) {
             System.err.println("更新角色帐号的在线时间出现错误 - 数据库更新失败." + Ex);
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public void resetGamePoints() {
@@ -6108,8 +6237,8 @@ implements Serializable {
     }
 
     public void updateGamePoints(int amount) {
+    	Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("UPDATE accounts_info SET gamePoints = ?, updateTime = CURRENT_TIMESTAMP() WHERE accId = ? AND worldId = ?");
             ps.setInt(1, amount);
             ps.setInt(2, this.getClient().getAccID());
@@ -6119,13 +6248,19 @@ implements Serializable {
         }
         catch (SQLException Ex) {
             System.err.println("更新角色帐号的在线时间出现错误 - 数据库更新失败." + Ex);
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public int getGamePointsRQ() {
+    	Connection con = DatabaseConnection.getConnection();
         try {
             int gamePointsRQ = 0;
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT * FROM accounts_info WHERE accId = ? AND worldId = ?");
             ps.setInt(1, this.getClient().getAccID());
             ps.setInt(2, this.getWorld());
@@ -6160,7 +6295,13 @@ implements Serializable {
         catch (SQLException Ex) {
             System.err.println("获取角色帐号的在线时间点出现错误 - 数据库查询失败" + Ex);
             return -1;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public void gainGamePointsRQ(int amount) {
@@ -6173,8 +6314,8 @@ implements Serializable {
     }
 
     public void updateGamePointsRQ(int amount) {
+    	Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("UPDATE accounts_info SET gamePointsrq = ?, updateTime = CURRENT_TIMESTAMP() WHERE accId = ? AND worldId = ?");
             ps.setInt(1, amount);
             ps.setInt(2, this.getClient().getAccID());
@@ -6184,13 +6325,19 @@ implements Serializable {
         }
         catch (SQLException Ex) {
             System.err.println("更新角色帐号的在线时间出现错误 - 数据库更新失败." + Ex);
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public int getGamePointsPS() {
+    	Connection con = DatabaseConnection.getConnection();
         try {
             int gamePointsRQ = 0;
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT * FROM accounts_info WHERE accId = ? AND worldId = ?");
             ps.setInt(1, this.getClient().getAccID());
             ps.setInt(2, this.getWorld());
@@ -6225,7 +6372,13 @@ implements Serializable {
         catch (SQLException Ex) {
             System.err.println("获取角色帐号的在线时间点出现错误 - 数据库查询失败" + Ex);
             return -1;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public void gainGamePointsPS(int amount) {
@@ -6238,8 +6391,8 @@ implements Serializable {
     }
 
     public void updateGamePointsPS(int amount) {
+    	Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("UPDATE accounts_info SET gamePointsps = ?, updateTime = CURRENT_TIMESTAMP() WHERE accId = ? AND worldId = ?");
             ps.setInt(1, amount);
             ps.setInt(2, this.getClient().getAccID());
@@ -6249,7 +6402,13 @@ implements Serializable {
         }
         catch (SQLException Ex) {
             System.err.println("更新角色帐号的在线时间出现错误 - 数据库更新失败." + Ex);
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public long getDeadtime() {
@@ -6309,7 +6468,13 @@ implements Serializable {
             }
             catch (SQLException se) {
                 System.err.println("SQL error: " + se.getLocalizedMessage() + "-----错误输出：" + se);
-            }
+            }finally {
+    			try {
+    				if(con!=null) con.close();
+    			} catch (SQLException e) {
+    				e.printStackTrace();
+    			}
+    		}
         }
     }
 
@@ -6330,9 +6495,9 @@ implements Serializable {
     }
 
     public int getSJRW() {
+    	Connection con = DatabaseConnection.getConnection();
         try {
             int sjrw = 0;
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT * FROM accounts_info WHERE accId = ? AND worldId = ?");
             ps.setInt(1, this.getClient().getAccID());
             ps.setInt(2, this.getWorld());
@@ -6367,7 +6532,13 @@ implements Serializable {
         catch (SQLException Ex) {
             System.err.println("获取角色帐号的在线时间点出现错误 - 数据库查询失败" + Ex);
             return -1;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public void gainSJRW(int amount) {
@@ -6380,8 +6551,8 @@ implements Serializable {
     }
 
     public void updateSJRW(int amount) {
+    	Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("UPDATE accounts_info SET sjrw = ?, updateTime = CURRENT_TIMESTAMP() WHERE accId = ? AND worldId = ?");
             ps.setInt(1, amount);
             ps.setInt(2, this.getClient().getAccID());
@@ -6391,13 +6562,19 @@ implements Serializable {
         }
         catch (SQLException Ex) {
             System.err.println("更新角色帐号的在线时间出现错误 - 数据库更新失败." + Ex);
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public int getFBRW() {
+    	Connection con = DatabaseConnection.getConnection();
         try {
             int fbrw = 0;
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT * FROM accounts_info WHERE accId = ? AND worldId = ?");
             ps.setInt(1, this.getClient().getAccID());
             ps.setInt(2, this.getWorld());
@@ -6432,7 +6609,13 @@ implements Serializable {
         catch (SQLException Ex) {
             System.err.println("获取角色帐号的在线时间点出现错误 - 数据库查询失败" + Ex);
             return -1;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public void gainFBRW(int amount) {
@@ -6445,8 +6628,8 @@ implements Serializable {
     }
 
     public void updateFBRW(int amount) {
+    	Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("UPDATE accounts_info SET fbrw = ?, updateTime = CURRENT_TIMESTAMP() WHERE accId = ? AND worldId = ?");
             ps.setInt(1, amount);
             ps.setInt(2, this.getClient().getAccID());
@@ -6456,13 +6639,19 @@ implements Serializable {
         }
         catch (SQLException Ex) {
             System.err.println("更新角色帐号的在线时间出现错误 - 数据库更新失败." + Ex);
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public int getFBRWA() {
+    	Connection con = DatabaseConnection.getConnection();
         try {
             int fbrwa = 0;
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT * FROM accounts_info WHERE accId = ? AND worldId = ?");
             ps.setInt(1, this.getClient().getAccID());
             ps.setInt(2, this.getWorld());
@@ -6497,7 +6686,13 @@ implements Serializable {
         catch (SQLException Ex) {
             System.err.println("获取角色帐号的在线时间点出现错误 - 数据库查询失败" + Ex);
             return -1;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public void gainFBRWA(int amount) {
@@ -6510,8 +6705,8 @@ implements Serializable {
     }
 
     public void updateFBRWA(int amount) {
+    	Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("UPDATE accounts_info SET fbrwa = ?, updateTime = CURRENT_TIMESTAMP() WHERE accId = ? AND worldId = ?");
             ps.setInt(1, amount);
             ps.setInt(2, this.getClient().getAccID());
@@ -6521,13 +6716,19 @@ implements Serializable {
         }
         catch (SQLException Ex) {
             System.err.println("更新角色帐号的在线时间出现错误 - 数据库更新失败." + Ex);
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public int getSGRW() {
+    	Connection con = DatabaseConnection.getConnection();
         try {
             int sgrw = 0;
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT * FROM accounts_info WHERE accId = ? AND worldId = ?");
             ps.setInt(1, this.getClient().getAccID());
             ps.setInt(2, this.getWorld());
@@ -6562,7 +6763,13 @@ implements Serializable {
         catch (SQLException Ex) {
             System.err.println("获取角色帐号的在线时间点出现错误 - 数据库查询失败" + Ex);
             return -1;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public void gainSGRW(int amount) {
@@ -6575,8 +6782,8 @@ implements Serializable {
     }
 
     public void updateSGRW(int amount) {
+    	Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("UPDATE accounts_info SET sgrw = ?, updateTime = CURRENT_TIMESTAMP() WHERE accId = ? AND worldId = ?");
             ps.setInt(1, amount);
             ps.setInt(2, this.getClient().getAccID());
@@ -6586,13 +6793,19 @@ implements Serializable {
         }
         catch (SQLException Ex) {
             System.err.println("更新角色帐号的在线时间出现错误 - 数据库更新失败." + Ex);
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public int getSGRWA() {
+    	Connection con = DatabaseConnection.getConnection();
         try {
             int sgrwa = 0;
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT * FROM accounts_info WHERE accId = ? AND worldId = ?");
             ps.setInt(1, this.getClient().getAccID());
             ps.setInt(2, this.getWorld());
@@ -6627,7 +6840,13 @@ implements Serializable {
         catch (SQLException Ex) {
             System.err.println("获取角色帐号的在线时间点出现错误 - 数据库查询失败" + Ex);
             return -1;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public void gainSGRWA(int amount) {
@@ -6640,8 +6859,8 @@ implements Serializable {
     }
 
     public void updateSGRWA(int amount) {
+    	Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("UPDATE accounts_info SET sgrwa = ?, updateTime = CURRENT_TIMESTAMP() WHERE accId = ? AND worldId = ?");
             ps.setInt(1, amount);
             ps.setInt(2, this.getClient().getAccID());
@@ -6651,13 +6870,19 @@ implements Serializable {
         }
         catch (SQLException Ex) {
             System.err.println("更新角色帐号的在线时间出现错误 - 数据库更新失败." + Ex);
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public int getSBOSSRW() {
+    	Connection con = DatabaseConnection.getConnection();
         try {
             int sbossrw = 0;
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT * FROM accounts_info WHERE accId = ? AND worldId = ?");
             ps.setInt(1, this.getClient().getAccID());
             ps.setInt(2, this.getWorld());
@@ -6692,7 +6917,13 @@ implements Serializable {
         catch (SQLException Ex) {
             System.err.println("获取角色帐号的在线时间点出现错误 - 数据库查询失败" + Ex);
             return -1;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public void gainSBOSSRW(int amount) {
@@ -6705,8 +6936,8 @@ implements Serializable {
     }
 
     public void updateSBOSSRW(int amount) {
+    	Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("UPDATE accounts_info SET sbossrw = ?, updateTime = CURRENT_TIMESTAMP() WHERE accId = ? AND worldId = ?");
             ps.setInt(1, amount);
             ps.setInt(2, this.getClient().getAccID());
@@ -6716,13 +6947,19 @@ implements Serializable {
         }
         catch (SQLException Ex) {
             System.err.println("更新角色帐号的在线时间出现错误 - 数据库更新失败." + Ex);
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public int getSBOSSRWA() {
+    	Connection con = DatabaseConnection.getConnection();
         try {
             int sbossrwa = 0;
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT * FROM accounts_info WHERE accId = ? AND worldId = ?");
             ps.setInt(1, this.getClient().getAccID());
             ps.setInt(2, this.getWorld());
@@ -6757,7 +6994,13 @@ implements Serializable {
         catch (SQLException Ex) {
             System.err.println("获取角色帐号的在线时间点出现错误 - 数据库查询失败" + Ex);
             return -1;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public void gainSBOSSRWA(int amount) {
@@ -6770,8 +7013,8 @@ implements Serializable {
     }
 
     public void updateSBOSSRWA(int amount) {
+    	Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("UPDATE accounts_info SET sbossrwa = ?, updateTime = CURRENT_TIMESTAMP() WHERE accId = ? AND worldId = ?");
             ps.setInt(1, amount);
             ps.setInt(2, this.getClient().getAccID());
@@ -6781,13 +7024,19 @@ implements Serializable {
         }
         catch (SQLException Ex) {
             System.err.println("更新角色帐号的在线时间出现错误 - 数据库更新失败." + Ex);
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public int getlb() {
+    	Connection con = DatabaseConnection.getConnection();
         try {
             int lb = 0;
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT * FROM accounts_info WHERE accId = ? AND worldId = ?");
             ps.setInt(1, this.getClient().getAccID());
             ps.setInt(2, this.getWorld());
@@ -6822,7 +7071,13 @@ implements Serializable {
         catch (SQLException Ex) {
             System.err.println("获取角色帐号的在线时间点出现错误 - 数据库查询失败" + Ex);
             return -1;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public void gainlb(int amount) {
@@ -6835,8 +7090,8 @@ implements Serializable {
     }
 
     public void updatelb(int amount) {
+    	Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("UPDATE accounts_info SET lb = ?, updateTime = CURRENT_TIMESTAMP() WHERE accId = ? AND worldId = ?");
             ps.setInt(1, amount);
             ps.setInt(2, this.getClient().getAccID());
@@ -6846,7 +7101,13 @@ implements Serializable {
         }
         catch (SQLException Ex) {
             System.err.println("更新角色帐号的在线时间出现错误 - 数据库更新失败." + Ex);
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public int getmrsgrw() {

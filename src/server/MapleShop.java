@@ -201,8 +201,8 @@ public class MapleShop {
 
     public static MapleShop createFromDB(int id, boolean isShopId) {
         MapleShop ret = null;
+        Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement(isShopId ? "SELECT * FROM shops WHERE shopid = ?" : "SELECT * FROM shops WHERE npcid = ?");
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
@@ -237,7 +237,13 @@ public class MapleShop {
         }
         catch (SQLException e) {
             System.err.println("Could not load shop" + e);
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
         return ret;
     }
 

@@ -3,13 +3,13 @@
  */
 package handling.login.handler;
 
-import client.LoginCrypto;
-import database.DatabaseConnection;
-import java.io.PrintStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import client.LoginCrypto;
+import database.DatabaseConnection;
 
 public class AutoRegister {
     private static final int ACCOUNTS_PER_IP = 1;
@@ -29,12 +29,18 @@ public class AutoRegister {
         }
         catch (SQLException ex) {
             System.out.println(ex);
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
         return accountExists;
     }
 
     public static void createAccount(String login, String pwd, String eip) {
-        Connection con;
+        Connection con=null;
         String sockAddr = eip;
         try {
             con = DatabaseConnection.getConnection();
@@ -62,7 +68,13 @@ public class AutoRegister {
         catch (SQLException ex) {
             System.out.println(ex);
             return;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 }
 

@@ -1001,8 +1001,8 @@ extends AbstractPlayerInteraction {
 
     public void giveMerchantMesos() {
         long mesos = 0L;
+        Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT * FROM hiredmerchants WHERE merchantid = ?");
             ps.setInt(1, this.getPlayer().getId());
             ResultSet rs = ps.executeQuery();
@@ -1021,7 +1021,13 @@ extends AbstractPlayerInteraction {
         }
         catch (SQLException ex) {
             System.err.println("Error gaining mesos in hired merchant" + ex);
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
         this.c.getPlayer().gainMeso((int)mesos, true);
     }
 
@@ -1033,8 +1039,8 @@ extends AbstractPlayerInteraction {
 
     public long getMerchantMesos() {
         long mesos = 0L;
+        Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT * FROM hiredmerchants WHERE merchantid = ?");
             ps.setInt(1, this.getPlayer().getId());
             ResultSet rs = ps.executeQuery();
@@ -1049,7 +1055,13 @@ extends AbstractPlayerInteraction {
         }
         catch (SQLException ex) {
             System.err.println("Error gaining mesos in hired merchant" + ex);
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
         return mesos;
     }
 
@@ -1100,7 +1112,13 @@ extends AbstractPlayerInteraction {
         catch (SQLException e) {
             e.printStackTrace();
             return null;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public void sendRepairWindow() {

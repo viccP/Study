@@ -29,8 +29,8 @@ public class MapleGuildRanking {
 
     private void reload() {
         this.ranks.clear();
+        Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT * FROM guilds ORDER BY `GP` DESC LIMIT 50");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -43,7 +43,13 @@ public class MapleGuildRanking {
         catch (SQLException e) {
             System.err.println("Error handling guildRanking");
             e.printStackTrace();
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public static class GuildRankingInfo {

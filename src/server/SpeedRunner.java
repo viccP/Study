@@ -4,6 +4,8 @@
 package server;
 
 import database.DatabaseConnection;
+
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -48,23 +50,35 @@ public class SpeedRunner {
 
     public final void loadSpeedRunData(SpeedRunType type) throws SQLException {
         boolean cont;
-        PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement("SELECT * FROM speedruns WHERE type = ? ORDER BY time LIMIT 25");
-        ps.setString(1, type.name());
-        StringBuilder ret = new StringBuilder("#rThese are the speedrun times for " + StringUtil.makeEnumHumanReadable(type.name()) + ".#k\r\n\r\n");
-        LinkedHashMap<Integer, String> rett = new LinkedHashMap<Integer, String>();
-        ResultSet rs = ps.executeQuery();
-        int rank = 1;
-        boolean changed = cont = rs.first();
-        while (cont) {
-            this.addSpeedRunData(ret, rett, rs.getString("members"), rs.getString("leader"), rank, rs.getString("timestring"));
-            ++rank;
-            cont = rs.next();
-        }
-        rs.close();
-        ps.close();
-        if (changed) {
-            this.speedRunData.put(type, new Pair<String, Map<Integer, String>>(ret.toString(), rett));
-        }
+        Connection con = DatabaseConnection.getConnection();
+        try {
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM speedruns WHERE type = ? ORDER BY time LIMIT 25");
+			ps.setString(1, type.name());
+			StringBuilder ret = new StringBuilder("#rThese are the speedrun times for " + StringUtil.makeEnumHumanReadable(type.name()) + ".#k\r\n\r\n");
+			LinkedHashMap<Integer, String> rett = new LinkedHashMap<Integer, String>();
+			ResultSet rs = ps.executeQuery();
+			int rank = 1;
+			boolean changed = cont = rs.first();
+			while (cont) {
+			    this.addSpeedRunData(ret, rett, rs.getString("members"), rs.getString("leader"), rank, rs.getString("timestring"));
+			    ++rank;
+			    cont = rs.next();
+			}
+			rs.close();
+			ps.close();
+			if (changed) {
+			    this.speedRunData.put(type, new Pair<String, Map<Integer, String>>(ret.toString(), rett));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public final Pair<StringBuilder, Map<Integer, String>> addSpeedRunData(StringBuilder ret, Map<Integer, String> rett, String members, String leader, int rank, String timestring) {

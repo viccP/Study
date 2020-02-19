@@ -377,7 +377,13 @@ public class EventManager {
         }
         catch (SQLException ex) {
             Logger.getLogger(EventInstanceManager.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
         return count;
     }
 

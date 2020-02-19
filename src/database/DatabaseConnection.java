@@ -39,7 +39,7 @@ public enum DatabaseConnection {
 	public static Connection getConnection() {
 		try {
 			return INSTANCE.getDatasource().getConnection();
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}

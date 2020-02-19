@@ -37,8 +37,8 @@ implements Serializable {
     private boolean changed = false;
 
     public MapleFamily(int fid) {
+    	Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT * FROM families WHERE familyid = ?");
             ps.setInt(1, fid);
             ResultSet rs = ps.executeQuery();
@@ -115,7 +115,13 @@ implements Serializable {
         catch (SQLException se) {
             System.err.println("unable to read family information from sql");
             se.printStackTrace();
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public int getGens() {
@@ -151,8 +157,8 @@ implements Serializable {
 
     public static final Collection<MapleFamily> loadAll() {
         ArrayList<MapleFamily> ret = new ArrayList<MapleFamily>();
+        Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT familyid FROM families");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -166,13 +172,19 @@ implements Serializable {
         catch (SQLException se) {
             System.err.println("unable to read family information from sql");
             se.printStackTrace();
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
         return ret;
     }
 
     public final void writeToDB(boolean bDisband) {
+    	Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             if (!bDisband) {
                 if (this.changed) {
                     PreparedStatement ps = con.prepareStatement("UPDATE families SET notice = ? WHERE familyid = ?");
@@ -192,7 +204,13 @@ implements Serializable {
         catch (SQLException se) {
             System.err.println("Error saving family to SQL");
             se.printStackTrace();
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public final int getId() {
@@ -398,8 +416,8 @@ implements Serializable {
     }
 
     public static void setOfflineFamilyStatus(int familyid, int seniorid, int junior1, int junior2, int currentrep, int totalrep, int cid) {
+    	Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("UPDATE characters SET familyid = ?, seniorid = ?, junior1 = ?, junior2 = ?, currentrep = ?, totalrep = ? WHERE id = ?");
             ps.setInt(1, familyid);
             ps.setInt(2, seniorid);
@@ -414,12 +432,18 @@ implements Serializable {
         catch (SQLException se) {
             System.out.println("SQLException: " + se.getLocalizedMessage());
             se.printStackTrace();
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public static int createFamily(int leaderId) {
+    	Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("INSERT INTO families (`leaderid`) VALUES (?)", 1);
             ps.setInt(1, leaderId);
             ps.executeUpdate();
@@ -437,7 +461,13 @@ implements Serializable {
         catch (Exception e) {
             e.printStackTrace();
             return 0;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public static void mergeFamily(MapleFamily newfam, MapleFamily oldfam) {

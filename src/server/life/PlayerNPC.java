@@ -20,6 +20,7 @@ import java.awt.Point;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -58,14 +59,25 @@ extends MapleNPC {
             this.pets[i] = pet[i] != null ? Integer.parseInt(pet[i]) : 0;
         }
         Connection con = DatabaseConnection.getConnection();
-        PreparedStatement ps = con.prepareStatement("SELECT * FROM playernpcs_equip WHERE NpcId = ?");
-        ps.setInt(1, this.getId());
-        ResultSet rs2 = ps.executeQuery();
-        while (rs2.next()) {
-            this.equips.put(rs2.getByte("equippos"), rs2.getInt("equipid"));
-        }
-        rs2.close();
-        ps.close();
+        try {
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM playernpcs_equip WHERE NpcId = ?");
+			ps.setInt(1, this.getId());
+			ResultSet rs2 = ps.executeQuery();
+			while (rs2.next()) {
+			    this.equips.put(rs2.getByte("equippos"), rs2.getInt("equipid"));
+			}
+			rs2.close();
+			ps.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public PlayerNPC(MapleCharacter cid, int npc, MapleMap map, MapleCharacter base) {
@@ -99,7 +111,13 @@ extends MapleNPC {
         }
         catch (Exception se) {
             se.printStackTrace();
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
         for (PlayerNPC npc : toAdd) {
             npc.addToServer();
         }
@@ -164,7 +182,13 @@ extends MapleNPC {
         }
         catch (Exception se) {
             se.printStackTrace();
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public void saveToDB() {
@@ -208,7 +232,13 @@ extends MapleNPC {
         }
         catch (Exception se) {
             se.printStackTrace();
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public Map<Byte, Integer> getEquips() {

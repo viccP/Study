@@ -88,7 +88,13 @@ public class HiredMerchantHandler {
         }
         catch (SQLException se) {
             return -1;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public static void MerchantItemStore(SeekableLittleEndianAccessor slea, MapleClient c) {
@@ -237,7 +243,13 @@ public class HiredMerchantHandler {
         }
         catch (SQLException e) {
             return false;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     private static final MerchItemPackage loadItemFrom_Database(int charid, int accountid) {
@@ -272,7 +284,13 @@ public class HiredMerchantHandler {
         catch (SQLException e) {
             e.printStackTrace();
             return null;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 }
 

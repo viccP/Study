@@ -61,8 +61,8 @@ extends AbstractScriptManager {
         ret = new LinkedList<ReactorDropEntry>();
         PreparedStatement ps = null;
         ResultSet rs = null;
+        Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             ps = con.prepareStatement("SELECT * FROM reactordrops WHERE reactorid = ?");
             ps.setInt(1, rid);
             rs = ps.executeQuery();
@@ -85,6 +85,8 @@ extends AbstractScriptManager {
                 if (ps != null) {
                     ps.close();
                 }
+                
+                if(con!=null) con.close();
             }
             catch (SQLException ignore) {
                 return ret;

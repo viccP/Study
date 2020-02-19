@@ -3,17 +3,16 @@
  */
 package client.inventory;
 
-import client.MapleBuffStat;
-import client.MapleCharacter;
-import database.DatabaseConnection;
-import handling.MaplePacket;
 import java.io.Serializable;
 import java.lang.ref.WeakReference;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
+import client.MapleBuffStat;
+import client.MapleCharacter;
+import database.DatabaseConnection;
 import server.Randomizer;
-import server.maps.MapleMap;
 import tools.MaplePacketCreator;
 
 public class MapleMount
@@ -42,13 +41,24 @@ implements Serializable {
             return;
         }
         Connection con = DatabaseConnection.getConnection();
-        PreparedStatement ps = con.prepareStatement("UPDATE mountdata set `Level` = ?, `Exp` = ?, `Fatigue` = ? WHERE characterid = ?");
-        ps.setByte(1, this.level);
-        ps.setInt(2, this.exp);
-        ps.setByte(3, this.fatigue);
-        ps.setInt(4, charid);
-        ps.executeUpdate();
-        ps.close();
+        try {
+			PreparedStatement ps = con.prepareStatement("UPDATE mountdata set `Level` = ?, `Exp` = ?, `Fatigue` = ? WHERE characterid = ?");
+			ps.setByte(1, this.level);
+			ps.setInt(2, this.exp);
+			ps.setByte(3, this.fatigue);
+			ps.setInt(4, charid);
+			ps.executeUpdate();
+			ps.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public int getItemId() {

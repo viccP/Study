@@ -4,6 +4,7 @@
 package client.messages;
 
 import java.lang.reflect.Modifier;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -91,8 +92,9 @@ public class CommandProcessor {
      */
     private static void logGMCommandToDB(MapleCharacter player, String command) {
         PreparedStatement ps = null;
+        Connection con = DatabaseConnection.getConnection();
         try {
-            ps = DatabaseConnection.getConnection().prepareStatement("INSERT INTO gmlog (cid, name, command, mapid) VALUES (?, ?, ?, ?)");
+            ps = con.prepareStatement("INSERT INTO gmlog (cid, name, command, mapid) VALUES (?, ?, ?, ?)");
             ps.setInt(1, player.getId());
             ps.setString(2, player.getName());
             ps.setString(3, command);
@@ -106,6 +108,7 @@ public class CommandProcessor {
         finally {
             try {
                 ps.close();
+                con.close();
             }
             catch (SQLException e) {}
         }

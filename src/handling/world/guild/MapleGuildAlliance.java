@@ -31,8 +31,8 @@ implements Serializable {
     private String[] ranks = new String[5];
 
     public MapleGuildAlliance(int id) {
+    	Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT * FROM alliances WHERE id = ?");
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
@@ -58,13 +58,19 @@ implements Serializable {
             System.err.println("unable to read guild information from sql");
             se.printStackTrace();
             return;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public static final Collection<MapleGuildAlliance> loadAll() {
         ArrayList<MapleGuildAlliance> ret = new ArrayList<MapleGuildAlliance>();
+        Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT id FROM alliances");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -78,7 +84,13 @@ implements Serializable {
         catch (SQLException se) {
             System.err.println("unable to read guild information from sql");
             se.printStackTrace();
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
         return ret;
     }
 
@@ -124,14 +136,20 @@ implements Serializable {
         catch (SQLException SE) {
             System.err.println("SQL THROW");
             SE.printStackTrace();
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
         return ret;
     }
 
     public final boolean deleteAlliance() {
+    	Connection con = DatabaseConnection.getConnection();
         try {
             PreparedStatement ps;
-            Connection con = DatabaseConnection.getConnection();
             for (int i = 0; i < this.getNoGuilds(); ++i) {
                 ps = con.prepareStatement("UPDATE characters SET alliancerank = 5 WHERE guildid = ?");
                 ps.setInt(1, this.guilds[i]);
@@ -146,7 +164,13 @@ implements Serializable {
         catch (SQLException SE) {
             System.err.println("SQL THROW" + SE);
             return false;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
         return true;
     }
 
@@ -194,7 +218,13 @@ implements Serializable {
         catch (SQLException SE) {
             System.err.println("SQL THROW");
             SE.printStackTrace();
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public void setRank(String[] ranks) {

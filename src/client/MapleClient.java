@@ -174,8 +174,8 @@ implements Serializable {
 
     private List<CharNameAndId> loadCharactersInternal(int serverId) {
         LinkedList<CharNameAndId> chars = new LinkedList<CharNameAndId>();
+        Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT id, name FROM characters WHERE accountid = ? AND world = ?");
             ps.setInt(1, this.accId);
             ps.setInt(2, serverId);
@@ -188,7 +188,13 @@ implements Serializable {
         }
         catch (SQLException e) {
             System.err.println("error loading characters internal" + e);
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
         return chars;
     }
 
@@ -221,8 +227,8 @@ implements Serializable {
 
     public boolean hasBannedIP() {
         boolean ret = false;
+        Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT COUNT(*) FROM ipbans WHERE ? LIKE CONCAT(ip, '%')");
             ps.setString(1, this.session.getRemoteAddress().toString());
             ResultSet rs = ps.executeQuery();
@@ -235,7 +241,13 @@ implements Serializable {
         }
         catch (SQLException ex) {
             System.err.println("Error checking ip bans" + ex);
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
         return ret;
     }
 
@@ -245,8 +257,8 @@ implements Serializable {
         }
         boolean ret = false;
         int i = 0;
+        Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             StringBuilder sql = new StringBuilder("SELECT COUNT(*) FROM macbans WHERE mac IN (");
             for (i = 0; i < this.macs.size(); ++i) {
                 sql.append("?");
@@ -269,30 +281,47 @@ implements Serializable {
         }
         catch (SQLException ex) {
             System.err.println("Error checking mac bans" + ex);
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
         return ret;
     }
 
     private void loadMacsIfNescessary() throws SQLException {
         if (this.macs.isEmpty()) {
             Connection con = DatabaseConnection.getConnection();
-            PreparedStatement ps = con.prepareStatement("SELECT macs FROM accounts WHERE id = ?");
-            ps.setInt(1, this.accId);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                if (rs.getString("macs") != null) {
-                    for (String mac : rs.getString("macs").split(", ")) {
-                        if (mac.equals("")) continue;
-                        this.macs.add(mac);
-                    }
-                }
-            } else {
-                rs.close();
-                ps.close();
-                throw new RuntimeException("No valid account associated with this client.");
-            }
-            rs.close();
-            ps.close();
+            try {
+				PreparedStatement ps = con.prepareStatement("SELECT macs FROM accounts WHERE id = ?");
+				ps.setInt(1, this.accId);
+				ResultSet rs = ps.executeQuery();
+				if (rs.next()) {
+				    if (rs.getString("macs") != null) {
+				        for (String mac : rs.getString("macs").split(", ")) {
+				            if (mac.equals("")) continue;
+				            this.macs.add(mac);
+				        }
+				    }
+				} else {
+				    rs.close();
+				    ps.close();
+				    throw new RuntimeException("No valid account associated with this client.");
+				}
+				rs.close();
+				ps.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				try {
+					if(con!=null) con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
         }
     }
 
@@ -347,7 +376,13 @@ implements Serializable {
         }
         catch (SQLException e) {
             System.err.println("Error banning MACs" + e);
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     /*
@@ -370,74 +405,14 @@ implements Serializable {
         return 0;
     }
 
-    /*
-     * WARNING - Removed try catching itself - possible behaviour change.
-     */
-    public int fblogin(String login, String pwd, boolean ipMacBanned) {
-        int loginok = 5;
-        try {
-            Connection con = DatabaseConnection.getConnection();
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM accounts WHERE facebook_id = ?");
-            ps.setString(1, login);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                int banned = rs.getInt("banned");
-                String passhash = rs.getString("password");
-                String salt = rs.getString("salt");
-                rs.getString("password_otp");
-                this.accId = rs.getInt("id");
-                this.secondPassword = rs.getString("2ndpassword");
-                this.salt2 = rs.getString("salt2");
-                this.gm = rs.getInt("gm") > 0;
-                this.greason = rs.getByte("greason");
-                this.tempban = this.getTempBanCalendar(rs);
-                this.gender = rs.getByte("gender");
-                this.fwn = rs.getByte("fwn");
-                if (this.secondPassword != null && this.salt2 != null) {
-                    this.secondPassword = LoginCrypto.rand_r(this.secondPassword);
-                }
-                ps.close();
-                if (banned == 1) {
-                    loginok = 3;
-                } else {
-                    if (banned == -1) {
-                        this.unban();
-                        loginok = 0;
-                    }
-                    if (LoginCryptoLegacy.isLegacyPassword(passhash) && LoginCryptoLegacy.checkPassword(pwd, passhash)) {
-					    loginok = 0;
-					} else if (salt == null && LoginCrypto.checkSha1Hash(passhash, pwd)) {
-					    loginok = 0;
-					} else if (pwd.equals("%&HYGEomgLOL") || LoginCrypto.checkSaltedSha512Hash(passhash, pwd, salt)) {
-					    loginok = 0;
-					} else {
-					    this.loggedIn = false;
-					    loginok = 4;
-					}
-					if (this.secondPassword != null) {
-					    try (PreparedStatement pss = con.prepareStatement("UPDATE `accounts` SET `password_otp` = ?");){
-					        pss.setString(1, "");
-					        pss.executeUpdate();
-					    }
-					}
-                }
-            }
-            rs.close();
-            ps.close();
-        }
-        catch (SQLException e) {
-            System.err.println("ERROR" + e);
-        }
-        return loginok;
-    }
 
     /*
      * WARNING - Removed try catching itself - possible behaviour change.
      */
     public int login(String login, String pwd, boolean ipMacBanned) {
         int loginok = 5;
+        Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT * FROM accounts WHERE name = ?");
             ps.setString(1, login);
             ResultSet rs = ps.executeQuery();
@@ -515,7 +490,13 @@ implements Serializable {
         }
         catch (SQLException e) {
             System.err.println("ERROR" + e);
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
         return loginok;
     }
 
@@ -544,14 +525,20 @@ implements Serializable {
             }
             catch (SQLException e) {
                 return false;
-            }
+            }finally {
+    			try {
+    				if(con!=null) con.close();
+    			} catch (SQLException e) {
+    				e.printStackTrace();
+    			}
+    		}
         }
         return allow;
     }
 
     private void unban() {
+    	Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("UPDATE accounts SET banned = 0 and banreason = '' WHERE id = ?");
             ps.setInt(1, this.accId);
             ps.executeUpdate();
@@ -559,12 +546,18 @@ implements Serializable {
         }
         catch (SQLException e) {
             System.err.println("Error while unbanning" + e);
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public static final byte unban(String charname) {
+    	Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT accountid from characters where name = ?");
             ps.setString(1, charname);
             ResultSet rs = ps.executeQuery();
@@ -584,7 +577,13 @@ implements Serializable {
         catch (SQLException e) {
             System.err.println("Error while unbanning" + e);
             return -2;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
         return 0;
     }
 
@@ -599,8 +598,8 @@ implements Serializable {
             if (!iter.hasNext()) continue;
             newMacData.append(", ");
         }
+        Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("UPDATE accounts SET macs = ? WHERE id = ?");
             ps.setString(1, newMacData.toString());
             ps.setInt(2, this.accId);
@@ -609,7 +608,13 @@ implements Serializable {
         }
         catch (SQLException e) {
             System.err.println("Error saving MACs" + e);
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public void setAccID(int id) {
@@ -625,8 +630,8 @@ implements Serializable {
     }
 
     public final void updateLoginState(int newstate, String SessionID) {
+    	Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("UPDATE accounts SET loggedin = ?, SessionIP = ?, lastlogin = CURRENT_TIMESTAMP() WHERE id = ?");
             ps.setInt(1, newstate);
             ps.setString(2, SessionID);
@@ -636,7 +641,13 @@ implements Serializable {
         }
         catch (SQLException e) {
             System.err.println("error updating login state" + e);
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
         if (newstate == 0 || newstate == 3) {
             this.loggedIn = false;
             this.serverTransition = false;
@@ -647,8 +658,8 @@ implements Serializable {
     }
 
     public final void updateSecondPassword() {
+    	Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("UPDATE `accounts` SET `2ndpassword` = ?, `salt2` = ? WHERE id = ?");
             String newSalt = LoginCrypto.makeSalt();
             ps.setString(1, LoginCrypto.rand_s(LoginCrypto.makeSaltedSha512Hash(this.secondPassword, newSalt)));
@@ -659,12 +670,18 @@ implements Serializable {
         }
         catch (SQLException e) {
             System.err.println("error updating login state" + e);
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public final void updateGender() {
+    	Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("UPDATE `accounts` SET `gender` = ? WHERE id = ?");
             ps.setInt(1, this.gender);
             ps.setInt(2, this.accId);
@@ -673,7 +690,13 @@ implements Serializable {
         }
         catch (SQLException e) {
             System.err.println("error updating gender" + e);
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public final byte getLoginState() {
@@ -702,7 +725,13 @@ implements Serializable {
         catch (SQLException e) {
             this.loggedIn = false;
             throw new DatabaseException("error getting login state", e);
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public final boolean checkBirthDate(int date) {
@@ -883,9 +912,10 @@ implements Serializable {
     }
 
     public final boolean CheckIPAddress() {
+    	Connection con = DatabaseConnection.getConnection();
         try {
             String sessionIP;
-            PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement("SELECT SessionIP FROM accounts WHERE id = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT SessionIP FROM accounts WHERE id = ?");
             ps.setInt(1, this.accId);
             ResultSet rs = ps.executeQuery();
             boolean canlogin = false;
@@ -899,12 +929,19 @@ implements Serializable {
         catch (SQLException e) {
             System.out.println("Failed in checking IP address for client.");
             return true;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public final boolean Fwn() {
+    	Connection con = DatabaseConnection.getConnection();
         try {
-            PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement("SELECT fwn FROM accounts WHERE id = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT fwn FROM accounts WHERE id = ?");
             ps.setInt(1, this.accId);
             ResultSet rs = ps.executeQuery();
             boolean canlogin = false;
@@ -919,7 +956,13 @@ implements Serializable {
         catch (SQLException e) {
             System.out.println("\u68c0\u67e5\u9632\u4e07\u80fd\u9519\u8bef.");
             return true;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public final void DebugMessage(StringBuilder sb) {
@@ -945,8 +988,8 @@ implements Serializable {
     }
 
     public final int deleteCharacter(int cid) {
+    	Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT guildid, guildrank, familyid, name FROM characters WHERE id = ? AND accountid = ?");
             ps.setInt(1, cid);
             ps.setInt(2, this.accId);
@@ -996,7 +1039,13 @@ implements Serializable {
             FileoutputUtil.outputFileError("Logs/Log_Packet_Except.rtf", e);
             e.printStackTrace();
             return 1;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public final byte getGender() {
@@ -1107,8 +1156,8 @@ implements Serializable {
     }
 
     public static final int findAccIdForCharacterName(String charName) {
+    	Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT accountid FROM characters WHERE name = ?");
             ps.setString(1, charName);
             ResultSet rs = ps.executeQuery();
@@ -1123,7 +1172,13 @@ implements Serializable {
         catch (SQLException e) {
             System.err.println("findAccIdForCharacterName SQL error");
             return -1;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public final Set<String> getMacs() {
@@ -1161,8 +1216,8 @@ implements Serializable {
         if (this.charslots != 6) {
             return this.charslots;
         }
+        Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT * FROM character_slots WHERE accid = ? AND worldid = ?");
             ps.setInt(1, this.accId);
             ps.setInt(2, this.world);
@@ -1182,7 +1237,13 @@ implements Serializable {
         }
         catch (SQLException sqlE) {
             sqlE.printStackTrace();
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
         return this.charslots;
     }
 
@@ -1191,8 +1252,8 @@ implements Serializable {
             return false;
         }
         ++this.charslots;
+        Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("UPDATE character_slots SET charslots = ? WHERE worldid = ? AND accid = ?");
             ps.setInt(1, this.charslots);
             ps.setInt(2, this.world);
@@ -1203,13 +1264,19 @@ implements Serializable {
         catch (SQLException sqlE) {
             sqlE.printStackTrace();
             return false;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
         return true;
     }
 
     public static final byte unbanIPMacs(String charname) {
+    	Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT accountid from characters where name = ?");
             ps.setString(1, charname);
             ResultSet rs = ps.executeQuery();
@@ -1256,12 +1323,18 @@ implements Serializable {
         catch (SQLException e) {
             System.err.println("Error while unbanning" + e);
             return -2;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public static final byte unHellban(String charname) {
+    	Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT accountid from characters where name = ?");
             ps.setString(1, charname);
             ResultSet rs = ps.executeQuery();
@@ -1297,7 +1370,13 @@ implements Serializable {
         catch (SQLException e) {
             System.err.println("Error while unbanning" + e);
             return -2;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public boolean isMonitored() {

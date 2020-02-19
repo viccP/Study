@@ -9,6 +9,7 @@
  */
 package client.messages.commands;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Arrays;
@@ -17,8 +18,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ScheduledFuture;
-
-import com.mysql.jdbc.Connection;
 
 import client.ISkill;
 import client.MapleCharacter;
@@ -142,8 +141,8 @@ public class GMCommand {
                 npc.setRx1(xpos);
                 npc.setFh(fh);
                 npc.setCustom(true);
+                Connection con = DatabaseConnection.getConnection();
                 try {
-                    Connection con = (Connection)DatabaseConnection.getConnection();
                     try (PreparedStatement ps = con.prepareStatement("INSERT INTO spawns (idd, f, hide, fh, cy, rx0, rx1, type, x, y, mid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");){
                         ps.setInt(1, npcId);
                         ps.setInt(2, 0);
@@ -161,7 +160,13 @@ public class GMCommand {
                 }
                 catch (SQLException e) {
                     c.getPlayer().dropMessage(6, "Failed to save NPC to the database");
-                }
+                }finally {
+        			try {
+        				if(con!=null) con.close();
+        			} catch (SQLException e) {
+        				e.printStackTrace();
+        			}
+        		}
             } else {
                 c.getPlayer().dropMessage(6, "You have entered an invalid Npc-Id");
                 return 0;

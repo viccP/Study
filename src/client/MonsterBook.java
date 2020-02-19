@@ -7,9 +7,6 @@
  */
 package client;
 
-import client.MapleClient;
-import constants.GameConstants;
-import database.DatabaseConnection;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,9 +14,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Set;
-import org.apache.mina.common.IoSession;
-import org.apache.mina.common.WriteFuture;
+
+import constants.GameConstants;
+import database.DatabaseConnection;
 import server.MapleItemInformationProvider;
 import tools.data.output.MaplePacketLittleEndianWriter;
 import tools.packet.MonsterBookPacket;
@@ -58,15 +55,27 @@ implements Serializable {
     }
 
     public static final MonsterBook loadCards(int charid) throws SQLException {
-        PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement("SELECT * FROM monsterbook WHERE charid = ? ORDER BY cardid ASC");
-        ps.setInt(1, charid);
-        ResultSet rs = ps.executeQuery();
-        LinkedHashMap<Integer, Integer> cards = new LinkedHashMap<Integer, Integer>();
-        while (rs.next()) {
-            cards.put(rs.getInt("cardid"), rs.getInt("level"));
-        }
-        rs.close();
-        ps.close();
+        Map<Integer, Integer> cards=new LinkedHashMap<>();
+        Connection con = DatabaseConnection.getConnection();
+		try {
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM monsterbook WHERE charid = ? ORDER BY cardid ASC");
+			ps.setInt(1, charid);
+			ResultSet rs = ps.executeQuery();
+			cards = new LinkedHashMap<Integer, Integer>();
+			while (rs.next()) {
+			    cards.put(rs.getInt("cardid"), rs.getInt("level"));
+			}
+			rs.close();
+			ps.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
         return new MonsterBook(cards);
     }
 
@@ -75,29 +84,39 @@ implements Serializable {
             return;
         }
         Connection con = DatabaseConnection.getConnection();
-        PreparedStatement ps = con.prepareStatement("DELETE FROM monsterbook WHERE charid = ?");
-        ps.setInt(1, charid);
-        ps.execute();
-        ps.close();
-        boolean first = true;
-        StringBuilder query = new StringBuilder();
-        for (Map.Entry<Integer, Integer> all : this.cards.entrySet()) {
-            if (first) {
-                first = false;
-                query.append("INSERT INTO monsterbook VALUES (DEFAULT,");
-            } else {
-                query.append(",(DEFAULT,");
-            }
-            query.append(charid);
-            query.append(",");
-            query.append(all.getKey());
-            query.append(",");
-            query.append(all.getValue());
-            query.append(")");
-        }
-        ps = con.prepareStatement(query.toString());
-        ps.execute();
-        ps.close();
+        try {
+			PreparedStatement ps = con.prepareStatement("DELETE FROM monsterbook WHERE charid = ?");
+			ps.setInt(1, charid);
+			ps.execute();
+			ps.close();
+			boolean first = true;
+			StringBuilder query = new StringBuilder();
+			for (Map.Entry<Integer, Integer> all : this.cards.entrySet()) {
+			    if (first) {
+			        first = false;
+			        query.append("INSERT INTO monsterbook VALUES (DEFAULT,");
+			    } else {
+			        query.append(",(DEFAULT,");
+			    }
+			    query.append(charid);
+			    query.append(",");
+			    query.append(all.getKey());
+			    query.append(",");
+			    query.append(all.getValue());
+			    query.append(")");
+			}
+			ps = con.prepareStatement(query.toString());
+			ps.execute();
+			ps.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     private final void calculateLevel() {

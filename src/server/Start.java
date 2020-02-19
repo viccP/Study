@@ -1,5 +1,6 @@
 package server;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -46,11 +47,18 @@ public class Start {
 		if (Boolean.parseBoolean(ServerProperties.getProperty("KinMS.AutoRegister"))) {
 			System.out.println("加载 自动注册完成 :::");
 		}
+		Connection con = DatabaseConnection.getConnection();
 		try {
-			PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement("UPDATE accounts SET loggedin = 0");
+			PreparedStatement ps = con.prepareStatement("UPDATE accounts SET loggedin = 0");
 			ps.executeUpdate();
 		} catch (SQLException ex) {
 			throw new RuntimeException("[EXCEPTION] Please check if the SQL server is active.");
+		}finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		World.init();
 		Timer.WorldTimer.getInstance().start();

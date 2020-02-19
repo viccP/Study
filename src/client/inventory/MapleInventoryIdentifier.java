@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -77,9 +78,9 @@ implements Serializable {
         if (this.grabRunningUID() > 0) {
             return this.grabRunningUID();
         }
+        Connection con = DatabaseConnection.getConnection();
         try {
             int[] ids = new int[4];
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT MAX(uniqueid) FROM inventoryitems");
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -115,7 +116,13 @@ implements Serializable {
         }
         catch (Exception e) {
             e.printStackTrace();
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
         return ret;
     }
 }

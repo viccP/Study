@@ -13,6 +13,7 @@ import java.awt.Point;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -1870,14 +1871,21 @@ public class AdminCommand {
     extends CommandExecute {
         @Override
         public int execute(MapleClient c, String[] splitted) {
+        	Connection con = DatabaseConnection.getConnection();
             try {
-                PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement(StringUtil.joinStringFrom(splitted, 1));
+                PreparedStatement ps = con.prepareStatement(StringUtil.joinStringFrom(splitted, 1));
                 ps.executeUpdate();
                 ps.close();
             }
             catch (SQLException e) {
                 c.getPlayer().dropMessage(6, "An error occurred : " + e.getMessage());
-            }
+            }finally {
+    			try {
+    				if(con!=null) con.close();
+    			} catch (SQLException e) {
+    				e.printStackTrace();
+    			}
+    		}
             return 1;
         }
     }

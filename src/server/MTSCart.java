@@ -3,21 +3,19 @@
  */
 package server;
 
-import client.inventory.IItem;
-import client.inventory.ItemLoader;
-import client.inventory.MapleInventoryType;
-import constants.GameConstants;
-import database.DatabaseConnection;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
-import server.MTSStorage;
+
+import client.inventory.IItem;
+import client.inventory.ItemLoader;
+import client.inventory.MapleInventoryType;
+import constants.GameConstants;
+import database.DatabaseConnection;
 import tools.Pair;
 
 public class MTSCart
@@ -104,51 +102,86 @@ implements Serializable {
         }
         ItemLoader.MTS_TRANSFER.saveItems(itemsWithType, this.characterId);
         Connection con = DatabaseConnection.getConnection();
-        PreparedStatement ps = con.prepareStatement("DELETE FROM mts_cart WHERE characterid = ?");
-        ps.setInt(1, this.characterId);
-        ps.execute();
-        ps.close();
-        ps = con.prepareStatement("INSERT INTO mts_cart VALUES(DEFAULT, ?, ?)");
-        ps.setInt(1, this.characterId);
-        for (int i : this.cart) {
-            ps.setInt(2, i);
-            ps.executeUpdate();
-        }
-        if (this.owedNX > 0) {
-            ps.setInt(2, -this.owedNX);
-            ps.executeUpdate();
-        }
-        ps.close();
+        try {
+			PreparedStatement ps = con.prepareStatement("DELETE FROM mts_cart WHERE characterid = ?");
+			ps.setInt(1, this.characterId);
+			ps.execute();
+			ps.close();
+			ps = con.prepareStatement("INSERT INTO mts_cart VALUES(DEFAULT, ?, ?)");
+			ps.setInt(1, this.characterId);
+			for (int i : this.cart) {
+			    ps.setInt(2, i);
+			    ps.executeUpdate();
+			}
+			if (this.owedNX > 0) {
+			    ps.setInt(2, -this.owedNX);
+			    ps.executeUpdate();
+			}
+			ps.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public void loadCart() throws SQLException {
-        PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement("SELECT * FROM mts_cart WHERE characterid = ?");
-        ps.setInt(1, this.characterId);
-        ResultSet rs = ps.executeQuery();
-        while (rs.next()) {
-            int iId = rs.getInt("itemid");
-            if (iId < 0) {
-                this.owedNX -= iId;
-                continue;
-            }
-            if (!MTSStorage.getInstance().check(iId)) continue;
-            this.cart.add(iId);
-        }
-        rs.close();
-        ps.close();
+    	Connection con = DatabaseConnection.getConnection();
+        try {
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM mts_cart WHERE characterid = ?");
+			ps.setInt(1, this.characterId);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+			    int iId = rs.getInt("itemid");
+			    if (iId < 0) {
+			        this.owedNX -= iId;
+			        continue;
+			    }
+			    if (!MTSStorage.getInstance().check(iId)) continue;
+			    this.cart.add(iId);
+			}
+			rs.close();
+			ps.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public void loadNotYetSold() throws SQLException {
-        PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement("SELECT * FROM mts_items WHERE characterid = ?");
-        ps.setInt(1, this.characterId);
-        ResultSet rs = ps.executeQuery();
-        while (rs.next()) {
-            int pId = rs.getInt("id");
-            if (!MTSStorage.getInstance().check(pId)) continue;
-            this.notYetSold.add(pId);
-        }
-        rs.close();
-        ps.close();
+    	Connection con = DatabaseConnection.getConnection();
+    	try {
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM mts_items WHERE characterid = ?");
+			ps.setInt(1, this.characterId);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+			    int pId = rs.getInt("id");
+			    if (!MTSStorage.getInstance().check(pId)) continue;
+			    this.notYetSold.add(pId);
+			}
+			rs.close();
+			ps.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public void changeInfo(int tab, int type, int page) {

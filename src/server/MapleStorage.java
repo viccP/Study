@@ -52,27 +52,38 @@ implements Serializable {
 
     public static int create(int id) throws SQLException {
         Connection con = DatabaseConnection.getConnection();
-        PreparedStatement ps = con.prepareStatement("INSERT INTO storages (accountid, slots, meso) VALUES (?, ?, ?)", 1);
-        ps.setInt(1, id);
-        ps.setInt(2, 4);
-        ps.setInt(3, 0);
-        ps.executeUpdate();
-        ResultSet rs = ps.getGeneratedKeys();
-        if (rs.next()) {
-            int storageid = rs.getInt(1);
-            ps.close();
-            rs.close();
-            return storageid;
-        }
-        ps.close();
-        rs.close();
+        try {
+			PreparedStatement ps = con.prepareStatement("INSERT INTO storages (accountid, slots, meso) VALUES (?, ?, ?)", 1);
+			ps.setInt(1, id);
+			ps.setInt(2, 4);
+			ps.setInt(3, 0);
+			ps.executeUpdate();
+			ResultSet rs = ps.getGeneratedKeys();
+			if (rs.next()) {
+			    int storageid = rs.getInt(1);
+			    ps.close();
+			    rs.close();
+			    return storageid;
+			}
+			ps.close();
+			rs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
         throw new DatabaseException("Inserting char failed.");
     }
 
     public static MapleStorage loadStorage(int id) {
         MapleStorage ret = null;
+        Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT * FROM storages WHERE accountid = ?");
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
@@ -93,7 +104,13 @@ implements Serializable {
         }
         catch (SQLException ex) {
             System.err.println("Error loading storage" + ex);
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
         return ret;
     }
 
@@ -101,8 +118,8 @@ implements Serializable {
         if (!this.changed) {
             return;
         }
+        Connection con = DatabaseConnection.getConnection();
         try {
-            Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("UPDATE storages SET slots = ?, meso = ? WHERE storageid = ?");
             ps.setInt(1, this.slots);
             ps.setInt(2, this.meso);
@@ -117,7 +134,13 @@ implements Serializable {
         }
         catch (SQLException ex) {
             System.err.println("Error saving storage" + ex);
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public IItem takeOut(byte slot) {

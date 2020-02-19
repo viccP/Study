@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -49,8 +50,9 @@ public class ServerProperties {
 				}
             }
         }
+        Connection con = DatabaseConnection.getConnection();
         try {
-            PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement("SELECT * FROM auth_server_channel_ip");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM auth_server_channel_ip");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 props.put(rs.getString("name") + rs.getInt("channelid"), rs.getString("value"));
@@ -61,6 +63,12 @@ public class ServerProperties {
         catch (SQLException ex) {
             ex.printStackTrace();
             System.exit(0);
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 }

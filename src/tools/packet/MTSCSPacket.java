@@ -340,7 +340,13 @@ public class MTSCSPacket {
         }
         catch (SQLException se) {
             System.out.println("Error getting wishlist data:" + se);
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
         while (i > 0) {
             mplew.writeInt(0);
             --i;

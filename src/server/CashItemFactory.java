@@ -7,6 +7,7 @@ import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -101,8 +102,8 @@ public class CashItemFactory {
             if (this.initialized) {
                 return null;
             }
+            Connection con = DatabaseConnection.getConnection();
             try {
-                Connection con = DatabaseConnection.getConnection();
                 PreparedStatement ps = con.prepareStatement("SELECT * FROM cashshop_modified_items WHERE serial = ?");
                 ps.setInt(1, sn);
                 ResultSet rs = ps.executeQuery();
@@ -115,7 +116,13 @@ public class CashItemFactory {
             }
             catch (Exception e) {
                 e.printStackTrace();
-            }
+            }finally {
+    			try {
+    				if(con!=null) con.close();
+    			} catch (SQLException e) {
+    				e.printStackTrace();
+    			}
+    		}
         }
         return ret;
     }
@@ -125,8 +132,8 @@ public class CashItemFactory {
      * @param set
      */
     public final void setModCashInfoAll(Set<Integer> set) {
+    	Connection con = DatabaseConnection.getConnection();
     	try {
-            Connection con = DatabaseConnection.getConnection();
             for(Integer sn:set) {
             	PreparedStatement ps = con.prepareStatement("SELECT * FROM cashshop_modified_items WHERE serial = ?");
                 ps.setInt(1, sn);
@@ -145,7 +152,13 @@ public class CashItemFactory {
         }
         catch (Exception e) {
             e.printStackTrace();
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
     
 

@@ -204,8 +204,8 @@ public class MapleMapFactory {
 
     public static int loadCustomLife() {
         customLife.clear();
+        Connection con = (Connection)DatabaseConnection.getConnection();
         try {
-            Connection con = (Connection)DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT * FROM `spawns`");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -230,7 +230,13 @@ public class MapleMapFactory {
         catch (SQLException e) {
             System.out.println("Error loading custom life..." + e);
             return -1;
-        }
+        }finally {
+			try {
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     /*
