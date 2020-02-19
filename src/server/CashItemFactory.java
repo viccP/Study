@@ -50,7 +50,8 @@ public class CashItemFactory {
             int price=MapleDataTool.getIntConvert("Price", field, 0);
             int expire=MapleDataTool.getIntConvert("Period", field, 0);
             int gender=MapleDataTool.getIntConvert("Gender", field, 2);
-            boolean sale=MapleDataTool.getIntConvert("OnSale", field, 0) > 0;
+//            boolean sale=MapleDataTool.getIntConvert("OnSale", field, 0) > 0;
+            boolean sale=true;
             CashItemInfo stats = new CashItemInfo(itemId, count, price, SN, expire,gender ,sale );
             if (SN > 0) {
                 this.itemStats.put(SN, stats);
@@ -99,9 +100,9 @@ public class CashItemFactory {
     public final CashItemInfo.CashModInfo getModInfo(int sn) {
         CashItemInfo.CashModInfo ret = this.itemMods.get(sn);
         if (ret == null) {
-            if (this.initialized) {
-                return null;
-            }
+//            if (this.initialized) {
+//                return null;
+//            }
             Connection con = DatabaseConnection.getConnection();
             try {
                 PreparedStatement ps = con.prepareStatement("SELECT * FROM cashshop_modified_items WHERE serial = ?");
